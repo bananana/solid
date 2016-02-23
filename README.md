@@ -15,7 +15,7 @@ pip install -r requirements.txt
 '''
 ./run.py
 '''
-By default the app will run on *localhost:5000*. You can modify that in '''config.py'''
+By default the app will run on *localhost:5000*. You can modify that in config.py. If you want to run the app in a virtual machine, you'll want to set host to 0.0.0.0
 
 ## Database
 Using sqlite for now, to make development easier. If you modify models, you'll need to migrate the database:

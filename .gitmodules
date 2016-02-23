@@ -1,0 +1,6 @@
+[submodule "app/static/Skeleton"]
+	path = app/static/Skeleton
+	url = https://github.com/dhg/Skeleton
+[submodule "app/static/open-iconic"]
+    path = app/static/open-iconic
+    url = https://github.com/iconic/open-iconic
