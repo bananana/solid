@@ -1,0 +1,46 @@
+{% macro render_boolean(bool) %}
+    <div class="checkbox-container u-pull-left">
+        <div class="checkbox">
+            {{ bool }}
+            <div class="checkbox-replacement"></div>
+        </div>
+        {{ bool.label }}
+    </div>
+{% endmacro %}
+
+{% macro render_radio(radio) %}
+    {{ radio.label }}
+    {% for subfield in radio %}
+        <label for="{{ subfield.label.field_id }}" class="button button-choice">
+            <span class="u-pull-left">{{ subfield.label.text }}</span>
+            <span class="u-pull-right">{{ subfield }}</span>
+        </label>
+    {% endfor %}
+{% endmacro %}
+
+{% macro render_field(field, label, flags) %}
+    <label for="{{ label.field_id }}">
+        {{ label.text }} {% if flags.required %}*{% endif %}
+        <span id="form-{{ label.field_id }}-error" class="u-pull-right"></span>
+    </label>
+    {{ field }}
+{% endmacro %}
+
+<!-- 
+Credit card fields have to be rendered without the name attribute, so they never
+hit the server. These fields are validated by Stripe and made into a token 
+client side, which can then be securely sent to the server. -->
+{% macro render_cc_field(field, validation, message) %}
+    <label for="{{ field.label.field_id }}">
+        {{ field.label.text }} *
+        <span id="form-{{ field.label.field_id }}-error" class="u-pull-right"></span>
+    </label>
+    <input type="text" 
+           id="{{ field.id }}"
+           autocomplete="off" 
+           data-validation="{{ validation }}" 
+           data-validation-error-msg-container="#form-{{ field.label.field_id }}-error"
+           data-validation-error-msg="{{ message }}"
+           required>
+    </input>
+{% endmacro %}

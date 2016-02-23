@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% set active_page = "user" %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="twelve columns">
+        <h1>{{ user.full_name }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="six columns">
+        <table class="u-full-width">
+            <tbody>
+                <tr><th>nickname</th><td>{{ user.nickname }}</td></tr>
+                <tr><th>email</th><td>{{ user.email }}</td></tr>
+                <tr><th>phone</th><td>{{ user.phone }}</td></tr>
+                <tr><th>zip</th><td>{{ user.zip }}</td></tr>
+                <tr><th>employer</th><td>{{ user.employer }}</td></tr>
+                <tr><th>description</th><td>{{ user.description }}</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

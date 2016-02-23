@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% set active_page = "demands" %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+{% from "helpers/causes.html" import render_cause_nav, render_cause_info, render_cause_stat, render_cause_support_actions %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>vs. {{ cause.boss }}</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_cause_nav(active_page) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="eight columns">
+        {% for demand in cause.demands %}
+            {% if demand.resolved %}
+                <div style="color:#888;">
+                    <img class="icon-demand u-pull-left" src="{{ url_for('static', filename='open-iconic/svg/check.svg') }}"> 
+                    <h3 style="text-decoration: line-through;">&nbsp;{{ demand.title }}</h3>
+                    <p>{{ demand.description }}</p>
+                </div>
+            {% else %}
+                <div>
+                    <img class="icon-demand u-pull-left" src="{{ url_for('static', filename='open-iconic/svg/bullhorn.svg') }}"> 
+                    <h3>&nbsp;{{ demand.title }}</h3>
+                    <p>{{ demand.description }}</p>
+                </div>
+            {% endif %}
+        <hr>
+        {% endfor %}
+    </div>
+    <div class="four columns">
+        {{ render_cause_info('Created on:', cause.created_on.strftime('%b. %d, %Y')) }}
+        {{ render_cause_info('Location:', cause.location) }}
+        {{ render_cause_stat('Creators:', cause.creators|length , cause.creators, '#') }}
+        {{ render_cause_stat('Supporters:', cause.supporters|length, cause.supporters, '#') }}
+        {{ render_cause_support_actions('Support actions:', cause.actions) }}
+    </div>
+</div>
+{% endblock %}

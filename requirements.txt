@@ -1,0 +1,8 @@
+flask
+flask-login
+flask-bcrypt
+flask-mail
+flask-wtf
+flask-sqlalchemy
+sqlalchemy-migrate
+argparse

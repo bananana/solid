@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+   
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fonts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton/css/normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton/css/skeleton.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='skeleton/images/favicon.png') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.form-validator.min.js') }}"></script>
+    {% block scripts %}{% endblock %}
+
+    <title>Solid</title>
+    
+</head>
+<body>
+
+    <div class="spacer">&nbsp;</div>
+
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="twelve columns">
+                    <a class="u-link-color-override" href="{{ url_for('index') }}">
+                        <!--<img class="logo img-circle u-pull-left" src="{{ url_for('static', filename='images/logo_128x128.png') }}">-->
+                        <h4 class="title u-pull-left"><strong>SOLID</strong></h4>
+                    </a>
+                    {% if active_page != "login" %}
+                        {% if current_user.is_authenticated %} 
+                            <a href="{{ url_for('users.logout') }}" title="Log Out" class="button u-pull-right"><!--<img src="{# url_for('static', filename='open-iconic/svg/account-logout.svg') #}">-->Log Out</a>
+                        {% else %}
+                            <a href="{{ url_for('users.login') }}" title="Log In" class="button u-pull-right">Log In</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content container">    
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="row">
+                        <div class="twelve columns">
+                            <div class="flash {{ category }}" role="alert">{{ message }}</div>
+                        </div>
+                   </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="three columns">
+                    <h4>Causes</h4>
+                    <ul>
+                        <li><a href="#">Create a cause</a></li>
+                        <li><a href="#">Popular</a></li>
+                        <li><a href="#">Neglected</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div class="three columns">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">How it works</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="three columns">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="three columns">
+                    <h4>Follow Us</h4>
+                    <a href="#"><img class="icon-social" src="{{ url_for('static', filename='icons/twitter.svg') }}"></a>
+                    <a href="#"><img class="icon-social" src="{{ url_for('static', filename='icons/reddit.svg') }}"></a>
+                    <a href="#"><img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.svg') }}"></a>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="twelve columns u-text-center">
+                    <a href="#"><small>Terms of Service</small></a> | 
+                    <a href="#"><small>Privacy Policy</small></a> | 
+                    <a href="#"><small>License</small></a> | 
+                    <a href="#"><small>Source Code</small></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
