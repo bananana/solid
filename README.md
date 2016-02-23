@@ -14,7 +14,7 @@ Then create a python virtual environment, install requirements and create a data
 
     virtualenv venv
     pip install -r requirements.txt
-    ./db.py -create
+    ./db.py --create
 
 ## Running
 
