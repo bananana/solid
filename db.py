@@ -75,14 +75,14 @@ def upgrade():
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv,'hcdmu')
+        opts, args = getopt.getopt(sys.argv[1:], 'hcdmu', ['help','create','downgrade','migrate','upgrade'])
     except getopt.GetoptError:
         help() 
         sys.exit(2)
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             help() 
-        elif opt in ('-c', '--create'):
+        elif opt in ('-c', "--create"):
             create() 
         elif opt in ('-d', '--downgrade'):
             downgrade() 
