@@ -10,9 +10,10 @@ First, clone the repo and install submodules
     cd solid
     git submodule update --init
 
-Then create a python virtual environment, install requirements and create a database
+Then create and start  a python virtual environment, install requirements and create a database
 
     virtualenv venv
+    . venv/bin/activate
     pip install -r requirements.txt
     ./db.py --create
 
@@ -20,7 +21,7 @@ Then create a python virtual environment, install requirements and create a data
 
     ./run.py
     
-By default the app will run on *localhost:5000*. You can modify that in config.py. If you want to run the app in a virtual machine, you'll want to set host to 0.0.0.0
+By default the app will run on *localhost:5000*. You can modify that in config.py. If you want to run the app in a virtual machine, you'll want to set HOST to 0.0.0.0
 
 ## Database
 Using sqlite for now, to make development easier. If you modify models, you'll need to migrate the database:
