@@ -9,6 +9,5 @@ virtualenv/
 *~
 
 # App specific
-app.py
 app.db
 db_repository/
