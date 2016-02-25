@@ -5,6 +5,7 @@ virtualenv/
 
 # Vim
 *.swp
+*.swo
 *~
 
 # App specific
