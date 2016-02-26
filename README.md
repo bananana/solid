@@ -15,7 +15,7 @@ Then create and start  a python virtual environment, install requirements and cr
     virtualenv venv
     . venv/bin/activate
     pip install -r requirements.txt
-    ./db.py --create
+    ./app.py db -c
 
 ## Utilities
 
