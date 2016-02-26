@@ -42,7 +42,7 @@ class AppManager(object):
 
             commands:
               db          manipluate the database
-              mod         create new module from a template
+              mod         create new module scaffolding 
               run         run the Flask app
             '''))
         parser.add_argument('command', help='subcommand to run')
