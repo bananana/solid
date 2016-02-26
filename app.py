@@ -188,7 +188,10 @@ class AppManager(object):
         '''Running the app.
         '''
         parser=argparse.ArgumentParser(
-            description='run the Flask app',
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            description=dedent('''\
+                description:
+                  run the Flask app'''),
             usage='''./app.py run [-h] [-H HOST] [-p PORT] [-d]''')
         parser.add_argument('-H',
                             '--host',
