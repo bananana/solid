@@ -17,28 +17,30 @@ Then create and start  a python virtual environment, install requirements and cr
     pip install -r requirements.txt
     ./db.py --create
 
-## Running
+## Utilities
 
-    ./run.py
-    
-By default the app will run on *localhost:5000*. You can modify that in config.py. If you want to run the app in a virtual machine, you'll want to set HOST to 0.0.0.0
+All app management is done from **app.py** script, for help run it without any arguments or like so:
+
+    ./app.py -h
+
+Currently you can manipulate the database (**db** command), create module scaffolding (**mod** command) and run the app (**run** command). Each command comes with a set of subcommands. Getting help for them is done the same way as with the main script.
+
+    ./app.py db -h
+    ./app.py mod -h
+    ./app.py run -h
+
+## Running the App
+
+    ./app.py run
+
+By default the app will run in debug mode on *localhost:5000*. You can modify that behavious with **-H**, **-p** and **-d** flags. If you want to run the app in a virtual machine, you'll want to set host to 0.0.0.0
 
 ## Database
 Using sqlite for now, to make development easier. If you modify models, you'll need to migrate the database:
 
-    ./db.py --migrate
-
-## Utilities
-**run.py**
-
-Runs the app using the Werkzeug server.
-
-**db.py**
-
-Manipulates the database using SQLAlchemy. Run *./db.py --help* for full documentation.
+    ./app.py db -m
 
 # TODO
-* Combine run.py and db.py in one utility so everything is neater.
 * Finish models
 * Setup unit testing (per modlue or app-wide?)
 * Documentation and proper comments
