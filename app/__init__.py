@@ -39,6 +39,11 @@ def index():
     '''Home page of the app. Nothing much here.'''
     return render_template('index.html')
 
+# Style-guide page
+@app.route('/styleguide')
+def styleguide():
+    return render_template('styleguide.html')
+
 
 # Logging 
 if not app.debug:
