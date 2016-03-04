@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block content %}
-{% from "helpers/causes.html" import render_cause_nav, render_cause_info, render_cause_stat, render_cause_support_actions %}
+{% from "helpers/navigation.html" import render_cause_nav %}
+{% from "helpers/causes.html" import render_cause_info, render_cause_stat, render_cause_support_actions %}
 <div class="row">
     <div class="eight columns">
         <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>

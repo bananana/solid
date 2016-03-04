@@ -20,6 +20,9 @@ lm.login_view = 'users.login'
 from app.causes.views import mod as causesModule
 app.register_blueprint(causesModule)
 
+from app.styleguide.views import mod as styleguideModule
+app.register_blueprint(styleguideModule)
+
 
 # HTTP erros
 @app.errorhandler(404)
@@ -38,11 +41,6 @@ def internal_error(error):
 def index():
     '''Home page of the app. Nothing much here.'''
     return render_template('index.html')
-
-# Style-guide page
-@app.route('/styleguide')
-def styleguide():
-    return render_template('styleguide.html')
 
 
 # Logging 

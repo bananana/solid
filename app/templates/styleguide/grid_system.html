@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% set active_page = "styleguide_grid_system" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
+<style>
+.styleguide-grid-container .row {
+    margin-bottom: 1rem;
+}
+.styleguide-grid-container .column,
+.styleguide-grid-container .columns {
+    text-align: center;
+    background-color: #eee;
+    font-size: 12px;
+    font-weight: 600;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_styleguide_nav %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">Style Guide</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>v 0.1.0</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_styleguide_nav(active_page) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="nine columns">
+        
+        <h2>Grid System</h2>
+        <p>The grid system is borrowed directly from Skeleton. It is a fluid 12-column grid with a max width of 960px. It is completely responsive.</p>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="basic-grid"></a>Basic Grid</h3>
+        <p>Here's an example of what a basic grid looks like:</p>
+        <div class="styleguide-grid-container">
+            <div class="row">
+                <div class="one column">One</div>
+                <div class="eleven columns">Eleven</div>
+            </div>
+            <div class="row">
+                <div class="two columns">Two</div>
+                <div class="ten columns">Ten</div>
+            </div>
+            <div class="row">
+                <div class="three columns">Three</div>
+                <div class="nine columns">Nine</div>
+            </div>
+            <div class="row">
+                <div class="four columns">Four</div>
+                <div class="eight columns">Eight</div>
+            </div>
+            <div class="row">
+                <div class="five columns">Five</div>
+                <div class="seven columns">Seven</div>
+            </div>
+            <div class="row">
+                <div class="six columns">Six</div>
+                <div class="six columns">Six</div>
+            </div>
+            <div class="row">
+                <div class="seven columns">Seven</div>
+                <div class="five columns">Five</div>
+            </div>
+            <div class="row">
+                <div class="eight columns">Eight</div>
+                <div class="four columns">Four</div>
+            </div>
+            <div class="row">
+                <div class="nine columns">Nine</div>
+                <div class="three columns">Three</div>
+            </div>
+            <div class="row">
+                <div class="ten columns">Ten</div>
+                <div class="two columns">Two</div>
+            </div>
+            <div class="row">
+                <div class="eleven columns">Eleven</div>
+                <div class="one column">One</div>
+            </div>
+            <div class="row">
+                <div class="twelve columns">Twelve</div>
+            </div>
+        </div>
+        <pre class="u-full-width">
+&lt;!-- .container is the main centered wrapper --&gt;
+&lt;div class="container"&gt;
+
+&lt;!-- columns should be the immediate child of a .row --&gt;
+&lt;div class="row"&gt;
+    &lt;div class="one column"&gt;One&lt;/div&gt;
+    &lt;div class="eleven columns"&gt;Eleven&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+    &lt;div class="two columns"&gt;Two&lt;/div&gt;
+    &lt;div class="ten columns"&gt;Ten&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</pre>
+        <p>Each row supports up to twelve columns.</p>
+        <div class="styleguide-grid-container">
+            <div class="row">
+                <div class="three columns">Three</div>
+                <div class="four columns">Four</div>
+                <div class="five columns">Five</div>
+            </div>
+        </div>
+        <pre class="u-full-width">
+&lt;div class="container"&gt;
+
+&lt;div class="row"&gt;
+    &lt;div class="three columns"&gt;Three&lt;/div&gt;
+    &lt;div class="four columns"&gt;Four&lt;/div&gt;
+    &lt;div class="five columns"&gt;Five&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</pre>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="fractional-column-sizes"></a>Fractional Columns Sizes</h3>
+        <p>Shorthand for fractional column widths is also supported.</p>
+        <div class="styleguide-grid-container">
+            <div class="row">
+                <div class="one-third column">One Third</div>
+                <div class="two-thirds column">Two Thirds</div>
+            </div>
+            <div class="row">
+                <div class="one-half column">One Half</div>
+                <div class="one-half column">One Half</div>
+            </div>
+        </div>
+        <pre class="u-full-width">
+&lt;div class="container"&gt;
+
+&lt;div class="row"&gt;
+    &lt;div class="one-third column"&gt;One Third&lt;/div&gt;
+    &lt;div class="two-thirds columns"&gt;Two Thirds&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="one-half column"&gt;One Half&lt;/div&gt;
+    &lt;div class="one-half column"&gt;One Half&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</pre>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="column-offsets"></a>Column Offsets</h3>
+        <p>Sometimes it is necessary to offset a column by a certain amount. This is pretty easy to do, just use <code>offset-by-[amount]</code> class, where <code>[amount]</code> is the number of columns like; <em>one</em>, <em>two</em>, <em>three</em> and so on all the way to <em>eleven</em>.</p>
+        <div class="styleguide-grid-container">
+            <div class="row">
+                <div class="eight columns offset-by-four">Eight columns offset by four</div>
+            </div>
+            <div class="row">
+                <div class="ten columns offset-by-two">Ten columns offset by two</div>
+            </div>
+        </div>
+        <pre class="u-full-width">
+&lt;div class="container"&gt;
+
+&lt;div class="row"&gt;
+    &lt;div class="eight columns offset-by-four"&gt;Eight columns offset by four&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="eight columns offset-by-two"&gt;Ten columns offset by two&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</pre>
+
+    </div>
+
+    <div class="three columns">
+        <div class="nav-stacked-container">
+            <ul id="nav-submenu" class="nav nav-stacked nav-secondary u-pull-right"></ul>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

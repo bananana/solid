@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% set active_page = "styleguide_about" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_styleguide_nav %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">Style Guide</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>v 0.1.0</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_styleguide_nav(active_page) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="nine columns">
+
+        <h2>About</h2>
+        <p>This style guide is here to help new and current developers to keep the UI consistent.</p>
+        <p>Currently for frontend development we're using:</p>
+        <ul>
+            <li><a href="http://getskeleton.com/" target="_blank">Skelton</a> CSS boilerplate.</a></li>
+            <li><a href="https://useiconic.com/open" target="_blank">Open Iconic</a> icons</a></li>
+            <li>A few custom social media svg icons</li>
+            <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a> templating engine.</a></li>
+        </ul>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="skeleton"></a>Skeleton</h3>
+        <p>Skeleton is not a fremework, it's a boilerplate to create unique style for a website. To keep things easy to maintain it's core is located in:</p>
+        <p><code>app/static/Skeleton</code></p>
+        <p>All custom additions to it are added to a separate file:</p>
+        <p><code>app/static/css/custom.css</code></p>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="raleway"></a>Raleway</h3>
+        <p>Currently using the default font that comes with Skeleton, called Raleway. For development all files are server locally from:</p>
+        <p><code>app/static/fonts</code></p>
+        <p>The font comes in 3 styles; Light, Regular and Semi-Bold (Raleway-Light.ttf, Raleway-Regular.ttf and Raleway-SemiBold.ttf). For detailed specifications visit the <a href="#fonts">Fonts section</a> of this style guide.</p>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="open-iconic"></a>Open Iconic</h3>
+        <p>We're using Open Iconic icon set. Throughout the app svg icons are used istead of the icon font. It is located in:</p>
+        <p><code>app/static/open-iconic/svg</code></p>
+        <p>Additionally, there are a few custom social media icons located in:</p>
+        <p><code>app/static/icons</code></p>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="jinja2"></a>Jinja2</h3>
+        <p>Jinja comes by default with <a href="http://flask.pocoo.org/" target="_blank">Flask</a>, which is the Python microframework we're using. Detailed documentation can be found <a href="http://jinja.pocoo.org/docs/dev/" target="_blank">here</a>.</p>
+        <p>Templating conventions used for this project are described in the <a href="{# url_for('styleguide/templating') #}">Templating section</a>.</p>
+
+    </div>
+
+    <div class="three columns">
+        <div class="nav-stacked-container">
+            <ul id="nav-submenu" class="nav nav-stacked nav-secondary u-pull-right"></ul>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
