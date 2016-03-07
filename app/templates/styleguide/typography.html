@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% set active_page = "styleguide_typography" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">Style Guide</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>v 0.1.0</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_styleguide_nav(active_page) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="nine columns">
+
+        <h2>Typography</h2>
+        <p>Just as vanilla Skeleton, we're using Raleway font, which is served locally. Type is set using <em>rems</em>, so all font sizes are based on a single <code>fots-size</code> property defined for <code>&lt;html&gt;</code> element. Generally, that definition should not be changed. This is done to keep font-size relationships consistent. All measurements are base 10, so <code>&lt;h1&gt;</code> with <em>5.0rem</em> means <em>50px</em>.</p>
+        <p>The base font size is 15rem (15px) with 1.6rem line height (24px). Here are some examples of basic tags:</p>
+        <div class="row">
+            <div class="one-half column">
+                <p>
+                    Normal<br>
+                    <strong>Bold</strong><br>
+                    <em>Italics</em><br>
+                    <u>Underline</u><br>
+                    <a>Anchor</a><br>
+                    <a href="#">Link</a>
+                </p>
+            </div>
+            <div class="one-half column">
+                <pre>
+&lt;strong&gt;Bold&lt;/strong&gt;
+&lt;em&gt;Italics&lt;/em&gt;
+&lt;u&gt;Underline&lt;/u&gt;
+&lt;a&gt;Anchor&lt;/a&gt;
+&lt;a href="#"&gt;Link&lt;/a&gt;</pre>
+            </div>
+        </div>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="headings"></a>Headings</h3>
+        <p>Below is a table with examples for all vailable headings with their respective sizes.</p>
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Example</th>
+                    <th>Tag</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><h1>Heading</h1></td>
+                    <td><code>&lt;h1&gt;</code></td>
+                    <td>50rem</td>
+                </tr>
+                <tr>
+                    <td><h2>Heading</h1></td>
+                    <td><code>&lt;h2&gt;</code></td>
+                    <td>42rem</td>
+                </tr>
+                <tr>
+                    <td><h3>Heading</h3></td>
+                    <td><code>&lt;h3&gt;</code></td>
+                    <td>36rem</td>
+                </tr>
+                <tr>
+                    <td><h4>Heading</h4></td>
+                    <td><code>&lt;h4&gt;</code></td>
+                    <td>30rem</td>
+                </tr>
+                <tr>
+                    <td><h5>Heading</h5></td>
+                    <td><code>&lt;h5&gt;</code></td>
+                    <td>24rem</td>
+                </tr>
+                <tr>
+                    <td><h6>Heading</h6></td>
+                    <td><code>&lt;h6&gt;</code></td>
+                    <td>15rem</td>
+                </tr>
+            </tbody>
+        </table>
+        <pre>
+&lt;h1&gt;Heading&lt;/h1&gt;
+&lt;h2&gt;Heading&lt;/h2&gt;
+&lt;h3&gt;Heading&lt;/h3&gt;
+&lt;h4&gt;Heading&lt;/h4&gt;
+&lt;h5&gt;Heading&lt;/h5&gt;
+&lt;h6&gt;Heading&lt;/h6&gt;</pre>
+        <p>Subheadings are easy to create with a <code>&lt;small&gt;</code> tag:</p>
+        <h1>Heading <small>Subheading</small></h1>
+        <pre>
+&lt;h1&gt;Heading &lt;small&gt;Subheading&lt;/small&gt;&lt;/h1&gt;</pre>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="paragraphs"></a>Paragraphs</h3>
+        <p>Simply use the <code>&lt;p&gt;</code> tag. Here's an example:</p>
+        <p><strong>Normal size</strong><br>
+        Est et ad rem unde a commodi. Nemo velit deserunt molestias velit. Dolor nesciunt recusandae magni provident eos. Dolore ea veritatis quod alias dolorum facere animi sunt. Ea voluptatem voluptatem perspiciatis quia voluptatem veritatis ut. Perferendis optio modi quas sunt natus.</p>
+        <p><small><strong>Small size</strong><br>
+        A et tenetur at non quo vitae eveniet. Tempora quos aut placeat nam ullam est qui repellat. Praesentium consequatur alias aut doloribus harum rerum facere aut. Perspiciatis saepe aut nulla. Expedita minima qui sunt facilis voluptas possimus. Dolor officiis natus sint perferendis.</small></p>
+        <pre>
+&lt;-- A standard, normal size paragraph --&gt;
+&lt;p&gt;&lt;strong&gt;Normal size&lt;/strong&gt;&lt;br&gt;
+Est et ad rem unde a commodi. [...]&lt;/p&gt;
+        
+&lt;-- A small paragraph with a more subdued color --&gt;
+&lt;p&gt;&lt;small&gt;&lt;strong&gt;Small size&lt;/strong&gt;&lt;br&gt;
+A et tenetur at non quo vitae eveniet. [...]&lt;/p&gt;</pre>
+    </div>
+
+    <div class="three columns">
+        {{ render_scrollspy() }}
+    </div>
+
+</div>
+{% endblock %}

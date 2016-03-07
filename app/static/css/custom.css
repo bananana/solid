@@ -342,12 +342,6 @@ small {
 
 /* Input 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-input,
-select,
-label,
-textarea {
-    width: 100%;
-}
 button:disabled {
     color: #fff;
     background-color: #ccc;

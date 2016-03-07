@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% set active_page = "styleguide_forms" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">Style Guide</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>v 0.1.0</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_styleguide_nav(active_page) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="nine columns">
+
+        <h2>Forms</h2>
+        <p>All form inputs are responsive out of the box. You can put them inside <a href="{{ url_for('styleguide.grid_system') }}">grid columns</a> for an inline or stacked look.</p>
+
+        <h3 class="scrollspy-section"><a id="buttons"></a>Buttons</h3>
+        <p>You can turn any element such as <code>&lt;a&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code> or <code>&lt;submit&gt;</code> into a button by giving it a <code>&lt;button&gt;</code> class.</p>
+        <a class="button">Anchor Element</a>
+        <button>Button Element</button>
+        <input type="button" class="button" value="Input Button">
+        <input type="submit" class="button" value="Submit Button">
+
+    </div>
+
+    <div class="three columns">
+        {{ render_scrollspy() }}
+    </div>
+
+</div>
+{% endblock %}

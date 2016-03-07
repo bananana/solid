@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block content %}
-{% from "helpers/navigation.html" import render_styleguide_nav %}
+{% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
 <div class="row">
     <div class="eight columns">
         <h1 class="u-remove-margin-bottom">Style Guide</h1>
@@ -179,9 +179,7 @@
     </div>
 
     <div class="three columns">
-        <div class="nav-stacked-container">
-            <ul id="nav-submenu" class="nav nav-stacked nav-secondary u-pull-right"></ul>
-        </div>
+        {{ render_scrollspy() }}
     </div>
 
 </div>

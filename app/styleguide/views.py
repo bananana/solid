@@ -12,3 +12,11 @@ def styleguide():
 @mod.route('/styleguide/grid_system')
 def grid_system():
     return render_template('styleguide/grid_system.html')
+
+@mod.route('/styleguide/typography')
+def typography():
+    return render_template('styleguide/typography.html')
+
+@mod.route('/styleguide/forms')
+def forms():
+    return render_template('styleguide/forms.html')
