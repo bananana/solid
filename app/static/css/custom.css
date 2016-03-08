@@ -342,15 +342,27 @@ small {
 
 /* Input 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-button:disabled {
+.button-disabled,
+button:disabled,
+input[type="button"]:disabled,
+input[type="submit"]:disabled {
     color: #fff;
     background-color: #ccc;
     border-color: #bbb;
     text-decoration: line-through;
 }
+.button-disabled:hover,
+.button-disabled:active,
+.button-disabled:focus,
 button:disabled:hover,
 button:disabled:active,
-button:disabled:focus {
+button:disabled:focus, 
+input[type="button"]:disabled:hover,
+input[type="button"]:disabled:active,
+input[type="button"]:disabled:focus,
+input[type="submit"]:disabled:hover,
+input[type="submit"]:disabled:active,
+input[type="submit"]:disabled:focus {
     color: #A94442;
     background-color: #F3DEDE;
     border-color: #EBCCD1;

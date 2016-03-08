@@ -26,13 +26,80 @@
 
         <h2>Forms</h2>
         <p>All form inputs are responsive out of the box. You can put them inside <a href="{{ url_for('styleguide.grid_system') }}">grid columns</a> for an inline or stacked look.</p>
+        <hr>
 
         <h3 class="scrollspy-section"><a id="buttons"></a>Buttons</h3>
-        <p>You can turn any element such as <code>&lt;a&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code> or <code>&lt;submit&gt;</code> into a button by giving it a <code>&lt;button&gt;</code> class.</p>
+        <p>You can style any element such as <code>&lt;a&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code> or <code>&lt;submit&gt;</code> by giving it a <code>button</code> class.</p>
         <a class="button">Anchor Element</a>
         <button>Button Element</button>
-        <input type="button" class="button" value="Input Button">
-        <input type="submit" class="button" value="Submit Button">
+        <input type="button" value="Input Button">
+        <input type="submit" value="Submit Button">
+        <pre>
+&lt;a class="button"&gt;Anchor Element&lt;/a&gt;
+&lt;button&gt;Button Element&lt;/button&gt;
+&lt;input type="button" value="Input Button"&gt;
+&lt;input type="submit" value="Submit Button"&gt;</pre>
+        <p>Adding <code>button-primary</code> class will turn it into a primary button that is styled to be more prominent.</p>
+        <a class="button button-primary">Anchor Element</a>
+        <button class="button-primary">Button Element</button>
+        <input type="button" class="button button-primary" value="Input Button">
+        <input type="submit" class="button button-primary" value="Submit Button">
+        <pre>
+&lt;a class="button button-primary"&gt;Anchor Element&lt;/a&gt;
+&lt;button class="button-primary"&gt;Button Element&lt;/button&gt;
+&lt;input type="button" class="button button-primary" value="Input Button"&gt;
+&lt;input type="submit" class="button button-primary" value="Submit Button"&gt;</pre>
+        <p><code>&lt;button&gt;</code> and <code>&lt;input&gt;</code> elements with <code>disabled</code> parameter will automatically get styled accordingly. <code>&lt;a&gt;</code> tag has to have <code>button-disabled</code> class to get styled.</p>
+        <a class="button button-disabled">Anchor Element</a>
+        <button class="button-primary" disabled>Button Element</button>
+        <input type="button" class="button button-primary" value="Input Button" disabled>
+        <input type="submit" class="button button-primary" value="Submit Button" disabled>
+        <pre>
+&lt;a class="button button-disabled"&gt;Anchor Element&lt;/a&gt;
+&lt;button class="button-primary" disabled&gt;Button Element&lt;/button&gt;
+&lt;input type="button" class="button button-primary" value="Input Button" disabled&gt;
+&lt;input type="submit" class="button button-primary" value="Submit Button" disabled&gt;</pre>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="form-elements"></a>Form Elements</h3>
+        <p>All form elements, including labels, are styled automatically. To make the element take up a whole column, use the <code>u-full-width</code> class.</p>
+        <div class="row">
+            <div class="one-half column">
+                <label for="text-input-field-demo">Text Input Field Demo</label>
+                <input id="text-input-field-demo" class="u-full-width" type="text" placeholder="Placeholder"></input>
+            </div>
+            <div class="one-half column">
+                <label for="select-field-demo">Select Field Demo</label>
+                <select id="select-field-demo" class="u-full-width">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                </select>
+            </div>
+            <div class="twelve columns">
+                <label for="textarea-demo">Textarea Demo</label>
+                <textarea id="textarea-demo" class="u-full-width" placeholder="Textarea placeholder"></textarea>
+            </div>
+        </div>
+        <pre>
+&lt;div class="row"&gt;
+    &lt;div class="one-half column"&gt;
+        &lt;label for="text-input-field-demo"&gt;Text Input Field Demo&lt;/label&gt;
+        &lt;input id="text-input-field-demo" class="u-full-width" type="text" placeholder="Placeholder"&gt;&lt;/input&gt;
+    &lt;/div&gt;
+    &lt;div class="one-half column"&gt;
+        &lt;label for="select-field-demo"&gt;Select Field Demo&lt;/label&gt;
+        &lt;select id="select-field-demo" class="u-full-width"&gt;
+            &lt;option&gt;Option 1&lt;/option&gt;
+            &lt;option&gt;Option 2&lt;/option&gt;
+            &lt;option&gt;Option 3&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class="twelve columns"&gt;
+        &lt;label for="textarea-demo"&gt;Textarea Demo&lt;/label&gt;
+        &lt;textarea id="textarea-demo" class="u-full-width" placeholder="Textarea placeholder"&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
 
     </div>
 

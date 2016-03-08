@@ -22,7 +22,7 @@ $(document).ready(function() {
 
     // Selectors
     var lastId,
-        menuHeight = menu.outerHeight() + 15,
+        menuHeight = menu.outerHeight() + 20,
         menuItems = menu.find('a'),
         scrollItems = menuItems.map(function() {
             var item = $($(this).attr('href'));
