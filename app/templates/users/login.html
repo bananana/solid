@@ -21,6 +21,7 @@
                 <div class="six columns offset-by-three">
                     {{ render_field(
                         form.email(**{
+                            'class':'u-full-width',
                             'data-validation':'email', 
                             'data-validation-error-msg-container':'#form-email-error',
                             'data-validation-error-msg':'Incorrect'
@@ -31,6 +32,7 @@
                     }}
                     {{ render_field(
                         form.password(**{
+                            'class':'u-full-width',
                             'data-validation':'required',
                             'data-validation-error-msg-container':'#form-password-error',
                             'data-validation-error-msg':'Required'}),

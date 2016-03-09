@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% set active_page = "styleguide_tables" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">Style Guide</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>v 0.1.0</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_styleguide_nav(active_page) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="nine columns">
+
+        <h2>Tables</h2>
+        <p>For now there's only basic table styling borrowed directly from Skeleton.</p>
+
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Text</th>
+                    <th>Number</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Demo Entry</td>
+                    <td>32</td>
+                    <td><a href="#">Demo Link</a></td>
+                </tr>
+                <tr>
+                    <td>Another Demo Entry</td>
+                    <td>64</td>
+                    <td><a href="#">Another Demo Link</a></td>
+                </tr>
+                <tr>
+                    <td>Test</td>
+                    <td>128</td>
+                    <td><a href="#">Test</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <pre>
+&lt;table class="u-full-width"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Text&lt;/th&gt;
+            &lt;th&gt;Number&lt;/th&gt;
+            &lt;th&gt;Link&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Demo Entry&lt;/td&gt;
+            &lt;td&gt;32&lt;/td&gt;
+            &lt;td&gt;&lt;a href="#"&gt;Demo Link&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Another Demo Entry&lt;/td&gt;
+            &lt;td&gt;64&lt;/td&gt;
+            &lt;td&gt;&lt;a href="#"&gt;Another Demo Link&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Test&lt;/td&gt;
+            &lt;td&gt;128&lt;/td&gt;
+            &lt;td&gt;&lt;a href="#"&gt;Test&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+
+    </div>
+
+    <div class="three columns">
+        {{ render_scrollspy() }}
+    </div>
+
+</div>
+{% endblock %}

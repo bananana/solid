@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% set active_page = "styleguide_media_queries" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">Style Guide</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>v 0.1.0</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_styleguide_nav(active_page) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="nine columns">
+
+        <h2>Media Queries</h2>
+        <p>Media queries are borrowed directly <a href="http://getskeleton.com/#queries" target="_blank">from Skeleton</a>. All the queries are mobile-first, meaning they use <code>min-width</code> property.</p>
+        <p><strong>Note:</strong> The best way to structure the use of media queries is to create the queries near the relevant code. For example, if you wanted to change the styles for buttons on small devices, paste the mobile query code up in the buttons section and style it there.</p>
+        <p>Below is a table of all available media queries:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Media Query</th> 
+                    <th>Explanation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>@media (min-width: 400px) {}</code></td>
+                    <td>Larger than mobile</td>
+                </tr>
+                <tr>
+                    <td><code>@media (min-width: 550px) {}</code></td>
+                    <td>Larger than phablet</td>
+                </tr>
+                <tr>
+                    <td><code>@media (min-width: 750px) {}</code></td>
+                    <td>Larger than tablet</td>
+                </tr>
+                <tr>
+                    <td><code>@media (min-width: 1000px) {}</code></td>
+                    <td>Larger than desktop</td>
+                </tr>
+                <tr>
+                    <td><code>@media (min-width: 1200px) {}</code></td>
+                    <td>Larger than HD desktop</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <div class="three columns">
+        {{ render_scrollspy() }}
+    </div>
+
+</div>
+{% endblock %}

@@ -55,6 +55,21 @@
         <li {% if active_section == "styleguide_forms" %}class="active"{% endif %}>
             <a href="{{ url_for('styleguide.forms') }}">Forms</a>
         </li>
+        <li {% if active_section == "styleguide_tables" %}class="active"{% endif %}>
+            <a href="{{ url_for('styleguide.tables') }}">Tables</a>
+        </li>
+        <li {% if active_section == "styleguide_alerts" %}class="active"{% endif %}>
+            <a href="{{ url_for('styleguide.alerts') }}">Alerts</a>
+        </li>
+        <li {% if active_section == "styleguide_utilities" %}class="active"{% endif %}>
+            <a href="{{ url_for('styleguide.utilities') }}">Utilities</a>
+        </li>
+        <li {% if active_section == "styleguide_media_queries" %}class="active"{% endif %}>
+            <a href="{{ url_for('styleguide.media_queries') }}">Media Queries</a>
+        </li>
+        <li {% if active_section == "styleguide_templating" %}class="active"{% endif %}>
+            <a href="{{ url_for('styleguide.templating') }}">Templating</a>
+        </li>
     </ul>
     <span class="u-cf"></span>
 </div>

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% set active_page = "styleguide_utilities" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">Style Guide</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>v 0.1.0</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_styleguide_nav(active_page) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="nine columns">
+
+        <h2>Utilities</h2>
+        <p>In addition to Skeleton's helper utilites we've added several others to help with layout creation. Below is a full list of these classes, the details of their implementation can be found in <a href="{{ url_for('static', filename='css/custom.css') }}" target="_blank"><code>app/static/css/custom.css</code></a> under "Utilities" section.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Class</th>
+                    <th>Explanation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>u-pull-right</code></td>
+                    <td>Float right</td>
+                </tr>
+                <tr>
+                    <td><code>u-pull-left</code></td>
+                    <td>Float left</td>
+                </tr>
+                <tr>
+                    <td><code>u-cf</code></td>
+                    <td>Clear all floats</td>
+                </tr>
+                <tr>
+                    <td><code>u-full-width</code></td>
+                    <td>Set element width to 100%, making it take up the entire width of parent element</td>
+                </tr>
+                <tr>
+                    <td><code>u-max-full-width</code></td>
+                    <td>Same as <code>u-full-width</code>, only using the max-width property</td>
+                </tr>
+                <tr>
+                    <td><code>u-add-margin-top</code></td>
+                    <td>Add a 1em top margin</td>
+                </tr>
+                <tr>
+                    <td><code>u-remove-margin-bottom</code></td>
+                    <td>Remove bottom margin by setting that property to 0</td>
+                </tr>
+                <tr>
+                    <td><code>u-to-upper</code></td>
+                    <td>Turn text to all caps<td>
+                </tr>
+                <tr>
+                    <td><code>u-text-center</code></td>
+                    <td>Align text to center</td>
+                </tr>
+                <tr>
+                    <td><code>u-text-right</code></td>
+                    <td>Align text to the right</td>
+                </tr>
+                <tr>
+                    <td><code>u-mobile-fixed-bottom</code></td>
+                    <td>Make element stick to the bottom of the screen on mobile devices (width 550px or less)</td>
+                </tr>
+                <tr>
+                    <td><code>u-hide-on-mobile</code></td>
+                    <td>Hide element on mobile devices (width 550px or less)</td>
+                </tr>
+                <tr>
+                    <td><code>u-show-on-mobile</code></td>
+                    <td>Only display element on mobile devices (width 550px or less)</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="three columns">
+        {{ render_scrollspy() }}
+    </div>
+
+</div>
+{% endblock %}

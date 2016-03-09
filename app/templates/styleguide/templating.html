@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% set active_page = "styleguide_templating" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">Style Guide</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>v 0.1.0</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_styleguide_nav(active_page) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="nine columns">
+
+        <h2>Templating</h2>
+        <p>We're using <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a> templating engine which comes with Flask by default. All documentation can be found <a href="http://jinja.pocoo.org/docs/dev/" target="_blank">here</a>. All the template can be found in <code>app/templates</code>, broken up into sub-directories by module names. There's a special directory called <code>app/templates/helpers</code>, which contains helper macros that a recycled multiple times in other templates.</p>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="base-layout"></a>Base Layout</h3>
+        <p>All templates inherit their layout from <code>app/templates/base.html</code>. It includes a standard <code>&lt;html&gt;</code> declaration, <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> sections. Within the <code>&lt;body&gt;</code> there are <code>&lt;div&gt;</code> blocks with <code>header</code>, <code>content</code> and <code>footer</code> classes that represent these respective sections of the page.</p>
+        <p>There are 2 template blocks called <code>{&#37; block scripts &#37;}</code> and <code>{&#37; block content &#37;}</code>, which correspond to blocks declared in each individual page template.</p>
+        <p>Flashed messages are automatically inserted above the main content, right under the header.</p>
+        <hr>
+       
+        <h3 class="scrollspy-section"><a id="basic-template"></a>Basic Template</h3>
+        <p>Each page template has a basic layout that looks like this:</p>
+        <pre>
+{&#37; extends "base.html" &#37;}
+{&#37; set active_page = "page_name" &#37;}
+        
+{&#37; block scripts &#37;}
+{&#37; endblock &#37;}
+        
+{&#37; block content &#37;}
+{&#37; endblock &#37;}</pre>
+        <p>Basically, it extends the <code>base.html</code> template and inserts anything in the <code>scripts</code> and <code>content</code> blocks into <code>base.html</code>.
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="navigation-helpers"></a>Navigation Helpers</h3>
+        <p>Navigation helpers are located in <code>app/templates/helpers/navigation.html</code> file. Currently available macros:</p>
+        <dl>
+            <dt><code>render_cause_nav(active_section, new_updates, new_comments)</code></dt>
+            <dd>
+                Renders navigation for cause module.
+                <ul>
+                    <li><code>active_section</code> currently active section, usualy you should pass <code>active_section</code> variable from the template to this variable.</li>
+                    <li><code>new_updates</code> number of new updates in the Updates section.</li>
+                    <li><code>new_comments</code> number of new comments in the Comments section.</li>
+                </ul>
+            </dd>
+            <dt></dt>
+            <dd></dd>
+            <dt></dt>
+            <dd></dd>
+        </dl>
+    </div>
+
+    <div class="three columns">
+        {{ render_scrollspy() }}
+    </div>
+
+</div>
+{% endblock %}

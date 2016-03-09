@@ -25,7 +25,7 @@
     <div class="nine columns">
 
         <h2>Forms</h2>
-        <p>All form inputs are responsive out of the box. You can put them inside <a href="{{ url_for('styleguide.grid_system') }}">grid columns</a> for an inline or stacked look.</p>
+        <p>All form inputs are responsive out of the box. Form elements, including labels, are styled automatically, so no need to add any special classes to them. You can put them inside <a href="{{ url_for('styleguide.grid_system') }}">grid columns</a> for an inline or stacked look. To make the element take up a whole column, use the <code>u-full-width</code> class.</p>
         <hr>
 
         <h3 class="scrollspy-section"><a id="buttons"></a>Buttons</h3>
@@ -61,46 +61,208 @@
 &lt;input type="submit" class="button button-primary" value="Submit Button" disabled&gt;</pre>
         <hr>
 
-        <h3 class="scrollspy-section"><a id="form-elements"></a>Form Elements</h3>
-        <p>All form elements, including labels, are styled automatically. To make the element take up a whole column, use the <code>u-full-width</code> class.</p>
+        <h3 class="scrollspy-section"><a id="text-input"></a>Text Input</h3>
+        <p>No additional classes are necessary to style <code>&lt;input&gt;</code> elements.</p>
         <div class="row">
-            <div class="one-half column">
+            <div class="one-third column">
                 <label for="text-input-field-demo">Text Input Field Demo</label>
-                <input id="text-input-field-demo" class="u-full-width" type="text" placeholder="Placeholder"></input>
+                <input id="text-input-field-demo" class="u-full-width" type="text" placeholder="Placeholder">
             </div>
+            <div class="one-third column">
+                <label for="password-input-field-demo">Password Input Field Demo</label>
+                <input id="password-input-field-demo" class="u-full-width" type="password" placeholder="Placeholder">
+            </div>
+            <div class="one-third column">
+                <label for="email-input-field-demo">Email Input Field Demo</label>
+                <input id="email-input-field-demo" class="u-full-width" type="email" placeholder="email@example.com">
+            </div>
+        </div>
+        <pre>
+&lt;div class="row"&gt;
+    &lt;div class="one-third column"&gt;
+        &lt;!-- Standard text input --&gt;
+        &lt;label for="text-input-field-demo"&gt;Text Input Field Demo&lt;/label&gt;
+        &lt;input type="text"
+               id="text-input-field-demo" 
+               class="u-full-width" 
+               placeholder="Placeholder"&gt;
+    &lt;/div&gt;
+    &lt;div class="one-third column"&gt;
+        &lt;!-- Password input --&gt;
+        &lt;label for="password-input-field-demo"&gt;Password Input Field Demo&lt;/label&gt;
+        &lt;input type="password" 
+               id="password-input-field-demo"
+               class="u-full-width" 
+               placeholder="Placeholder"&gt;
+    &lt;/div&gt;
+    &lt;div class="one-third column"&gt;
+        &lt;!-- Email input --&gt;
+        &lt;label for="email-input-field-demo"&gt;Email Input Field Demo&lt;/label&gt;
+        &lt;input type="email"
+               id="email-input-field-demo" 
+               class="u-full-width" 
+               placeholder="email@example.com"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="textarea"></a>Textarea</h3>
+        <p><code>&lt;textarea&gt;</code> can have all the standard <code>cols</code> and <code>rows</code> properties to control it's size. Alternatively, you can use the <code>u-full-width</code> class to make it take up an entire column.</p>
+        <label for="textarea-demo">Textarea Demo</label>
+        <textarea id="textarea-demo" cols="32" placeholder="Textarea placeholder"></textarea>
+        <pre>
+&lt;label for="textarea-demo"&gt;Textarea Demo&lt;/label&gt;
+&lt;textarea id="textarea-demo" cols="32" placeholder="Textarea placeholder"&gt;&lt;/textarea&gt;</pre>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="select-field"></a>Select Field</h3>
+        <p></p>
+        <div class="row">
             <div class="one-half column">
                 <label for="select-field-demo">Select Field Demo</label>
                 <select id="select-field-demo" class="u-full-width">
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
+                    <option value="option-1">Option 1</option>
+                    <option value="option-2">Option 2</option>
+                    <option value="option-3">Option 3</option>
                 </select>
             </div>
-            <div class="twelve columns">
-                <label for="textarea-demo">Textarea Demo</label>
-                <textarea id="textarea-demo" class="u-full-width" placeholder="Textarea placeholder"></textarea>
+            <div class="one-half column">
+                <label for="select-field-demo-2">Select Field Demo <small>(with optgroups)</small></label>
+                <select id="select-field-demo-2" class="u-full-width">
+                    <optgroup label="Group 1">
+                        <option value="option-1">Option 1</option>
+                        <option value="option-2">Option 2</option>
+                        <option value="option-3">Option 3</option>
+                    </optgroup>
+                    <optgroup label="Group 2">
+                        <option value="option-4">Option 4</option>
+                        <option value="option-5">Option 5</option>
+                        <option value="option-6">Option 6</option>
+                    </optgroup>
+                </select>
             </div>
         </div>
         <pre>
 &lt;div class="row"&gt;
     &lt;div class="one-half column"&gt;
-        &lt;label for="text-input-field-demo"&gt;Text Input Field Demo&lt;/label&gt;
-        &lt;input id="text-input-field-demo" class="u-full-width" type="text" placeholder="Placeholder"&gt;&lt;/input&gt;
-    &lt;/div&gt;
-    &lt;div class="one-half column"&gt;
         &lt;label for="select-field-demo"&gt;Select Field Demo&lt;/label&gt;
         &lt;select id="select-field-demo" class="u-full-width"&gt;
-            &lt;option&gt;Option 1&lt;/option&gt;
-            &lt;option&gt;Option 2&lt;/option&gt;
-            &lt;option&gt;Option 3&lt;/option&gt;
+            &lt;option value="option-1"&gt;Option 1&lt;/option&gt;
+            &lt;option value="option-2"&gt;Option 2&lt;/option&gt;
+            &lt;option value="option-3"&gt;Option 3&lt;/option&gt;
         &lt;/select&gt;
     &lt;/div&gt;
-    &lt;div class="twelve columns"&gt;
-        &lt;label for="textarea-demo"&gt;Textarea Demo&lt;/label&gt;
-        &lt;textarea id="textarea-demo" class="u-full-width" placeholder="Textarea placeholder"&gt;&lt;/textarea&gt;
+    &lt;div class="one-half column"&gt;
+        &lt;label for="select-field-demo-2"&gt;
+            Select Field Demo 
+            &lt;small&gt;(with optgroups)&lt;/small&gt;
+        &lt;/label&gt;
+        &lt;select id="select-field-demo-2" class="u-full-width"&gt;
+            &lt;optgroup label="Group 1"&gt;
+                &lt;option value="option-1"&gt;Option 1&lt;/option&gt;
+                &lt;option value="option-2"&gt;Option 2&lt;/option&gt;
+                &lt;option value="option-3"&gt;Option 3&lt;/option&gt;
+            &lt;/optgroup&gt;
+            &lt;optgroup label="Group 2"&gt;
+                &lt;option value="option-4"&gt;Option 4&lt;/option&gt;
+                &lt;option value="option-5"&gt;Option 5&lt;/option&gt;
+                &lt;option value="option-6"&gt;Option 6&lt;/option&gt;
+            &lt;/optgroup&gt;
+        &lt;/select&gt;
     &lt;/div&gt;
 &lt;/div&gt;</pre>
+        <hr>
+        
+        <h3 class="scrollspy-section"><a id="radio-buttons-and-checkboxes"></a>Radio Buttons &amp; Checkboxes</h3>
+        <p>Radio buttons and checkboxes are rendered by putting the <code>&lt;input&gt;</code> tag inside the <code>&lt;label&gt;</code> tag. This is done so clicking on the label can activate the radio/checkbox.</p>
+        <div class="row">
+            <div class="one-half column">
+                <label for="option-1">
+                    <input type="radio" name="radio-demo" id="option-1">
+                    Option 1
+                </label>
+                <label for="option-2">
+                    <input type="radio" name="radio-demo" id="option-2">
+                    Option 2
+                </label>
+                <label for="option-3">
+                    <input type="radio" name="radio-demo" id="option-3">
+                    Option 3
+                </label>
+            </div>
+            <div class="one-half column">
+                <div class="one-half column">
+                    <label for="checkbox-1">
+                        <input type="checkbox" id="checkbox-1">
+                        Checkbox 1
+                    </label>
+                    <label for="checkbox-2">
+                        <input type="checkbox" id="checkbox-2">
+                        Checkbox 2
+                    </label>
+                    <label for="checkbox-3">
+                        <input type="checkbox" id="checkbox-3">
+                        Checkbox 3
+                    </label>
+                </div>
+            </div>
+        </div>
+        <pre>
+&lt;div class="row"&gt;
+    &lt;div class="one-half column"&gt;
+        &lt;label for="option-1"&gt;
+            &lt;input type="radio" name="radio-demo" id="option-1"&gt;
+            Option 1
+        &lt;/label&gt;
+        &lt;label for="option-2"&gt;
+            &lt;input type="radio" name="radio-demo" id="option-2"&gt;
+            Option 2
+        &lt;/label&gt;
+        &lt;label for="option-3"&gt;
+            &lt;input type="radio" name="radio-demo" id="option-3"&gt;
+            Option 3
+        &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="one-half column"&gt;
+        &lt;div class="one-half column"&gt;
+            &lt;label for="checkbox-1"&gt;
+                &lt;input type="checkbox" id="checkbox-1"&gt;
+                Checkbox 1
+            &lt;/label&gt;
+            &lt;label for="checkbox-2"&gt;
+                &lt;input type="checkbox" id="checkbox-2"&gt;
+                Checkbox 2
+            &lt;/label&gt;
+            &lt;label for="checkbox-3"&gt;
+                &lt;input type="checkbox" id="checkbox-3"&gt;
+                Checkbox 3
+            &lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+        <hr>
 
+        <h3 class="scrollspy-section"><a id="bool-checkbox"></a>Bool Checkbox</h3>
+        <p>There a way to style checkboxes that need more prominent status, usually reserved for boolean variables like <em>Remember Me</em> questions. The checkbox and label both need to be in a <code>&lt;div&gt;</code> container with class <code>checkbox-container</code>, then the checkbox itself has to be inside a <code>&lt;div&gt;</code> with a <code>checkbox</code> class. Additionally, a special empty <code>&lt;div&gt;</code> with class <code>checkbox-replacement</code> has to be below the checkbox <code>&lt;input&gt;</code> tag itself. Here's an example of what it looks like:</p>
+        <div class="checkbox-container">
+            <div class="checkbox">
+                <input type="checkbox" id="bool-checkbox-demo" value="y">
+                <div class="checkbox-replacement"></div>
+            </div>
+            <label for="bool-checkbox-demo">Bool Checkbox Demo</label>
+        </div>
+        <pre>
+&lt;!-- Main container for the whole component --&gt;
+&lt;div class="checkbox-container"&gt;
+    &lt;!-- Container for the checkbox itself --&gt;
+    &lt;div class="checkbox"&gt;
+        &lt;input type="checkbox" id="bool-checkbox-demo" value="y"&gt;
+        &lt;!-- Special empty div to hold the replacement checkbox --&gt;
+        &lt;div class="checkbox-replacement"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Label for the checkbox --&gt;
+    &lt;label for="bool-checkbox-demo"&gt;Bool Checkbox Demo&lt;/label&gt;
+&lt;/div&gt;</pre>
     </div>
 
     <div class="three columns">

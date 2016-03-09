@@ -19,6 +19,7 @@
 - Progress Bar
 - Input
 - Tables
+- Lists
 - Code
 - Animations
 */
@@ -385,11 +386,15 @@ input[type="submit"]:disabled:focus {
     display: inline-block;
     margin-bottom: 1rem;
     margin-top: 0.4rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .checkbox-container label {
     position: absolute;
     padding-left: 40px;
-    margin-top: 0.2rem;
+    margin-top: 0.3rem;
 }
 .checkbox {
     float: left;
@@ -450,9 +455,6 @@ input[type="submit"]:disabled:focus {
 }
 .u-remove-margin-bottom {
     margin-bottom: 0;
-}
-.u-half-width {
-    width: 50%;
 }
 .u-to-upper {
     text-transform: uppercase;
@@ -573,6 +575,12 @@ td code {
     table.responsive td:nth-of-type(6):before { content: "Zip"; }
 }
 */
+
+/* Lists 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+ol ol {
+    list-style-type: lower-alpha;
+}
 
 /* Code 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
