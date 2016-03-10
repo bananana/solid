@@ -121,11 +121,6 @@ small {
     background: #fff;
     border-bottom: 1px solid #eee;
 }
-.spacer {
-    width: 100%;
-    height: 6.5rem;
-    margin-bottom: 15px;
-}
 .progress {
     display: block;
     height: 6.5rem;
@@ -140,6 +135,9 @@ small {
 .header .title,
 .header .button {
     margin-top: 1.2rem;
+}
+.content {
+    margin-top: 9rem;
 }
 .support-action {
     display: block;
@@ -578,8 +576,18 @@ td code {
 
 /* Lists 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+ul, ol {
+    list-style: circle outside;
+    margin-left: 1em;
+}
 ol ol {
     list-style-type: lower-alpha;
+}
+dl dt {
+    margin-bottom: 1.5em;
+}
+dl dd {
+    margin-bottom: 2em;
 }
 
 /* Code 

@@ -25,13 +25,17 @@
     <div class="nine columns">
 
         <h2>Templating</h2>
-        <p>We're using <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a> templating engine which comes with Flask by default. All documentation can be found <a href="http://jinja.pocoo.org/docs/dev/" target="_blank">here</a>. All the template can be found in <code>app/templates</code>, broken up into sub-directories by module names. There's a special directory called <code>app/templates/helpers</code>, which contains helper macros that a recycled multiple times in other templates.</p>
+        <p>We're using <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a> templating engine which comes with Flask by default. All documentation can be found <a href="http://jinja.pocoo.org/docs/dev/" target="_blank">here</a>. All the template can be found in <code>app/templates</code>, broken up into sub-directories by their respective modules. There's a special directory called <code>app/templates/helpers</code>, which contains helper macros that are recycled multiple times in other templates.</p>
         <hr>
 
         <h3 class="scrollspy-section"><a id="base-layout"></a>Base Layout</h3>
-        <p>All templates inherit their layout from <code>app/templates/base.html</code>. It includes a standard <code>&lt;html&gt;</code> declaration, <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> sections. Within the <code>&lt;body&gt;</code> there are <code>&lt;div&gt;</code> blocks with <code>header</code>, <code>content</code> and <code>footer</code> classes that represent these respective sections of the page.</p>
-        <p>There are 2 template blocks called <code>{&#37; block scripts &#37;}</code> and <code>{&#37; block content &#37;}</code>, which correspond to blocks declared in each individual page template.</p>
-        <p>Flashed messages are automatically inserted above the main content, right under the header.</p>
+        <p>All templates inherit their layout from <code>app/templates/base.html</code>. It includes standard <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> declarations that are recycled by every page. Within the <code>&lt;body&gt;</code> there are <code>&lt;div&gt;</code> blocks with <code>header</code>, <code>content</code> and <code>footer</code> classes that represent these sections of the page.</p>
+        <ul>
+            <li><code>header</code> contains the fixed header containing a logo, site-wide navigation and login/logout buttons.</li>
+            <li><code>content</code> holds flashed messages, as well as main page content. So messages are displayed right below the <code>header</code> and below the <code>content</code>.</li>
+            <li><code>footer</code> contains the static footer with some quick links to important information and social media links.</li>
+        </ul>
+        <p>There are 2 template blocks called <code>{&#37; block scripts &#37;}</code> and <code>{&#37; block content &#37;}</code>, which correspond to blocks declared in each individual page template. Details are  described below in the <a href="#basic-template">Basic Template</a> section.</p>
         <hr>
        
         <h3 class="scrollspy-section"><a id="basic-template"></a>Basic Template</h3>
@@ -45,25 +49,118 @@
         
 {&#37; block content &#37;}
 {&#37; endblock &#37;}</pre>
-        <p>Basically, it extends the <code>base.html</code> template and inserts anything in the <code>scripts</code> and <code>content</code> blocks into <code>base.html</code>.
+        <p>Basically, it extends the <code>base.html</code> template and inserts anything from <code>{&#37; block scripts &#37;}</code> and <code>{&#37; block content &#37;}</code> into corresponding blocks in <code>base.html</code>.</p>
+        <ul>
+            <li><code>{&#37; set active_page = "page_name" &#37;}</code> is usually used to tell navigation which page is currently active.</li>
+            <li><code>{&#37; block scripts &#37;}</code> should contain short scripts that are unique to this particular page, such as form validation.</li>
+            <li><code>{&#37; block content &#37;}</code> should contain the main page content.</li>
+        </ul>
         <hr>
 
         <h3 class="scrollspy-section"><a id="navigation-helpers"></a>Navigation Helpers</h3>
-        <p>Navigation helpers are located in <code>app/templates/helpers/navigation.html</code> file. Currently available macros:</p>
+        <p>Navigation helpers are located in <code>app/templates/helpers/navigation.html</code> file. Currently available macros are:</p>
         <dl>
-            <dt><code>render_cause_nav(active_section, new_updates, new_comments)</code></dt>
+            <dt><code><strong>render_cause_nav(active_section, new_updates, new_comments)</strong></code></dt>
             <dd>
-                Renders navigation for cause module.
+                <p><strong>Description:</strong> renders navigation for <em>cause</em> module</p>
+                <p><strong>Arguments:</strong>
+                    <ul>
+                        <li><code><strong>active_section</strong></code> : currently active section that gets an underline.</li>
+                        <li><code><strong>new_updates</strong></code> : number of new updates in the <em>Updates</em> section</li>
+                        <li><code><strong>new_comments</strong></code> : number of new comments in the <em>Comments</em> section</li>
+                    </ul>
+                </p>
+            </dd>
+            <dt><code><strong>render_styleguide_nav(active_section)</strong></code></dt>
+            <dd>
+                <p><strong>Description:</strong> renders navigation for <em>styleguide</em> module</p>
+                <p><strong>Arguments:</strong>
+                    <ul>
+                        <li><code><strong>active_section</strong></code> : currently active section that gets an underline.</li>
+                    </ul>
+                </p>
+            </dd>
+            <dt><code><strong>render_scrollspy()</strong></code></dt>
+            <dd>
+            <p><strong>Description:</strong> this menu is populated automatically by <a href="{{ url_for('static', filename='js/scroll-spy.js') }}" target="_blank"><code>app/static/js/scroll-spy.js</code></a> script. If you are going to use this navigation macro, don't forget to include it in <code>{&#37; block scripts &#37;}</code> like so: <pre>&lt;script type="text/javascript" src="{&#123; url_for('static', filename='js/scroll-spy.js') &#125;}"&gt;&lt;/script&gt;</pre>
+                Each section of a page that needs to appear in this menu needs to have the following markup: <pre>&lt;h3 class="scrollspy-section"&gt;&lt;a id="some-section-id"&gt;&lt;/a&gt;Some Section&lt;/h3&gt;</pre>
+            </p>
+            </dd>
+        </dl>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="form-helpers"></a>Form Helpers</h3>
+        <p>Form helpers are located in <code>app/templates/helpers/forms.html</code> file. We're using <a href="https://flask-wtf.readthedocs.org/en/latest/" target="_blank">Flask-WTF</a> extention for form processing. You should declare your forms in the <code>app/module_name/forms.py</code>, then import it in <code>app/module_name/views.py</code> file and then pass the form as avariable to <code>render_template()</code> method in the view.</p>
+        <p><code>forms.py</code> should look something like this:</p>
+        <pre>
+from flask_wtf import Form 
+from wtforms import StringField
+
+class YourForm(Form):
+    some_field = StringField('Some Field')</pre>
+        <p><code>views.py</code> should look something like this:</p>
+        <pre>
+# Other imports and views would be declared above
+
+# Don't forget to import your forms
+from app.module_name.forms import YourForm
+
+# The view that needs a form 
+@mod.route('/some_route')
+def some_view():
+    form = YourForm()
+    return render_template('module_name/template.html', form=form)</pre>
+        <p>The template file that uses the form should have something like the follow in its <code>{&#37; block content &#37;}</code>:</p>
+        <pre>
+&#123;&#37; block content &#37;&#125;
+
+    &lt;!-- Import the form helpers --&gt;
+    &#123;&#37; from "helpers/forms.html" import render_field &#37;&#125;
+
+    &lt;form id="form_id" name="form_name" action="" method="post"&gt;
+
+        &lt;!-- CSRF protection --&gt;
+        &#123;&#123; form.hidden_tag() &#125;&#125;
+
+        &lt;!-- Render your field --&gt;
+        &#123;&#123; render_field(form.some_field(**&#123;&#125;), 
+                        form.some_field.label,
+                        form.some_field.flags) &#125;&#125;
+
+    &lt;/form&gt;
+
+&#123;&#37; endblock &#37;&#125;</pre>
+
+        <p>Currently available macros are:</p>
+        <dl>
+            <dt><code><strong>render_boolean(bool)</strong></code></dt>
+            <dd>
+            <p><strong>Description:</strong> renders <a href="http://localhost:5000/styleguide/forms#bool-checkbox">Bool Checkbox</a></p>
+                <p><strong>Arguments:</strong></p>
                 <ul>
-                    <li><code>active_section</code> currently active section, usualy you should pass <code>active_section</code> variable from the template to this variable.</li>
-                    <li><code>new_updates</code> number of new updates in the Updates section.</li>
-                    <li><code>new_comments</code> number of new comments in the Comments section.</li>
+                    <li><code><strong>bool</strong></code> : takes a WTForms <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.BooleanField" target="_blank"><code>BooleanField()</code></a>, which is usually defined in the <code>forms.py</code> file of a module.</li>
                 </ul>
             </dd>
-            <dt></dt>
-            <dd></dd>
-            <dt></dt>
-            <dd></dd>
+            <dt><code><strong>render_radio(radio)</strong></code></dt>
+            <dd>
+                <p><strong>Description:</strong> renders a standard radio button section.</p>
+                <p><strong>Arguments:</strong>
+                <ul>
+                    <li><code><strong>radio</strong></code> : takes a WTForms <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.RadioField" target="_blank"><code>RadioField()</code></a>, which is usually defined in the <code>forms.py</code> file of a module.</li>
+                </ul>
+                </p>
+            </dd>
+            <dt><code><strong>render_field(field, label, flags)</strong></code></dt>
+            <dd>
+            <p><strong>Description:</strong> renders most other fields, including <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.StringField" target="_blank"><code>StringField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.PasswordField"><code>PasswordField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.HiddenField"><code>HiddenField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.TextAreaField"><code>TextAreaField()</code></a>, etc. A full list of possible fields can be fround <a href="http://wtforms.readthedocs.org/en/latest/fields.html" target="_blank">here</a>.</p>
+                <p><strong>Arguments:</strong>
+                <ul>
+                    <li><code><strong>field</strong></code> : any of the fields availabe <a href="http://wtforms.readthedocs.org/en/latest/fields.html" taget="_blank">here</a>, except the <code>RadioField()</code>, for which you should use the <code>render_radio()</code> macro.</li>
+                    <li><code><strong>label</strong></code> : pass the form label to this, usually it would look something like <code>form.field_name.label</code>.</li>
+                    <li><code><strong>flags</strong></code> : pass all the form flags to this, usually it would look something like <code>form.field_name.flags</code>. If there's a <em>required</em> flag set, the label will automatically get an asterisk next to it.</li>
+                </ul>
+                </p>
+            </dd>
         </dl>
     </div>
 

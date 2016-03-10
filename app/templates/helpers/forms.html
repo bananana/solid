@@ -1,3 +1,8 @@
+<!-- If you add another macro to this file or significatly edit an existing one, 
+dont' forget to add a description of your changes to the appropriate styleguide
+section (app/templates/styleguide/templating.html#form-helpers)
+-->
+
 {% macro render_boolean(bool) %}
     <div class="checkbox-container u-pull-left">
         <div class="checkbox">
@@ -24,23 +29,4 @@
         <span id="form-{{ label.field_id }}-error" class="u-pull-right"></span>
     </label>
     {{ field }}
-{% endmacro %}
-
-<!-- 
-Credit card fields have to be rendered without the name attribute, so they never
-hit the server. These fields are validated by Stripe and made into a token 
-client side, which can then be securely sent to the server. -->
-{% macro render_cc_field(field, validation, message) %}
-    <label for="{{ field.label.field_id }}">
-        {{ field.label.text }} *
-        <span id="form-{{ field.label.field_id }}-error" class="u-pull-right"></span>
-    </label>
-    <input type="text" 
-           id="{{ field.id }}"
-           autocomplete="off" 
-           data-validation="{{ validation }}" 
-           data-validation-error-msg-container="#form-{{ field.label.field_id }}-error"
-           data-validation-error-msg="{{ message }}"
-           required>
-    </input>
 {% endmacro %}
