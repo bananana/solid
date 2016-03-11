@@ -63,5 +63,12 @@ $(document).ready(function() {
                 .parent().removeClass('active')
                 .end().filter('[href="#' + id + '"]').parent().addClass('active');
         }
+
+        if ($(this).scrollTop() > 190) {
+            $('#scrollspy').addClass('nav-stacked-fixed');
+        }
+        if ($(this).scrollTop() < 190) {
+            $('#scrollspy').removeClass('nav-stacked-fixed');
+        }
     });
 });

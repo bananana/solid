@@ -176,12 +176,16 @@ small {
 
 /* Navigation 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+#scrollspy {
+    display: inline-block;
+}
 .nav-tabs-container {
     border-bottom: 1px solid #eee;
     margin-bottom: 1em;
 }
-.nav-stacked-container {
+.nav-stacked-fixed {
     position: fixed;
+    top: 6em;
 }
 .nav {
     padding-left: 0;
