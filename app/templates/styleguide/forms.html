@@ -3,6 +3,15 @@
 
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.form-validator.min.js') }}"></script>
+<script>
+$(document).ready(function() {
+    $.validate({
+        form : '#validation-demo',
+        errorMessageClass : 'danger'
+    });
+});
+</script> 
 {% endblock %}
 
 {% block content %}
@@ -263,6 +272,51 @@
     &lt;!-- Label for the checkbox --&gt;
     &lt;label for="bool-checkbox-demo"&gt;Bool Checkbox Demo&lt;/label&gt;
 &lt;/div&gt;</pre>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="validation"></a>Validation</h3>
+        <p>Front-end form validation is handled by <a href="http://www.formvalidator.net/" target="_blank">jQuery Form Validator</a>. Back-end validation is handled by <a href="http://flask-wtf.readthedocs.org/en/latest/" target="_blank">Flask-WTF</a>. In order for the front-end validation to be rendered correctly, first you'll need to include the validator library and an initialization sattement in <code>{&#37; block scripts &#37;}</code> of your template. It is not included by default because most pages never have forms and don't need validation.</p>
+        <p>Here's an example of a field that checks if input is a valid email address when the field looses focus:</p>
+        <div class="row">
+            <div class="one-half column">
+                <form id="validation-demo" action="">
+                    <label for="email">
+                        Email * <span id="form-email-error" class="u-pull-right"></span>
+                    </label>
+                    <input class="u-full-width" data-validation="email" data-validation-error-msg="Incorrect" data-validation-error-msg-container="#form-email-error" id="email" name="email" type="text" value="">
+                </form>
+            </div>
+        </div>   
+        <pre>
+&lt;script type="text/javascript" src="{&#123; url_for('static', filename="js/jquery.form-validator.min") &#125;}"&gt;&lt;/script&gt;
+&lt;script&gt;
+$(document).ready(function() {
+    $.validate({
+        form : '#form_id',
+        errorMessageClass : 'danger'
+    });
+});
+&lt;/script&gt;
+
+&lt;!-- Other markup and template statments would be here --&gt;
+
+&lt;form id="form_id" name="form_name" action="" method="post"&gt;
+
+    &lt;!-- CSRF protection --&gt;
+    &#123;&#123; form.hidden_tag() &#125;&#125;
+
+    &lt;!-- Render your field --&gt;
+    &#123;&#123; render_field(form.email(**{
+                        'data-validation':'email', 
+                        'data-validation-error-msg-container':'#form-email-error',
+                        'data-validation-error-msg':'Incorrect'
+                    }), 
+                    form.email.label,
+                    form.email.flags) &#125;&#125;
+
+&lt;/form&gt;</pre>
+        <p>The <code>render_field()</code> macro is describe in the  <a href="{{ url_for('styleguide.templating') }}#form-helpers">Form Helpers</a> section of this style guide. A full list of possible validators is available on the <a href="http://www.formvalidator.net/" target="_blank">jQuery Form Validator website</a>.</p>
+
     </div>
 
     <div class="three columns">
