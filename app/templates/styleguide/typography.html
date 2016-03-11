@@ -124,7 +124,7 @@ A et tenetur at non quo vitae eveniet. [...]&lt;/p&gt;</pre>
         <h3 class="scrollspy-section"><a id="lists"></a>Lists</h3>
         <p>Unoredered lists have a circle decoration by default. Nesting for more that 2 levels is not currently supported.</p>
         <div class="row">
-            <div class="one-half column">
+            <div class="one-third column">
                 <p><strong>Unordered list:</strong></p>
                 <ul>
                     <li>Item 1</li>
@@ -137,7 +137,7 @@ A et tenetur at non quo vitae eveniet. [...]&lt;/p&gt;</pre>
                     <li>Item 3</li>
                 </ul>
             </div>
-            <div class="one-half column">
+            <div class="one-third column">
                 <p><strong>Ordered list:</strong></p>
                 <ol>
                     <li>Item 1</li>
@@ -150,10 +150,19 @@ A et tenetur at non quo vitae eveniet. [...]&lt;/p&gt;</pre>
                     <li>Item 3</li>
                 </ol>
             </div>
+            <div class="one-third column">
+                <p><strong>Definition list:</strong></p>
+                <dl>
+                    <dt>Term 1</dt>
+                    <dd>Term 1 definition</dd>
+                    <dt>Term 2</dt>
+                    <dd>Term 2 definition</dd>
+                </dl>
+            </div>
         </div>
         <pre>
 &lt;div class="row"&gt;
-    &lt;div class="one-half column"&gt;
+    &lt;div class="one-third column"&gt;
         &lt;p&gt;&lt;strong&gt;Unordered list:&lt;/strong&gt;&lt;/p&gt;
         &lt;ul&gt;
             &lt;li&gt;Item 1&lt;/li&gt;
@@ -166,7 +175,7 @@ A et tenetur at non quo vitae eveniet. [...]&lt;/p&gt;</pre>
             &lt;li&gt;Item 3&lt;/li&gt;
         &lt;/ul&gt;
     &lt;/div&gt;
-    &lt;div class="one-half column"&gt;
+    &lt;div class="one-third column"&gt;
         &lt;p&gt;&lt;strong&gt;Ordered list:&lt;/strong&gt;&lt;/p&gt;
         &lt;ol&gt;
             &lt;li&gt;Item 1&lt;/li&gt;
@@ -179,16 +188,71 @@ A et tenetur at non quo vitae eveniet. [...]&lt;/p&gt;</pre>
             &lt;li&gt;Item 3&lt;/li&gt;
         &lt;/ol&gt;
     &lt;/div&gt;
+    &lt;div class="one-third column"&gt;
+        &lt;p&gt;&lt;strong&gt;Definition list:&lt;/strong&gt;&lt;/p&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;Term 1&lt;/dt&gt;
+            &lt;dd&gt;Term 1 definition&lt;/dd&gt;
+            &lt;dt&gt;Term 2&lt;/dt&gt;
+            &lt;dd&gt;Term 2 definition&lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</pre>
         <hr>
 
-        <h3 class="scrollspy-section"><a id="code"></a>Code</h3>
-        <p>Code styling is basic, without any bells and whistles. For inline code wrap text in the <code>&lt;code&gt;</code> tag. For block code, use the <code>&lt;pre&gt;</code> tag, which will preserve indentation and white space. The <code>&lt;</code> and <code>&gt;</code> characters have to be represented using ASCII codes <code>&amp;lt;</code> and <code>&amp;gt;</code> respectively.</p>
+        <h3 class="scrollspy-section"><a id="block-quotes"></a>Block Quotes</h3>
+        <blockquote>Nostrum sunt et inventore enim. Pariatur minus qui modi adipisci. Ab nemo voluptatem quisquam molestiae ex commodi rerum.</blockquote>
         <pre>
+&lt;blockquote&gt;Nostrum sunt et inventore enim. [...]&lt;/blockquote&gt;</pre>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="code"></a>Code</h3>
+        <p>Code styling is basic, without any bells and whistles. For inline code wrap text in the <code>&lt;code&gt;</code> tag. For block code, use the <code>&lt;pre&gt;</code> tag, which will preserve indentation and white space. Special characters used by html and Jinja have to be represented using ASCII codes.</p>
+        <div class="row">
+            <div class="one-third column">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Character</th>
+                            <th>ACII Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;</code></td><td><code>&amp;lt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&gt;</code></td><td><code>&amp;gt;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>%</code></td><td><code>&amp;#37;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>{</code></td><td><code>&amp;#123;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>}</code></td><td><code>&amp;#125;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="two-thirds column">
+                <pre>
+&lt;!-- CSS class example --&gt;
 &lt;pre&gt;
 .example-class {
     background-color: #000;
-}&lt;pre&gt;</pre>
+}&lt;pre&gt;
+
+&lt;!-- HTML markup example --&gt;
+&lt;pre&gt;&amp;lt;p&amp;gt;Lorem Ipsum&amp;lt;/p&amp;gt;&lt;pre&gt;     
+
+&lt;!-- Jinja template example --&gt;
+{&amp;#37; set some_variable = "some_value" &amp;#37;}
+{&amp;#123; block content &amp;#125;}
+</pre>
+            </div>
+        </div>
 
     </div>
 

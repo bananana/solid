@@ -85,7 +85,7 @@ to appear in this menu needs to have the following markup:
     <h3 class="scrollspy-section"><a id="some-section-id"></a>Some Section</h3>
 -->
 {% macro render_scrollspy() %}
-<div id="scrollspy" class="">
+<div id="scrollspy" class="u-hide-on-mobile">
     <ul id="nav-submenu" class="nav nav-stacked nav-secondary u-pull-right"></ul>
 </div>
 {% endmacro %}

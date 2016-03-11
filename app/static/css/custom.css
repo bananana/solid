@@ -20,6 +20,7 @@
 - Input
 - Tables
 - Lists
+- Blockquotes
 - Code
 - Animations
 */
@@ -244,10 +245,17 @@ small {
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
     font-weight: 600;
-    background-color: #fff;
-    border-bottom-style: solid;
-    border-bottom-color: #1EAEDB;
-    border-radius: 3px;
+    text-decoration: underline;
+}
+@media (min-width: 1000px) {
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:hover,
+    .nav-tabs > li.active > a:focus {
+        text-decoration: none;
+        border-bottom-style: solid;
+        border-bottom-color: #1EAEDB;
+        border-radius: 3px;
+    }
 }
 .nav-stacked > li.active > a,
 .nav-stacked > li.active > a:hover,
@@ -484,11 +492,11 @@ input[type="submit"]:disabled:focus {
     }
 }
 .u-hide-on-mobile {
-    display: none;
+    display: none !important;
 }
 @media (min-width: 550px) {
     .u-hide-on-mobile {
-        display: initial;
+        display: initial !important;
     }
 }
 .u-show-on-mobile {
@@ -593,6 +601,17 @@ dl dt {
 }
 dl dd {
     margin-bottom: 2em;
+}
+
+
+/* Blockquotes 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+blockquote {
+    border-left: 3px solid #222;
+    margin-left: 0;
+    padding-left: 2.4rem;
+    font-style: oblique;
+    font-size: larger;
 }
 
 /* Code 
