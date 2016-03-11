@@ -7,6 +7,9 @@ $(document).ready(function() {
     var menu = $('#nav-submenu');
     var menuContainer = $('#scrollspy');
 
+    // How much the scrollspy will be offset from the top
+    var topOffset = 190;
+
     // Find all sections to be used in scroll spy
     var sections = $('.scrollspy-section');
     var sectionNames = sections.map(function() {
@@ -16,9 +19,11 @@ $(document).ready(function() {
             return $(this).find('a').attr('id');
         });
 
-    // How much the scrollspy will be offset from the top
-    var topOffset = 190;
-    
+    // Automatically generate the sidemenu
+    for (i = 0; i < sections.length; i++) {
+        menu.append('<li><a href="#' + sectionIds[i] + '">' + sectionNames[i] + '</a></li>');
+    }
+        
     // Selectors
     var lastId,
         menuHeight = menu.outerHeight() + 20,
@@ -28,10 +33,6 @@ $(document).ready(function() {
             if (item.length) { return item; }
         });
 
-    // Automatically generate the sidemenu
-    for (i = 0; i < sections.length; i++) {
-        menu.append('<li><a href="#' + sectionIds[i] + '">' + sectionNames[i] + '</a></li>');
-    }
  
     // Event handler
     menuItems.click(function(e) {
