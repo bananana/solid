@@ -4,7 +4,7 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 from datetime import datetime
 from app import app, db, lm, bcrypt
 from app.users import constants as USER
-from app.users.forms import LoginForm
+from app.users.forms import LoginForm, SignupForm
 from app.users.models import User
 
 mod = Blueprint('users', __name__)
@@ -26,6 +26,22 @@ def before_request():
         g.user.save()
 
 
+@mod.route('/signup', methods=['GET', 'POST'])
+def signup():
+    '''Get basic user info and sign them up.'''
+    form = SignupForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        nickname = form.nickname.data
+        password_hash = bcrypt.generate_password_hash(form.password.data)
+        user = User(email=email, nickname=nickname, password=password_hash)
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+        return redirect(url_for('.user', nickname=nickname))
+    return render_template('users/signup.html', form=form)
+
+
 @mod.route('/login', methods=['GET', 'POST'])
 def login():
     '''Login user after checking credentials, which are their email and password.'''
@@ -36,11 +52,10 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         email    = form.email.data
-        password = form.password.data
         remember = bool(form.remember.data)
-        user_query = User.query.filter_by(email=email, 
-                                          password=password).first()
-        if user_query is None:
+        user_query = User.query.filter_by(email=email).first()
+        if user_query is None or not bcrypt.check_password_hash(user_query.password,
+                                                                form.password.data):
             flash('Email or Password is invalid', 'error')
         else:
             login_user(user_query, remember=remember)

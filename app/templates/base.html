@@ -15,7 +15,6 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='Skeleton/images/favicon.png') }}">
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.form-validator.min.js') }}"></script>
     {% block scripts %}{% endblock %}
 
     <title>Solid</title>
@@ -35,7 +34,8 @@
                         {% if current_user.is_authenticated %} 
                             <a href="{{ url_for('users.logout') }}" title="Log Out" class="button u-pull-right"><!--<img src="{# url_for('static', filename='open-iconic/svg/account-logout.svg') #}">-->Log Out</a>
                         {% else %}
-                            <a href="{{ url_for('users.login') }}" title="Log In" class="button u-pull-right">Log In</a>
+                            <a href="{{ url_for('users.login') }}" title="Log In" class="button button-login button-primary u-pull-right">Log In</a>
+                            <a href="{{ url_for('users.signup') }}" title="Sign Up" class="button u-pull-right">Sign Up</a>
                         {% endif %}
                     {% endif %}
                 </div>

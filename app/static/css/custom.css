@@ -354,6 +354,9 @@ small {
 
 /* Input 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button-login {
+    margin-left: 1em;
+}
 .button-disabled,
 button:disabled,
 input[type="button"]:disabled,

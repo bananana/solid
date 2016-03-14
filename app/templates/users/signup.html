@@ -6,7 +6,8 @@
 <script>
 $(document).ready(function() {
     $.validate({
-        form : '#login',
+        modules : 'security',
+        form : '#signup',
         errorMessageClass : 'danger'
     });
 });
@@ -15,7 +16,7 @@ $(document).ready(function() {
 
 {% block content %}
     {% from "helpers/forms.html" import render_field, render_boolean %}
-    <form id="login" name="login" action="" method="post">
+    <form id="signup" name="signup" action="" method="post">
         {{ form.hidden_tag() }}
         <div class="row">
             <fieldset>
@@ -25,11 +26,22 @@ $(document).ready(function() {
                             'class':'u-full-width',
                             'data-validation':'email', 
                             'data-validation-error-msg-container':'#form-email-error',
-                            'data-validation-error-msg':'Incorrect'
+                            'data-validation-error-msg':'Not a valid email address'
                         }), 
                         form.email.label,
                         form.email.flags
-                       ) 
+                        ) 
+                    }}
+                    {{ render_field(
+                        form.nickname(**{
+                            'class':'u-full-width',
+                            'data-validation':'alphanumeric',
+                            'data-validation-allowing':'-_',
+                            'data-validation-error-msg-container':'#form-nickname-error',
+                            'data-validation-error-msg':'Must be alphanumeric'}),
+                        form.nickname.label,
+                        form.nickname.flags
+                        )
                     }}
                     {{ render_field(
                         form.password(**{
@@ -39,18 +51,26 @@ $(document).ready(function() {
                             'data-validation-error-msg':'Required'}),
                         form.password.label,
                         form.password.flags
-                       ) 
+                        ) 
+                    }}
+                    {{ render_field(
+                        form.verify_password(**{
+                            'class':'u-full-width',
+                            'data-validation':'confirmation',
+                            'data-validation-confirm':'password',
+                            'data-validation-error-msg-container':'#form-verify_password-error',
+                            'data-validation-error-msg':'Must match the password field'}),
+                        form.verify_password.label,
+                        form.verify_password.flags
+                        )
                     }}
                 </div>
             </fieldset>
         </div>
         <div class="row">
             <fieldset>
-                <div class="three columns offset-by-three">
-                    <input id="login" class="button button-primary u-mobile-fixed-bottom" type="submit" value="Login">
-                </div>
-                <div class="three columns">
-                    {{ render_boolean(form.remember) }}
+                <div class="six columns offset-by-three">
+                    <input id="login" class="button button-primary u-full-width u-mobile-fixed-bottom" type="submit" value="Sign Up">
                 </div>
             </fieldset>
         </div>

@@ -14,3 +14,17 @@ class LoginForm(Form):
     password = PasswordField('Password',
                              validators=[DataRequired(), Length(max=128)])
     remember = BooleanField('Remember me', default=False)
+
+class SignupForm(Form):
+    '''Signup form used by signup() function in app/users/views.py'''
+    email            = StringField('Email',
+                                   validators=[DataRequired(), Email()])
+    nickname         = StringField('Nickname',
+                                   validators=[DataRequired(),
+                                               Regexp('[\w-]')])
+    password         = PasswordField('Password', 
+                                     validators=[DataRequired(), 
+                                                 EqualTo('verify_password')])
+    verify_password  = PasswordField('Verify password', 
+                                     validators=[DataRequired()])
+

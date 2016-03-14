@@ -23,7 +23,8 @@ class User(UserMixin, CRUDMixin, db.Model):
         self.nickname = nickname
         self.password = password
         self.full_name = full_name
-        self.initials = ''.join([n[0] for n in full_name.split()])
+        # self.initials = ''.join([n[0] for n in full_name.split()])
+        self.initials = initials
         self.email = email
         self.phone = phone
         self.zip = zip

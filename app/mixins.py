@@ -15,9 +15,9 @@ class CRUDMixin(object):
         return None
 
     @classmethod
-    def create(cls, **kwargs):
+    def create(cls, commit=True, **kwargs):
         instance = cls(**kwargs)
-        return instance.save()
+        return instance.save(commit=commit)
 
     def update(self, commit=True, **kwargs):
         for attr, value in kwargs.iteritems():
