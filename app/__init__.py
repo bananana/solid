@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.bcrypt import Bcrypt
+from flask_dance.contrib.github import make_github_blueprint
 
 
 app = Flask(__name__)
@@ -23,8 +24,14 @@ app.register_blueprint(causesModule)
 from app.styleguide.views import mod as styleguideModule
 app.register_blueprint(styleguideModule)
 
+github_blueprint = make_github_blueprint(
+    client_id = '838a5146c0c02c49b6b1',
+    client_secret = '5ec8fef4e5ad9c0340e1c382f302a9fd4ab72b4b',
+    redirect_to = 'users.authorize_github')
+app.register_blueprint(github_blueprint, url_prefix="/login")
 
-# HTTP erros
+
+# HTTP errors
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404.html'), 404

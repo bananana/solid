@@ -1,4 +1,4 @@
-from app import db, bcrypt
+from app import db
 from app.mixins import CRUDMixin 
 from flask.ext.login import UserMixin
 
@@ -6,6 +6,7 @@ from flask.ext.login import UserMixin
 class User(UserMixin, CRUDMixin, db.Model):
     __tablename__ = 'users_user'
     id          = db.Column(db.Integer, primary_key=True)
+    social_id   = db.Column(db.String(64), unique=True)
     last_login  = db.Column(db.DateTime)
     nickname    = db.Column(db.String(64), index=True, unique=True)
     password    = db.Column(db.String(128))
@@ -17,9 +18,10 @@ class User(UserMixin, CRUDMixin, db.Model):
     employer    = db.Column(db.String(64), index=True)
     description = db.Column(db.Text)
 
-    def __init__(self, nickname=None, password=None, full_name=None,
-                 initials=None, email=None, phone=None, zip=None,
-                 employer=None, description=None):
+    def __init__(self, social_id=None, nickname=None, password=None, full_name='Anonymous',
+                 initials=None, email=None, phone=None, zip=None, employer=None, 
+                 description=None):
+        self.social_id = social_id
         self.nickname = nickname
         self.password = password
         self.full_name = full_name

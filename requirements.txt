@@ -4,5 +4,7 @@ flask-bcrypt
 flask-mail
 flask-wtf
 flask-sqlalchemy
+flask-dance
 sqlalchemy-migrate
+sqlalchemy-utils
 argparse

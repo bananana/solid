@@ -1,5 +1,6 @@
 # Python
 *.pyc
+python.stackdump
 venv/
 virtualenv/
 

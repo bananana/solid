@@ -1,7 +1,8 @@
+from datetime import datetime
 from flask import Blueprint, render_template, url_for, redirect, session, \
                   request, g, flash, abort
 from flask.ext.login import login_user, logout_user, current_user, login_required
-from datetime import datetime
+from flask_dance.contrib.github import github
 from app import app, db, lm, bcrypt
 from app.users import constants as USER
 from app.users.forms import LoginForm, SignupForm
@@ -34,11 +35,11 @@ def signup():
         email = form.email.data
         nickname = form.nickname.data
         password_hash = bcrypt.generate_password_hash(form.password.data)
-        user = User(email=email, nickname=nickname, password=password_hash)
-        db.session.add(user)
+        new_user = User(email=email, nickname=nickname, password=password_hash)
+        db.session.add(new_user)
         db.session.commit()
-        login_user(user)
-        return redirect(url_for('.user', nickname=nickname))
+        login_user(new_user)
+        return redirect(url_for('.user', nickname=new_user.nickname))
     return render_template('users/signup.html', form=form)
 
 
@@ -65,7 +66,35 @@ def login():
     return render_template('users/login.html',
                            form=form)
 
-    
+
+@mod.route('/authorize/github')
+def authorize_github():
+    # Prevent unauthorized users from getting here
+    if not github.authorized:
+        return redirect(url_for('github.login'))
+
+    # Get the response from github and get the necessary user info
+    resp = github.get('/user')
+    assert resp.ok
+    social_id = str(resp.json()['id'])
+    nickname = str(resp.json()['login'])
+    email = str(resp.json()['email'])
+
+    # See if user already exists
+    user_query = User.query.filter_by(social_id=social_id).first()
+    if user_query is None: 
+        # User is not in database, create a new one
+        new_user = User(social_id=social_id, nickname=nickname, email=nickname)
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+        return redirect(url_for('.user', nickname=g.user.nickname))
+    else:
+        # User already in database, just log them in
+        login_user(user_query)
+        return redirect(url_for('.user', nickname=g.user.nickname))
+
+
 @mod.route('/logout')
 def logout():
     '''Simply logout the user and go back to index page.'''
