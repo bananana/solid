@@ -8,6 +8,7 @@ from app.users import constants as USER
 from app.users.forms import LoginForm, SignupForm
 from app.users.models import User
 
+#: Module blueprint
 mod = Blueprint('users', __name__)
 
 
@@ -30,45 +31,59 @@ def before_request():
 @mod.route('/signup', methods=['GET', 'POST'])
 def signup():
     '''Get basic user info and sign them up.'''
+
+    # If user is already logged in, redirect them to their profile
+    if g.user is not None and g.user.is_authenticated:
+        return redirect(url_for('.user', nickname=g.user.nickname))
+
     form = SignupForm()
     if form.validate_on_submit():
-        email = form.email.data
-        nickname = form.nickname.data
         password_hash = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(email=email, nickname=nickname, password=password_hash)
-        db.session.add(new_user)
-        db.session.commit()
+        new_user = User.create(**{
+            'email'    : form.email.data,
+            'nickname' : form.nickname.data,
+            'password' : password_hash
+        })
         login_user(new_user)
-        return redirect(url_for('.user', nickname=new_user.nickname))
+        return redirect(url_for('.user', nickname=g.user.nickname))
+
     return render_template('users/signup.html', form=form)
 
 
 @mod.route('/login', methods=['GET', 'POST'])
 def login():
     '''Login user after checking credentials, which are their email and password.'''
-    # If user is already logged in, redirect them to their profile. 
+
+    # If user is already logged in, redirect them to their profile
     if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('.user', nickname=g.user.nickname))
-    # Load login form, see if it's valid.
+
     form = LoginForm()
     if form.validate_on_submit():
         email    = form.email.data
         remember = bool(form.remember.data)
+
+        #: Query the database with the provided credentials 
         user_query = User.query.filter_by(email=email).first()
-        if user_query is None or not bcrypt.check_password_hash(user_query.password,
-                                                                form.password.data):
+
+        if user_query is None: 
+            # User not found in database
+            flash('Email or Password is invalid', 'error')
+        elif not bcrypt.check_password_hash(user_query.password, form.password.data):
+            # Password does not match with the one in database
             flash('Email or Password is invalid', 'error')
         else:
             login_user(user_query, remember=remember)
             return redirect(request.args.get('next') or 
-                            url_for('.user', nickname=user_query.nickname))
-    # Render login form template
-    return render_template('users/login.html',
-                           form=form)
+                            url_for('.user', nickname=g.user.nickname))
+
+    return render_template('users/login.html', form=form)
 
 
 @mod.route('/authorize/github')
 def authorize_github():
+    '''Login using OAuth and a GitHub account.'''
+
     # Prevent unauthorized users from getting here
     if not github.authorized:
         return redirect(url_for('github.login'))
@@ -80,17 +95,19 @@ def authorize_github():
     nickname = str(resp.json()['login'])
     email = str(resp.json()['email'])
 
-    # See if user already exists
+    #: Query the database to see if user already exists
     user_query = User.query.filter_by(social_id=social_id).first()
+
     if user_query is None: 
-        # User is not in database, create a new one
-        new_user = User(social_id=social_id, nickname=nickname, email=nickname)
-        db.session.add(new_user)
-        db.session.commit()
+        #: User is not in database, create a new one
+        new_user = User.create(**{
+            'social_id' : social_id,
+            'nickname'  : nickname,
+            'email'     : email
+        })
         login_user(new_user)
         return redirect(url_for('.user', nickname=g.user.nickname))
     else:
-        # User already in database, just log them in
         login_user(user_query)
         return redirect(url_for('.user', nickname=g.user.nickname))
 
@@ -107,9 +124,9 @@ def logout():
 @login_required
 def user(nickname):
     '''Display user profile.'''
-    #: User currently viewing the page
-    current_user = g.user
+
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
-    # Render the user profile template
     return render_template('users/index.html', user=user)
+
+
