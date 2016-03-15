@@ -20,6 +20,10 @@ OAUTH_CREDENTIALS = {
     'github': {
         'id': '838a5146c0c02c49b6b1',
         'secret': '5ec8fef4e5ad9c0340e1c382f302a9fd4ab72b4b'
+    },
+    'twitter': {
+        'id: 'MXRHGhjB19kPKLd3G0hywzqAc',
+        'secret': 'Fe7ckjmAhyf1fcuhmDTxb2CAUWs9Ms66KbTwsYy5nyW4vlZf9g'
     }
 }
 '''

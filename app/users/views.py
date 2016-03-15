@@ -2,7 +2,8 @@ from datetime import datetime
 from flask import Blueprint, render_template, url_for, redirect, session, \
                   request, g, flash, abort
 from flask.ext.login import login_user, logout_user, current_user, login_required
-from flask_dance.contrib.github import github
+from flask_dance.contrib.github import github 
+from flask_dance.contrib.twitter import twitter
 from app import app, db, lm, bcrypt
 from app.users import constants as USER
 from app.users.forms import LoginForm, SignupForm
@@ -93,7 +94,6 @@ def authorize_github():
     assert resp.ok
     social_id = str(resp.json()['id'])
     nickname = str(resp.json()['login'])
-    email = str(resp.json()['email'])
 
     #: Query the database to see if user already exists
     user_query = User.query.filter_by(social_id=social_id).first()
@@ -103,7 +103,37 @@ def authorize_github():
         new_user = User.create(**{
             'social_id' : social_id,
             'nickname'  : nickname,
-            'email'     : email
+        })
+        login_user(new_user)
+        return redirect(url_for('.user', nickname=g.user.nickname))
+    else:
+        login_user(user_query)
+        return redirect(url_for('.user', nickname=g.user.nickname))
+
+
+@mod.route('/authorize/twitter')
+def authorize_twitter():
+    '''Login using OAuth and a Twitter account.'''
+
+    # Prevent unauthorized users from getting here
+    if not twitter.authorized:
+        return redirect(url_for('twitter.login'))
+
+    # Get the response from github and get the necessary user info
+    resp = twitter.get('account/settings.json')
+    assert resp.ok
+    return str(resp.json())
+    social_id = str(resp.json()['woeid'])
+    nickname = str(resp.json()['screen_name'])
+
+    #: Query the database to see if user already exists
+    user_query = User.query.filter_by(social_id=social_id).first()
+
+    if user_query is None: 
+        #: User is not in database, create a new one
+        new_user = User.create(**{
+            'social_id' : social_id,
+            'nickname'  : nickname,
         })
         login_user(new_user)
         return redirect(url_for('.user', nickname=g.user.nickname))

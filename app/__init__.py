@@ -2,7 +2,8 @@ from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.bcrypt import Bcrypt
-from flask_dance.contrib.github import make_github_blueprint
+from flask_dance.contrib.github import make_github_blueprint 
+from flask_dance.contrib.twitter import make_twitter_blueprint
 
 
 app = Flask(__name__)
@@ -25,10 +26,18 @@ from app.styleguide.views import mod as styleguideModule
 app.register_blueprint(styleguideModule)
 
 github_blueprint = make_github_blueprint(
-    client_id = '838a5146c0c02c49b6b1',
+    client_id     = '838a5146c0c02c49b6b1',
     client_secret = '5ec8fef4e5ad9c0340e1c382f302a9fd4ab72b4b',
-    redirect_to = 'users.authorize_github')
-app.register_blueprint(github_blueprint, url_prefix="/login")
+    redirect_to   = 'users.authorize_github'
+)
+app.register_blueprint(github_blueprint, url_prefix='/login')
+
+twitter_blueprint = make_twitter_blueprint(
+    api_key       = 'MXRHGhjB19kPKLd3G0hywzqAc',
+    api_secret    = 'Fe7ckjmAhyf1fcuhmDTxb2CAUWs9Ms66KbTwsYy5nyW4vlZf9g',
+    redirect_to   = 'users.authorize_twitter'
+)
+app.register_blueprint(twitter_blueprint, url_prefix='/login')
 
 
 # HTTP errors

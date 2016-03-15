@@ -55,9 +55,13 @@ $(document).ready(function() {
             </fieldset>
         </div>
     </form>
+    <hr>
     <div class="row">
-        <div class="six columns offset-by-three">
-            <a href="{{ url_for('github.login') }}" class="button">Log In with GitHub</a>
+        <div class="three columns offset-by-three">
+            <a href="{{ url_for('github.login') }}" class="button u-full-width">Log In with GitHub</a>
+        </div>
+        <div class="three columns">
+            <a href="{{ url_for('twitter.login') }}" class="button u-full-width">Log In with Twitter</a>
         </div>
     </div>
 {% endblock %}
