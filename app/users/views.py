@@ -158,5 +158,3 @@ def user(nickname):
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
     return render_template('users/index.html', user=user)
-
-

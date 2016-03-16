@@ -33,6 +33,15 @@
         <p>{{ cause.story_content }}</p>    
     </div>
     <div class="four columns">
+        {% if supporter %}
+        <a class="button u-full-width"
+                href="#">
+            Supporting</a>
+        {% else %}
+        <a class="button button-primary u-full-width"
+                href="{{ url_for('causes.support', slug=cause.slug) }}">
+            Support!</a>
+        {% endif %}
         {{ render_cause_info('Created on:', cause.created_on.strftime('%b. %d, %Y')) }}
         {{ render_cause_info('Location:', cause.location) }}
         {{ render_cause_stat('Creators:', cause.creators.count() , cause.creators, '#') }}
