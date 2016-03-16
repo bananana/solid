@@ -6,11 +6,11 @@ section (app/templates/styleguide/templating.html#navigation-helpers)
 {% macro render_cause_nav(active_section, new_updates, new_comments) %}
 <div class="nav-tabs-container">
     <ul class="nav nav-tabs nav-horizontal u-pull-left">
-        <li {% if active_section == "story" %}class="active"{% endif %}>
-            <a href="{{ url_for('causes.story', title='demo') }}">Story</a>
+        <li {% if active_section == "dashboard" %}class="active"{% endif %}>
+            <a href="">Story</a>
         </li>
         <li {% if active_section == "demands" %}class="active"{% endif %}>
-            <a href="{{ url_for('causes.demands', title='demo') }}">Demands</a>
+            <a href="">Demands</a>
         </li>
         <li {% if active_section == "updates" %}class="active"{% endif %}>
             <a href="#">Updates <sup>{{ new_updates }}</sup></a>

@@ -1,5 +1,19 @@
+import datetime
+
 from app import db
 from app.mixins import CRUDMixin 
+
+from slugify import slugify
+
+supporters = db.Table('causes_supporters',
+    db.Column('cause_id', db.Integer, db.ForeignKey('causes_cause.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey('users_user.id')),
+)
+
+creators = db.Table('causes_creators',
+    db.Column('cause_id', db.Integer, db.ForeignKey('causes_cause.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey('users_user.id')),
+)
 
 
 class Cause(CRUDMixin, db.Model):
@@ -7,27 +21,31 @@ class Cause(CRUDMixin, db.Model):
     id            = db.Column(db.Integer, primary_key=True)
     actions       = db.relationship('Action', backref='assigned_campaign', lazy='dynamic')
     demands       = db.relationship('Demand', backref='assigned_campaign', lazy='dynamic')
+
     title         = db.Column(db.String(128))
+    slug          = db.Column(db.String(128))
     boss          = db.Column(db.String(128))
     created_on    = db.Column(db.DateTime)
     location      = db.Column(db.String(128))
-    #creators #users foreign key
-    #supporters #users foreign key
+
+    creators      = db.relationship('User', secondary=creators,
+                                    backref='causes_created', lazy='dynamic')
+    supporters    = db.relationship('User', secondary=supporters,
+                                    backref='causes_supported', lazy='dynamic')
+
     video         = db.Column(db.String(128))
     image         = db.Column(db.String(128))
     story_heading = db.Column(db.String(128))
     story_content = db.Column(db.Text)
 
-    def __init__(self, title=None, boss=None, created_on=None, location=None,
-                 video=None, image=None, story_heading=None, story_content=None):
-        self.title = title 
-        self.boss = boss
-        self.created_on = created_on
-        self.location = locaion
-        self.video = video
-        self.image = image
-        self.story_heading = story_heading
-        self.story_content = story_content
+    def __init__(self, *args, **kwargs):
+        if not 'slug' in kwargs:
+            kwargs['slug'] = slugify(kwargs.get('title', ''))
+
+        if not 'created_on' in kwargs:
+            kwargs['created_on'] = datetime.datetime
+
+        super(Cause, self).__init__(*args, **kwargs)
 
     def __repr__(self):
         return '<Cause %r>' % (self.title)    

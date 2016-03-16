@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% set active_page = "story" %}
+{% set active_page = "dashboard" %}
 
 {% block scripts %}
 {% endblock %}
@@ -35,8 +35,8 @@
     <div class="four columns">
         {{ render_cause_info('Created on:', cause.created_on.strftime('%b. %d, %Y')) }}
         {{ render_cause_info('Location:', cause.location) }}
-        {{ render_cause_stat('Creators:', cause.creators|length , cause.creators, '#') }}
-        {{ render_cause_stat('Supporters:', cause.supporters|length, cause.supporters, '#') }}
+        {{ render_cause_stat('Creators:', cause.creators.count() , cause.creators, '#') }}
+        {{ render_cause_stat('Supporters:', cause.supporters.count(), cause.supporters, '#') }}
         {{ render_cause_support_actions('Support actions:', cause.actions) }}
     </div>
 </div>
