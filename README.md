@@ -17,15 +17,6 @@ Then create and start  a python virtual environment, install requirements and cr
     pip install -r requirements.txt
     ./app.py db --create
 
-## Utilities
-
-For now all app management is done through the `app.py` utility. To get help:
-
-    ./app.py --help
-    ./app.py db --help
-    ./app.py mod --help
-    ./app.py run --help
-
 ## Running the App
 
 To run the app:
@@ -36,15 +27,13 @@ By default the app will run on *localhost:5000*. To run on a different host or p
 
     ./app.py run --host <HOST> --port <PORT>
 
-## Database
+## Utilities
 
-Using sqlite for now, to make development easier. If you modify models, you'll need to migrate the database:
+For now all app management is done through the `app.py` utility. To get help:
 
-    ./app.py db --migrate
+    ./app.py --help
+    ./app.py db --help
+    ./app.py mod --help
+    ./app.py run --help
 
-# TODO
-* Finish models
-* Replace python scripts with [Invoke](http://docs.pyinvoke.org/en/latest/) or similar.
-* Setup unit testing (per modlue or app-wide?)
-* Documentation and proper comments
-* So much more...
+## [Contributing](CONTRIBUTING.md)
