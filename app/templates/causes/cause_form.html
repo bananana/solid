@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% set active_page = "cause" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='jQuery-Form-Validator/form-validator/jquery.form-validator.min.js') }}"></script>
+<script>
+$(document).ready(function() {
+    $.validate({
+        form : '#login',
+        errorMessageClass : 'danger'
+    });
+});
+</script>   
+{% endblock %}
+
+{% block content %}
+    {% from "helpers/forms.html" import render_field, render_boolean, render_f %}
+    <form id="login" name="login" action="" method="post">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <fieldset>
+                <div class="six columns offset-by-three">
+                    {{ render_f(form.title, "u-full-width") }}
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="six columns offset-by-three">
+                    {{ render_f(form.boss, "u-full-width") }}
+                    {{ render_f(form.location, "u-full-width")  }}
+                    {{ render_f(form.image, "u-full-width")  }}
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="six columns offset-by-three">
+                    {{ render_f(form.story_heading, "u-full-width") }}
+                    {{ render_f(form.story_content, "u-full-width")  }}
+                </div>
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset>
+                <div class="three columns offset-by-three">
+                    <input id="save" type="submit" value="Save"
+                        class="button button-primary u-mobile-fixed-bottom">
+                </div>
+                <div class="three columns">
+                </div>
+            </fieldset>
+        </div>
+    </form>
+{% endblock %}

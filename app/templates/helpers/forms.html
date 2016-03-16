@@ -30,3 +30,7 @@ section (app/templates/styleguide/templating.html#form-helpers)
     </label>
     {{ field }}
 {% endmacro %}
+
+{% macro render_f(f, class) %}
+    {{ render_field(f(**{'class': class}), f.label, f.flags) }}
+{% endmacro %}

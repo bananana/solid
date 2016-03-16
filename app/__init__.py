@@ -49,10 +49,13 @@ def internal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
 
+from app.causes.views import cause_required, multi_cause
 
 # Default app view, same for all modules
 @app.route('/')
 @app.route('/index')
+@cause_required
+@multi_cause
 def index():
     '''Home page of the app. Nothing much here.'''
     return render_template('index.html')
