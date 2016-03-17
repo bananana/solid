@@ -3,20 +3,20 @@ dont' forget to add a description of your changes to the appropriate styleguide
 section (app/templates/styleguide/templating.html#navigation-helpers)
 -->
 
-{% macro render_cause_nav(active_section, new_updates, new_comments) %}
+{% macro render_cause_nav(active_section, cause) %}
 <div class="nav-tabs-container">
     <ul class="nav nav-tabs nav-horizontal u-pull-left">
         <li {% if active_section == "dashboard" %}class="active"{% endif %}>
-            <a href="">Story</a>
+            <a href="{{ url_for('causes.dashboard', slug=cause.slug) }}">Story</a>
         </li>
         <li {% if active_section == "demands" %}class="active"{% endif %}>
             <a href="">Demands</a>
         </li>
         <li {% if active_section == "updates" %}class="active"{% endif %}>
-            <a href="#">Updates <sup>{{ new_updates }}</sup></a>
+            <a href="#">Updates <sup>{# updates #}</sup></a>
         </li>
-        <li {% if active_section == "comments" %}class="active"{% endif %}>
-            <a href="#">Comments <sup>{{ new_comments }}</sup></a>
+        <li {% if active_section == "discussion" %}class="active"{% endif %}>
+            <a href="{{ url_for('discussions.posts', slug=cause.slug) }}">Discussion <sup>{#new_comments#}</sup></a>
         </li>
     </ul>
     <ul class="nav nav-tabs nav-horizontal nav-social u-pull-right u-hide-on-mobile">

@@ -6,7 +6,7 @@
 <script>
 $(document).ready(function() {
     $.validate({
-        form : '#login',
+        form : '#cause',
         errorMessageClass : 'danger'
     });
 });
@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 {% block content %}
     {% from "helpers/forms.html" import render_field, render_boolean, render_f %}
-    <form id="login" name="login" action="" method="post">
+    <form id="cause" name="cause" action="" method="post">
         {{ form.hidden_tag() }}
         <div class="row">
             <fieldset>
