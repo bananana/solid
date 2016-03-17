@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% set active_page = "comments" %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_cause_nav %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>vs. {{ cause.boss }}</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_cause_nav(active_page, cause) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="twelve columns post">
+        <h2>{{ post.title }}</h2>
+        <p>
+            <img class="icon" src="{{ url_for('static', filename='open-iconic/svg/person.svg') }}"> 
+            <em>{{ post.author.nickname }}, {{ post.created_on.strftime('%b. %d, %Y') }}</em>
+            {% if post.author == current_user %}
+            <a href="{{ url_for('discussions.post_edit', slug=cause.slug, pk=post.id) }}">
+                edit
+            </a>
+            {% endif %}
+        </p>
+        <article>{{ post.body|markdown }}</article>
+        <h3>Comments</h3>
+        {% for comment in post.comments.all() %}
+        <div class="6 columns">
+            {{ comment.body|markdown }}
+            <p>
+                <img class="icon" src="{{ url_for('static', filename='open-iconic/svg/person.svg') }}"> 
+                <em>{{ comment.author.nickname }}, {% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}</em>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

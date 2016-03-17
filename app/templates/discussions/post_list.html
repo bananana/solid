@@ -23,9 +23,21 @@
     <div class="eight columns">
 	{% for post in posts %}
 	<div class="post">
-	    <img class="icon-comment u-pull-left" src="{{ url_for('static', filename='open-iconic/svg/comment-square.svg') }}"> 
-	    <h4>{{ post.title }}</h4>
+	    <img class="icon-comment u-pull-left" src="{{ url_for('static', filename='open-iconic/svg/pulse.svg') }}"> 
+	    <h4>
+		<a href="{{ url_for('discussions.post_detail', slug=cause.slug, pk=post.id) }}">
+		    {{ post.title }}
+		</a>
+	    </h4>
 	    <article>{{ post.body|markdown }}</article>
+	    <p>
+		<img class="icon" src="{{ url_for('static', filename='open-iconic/svg/comment-square.svg') }}"> 
+		{{ post.comments.count() }}
+		comments. 
+		<a href="{{ url_for('discussions.comment_add', slug=cause.slug, pk=post.id) }}">
+		    Reply
+		</a>
+	    </p>
 	    <p>
 		<img class="icon" src="{{ url_for('static', filename='open-iconic/svg/person.svg') }}"> 
 		<em>{{ post.author.nickname }}, {{ post.created_on.strftime('%b. %d, %Y') }}</em>

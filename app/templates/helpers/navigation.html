@@ -16,7 +16,7 @@ section (app/templates/styleguide/templating.html#navigation-helpers)
             <a href="#">Updates <sup>{# updates #}</sup></a>
         </li>
         <li {% if active_section == "discussion" %}class="active"{% endif %}>
-            <a href="{{ url_for('discussions.posts', slug=cause.slug) }}">Discussion <sup>{#new_comments#}</sup></a>
+            <a href="{{ url_for('discussions.post_list', slug=cause.slug) }}">Discussion <sup>{#new_comments#}</sup></a>
         </li>
     </ul>
     <ul class="nav nav-tabs nav-horizontal nav-social u-pull-right u-hide-on-mobile">
