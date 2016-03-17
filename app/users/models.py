@@ -1,4 +1,4 @@
-from app import db
+from app import db, bcrypt
 from app.mixins import CRUDMixin 
 from flask.ext.login import UserMixin
 
@@ -32,6 +32,18 @@ class User(UserMixin, CRUDMixin, db.Model):
         self.zip = zip
         self.employer = employer
         self.description = description
+
+    def set_password(self,  password):
+        '''Hash the provided password with bcrypt and push it to the database.
+        '''
+        password_hash = bcrypt.generate_password_hash(password)
+        self.update(**{'password': password_hash})
+
+    def is_valid_password(self, password):
+        '''Checks password has with bcrypt. Return True if password is correct,
+        otherwise returns False.
+        '''
+        return bcrypt.check_password_hash(self.password, password)
 
     def __repr__(self):
         return '<User %r>' % (self.nickname)    

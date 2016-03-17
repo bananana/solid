@@ -6,6 +6,7 @@ from flask_dance.contrib.github import make_github_blueprint
 from flask_dance.contrib.twitter import make_twitter_blueprint
 
 
+# Setup required variables for app, db, login manager and bcrypt
 app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
