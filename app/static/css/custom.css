@@ -100,6 +100,11 @@ small {
     line-height: 2.1em;
     text-decoration: none;
 }
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+}
 .icon-social {
     width:2em;
     height:2em;
@@ -107,6 +112,11 @@ small {
 .icon-demand {
     height: 32px;
     margin-top: 7px;
+}
+.icon-comment {
+    height: 16px;
+    margin-top: 12px;
+    margin-right: 14px;
 }
 
     
@@ -155,6 +165,13 @@ small {
 }
 .support-action p {
     font-size: 12px;
+}
+.post article h1, 
+.post article h2,
+.post article h3,
+.post article h4 {
+    font-weight: bold;
+    font-size: larger;
 }
 .footer {
     display: block;

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% set active_page = "discussion" %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_cause_nav %}
+{% from "helpers/causes.html" import render_cause_info, render_cause_stat, render_cause_support_actions %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>vs. {{ cause.boss }}</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_cause_nav(active_page, cause) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="eight columns">
+	{% for post in posts %}
+	<div class="post">
+	    <img class="icon-comment u-pull-left" src="{{ url_for('static', filename='open-iconic/svg/comment-square.svg') }}"> 
+	    <h4>{{ post.title }}</h4>
+	    <article>{{ post.body|markdown }}</article>
+	    <p>
+		<img class="icon" src="{{ url_for('static', filename='open-iconic/svg/person.svg') }}"> 
+		<em>{{ post.author.nickname }}, {{ post.created_on.strftime('%b. %d, %Y') }}</em>
+		{% if post.author == current_user %}
+		<a href="{{ url_for('discussions.post_edit', slug=cause.slug, pk=post.id) }}">
+		    edit
+		</a>
+		{% endif %}
+	    </p>
+	    <hr>
+	</div>
+	{% endfor %}
+    </div>
+</div>
+{% endblock %}
