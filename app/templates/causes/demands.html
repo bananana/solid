@@ -18,7 +18,7 @@
 <hr class="u-remove-margin-bottom">
 <div class="row">
     <div class="twelve columns">
-        {{ render_cause_nav(active_page) }}
+        {{ render_cause_nav(active_page, cause) }}
     </div>
 </div>
 <div class="row u-add-margin-top">
@@ -43,8 +43,8 @@
     <div class="four columns">
         {{ render_cause_info('Created on:', cause.created_on.strftime('%b. %d, %Y')) }}
         {{ render_cause_info('Location:', cause.location) }}
-        {{ render_cause_stat('Creators:', cause.creators|length , cause.creators, '#') }}
-        {{ render_cause_stat('Supporters:', cause.supporters|length, cause.supporters, '#') }}
+        {{ render_cause_stat('Creators:', cause.creators.count() , cause.creators, '#') }}
+        {{ render_cause_stat('Supporters:', cause.supporters.count(), cause.supporters, '#') }}
         {{ render_cause_support_actions('Support actions:', cause.actions) }}
     </div>
 </div>

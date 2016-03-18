@@ -38,14 +38,16 @@ class Cause(CRUDMixin, db.Model):
     story_heading = db.Column(db.String(128))
     story_content = db.Column(db.Text)
 
-    def __init__(self, *args, **kwargs):
-        if not 'slug' in kwargs:
-            kwargs['slug'] = slugify(kwargs.get('title', ''))
+    def save(self, *args, **kwargs):
+        if not self.slug and self.title:
+            # even if cause title changes subsequently, the slug should remain
+            # the same
+            self.slug = slugify(self.title)
 
-        if not 'created_on' in kwargs:
-            kwargs['created_on'] = datetime.datetime
+        if not self.created_on:
+            self.created_on = datetime.datetime.utcnow()
 
-        super(Cause, self).__init__(*args, **kwargs)
+        return super(Cause, self).save(*args, **kwargs)
 
     def __repr__(self):
         return '<Cause %r>' % (self.title)    
@@ -61,16 +63,9 @@ class Action(CRUDMixin, db.Model):
     supporters    = db.Column(db.Integer)
     expiration    = db.Column(db.DateTime)
 
-    def __init__(self, title=None, heading=None, description=None, supporters=None,
-                 expiration=None):
-        self.title = title
-        self.heading = heading
-        self.description = description
-        self.supporters = supporters
-        self.expiration = expiration
-
     def __repr__(self):
        return '<Action %r>' % (self.title)
+
 
 class Demand(CRUDMixin, db.Model):
     __tablename__ = 'causes_demand'
@@ -79,11 +74,6 @@ class Demand(CRUDMixin, db.Model):
     title         = db.Column(db.String(64))
     resolved      = db.Column(db.Boolean)
     description   = db.Column(db.Text)
-
-    def __int__(self, title=None, resolved=False, description=None):
-        self.title = title
-        self.resolved = resolved
-        self.description = description
 
     def __repr__(self):
         return '<Demand %r' % (self.title)

@@ -60,16 +60,24 @@
         <h3 class="scrollspy-section"><a id="navigation-helpers"></a>Navigation Helpers</h3>
         <p>Navigation helpers are located in <code>app/templates/helpers/navigation.html</code> file. Currently available macros are:</p>
         <dl>
-            <dt><code><strong>render_cause_nav(active_section, new_updates, new_comments)</strong></code></dt>
+            <dt><code><strong>render_cause_nav(active_section, cause)</strong></code></dt>
             <dd>
                 <strong>Description:</strong><br>
                 Renders navigation for <em>cause</em> module.<br>
                 <br>
                 <strong>Arguments:</strong>
                 <ul>
-                    <li><code><strong>active_section</strong></code> : currently active section that gets an underline. Usually you would pass <code>active_page</code> Jija variable declared at the top of the <a href="#basic-template">template</a>.</li>
-                    <li><code><strong>new_updates</strong></code> : number of new updates in the <em>Updates</em> section</li>
-                    <li><code><strong>new_comments</strong></code> : number of new comments in the <em>Comments</em> section</li>
+                    <li>
+                        <code><strong>active_section</strong></code> :
+                        currently-active section that gets an underline. Usually
+                        you would pass <code>active_page</code> Jinja variable
+                        declared at the top of the <a
+                            href="#basic-template">template</a>.
+                    </li>
+                    <li>
+                        <code><strong>cause</strong></code> :
+                        <code>Cause</code>, for generating links
+                    </li>
                 </ul>
             </dd>
             <dt><code><strong>render_styleguide_nav(active_section)</strong></code></dt>
@@ -158,13 +166,24 @@ def some_view():
             <dt><code><strong>render_field(field, label, flags)</strong></code></dt>
             <dd>
                 <strong>Description:</strong><br>
-                Renders most other fields like <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.StringField" target="_blank"><code>StringField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.PasswordField"><code>PasswordField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.HiddenField"><code>HiddenField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.TextAreaField"><code>TextAreaField()</code></a>, etc. A full list of possible fields can be fround <a href="http://wtforms.readthedocs.org/en/latest/fields.html" target="_blank">here</a>.
+                Renders most other fields like <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.StringField" target="_blank"><code>StringField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.PasswordField"><code>PasswordField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.HiddenField"><code>HiddenField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.TextAreaField"><code>TextAreaField()</code></a>, etc. A full list of possible fields can be found <a href="http://wtforms.readthedocs.org/en/latest/fields.html" target="_blank">here</a>.
                 <br><br>
                 <strong>Arguments:</strong>
                 <ul>
                     <li><code><strong>field</strong></code> : any of the fields availabe <a href="http://wtforms.readthedocs.org/en/latest/fields.html" taget="_blank">here</a>, except the <code>RadioField()</code>, for which you should use the <code>render_radio()</code> macro.</li>
                     <li><code><strong>label</strong></code> : pass the form label to this, usually it would look something like <code>form.field_name.label</code>.</li>
                     <li><code><strong>flags</strong></code> : pass all the form flags to this, usually it would look something like <code>form.field_name.flags</code>. If there's a <em>required</em> flag set, the label will automatically get an asterisk next to it.</li>
+                </ul>
+            </dd>
+            <dt><code><strong>render_f(field, class)</strong></code></dt>
+            <dd>
+                <strong>Description:</strong><br>
+                Shortcut to <code>render_field</code>
+                <br><br>
+                <strong>Arguments:</strong>
+                <ul>
+                    <li><code><strong>field</strong></code> : any of the fields availabe <a href="http://wtforms.readthedocs.org/en/latest/fields.html" taget="_blank">here</a>, except the <code>RadioField()</code>, for which you should use the <code>render_radio()</code> macro.</li>
+                    <li><code><strong>class</strong></code> : CSS class to apply to the form field</li>
                 </ul>
             </dd>
         </dl>

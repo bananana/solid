@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='Skeleton/images/favicon.png') }}">
    
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fonts.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Skeleton/css/normalize.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Skeleton/css/skeleton.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='Skeleton/images/favicon.png') }}">
+    {% block styles %}{% endblock %}
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
     {% block scripts %}{% endblock %}
