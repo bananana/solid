@@ -35,8 +35,10 @@
 	</h4>
 	<article>{{ post.body|markdown }}</article>
 	<p class="u-pull-right">
-	    <img class="icon" src="{{ url_for('static', filename='open-iconic/svg/person.svg') }}"> 
-	    <em>{{ post.author.nickname }}, {{ post.created_on.strftime('%b. %d, %Y') }}</em>
+	    <a href="{{ url_for('users.user', nickname=post.author.nickname) }}" 
+		class="avatar-sm" 
+		title="{{ post.author.full_name  }}">{{ post.author.initials }}</a>
+	    <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
 	</p>
 	<p>
 	    <img class="icon" src="{{ url_for('static', filename='open-iconic/svg/comment-square.svg') }}"> 

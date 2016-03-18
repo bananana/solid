@@ -21,8 +21,10 @@
     <div class="eight columns post offset-by-two">
         <h2>{{ post.title }}</h2>
         <p>
-            <img class="icon" src="{{ url_for('static', filename='open-iconic/svg/person.svg') }}"> 
-            <em>{{ post.author.nickname }}, {{ post.created_on.strftime('%b. %d, %Y') }}</em>
+            <a href="{{ url_for('users.user', nickname=post.author.nickname) }}" 
+                class="avatar-sm" 
+                title="{{ post.author.full_name  }}">{{ post.author.initials }}</a>
+            <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
             {% if post.author == current_user %}
             <a href="{{ url_for('discussions.post_edit', slug=cause.slug, pk=post.id) }}">
                 edit
@@ -36,8 +38,10 @@
     <div class="six columns comment offset-by-three">
         {{ comment.body|markdown }}
         <p class="u-pull-right">
-            <img class="icon" src="{{ url_for('static', filename='open-iconic/svg/person.svg') }}"> 
-            <em>{{ comment.author.nickname }}, {% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}</em>
+            <a href="{{ url_for('users.user', nickname=comment.author.nickname) }}" 
+                class="avatar-sm" 
+                title="{{ comment.author.full_name  }}">{{ comment.author.initials }}</a>
+            <em>{% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}</em>
         </p>
     </div>
     {% endfor %}
