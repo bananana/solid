@@ -15,7 +15,7 @@ section (app/templates/styleguide/templating#cause-helpers)
     <strong>{{ caption }}</strong>
 </p>
 <h2 class="u-pull-left">{{ stat }}</h2>
-<div class="u-add-margin-top u-pull-right">
+<div class="u-pull-right" style="margin-top: .75em">
     {% for user in users_contributing %}
         {% if loop.index <= 3 %}
             <a href="{{ url_for('users.user', nickname=user.nickname) }}" class="avatar-sm" title="{{ user.full_name  }}">{{ user.initials }}</a>

@@ -5,12 +5,13 @@ from app.mixins import CRUDMixin
 
 from slugify import slugify
 
-supporters = db.Table('causes_supporters',
+
+cause_creators = db.Table('causes_cause_creators',
     db.Column('cause_id', db.Integer, db.ForeignKey('causes_cause.id')),
     db.Column('user_id', db.Integer, db.ForeignKey('users_user.id')),
 )
 
-creators = db.Table('causes_creators',
+cause_supporters = db.Table('causes_cause_supporters',
     db.Column('cause_id', db.Integer, db.ForeignKey('causes_cause.id')),
     db.Column('user_id', db.Integer, db.ForeignKey('users_user.id')),
 )
@@ -28,9 +29,9 @@ class Cause(CRUDMixin, db.Model):
     created_on    = db.Column(db.DateTime)
     location      = db.Column(db.String(128))
 
-    creators      = db.relationship('User', secondary=creators,
+    creators      = db.relationship('User', secondary=cause_creators,
                                     backref='causes_created', lazy='dynamic')
-    supporters    = db.relationship('User', secondary=supporters,
+    supporters    = db.relationship('User', secondary=cause_supporters,
                                     backref='causes_supported', lazy='dynamic')
 
     video         = db.Column(db.String(128))
@@ -53,14 +54,24 @@ class Cause(CRUDMixin, db.Model):
         return '<Cause %r>' % (self.title)    
 
 
+action_supporters = db.Table('causes_action_supporters',
+    db.Column('user_id', db.Integer, db.ForeignKey('users_user.id')),
+    db.Column('action_id', db.Integer, db.ForeignKey('causes_action.id')),
+)
+
+
 class Action(CRUDMixin, db.Model):
     __tablename__ = 'causes_action'
     id            = db.Column(db.Integer, primary_key=True)
     cause_id      = db.Column(db.Integer, db.ForeignKey('causes_cause.id'))
+
     title         = db.Column(db.String(128))
-    heading       = db.Column(db.String(64))
+
     description   = db.Column(db.Text)
-    supporters    = db.Column(db.Integer)
+
+    supporters    = db.relationship('User', secondary=action_supporters,
+                                    backref='actions_supported', lazy='dynamic')
+
     expiration    = db.Column(db.DateTime)
 
     def __repr__(self):

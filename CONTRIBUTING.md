@@ -2,7 +2,9 @@
 
 ## Workflow
 
-Since the app is still in heavy development we're using [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) workflow, at least till the first stable release.
+Since the app is still in heavy development we're using
+[GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+workflow, at least till the first stable release.
 
 What this means in a nutshell:
 
@@ -69,7 +71,9 @@ Checkout the dev branch and create your feature branch:
 
     git checkout -b your-feature dev
 
-Work on your feature, run tests to make sure it doesn't break anything. If you're an official collaborator you can merge back into **dev** when you're done:
+Work on your feature, run tests to make sure it doesn't break anything. If
+you're an official collaborator you can merge back into **dev** when you're
+done:
 
     git pull origin dev
     git checkout dev
@@ -77,11 +81,15 @@ Work on your feature, run tests to make sure it doesn't break anything. If you'r
     git push
     git branch -d your-feature
 
-If you're not an official collaborator, submit a pull request for your enhancement, bugfix or feature.
+If you're not an official collaborator, submit a pull request for your
+enhancement, bugfix or feature.
 
 ## Unit Testing
 
-Unit tests are organized on per module basis with `tests_base.py` being reused by all of them. If you add a feature, don't forget to add a test for it in the appropriate module. Also, run all tests before you push your changes to the remote. 
+Unit tests are organized on per module basis with `tests_base.py` being reused
+by all of them. If you add a feature, don't forget to add a test for it in the
+appropriate module. Also, run all tests before you push your changes to the
+remote. 
 
 To run test on all modules do:
 
