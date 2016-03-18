@@ -1,17 +1,5 @@
-{% extends "base.html" %}
+{% extends "base_form.html" %}
 {% set active_page = "cause" %}
-
-{% block scripts %}
-<script type="text/javascript" src="{{ url_for('static', filename='jQuery-Form-Validator/form-validator/jquery.form-validator.min.js') }}"></script>
-<script>
-$(document).ready(function() {
-    $.validate({
-        form : '#cause',
-        errorMessageClass : 'danger'
-    });
-});
-</script>   
-{% endblock %}
 
 {% block content %}
     {% from "helpers/forms.html" import render_field, render_boolean, render_f %}

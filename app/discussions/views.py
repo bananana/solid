@@ -17,7 +17,7 @@ def post_list(slug):
         "cause": cause,
         "posts": cause.posts.all()
     }
-    return render_template('discussions/list.html', **context)
+    return render_template('discussions/post_list.html', **context)
 
 
 @mod.route('/cause/<slug>/posts/add', methods=('GET', 'POST'))
