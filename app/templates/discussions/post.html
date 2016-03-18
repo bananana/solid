@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% set active_page = "comments" %}
+{% extends "base_form.html" %}
+{% set active_page = "discussion" %}
 
 {% block content %}
 {% from "helpers/navigation.html" import render_cause_nav %}
@@ -18,7 +18,7 @@
     </div>
 </div>
 <div class="row u-add-margin-top">
-    <div class="twelve columns post">
+    <div class="eight columns post offset-by-two">
         <h2>{{ post.title }}</h2>
         <p>
             <img class="icon" src="{{ url_for('static', filename='open-iconic/svg/person.svg') }}"> 
@@ -30,16 +30,27 @@
             {% endif %}
         </p>
         <article>{{ post.body|markdown }}</article>
-        <h3>Comments</h3>
-        {% for comment in post.comments.all() %}
-        <div class="6 columns">
-            {{ comment.body|markdown }}
-            <p>
-                <img class="icon" src="{{ url_for('static', filename='open-iconic/svg/person.svg') }}"> 
-                <em>{{ comment.author.nickname }}, {% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}</em>
-            </p>
-        </div>
-        {% endfor %}
+    </div>
+    <h3 class="six columns offset-by-three">Comments</h3>
+    {% for comment in post.comments.all() %}
+    <div class="six columns comment offset-by-three">
+        {{ comment.body|markdown }}
+        <p class="u-pull-right">
+            <img class="icon" src="{{ url_for('static', filename='open-iconic/svg/person.svg') }}"> 
+            <em>{{ comment.author.nickname }}, {% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}</em>
+        </p>
+    </div>
+    {% endfor %}
+    <div class="six columns offset-by-three">
+        {% from "helpers/forms.html" import render_field, render_boolean, render_f %}
+        <form id="cause" name="cause" action="{{ url_for('discussions.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
+            {{ comment_form.hidden_tag() }}
+            <fieldset class="no-label">
+                {{ render_f(comment_form.body, "u-full-width") }}
+            </fieldset>
+            <input id="save" type="submit" value="Post"
+                class="button button-primary u-mobile-fixed-bottom">
+        </form>
     </div>
 </div>
 {% endblock %}

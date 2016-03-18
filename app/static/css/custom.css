@@ -166,10 +166,10 @@ small {
 .support-action p {
     font-size: 12px;
 }
-.post article h1, 
-.post article h2,
-.post article h3,
-.post article h4 {
+.post article h1, .comment article h1, 
+.post article h2, .comment article h2,
+.post article h3, .comment article h3,
+.post article h4, .comment article h4 {
     font-weight: bold;
     font-size: larger;
 }
@@ -468,6 +468,9 @@ input[type="submit"]:disabled:focus {
 }
 .checkbox input[type="checkbox"]:checked + .checkbox-replacement {
     background-color: #33C3F0;
+}
+.no-label label {
+    display: none;
 }
 
 

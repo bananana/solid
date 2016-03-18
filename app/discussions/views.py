@@ -53,9 +53,12 @@ def post_detail(slug, pk):
     cause = Cause.query.filter_by(slug=slug).first()
     post = cause.posts.filter_by(id=pk).one()
 
+    comment_form = CommentForm(request.form)
+
     context = {
         'cause': cause,
-        'post': post
+        'post': post,
+        'comment_form': comment_form
     }
 
     return render_template('discussions/post.html', **context)
