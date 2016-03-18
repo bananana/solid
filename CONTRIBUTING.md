@@ -63,3 +63,15 @@ Work on your feature, run tests to make sure it doesn't break anything. If you'r
     git branch -d your-feature
 
 If you're not an official collaborator, submit a pull request for your enhancement, bugfix or feature.
+
+## Unit Testing
+
+Unit tests are organized on per module basis with `tests_base.py` being reused by all of them. If you add a feature, don't forget to add a test for it in the appropriate module. Also, run all tests before you push your changes to the remote. 
+
+To run test on all modules do:
+
+    python -m unittest discover
+
+To run tests for a particular module (like *users* module) do:
+
+    python -m unittest app.users.tests
