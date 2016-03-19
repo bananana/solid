@@ -7,6 +7,7 @@ class User(UserMixin, CRUDMixin, db.Model):
     __tablename__ = 'users_user'
     id          = db.Column(db.Integer, primary_key=True)
     social_id   = db.Column(db.String(64), unique=True)
+    is_admin    = db.Column(db.Boolean)
     last_login  = db.Column(db.DateTime)
     nickname    = db.Column(db.String(64), index=True, unique=True)
     password    = db.Column(db.String(128))
@@ -18,10 +19,12 @@ class User(UserMixin, CRUDMixin, db.Model):
     employer    = db.Column(db.String(64), index=True)
     description = db.Column(db.Text)
 
-    def __init__(self, social_id=None, nickname=None, password=None, full_name='Anonymous',
-                 initials=None, email=None, phone=None, zip=None, employer=None, 
+    def __init__(self, social_id=None, is_admin=False, nickname=None, 
+                 password=None, full_name='Anonymous', initials=None, 
+                 email=None, phone=None, zip=None, employer=None, 
                  description=None):
         self.social_id = social_id
+        self.is_admin = is_admin
         self.nickname = nickname
         self.password = password
         self.full_name = full_name
