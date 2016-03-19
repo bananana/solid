@@ -9,8 +9,7 @@ class UserViewsTests(BaseTestCase):
     test_user = {
         'nickname' : 'Tester',
         'password' : bcrypt.generate_password_hash('test'),
-        'full_name' : 'Test Testrov',
-        'initials': 'TT',
+        'full_name' : 'Test Testov',
         'email' : 'test@test.com',
         'phone' : 1234567890,
         'zip' : 12345,
@@ -58,3 +57,10 @@ class UserViewsTests(BaseTestCase):
             self.logout()
             # For some reason assertIsNone() doesn't work
             self.assertEqual(current_user, None)
+
+    def test_user_initials_generation(self):
+        User.create(**self.test_user)
+        with app.test_client() as c:
+            self.login(c, 'test@test.com', 'test')
+            current_user.generate_initials()
+            self.assertTrue(current_user.initials, 'IT')

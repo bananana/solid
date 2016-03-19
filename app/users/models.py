@@ -25,8 +25,7 @@ class User(UserMixin, CRUDMixin, db.Model):
         self.nickname = nickname
         self.password = password
         self.full_name = full_name
-        # self.initials = ''.join([n[0] for n in full_name.split()])
-        self.initials = initials
+        self.initials = initials 
         self.email = email
         self.phone = phone
         self.zip = zip
@@ -40,10 +39,17 @@ class User(UserMixin, CRUDMixin, db.Model):
         self.update(**{'password': password_hash})
 
     def is_valid_password(self, password):
-        '''Checks password has with bcrypt. Return True if password is correct,
+        '''Checks password hash with bcrypt. Return True if password is correct,
         otherwise returns False.
         '''
         return bcrypt.check_password_hash(self.password, password)
+
+    def generate_initials(self):
+        if self.full_name is not None:
+            initials = ''.join([n[0] for n in self.full_name.split()])
+        else:
+            initials = 'A'
+        self.update(**{'initials': initials})
 
     def __repr__(self):
         return '<User %r>' % (self.nickname)    
