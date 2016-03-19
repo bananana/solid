@@ -34,7 +34,7 @@ section (app/templates/styleguide/templating#cause-helpers)
             <h4>{{ action.title }}</h4>
             <strong>{{ action.heading }}</strong>
             <p>{{ action.description }}</p>
-            <h6 class="u-remove-margin-bottom">Supporters: {{ action.supporters }}</h6>
+            <h6 class="u-remove-margin-bottom">Supporters: {{ action.supporters.count() }}</h6>
             {% if action.expiration %}
             <h6>Expires: {{ action.expiration.strftime('%b. %d, %Y') }}</h6>
             {% endif %}

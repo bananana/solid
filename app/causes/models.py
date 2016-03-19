@@ -20,7 +20,6 @@ cause_supporters = db.Table('causes_cause_supporters',
 class Cause(CRUDMixin, db.Model):
     __tablename__ = 'causes_cause'
     id            = db.Column(db.Integer, primary_key=True)
-    actions       = db.relationship('Action', backref='assigned_campaign', lazy='dynamic')
     demands       = db.relationship('Demand', backref='assigned_campaign', lazy='dynamic')
 
     title         = db.Column(db.String(128))
@@ -63,7 +62,9 @@ action_supporters = db.Table('causes_action_supporters',
 class Action(CRUDMixin, db.Model):
     __tablename__ = 'causes_action'
     id            = db.Column(db.Integer, primary_key=True)
+
     cause_id      = db.Column(db.Integer, db.ForeignKey('causes_cause.id'))
+    cause         = db.relationship('Cause', backref=db.backref('actions', lazy='dynamic'))
 
     title         = db.Column(db.String(128))
 

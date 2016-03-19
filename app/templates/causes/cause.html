@@ -39,14 +39,23 @@
             Supporting</a>
         {% else %}
         <a class="button button-primary u-full-width"
-                href="{{ url_for('causes.support', slug=cause.slug) }}">
+                href="{{ url_for('causes.cause_support', slug=cause.slug) }}">
             Support!</a>
         {% endif %}
         {{ render_cause_info('Created on:', cause.created_on.strftime('%b. %d, %Y')) }}
         {{ render_cause_info('Location:', cause.location) }}
         {{ render_cause_stat('Creators:', cause.creators.count() , cause.creators, '#') }}
         {{ render_cause_stat('Supporters:', cause.supporters.count(), cause.supporters, '#') }}
-        {{ render_cause_support_actions('Support actions:', cause.actions) }}
+        {{ render_cause_support_actions('Support actions:', cause.actions.all()) }}
+        {% if creator %}
+        <p class="u-cf u-add-margin-top u-remove-margin-bottom">
+            <strong>Admin</strong>
+        </p>
+        <p>
+            <a class="button button-primary"
+                href="{{ url_for('causes.cause_edit', slug=cause.slug) }}">Edit</a>
+        </p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

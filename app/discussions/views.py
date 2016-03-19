@@ -92,7 +92,10 @@ def post_edit(slug, pk):
 @cause_required
 def comment_add(slug, pk):
     cause = Cause.query.filter_by(slug=slug).first()
-    post = cause.posts.filter_by(id=pk).one()
+    post = cause.posts.filter_by(id=pk).first()
+
+    if cause is None or post is None:
+        abort(404)
 
     form = CommentForm(request.form)
 
