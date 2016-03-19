@@ -7,7 +7,7 @@ section (app/templates/styleguide/templating#navigation-helpers)
 <div class="nav-tabs-container">
     <ul class="nav nav-tabs nav-horizontal u-pull-left">
         <li {% if active_section == "dashboard" %}class="active"{% endif %}>
-            <a href="{{ url_for('causes.dashboard', slug=cause.slug) }}">Story</a>
+            <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">Story</a>
         </li>
         <li {% if active_section == "demands" %}class="active"{% endif %}>
             <a href="">Demands</a>

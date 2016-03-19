@@ -9,7 +9,7 @@ from app import app, db
 from app.users.models import User
 
 from .models import Cause, Action
-from .forms import CauseForm
+from .forms import CauseForm, ActionForm
 
 
 mod = Blueprint('causes', __name__)
@@ -34,7 +34,7 @@ def multi_cause(f):
         causes = Cause.query.all()
 
         if len(causes) < 2:
-            return redirect(url_for('causes.dashboard', slug=causes[0].title))
+            return redirect(url_for('causes.cause_detail', slug=causes[0].title))
 
         return f(*args, **kwargs)
     return decorated_function
@@ -50,7 +50,7 @@ def index():
 @mod.route('/cause/<slug>')
 @mod.route('/cause/<slug>/dashboard')
 @cause_required
-def dashboard(slug):
+def cause_detail(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
     if cause is None:
@@ -59,6 +59,11 @@ def dashboard(slug):
     context = {
         "cause": cause,
     }
+
+    try:
+        context["creator"] = cause.creators.filter_by(id=current_user.id).count() > 0
+    except AttributeError:
+        context["creator"] = False
 
     try:
         context["supporter"] = cause.supporters.filter_by(id=current_user.id).count() > 0
@@ -70,16 +75,17 @@ def dashboard(slug):
 
 @mod.route('/cause/add', methods=('GET', 'POST'))
 @login_required
-def create():
+def cause_add():
     form = CauseForm(request.form)
 
     cause = Cause.create(commit=False)
 
     if form.validate_on_submit():
         form.populate_obj(cause)
+        cause.creators.append(current_user)
         cause.save()
         flash('Cause created!', 'success')
-        return redirect(url_for('.dashboard', slug=cause.slug))
+        return redirect(url_for('.cause_detail', slug=cause.slug))
 
     context = {
         "form": form,
@@ -87,10 +93,11 @@ def create():
 
     return render_template('causes/cause_form.html', **context)
 
+
 @mod.route('/cause/<slug>/edit', methods=('GET', 'POST'))
 @login_required
 @cause_required
-def edit(slug):
+def cause_edit(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
     if cause is None:
@@ -102,7 +109,7 @@ def edit(slug):
         form.populate_obj(cause)
         cause.update()
         flash('Cause updated!', 'success')
-        return redirect(url_for('.dashboard', slug=slug))
+        return redirect(url_for('.cause_detail', slug=slug))
 
     context = {
         "cause": cause,
@@ -115,7 +122,7 @@ def edit(slug):
 @mod.route('/cause/<slug>/support')
 @login_required
 @cause_required
-def support(slug):
+def cause_support(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
     if cause.supporters.filter_by(id=current_user.id).count() == 0:
@@ -123,4 +130,60 @@ def support(slug):
         db.session.commit()
         flash('Thanks for supporting this cause!')
 
-    return redirect(url_for('.dashboard', slug=slug))
+    return redirect(url_for('.cause_detail', slug=slug))
+
+
+@mod.route('/cause/<slug>/actions/add', methods=('GET', 'POST'))
+@login_required
+@cause_required
+def action_add(slug):
+    cause = Cause.query.filter_by(slug=slug).first()
+
+    if cause is None:
+        abort(404)
+
+    form = ActionForm(request.form)
+
+    action = Action.create(commit=False)
+
+    if form.validate_on_submit():
+        form.populate_obj(action)
+        action.cause = cause
+        from pdb import set_trace; set_trace() 
+        action.save()
+        flash('Action added!', 'success')
+        return redirect(url_for('.cause_detail', slug=slug))
+
+    context = {
+        "cause": cause,
+        "form": form,
+    }
+
+    return render_template('causes/action_form.html', **context)
+
+
+@mod.route('/cause/<slug>/actions/<pk>/edit', methods=('GET', 'POST'))
+@login_required
+@cause_required
+def action_edit(slug):
+    cause = Cause.query.filter_by(slug=slug).first()
+
+    action = cause.actions.filter(id=pk).first()
+
+    if cause is None or action is None:
+        abort(404)
+
+    form = ActionForm(request.form, action)
+
+    if form.validate_on_submit():
+        form.populate_obj(action)
+        action.update()
+        flash('Action updated!', 'success')
+        return redirect(url_for('.action_detail', slug=slug))
+
+    context = {
+        "cause": cause,
+        "form": form,
+    }
+
+    return render_template('causes/action_form.html', **context)
