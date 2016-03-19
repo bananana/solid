@@ -11,4 +11,5 @@ virtualenv/
 # App specific
 app.py
 app.db
+test.db
 db_repository/
