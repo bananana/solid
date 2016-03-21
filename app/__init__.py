@@ -2,6 +2,17 @@ from flask import Flask, render_template
 app = Flask(__name__)
 app.config.from_object('config')
 
+if app.config['OAUTH_ENVVAR_LOAD']:
+    app.config.from_envvar('OAUTH_TWITTER_ID')
+    app.config.from_envvar('OAUTH_TWITTER_SECRET')
+    app.config.from_envvar('OAUTH_GOOGLE_ID')
+    app.config.from_envvar('OAUTH_GOOGLE_SECRET')
+else: 
+    OAUTH_TWITTER_ID = ''
+    OAUTH_TWITTER_SECRET = ''
+    OAUTH_GOOGLE_ID = ''
+    OAUTH_GOOGLE_SECRET = ''
+
 from flask.ext.sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
@@ -29,21 +40,21 @@ app.register_blueprint(styleguideModule)
 from app.discussions.views import mod as discussionsModule
 app.register_blueprint(discussionsModule)
 
-from flask_dance.contrib.github import make_github_blueprint 
-github_blueprint = make_github_blueprint(
-    client_id     = app.config['OAUTH_CREDENTIALS']['github']['id'],
-    client_secret = app.config['OAUTH_CREDENTIALS']['github']['secret'],
-    redirect_to   = app.config['OAUTH_CREDENTIALS']['github']['redirect']
-)
-app.register_blueprint(github_blueprint, url_prefix='/login')
-
 from flask_dance.contrib.twitter import make_twitter_blueprint
 twitter_blueprint = make_twitter_blueprint(
-    api_key       = app.config['OAUTH_CREDENTIALS']['twitter']['id'],
-    api_secret    = app.config['OAUTH_CREDENTIALS']['twitter']['secret'],
-    redirect_to   = app.config['OAUTH_CREDENTIALS']['twitter']['redirect']
+    api_key       = OAUTH_TWITTER_ID,
+    api_secret    = OAUTH_TWITTER_SECRET,
+    redirect_to   = 'users.authorize_twitter' 
 )
 app.register_blueprint(twitter_blueprint, url_prefix='/login')
+
+from flask_dance.contrib.google import make_google_blueprint 
+google_blueprint = make_google_blueprint(
+    client_id     = OAUTH_GOOGLE_ID,
+    client_secret = OAUTH_GOOGLE_SECRET,
+    redirect_to   = 'users.authorize_google'
+)
+app.register_blueprint(google_blueprint, url_prefix='/login')
 
 
 # HTTP errors
@@ -56,9 +67,9 @@ def internal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
 
-from app.causes.views import cause_required, multi_cause
 
 # Default app view, same for all modules
+from app.causes.views import cause_required, multi_cause
 @app.route('/')
 @app.route('/index')
 @cause_required

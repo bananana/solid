@@ -79,19 +79,19 @@ def login():
     return render_template('users/login.html', form=form)
 
 
-@mod.route('/authorize/github')
-def authorize_github():
-    '''Login using OAuth and a GitHub account.
+@mod.route('/authorize/google')
+def authorize_google():
+    '''Login using OAuth and a Google account.
     '''
     # Prevent unauthorized users from getting here
-    if not github.authorized:
-        return redirect(url_for('github.login'))
+    if not google.authorized:
+        return redirect(url_for('google.login'))
 
-    # Get the response from github and get the necessary user info
-    resp = github.get('/user')
-    assert resp.ok
-    social_id = str(resp.json()['id'])
-    nickname = str(resp.json()['login'])
+    # Get the response from google and get the necessary user info
+    resp = google.get('/plus/v1/people/me')
+    assert resp.ok, resp.text
+    #social_id = str(resp.json()['id'])
+    #nickname = str(resp.json()['login'])
 
     #: Query the database to see if user already exists
     user_query = User.query.filter_by(social_id=social_id).first()
