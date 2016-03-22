@@ -12,4 +12,5 @@ virtualenv/
 # App specific
 app.db
 test.db
+envvars-dev.sh
 db_repository/

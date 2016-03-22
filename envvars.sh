@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export OAUTH_GOOGLE_ID=
+export OAUTH_GOOGLE_SECRET=
+export OAUTH_TWITTER_ID=
+export OAUTH_TWITTER_SECRET=

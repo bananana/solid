@@ -17,6 +17,11 @@ Then create and start  a python virtual environment, install requirements and cr
     pip install -r requirements.txt
     ./app.py db --create
 
+Edit the `envvars.sh` file and add OAuth ids and secrets. The app will work without these variables being set but social login won't work. To export the environment variables run the following after starting virtualenv:
+
+    . envvars.sh
+
+
 ## Running the App
 
 To run the app:

@@ -1,17 +1,13 @@
+from os import environ
 from flask import Flask, render_template
 app = Flask(__name__)
 app.config.from_object('config')
-
-if app.config['OAUTH_ENVVAR_LOAD']:
-    app.config.from_envvar('OAUTH_TWITTER_ID')
-    app.config.from_envvar('OAUTH_TWITTER_SECRET')
-    app.config.from_envvar('OAUTH_GOOGLE_ID')
-    app.config.from_envvar('OAUTH_GOOGLE_SECRET')
-else: 
-    OAUTH_TWITTER_ID = ''
-    OAUTH_TWITTER_SECRET = ''
-    OAUTH_GOOGLE_ID = ''
-    OAUTH_GOOGLE_SECRET = ''
+app.config.update(
+    OAUTH_TWITTER_ID=environ.get('OAUTH_TWITTER_ID', ''),
+    OAUTH_TWITTER_SECRET=environ.get('OAUTH_TWITTER_SECRET', ''),
+    OAUTH_GOOGLE_ID=environ.get('OAUTH_GOOGLE_ID', ''),
+    OAUTH_GOOGLE_SECRET=environ.get('OAUTH_GOOGLE_SECRET', ''),
+)
 
 from flask.ext.sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
@@ -42,16 +38,16 @@ app.register_blueprint(discussionsModule)
 
 from flask_dance.contrib.twitter import make_twitter_blueprint
 twitter_blueprint = make_twitter_blueprint(
-    api_key       = OAUTH_TWITTER_ID,
-    api_secret    = OAUTH_TWITTER_SECRET,
+    api_key       = app.config['OAUTH_TWITTER_ID'],
+    api_secret    = app.config['OAUTH_TWITTER_SECRET'],
     redirect_to   = 'users.authorize_twitter' 
 )
 app.register_blueprint(twitter_blueprint, url_prefix='/login')
 
 from flask_dance.contrib.google import make_google_blueprint 
 google_blueprint = make_google_blueprint(
-    client_id     = OAUTH_GOOGLE_ID,
-    client_secret = OAUTH_GOOGLE_SECRET,
+    client_id     = app.config['OAUTH_GOOGLE_ID'],
+    client_secret = app.config['OAUTH_GOOGLE_SECRET'],
     redirect_to   = 'users.authorize_google'
 )
 app.register_blueprint(google_blueprint, url_prefix='/login')

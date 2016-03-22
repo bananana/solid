@@ -25,6 +25,10 @@ Clone the repository and install dependencies:
     . venv/bin/activate
     pip install -r requirement.txt
 
+Edit the `envvars.sh` file and add OAuth ids and secrets. The app will work without these variables being set but social login won't work. To export the environment variables run the following after starting virtualenv:
+
+    . envvars.sh
+
 For now all app management is done through the `app.py` utility. To get help:
 
     ./app.py -h
