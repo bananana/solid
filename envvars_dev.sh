@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export OAUTH_GOOGLE_ID=503238832994-jm4b9p95s1383m66cdalpfuo1jm4avam.apps.googleusercontent.com
+export OAUTH_GOOGLE_SECRET=BjAn1ORGIFDDT-S5YPr4w995
+export OAUTH_TWITTER_ID=lzRk1ZYHTKZbtrPHgVeFCV9Dt
+export OAUTH_TWITTER_SECRET=QJQJDGkmAo4JdV0FYXdxSfo831VBBQiifPHOaa3M0hlLaRxHpu
+
+# For dev purposes only, remove for production
+export OAUTHLIB_INSECURE_TRANSPORT=1
+export OAUTHLIB_RELAX_TOKEN_SCOPE=1

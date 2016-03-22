@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Blueprint, render_template, url_for, redirect, session, \
                   request, g, flash, abort
 from flask.ext.login import login_user, logout_user, current_user, login_required
-from flask_dance.contrib.github import github 
+from flask_dance.contrib.google import google 
 from flask_dance.contrib.twitter import twitter
 from app import app, db, lm
 from app.users import constants as USER
@@ -90,9 +90,13 @@ def authorize_google():
     # Get the response from google and get the necessary user info
     resp = google.get('/plus/v1/people/me')
     assert resp.ok, resp.text
-    #social_id = str(resp.json()['id'])
-    #nickname = str(resp.json()['login'])
-
+    social_id = str(resp.json()['id'])
+    nickname = '_'.join([str(resp.json()['name']['givenName']), 
+                         str(resp.json()['name']['familyName'])])
+    full_name = ' '.join([str(resp.json()['name']['givenName']), 
+                          str(resp.json()['name']['familyName'])])
+    email = str(resp.json()['emails'][0]['value'])
+    
     #: Query the database to see if user already exists
     user_query = User.query.filter_by(social_id=social_id).first()
 
@@ -101,6 +105,7 @@ def authorize_google():
         new_user = User.create(**{
             'social_id' : social_id,
             'nickname'  : nickname,
+            'email'     : email
         })
         login_user(new_user)
         return redirect(url_for('.user', nickname=g.user.nickname))
@@ -124,6 +129,11 @@ def authorize_twitter():
     social_id = str(resp.json()['woeid'])
     nickname = str(resp.json()['screen_name'])
 
+    # Twitter does not allow to get user email, unless we request
+    # elevated permissions:
+    # https://dev.twitter.com/rest/reference/get/account/verify_credentials
+    #email = str(resp.json()['email']
+
     #: Query the database to see if user already exists
     user_query = User.query.filter_by(social_id=social_id).first()
 
@@ -132,6 +142,7 @@ def authorize_twitter():
         new_user = User.create(**{
             'social_id' : social_id,
             'nickname'  : nickname,
+            #'email'     : email
         })
         login_user(new_user)
         return redirect(url_for('.user', nickname=g.user.nickname))

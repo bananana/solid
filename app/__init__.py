@@ -48,6 +48,7 @@ from flask_dance.contrib.google import make_google_blueprint
 google_blueprint = make_google_blueprint(
     client_id     = app.config['OAUTH_GOOGLE_ID'],
     client_secret = app.config['OAUTH_GOOGLE_SECRET'],
+    scope         = ['profile', 'email'],
     redirect_to   = 'users.authorize_google'
 )
 app.register_blueprint(google_blueprint, url_prefix='/login')
