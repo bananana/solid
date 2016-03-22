@@ -6,7 +6,7 @@ from flask_dance.contrib.google import google
 from flask_dance.contrib.twitter import twitter
 from app import app, db, lm
 from app.users import constants as USER
-from app.users.forms import LoginForm, SignupForm
+from app.users.forms import LoginForm, SignupForm, EditForm
 from app.users.models import User
 
 #: Module blueprint
@@ -168,3 +168,32 @@ def user(nickname):
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
     return render_template('users/index.html', user=user)
+
+
+@mod.route('/user/<nickname>/edit', methods=['GET', 'POST'])
+@login_required
+def edit(nickname):
+    '''User profile editing.
+    '''
+    #: User who is being viewed
+    user = User.query.filter_by(nickname=nickname).first()
+    form = EditForm()
+    all_fields = form.data.keys()
+    all_fields.remove('verify_password')
+    all_fields.remove('current_password')
+    fields = ['password' if x=='new_password' else x for x in all_fields]
+    if form.validate_on_submit():
+        for field in fields:
+            print field
+        flash('Changes submitted successfully', 'success')
+        return redirect(url_for('.edit', nickname=nickname))
+    else:
+        # Set default form field values based on current values in the 
+        # database for user being edited.
+        for field in fields:
+            if field is 'password':
+                pass
+            else:
+                setattr(getattr(form, field), 'default', getattr(user, field))
+        form.process()
+    return render_template('users/edit.html', user=user, form=form)

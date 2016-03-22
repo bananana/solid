@@ -15,6 +15,7 @@ class LoginForm(Form):
                              validators=[DataRequired(), Length(max=128)])
     remember = BooleanField('Remember me', default=False)
 
+
 class SignupForm(Form):
     '''Signup form used by signup() function in app/users/views.py'''
     email            = StringField('Email',
@@ -27,4 +28,34 @@ class SignupForm(Form):
                                                  EqualTo('verify_password')])
     verify_password  = PasswordField('Verify password', 
                                      validators=[DataRequired()])
+
+
+class EditForm(Form):
+    nickname         = StringField('Nickname',
+                                   validators=[Optional(), Regexp('[\w-]')])
+    full_name        = StringField('Full Name',
+                                   validators=[Optional()])
+    email            = StringField('Email', 
+                                   validators=[Optional(), Email()])
+    phone            = StringField('Phone',
+                                   validators=[Optional()])
+    zip              = IntegerField('Zip',
+                                   validators=[Optional()])
+    employer         = StringField('Employer', 
+                                   validators=[Optional()])
+    description      = TextAreaField('Description',
+                                     validators=[Optional()])
+    current_password = PasswordField('Current password', 
+                                     validators=[Optional()])
+    new_password     = PasswordField('New password', 
+                                     validators=[Optional(), 
+                                                 EqualTo('verify_password')])
+    verify_password  = PasswordField('Verify password', 
+                                     validators=[Optional()])
+    private_full_name = BooleanField('Keep full name private', default=False)
+    #private_email     = BooleanField('Keep email private', default=False)
+    #private_phone     = BooleanField('Keep phone number private', default=False)
+    #private_zip       = BooleanField('Keep zip code private', default=False)
+    #private_employer  = BooleanField('Keep employer info private', default=False)
+
 

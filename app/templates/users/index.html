@@ -6,15 +6,18 @@
 
 {% block content %}
 <div class="row">
-    <div class="twelve columns">
-        <h1>{{ user.full_name }}</h1>
+    <div class="ten columns">
+        <h1>{{ user.nickname }}</h1>
+    </div>
+    <div class="two columns">
+        <a href="{{ url_for('users.edit', nickname=user.nickname) }}" class="button u-full-width u-add-margin-top">Edit</a>
     </div>
 </div>
 <div class="row">
     <div class="six columns">
         <table class="u-full-width">
             <tbody>
-                <tr><th>nickname</th><td>{{ user.nickname }}</td></tr>
+                <tr><th>full_name</th><td>{{ user.full_name }}</td></tr>
                 <tr><th>email</th><td>{{ user.email }}</td></tr>
                 <tr><th>phone</th><td>{{ user.phone }}</td></tr>
                 <tr><th>zip</th><td>{{ user.zip }}</td></tr>
