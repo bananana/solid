@@ -13,10 +13,11 @@
             <h1>{{ user.nickname }}</h1>
         </div>
         <div class="four columns u-text-right">
-            <a href="{{ url_for('users.user', nickname=user.nickname) }}" class="button u-add-margin-top">Cancel</a>
+            <a href="{{ url_for('users.user', nickname=user.nickname) }}" class="button u-add-margin-top">Back</a>
             <input type="submit" class="button-primary" value="Save">
         </div>
     </div>
+    <hr>
     <div class="row">
         <div class="six columns">
             <fieldset>
@@ -108,20 +109,14 @@
                     <div class="twelve columns">
                         {{ render_boolean(form.private_full_name) }}
                     </div>
-                    <div class="twelve columns">
-                        {# render_boolean(form.private_email) #}
-                    </div>
-                    <div class="twelve columns">
-                        {# render_boolean(form.private_phone) #}
-                    </div>
-                    <div class="twelve columns">
-                        {# render_boolean(form.private_zip) #}
-                    </div>
-                    <div class="twelve columns">
-                        {# render_boolean(form.private_employer) #}
-                    </div>
                 </div>
             </fieldset>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="twelve columns u-text-center">
+            <a href="{{ url_for('users.delete', nickname=user.nickname) }}" class="button">Delete Account</a>
         </div>
     </div>
 </form>

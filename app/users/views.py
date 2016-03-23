@@ -177,23 +177,63 @@ def edit(nickname):
     '''
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
-    form = EditForm()
-    all_fields = form.data.keys()
-    all_fields.remove('verify_password')
-    all_fields.remove('current_password')
-    fields = ['password' if x=='new_password' else x for x in all_fields]
+
+    if current_user.id is user.id:
+        # Serve regular form when user edits their own profile
+        form = EditForm()
+    elif current_user.is_admin:
+        # Serve admin form when officer edits user
+        #form = AdminEditUserForm()
+        form = EditForm()
+    else:
+        abort(404)
+
     if form.validate_on_submit():
-        for field in fields:
-            print field
+        #: A list of all the form data, including empty fields
+        complete_form_data = form.data
+
+        # Delete password fields from the list because password has to be 
+        # processed separately anyway
+        del(complete_form_data['verify_password'], 
+            complete_form_data['current_password'], 
+            complete_form_data['new_password'])
+
+        # Remove empty fields from list
+        form_data = {k:v for k,v in complete_form_data.iteritems() if not v == ''}
+
+        # Set the password if it was submitted
+        if form.new_password.data:
+            user.set_password(form.new_password.data)
+
+        user.update(**form_data)
         flash('Changes submitted successfully', 'success')
         return redirect(url_for('.edit', nickname=nickname))
     else:
+        # Create a list of field keys, remove password fields from it because the
+        # password has to be processed separately.
+        fields = form.data.keys()
+        fields.remove('verify_password')
+        fields.remove('current_password')
+        fields.remove('new_password') 
+
         # Set default form field values based on current values in the 
         # database for user being edited.
         for field in fields:
-            if field is 'password':
-                pass
-            else:
-                setattr(getattr(form, field), 'default', getattr(user, field))
+            setattr(getattr(form, field), 'default', getattr(user, field))
         form.process()
+
     return render_template('users/edit.html', user=user, form=form)
+
+@mod.route('/user/<nickname>/delete')
+@login_required
+def delete(nickname):
+    '''Delete user.
+    '''
+    #: User who is being viewed
+    user = User.query.filter_by(nickname=nickname).first()
+    
+    if current_user.id is user.id or current_user.is_admin:
+        logout_user()
+        user.delete()
+
+    return redirect('/') 

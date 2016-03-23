@@ -21,7 +21,8 @@ class CRUDMixin(object):
 
     def update(self, commit=True, **kwargs):
         for attr, value in kwargs.iteritems():
-            setattr(self, attr, value)
+            if getattr(self, attr) != value:
+                setattr(self, attr, value)
         return commit and self.save() or self
 
     def save(self, commit=True):

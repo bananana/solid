@@ -47,7 +47,10 @@ class User(UserMixin, CRUDMixin, db.Model):
         '''Checks password hash with bcrypt. Return True if password is correct,
         otherwise returns False.
         '''
-        return bcrypt.check_password_hash(self.password, password)
+        if self.password:
+            return bcrypt.check_password_hash(self.password, password)
+        else:
+            return False
 
     def generate_initials(self):
         if self.full_name is not None:

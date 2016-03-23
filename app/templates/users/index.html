@@ -7,12 +7,15 @@
 {% block content %}
 <div class="row">
     <div class="ten columns">
-        <h1>{{ user.nickname }}</h1>
+        <h1>{{ user.nickname }} {% if user.is_admin %}<sup><small>Admin</small></sup>{% endif %}</h1>
     </div>
     <div class="two columns">
+        {% if current_user == user or current_user.is_admin %}
         <a href="{{ url_for('users.edit', nickname=user.nickname) }}" class="button u-full-width u-add-margin-top">Edit</a>
+        {% endif %}
     </div>
 </div>
+<hr>
 <div class="row">
     <div class="six columns">
         <table class="u-full-width">

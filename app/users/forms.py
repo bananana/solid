@@ -53,9 +53,3 @@ class EditForm(Form):
     verify_password  = PasswordField('Verify password', 
                                      validators=[Optional()])
     private_full_name = BooleanField('Keep full name private', default=False)
-    #private_email     = BooleanField('Keep email private', default=False)
-    #private_phone     = BooleanField('Keep phone number private', default=False)
-    #private_zip       = BooleanField('Keep zip code private', default=False)
-    #private_employer  = BooleanField('Keep employer info private', default=False)
-
-

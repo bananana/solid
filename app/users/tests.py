@@ -33,6 +33,9 @@ class UserViewsTests(BaseTestCase):
 
     def logout(self):
         return self.app.get('/logout', follow_redirects=True)
+    
+    def edit(self, context, nickname, fields):
+        return context.post('/user/' + nickname + '/edit', data=fields)
 
     def test_user_signup(self):
         with app.test_client() as c:
@@ -49,7 +52,6 @@ class UserViewsTests(BaseTestCase):
             self.assertFalse(current_user.is_anonymous)
             self.assertEqual(current_user.nickname, 'Tester')
             self.assertEqual(current_user.email, 'test@test.com')
-            self.logout()
 
     def test_user_logout(self):
         with app.test_client() as c:
@@ -57,6 +59,37 @@ class UserViewsTests(BaseTestCase):
             self.logout()
             # For some reason assertIsNone() doesn't work
             self.assertEqual(current_user, None)
+
+    def test_user_delete(self):
+        User.create(**self.test_user)
+        with app.test_client() as c:
+            self.login(c, 'test@test.com', 'test')
+            return c.get('/user/' + current_user.nickname + '/delete')
+            user = User.querty.filter_by(nickname='Tester').first()
+            self.assertEqual(user, None)
+            self.assertFalse(current_user.is_authenticated)
+            self.assertTrue(current_user.is_anonymous)
+            
+    def test_user_edit(self):
+        User.create(**self.test_user)
+        with app.test_client() as c:
+            self.login(c, 'test@test.com', 'test')
+            self.edit(c, 'Tester', fields={
+                'nickname':'Tester2',
+                'full_name':'Different Name',
+                'email':'different.email@test.com',
+                'phone':9876543210,
+                'zip':54321,
+                'employer':'Another Employer',
+                'description':'Test description'
+            })
+            self.assertEqual(current_user.nickname, 'Tester2')
+            self.assertEqual(current_user.full_name, 'Different Name')
+            self.assertEqual(current_user.email, 'different.email@test.com')
+            self.assertEqual(current_user.phone, 9876543210)
+            self.assertEqual(current_user.zip, 54321)
+            self.assertEqual(current_user.employer, 'Another Employer')
+            self.assertEqual(current_user.description, 'Test description')
 
     def test_user_initials_generation(self):
         User.create(**self.test_user)
