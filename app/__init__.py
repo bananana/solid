@@ -1,13 +1,13 @@
 from os import environ
+
 from flask import Flask, render_template
+
 app = Flask(__name__)
-app.config.from_object('config')
-app.config.update(
-    OAUTH_TWITTER_ID=environ.get('OAUTH_TWITTER_ID', ''),
-    OAUTH_TWITTER_SECRET=environ.get('OAUTH_TWITTER_SECRET', ''),
-    OAUTH_GOOGLE_ID=environ.get('OAUTH_GOOGLE_ID', ''),
-    OAUTH_GOOGLE_SECRET=environ.get('OAUTH_GOOGLE_SECRET', ''),
-)
+
+if environ.get('FLASK_CONFIG', None) is None:
+    environ['FLASK_CONFIG'] = 'config/local.py'
+
+app.config.from_envvar('FLASK_CONFIG')
 
 from flask.ext.sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)

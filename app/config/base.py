@@ -1,10 +1,15 @@
 import os
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+d = os.path.dirname
+
+basedir = os.path.abspath(
+	d(d(d(__file__)))
+)
 
 #SECRET_KEY = os.urandom(24)
 SECRET_KEY = 'replace-with-truly-random-string-for-production'
-DEBUG = True
+
+DEBUG = False
 TESTING = False
 
 WTF_CSRF_ENABLED = True
