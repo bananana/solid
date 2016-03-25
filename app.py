@@ -15,7 +15,7 @@ from os import path, walk, listdir, makedirs
 from app import app, db
 from migrate.exceptions import DatabaseAlreadyControlledError
 from migrate.versioning import api
-from config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
+from app.config.local import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
 from textwrap import dedent
 
 

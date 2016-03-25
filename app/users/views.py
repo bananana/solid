@@ -1,9 +1,14 @@
 from datetime import datetime
+
 from flask import Blueprint, render_template, url_for, redirect, session, \
                   request, g, flash, abort
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask_dance.contrib.google import google 
 from flask_dance.contrib.twitter import twitter
+from flask_dance.contrib.facebook import facebook
+
+from slugify import slugify
+
 from app import app, db, lm
 from app.users import constants as USER
 from app.users.forms import LoginForm, SignupForm, EditForm
@@ -144,6 +149,33 @@ def authorize_twitter():
             'social_id' : social_id,
             'nickname'  : nickname,
             #'email'     : email
+        })
+        login_user(new_user)
+        return redirect(url_for('.user', nickname=g.user.nickname))
+    else:
+        login_user(user_query)
+        return redirect(url_for('.user', nickname=g.user.nickname))
+
+
+@mod.route('/authorize/facebook')
+def authorize_facebook():
+    if not facebook.authorized:
+        return redirect(url_for('facebook.login'))
+
+    r = facebook.get('/v2.5/me?fields=name,email,link,picture,id').json()
+
+    #: Query the database to see if user already exists
+    user_query = User.query.filter_by(social_id=r['id']).first()
+
+    if user_query is None: 
+        #: User is not in database, create a new one
+        new_user = User.create(**{
+            'social_id' : r['id'],
+            'nickname'  : slugify(r['name']),
+            'email'     : r.get('email', ''),
+            'full_name' : r['name'],
+            'initials'  : "".join([w[0] for w in r['name'].split(' ')]).upper()
+
         })
         login_user(new_user)
         return redirect(url_for('.user', nickname=g.user.nickname))

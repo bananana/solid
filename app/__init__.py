@@ -38,20 +38,23 @@ app.register_blueprint(discussionsModule)
 
 from flask_dance.contrib.twitter import make_twitter_blueprint
 twitter_blueprint = make_twitter_blueprint(
-    api_key       = app.config['OAUTH_TWITTER_ID'],
-    api_secret    = app.config['OAUTH_TWITTER_SECRET'],
     redirect_to   = 'users.authorize_twitter' 
 )
 app.register_blueprint(twitter_blueprint, url_prefix='/login')
 
 from flask_dance.contrib.google import make_google_blueprint 
 google_blueprint = make_google_blueprint(
-    client_id     = app.config['OAUTH_GOOGLE_ID'],
-    client_secret = app.config['OAUTH_GOOGLE_SECRET'],
     scope         = ['profile', 'email'],
     redirect_to   = 'users.authorize_google'
 )
 app.register_blueprint(google_blueprint, url_prefix='/login')
+
+from flask_dance.contrib.facebook import make_facebook_blueprint 
+facebook_blueprint = make_facebook_blueprint(
+    scope         = ['email'],
+    redirect_to   = 'users.authorize_facebook'
+)
+app.register_blueprint(facebook_blueprint, url_prefix='/login')
 
 
 # HTTP errors
