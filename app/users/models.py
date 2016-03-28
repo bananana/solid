@@ -44,7 +44,7 @@ class User(UserMixin, CRUDMixin, db.Model):
         self.update(**{'password': password_hash})
 
     def is_valid_password(self, password):
-        '''Checks password hash with bcrypt. Return True if password is correct,
+        '''Check password hash with bcrypt. Return True if password is correct,
         otherwise returns False.
         '''
         if self.password:

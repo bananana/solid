@@ -16,6 +16,7 @@
 - Images
 - Layout 
 - Navigation
+- Modals
 - Progress Bar
 - Input
 - Tables
@@ -302,6 +303,28 @@ small {
 }
 .nav-social img {
     margin-top: 0.5em;
+}
+
+/* Modals 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.modal {
+    visibility: hidden;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+    background-color: #000;
+    opacity: 0.5;
+}
+.modal div {
+    width: 300px;
+    margin: 100px auto;
+    background-color: #fff;
+    border: 1px solid #000;
+    padding: 15px;
+    border-radius: 4px;
 }
 
 
