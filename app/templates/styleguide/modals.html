@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% set active_page = "styleguide_modals" %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+{% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">Style Guide</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>v 0.1.0</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+<div class="row">
+    <div class="twelve columns">
+        {{ render_styleguide_nav(active_page) }}
+    </div>
+</div>
+<div class="row u-add-margin-top">
+    <div class="nine columns">
+
+        <h2>Modals</h2>
+        <p><a href="#" class="button button-modal" data-target="test-modal">Test</a></p>
+
+    </div>
+
+    <div class="three columns">
+        {{ render_scrollspy() }}
+    </div>
+
+</div>
+
+<div id="test-modal" class="modal">
+    <div>
+        <h3>Test Modal</h3>
+        <p>Test test test</p>
+    </div>
+</div>
+{% endblock %}

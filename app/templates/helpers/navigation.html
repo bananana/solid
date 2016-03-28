@@ -72,6 +72,9 @@ section (app/templates/styleguide/templating.html#navigation-helpers)
         <li {% if active_section == "styleguide_media_queries" %}class="active"{% endif %}>
             <a href="{{ url_for('styleguide.media_queries') }}">Media Queries</a>
         </li>
+        <li {% if active_section == "styleguide_modals" %}class="active"{% endif %}>
+            <a href="{{ url_for('styleguide.modals') }}">Modals</a>
+        </li>
         <li {% if active_section == "styleguide_templating" %}class="active"{% endif %}>
             <a href="{{ url_for('styleguide.templating') }}">Templating</a>
         </li>

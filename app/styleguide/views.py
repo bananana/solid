@@ -37,6 +37,10 @@ def utilities():
 def media_queries():
     return render_template('styleguide/media_queries.html')
 
+@mod.route('/styleguide/modals')
+def modals():
+    return render_template('styleguide/modals.html')
+
 @mod.route('/styleguide/templating')
 def templating():
     return render_template('styleguide/templating.html')

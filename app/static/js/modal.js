@@ -3,8 +3,8 @@
  ******************************************************************************/
 $(document).ready(function () {
     // Event listener
-    $('.button-modal').on('click', function(e) {
+    $('.button-modal').on('click', function() {
         var target = $(this).data('target');
-        $('#' + target).toggle();
+        $('#' + target).css('visibility', $('#' + target).css('visibility') == 'hidden' ? 'visible' : 'hidden'); 
     });
-
+});
