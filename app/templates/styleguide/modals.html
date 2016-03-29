@@ -2,12 +2,12 @@
 {% set active_page = "styleguide_modals" %}
 
 {% block scripts %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock %}
 
 {% block content %}
 {% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
+{% from "helpers/modals.html" import render_modal %}
 <div class="row">
     <div class="eight columns">
         <h1 class="u-remove-margin-bottom">Style Guide</h1>
@@ -26,20 +26,37 @@
     <div class="nine columns">
 
         <h2>Modals</h2>
-        <p><a href="#" class="button button-modal" data-target="test-modal">Test</a></p>
+        <p>Modals are dialog boxes that are displayed on top of normal content. Click on the button below to view a demo modal.</p>
+        <p>{{ render_modal('modal-demo', 'Modal Demo', 'Modal demo content', 'Click here to see a modal', 'button') }}</p>
+        <p><strong>Note:</strong> using modals breaks accessability. That is: screen readers will not interpret them correctly.</p>
+        <hr>
+        <p>You can either render modals manually or <a href="{{ url_for('styleguide.templating') }}#modal-helpers">use the included macro</a>. Below is an example manual implementation. First, import <code>modal.js</code> file inside <code>&#123;&#37; block scripts &#37;&#125;</code>.</p>
+        <pre>
+&lt;script src="&#123;&#123; url_for('static', filename='js/modal.js') &#125;&#125;"&gt;&lt;/script&gt;</pre>
+        <p>Then, somewhere inside <code>&#123;&#37; block scripts &#37;&#125;</code>, create a button like so:</p>
+        <pre>
+&lt;a class="button button-modal" data-target="modal-demo"&gt;Modal Demo&lt;/a&gt;</pre>
+        <p>The modal itself is always hidden by default and you can put it anywhere inside <code>&lt;body&gt;</code>. Note that trigger button's <code>data-target</code> parameter and modal's <code>id</code> match up. This is so the script knows which button triggers which modal.</p>
+        <pre>
+&lt;div id="modal-demo" class="modal"&gt;
+    &lt;div&gt;
+        &lt;h3 class="u-pull-left"&gt;Modal Demo&lt;/h3&gt;
+        &lt;a href="#" class="button-modal-close u-pull-right"&gt;
+            &lt;img src="/static/open-iconic/svg/x.svg" alt="X" /&gt;
+        &lt;/a&gt;
+        &lt;p class="u-cf"&gt;Modal demo content&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
 
     </div>
-
-    <div class="three columns">
-        {{ render_scrollspy() }}
-    </div>
-
 </div>
 
+<!--
 <div id="test-modal" class="modal">
     <div>
-        <h3>Test Modal</h3>
-        <p>Test test test</p>
+        <h3 class="u-pull-left">Test Modal</h3><a href="#" class="button-modal-close u-pull-right"><img src="{{ url_for('static', filename='open-iconic/svg/x.svg') }}" alt="X"></a>
+        <p class="u-cf">Test test test</p>
     </div>
 </div>
+-->
 {% endblock %}

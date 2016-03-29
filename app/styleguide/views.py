@@ -29,6 +29,10 @@ def tables():
 def alerts():
     return render_template('styleguide/alerts.html')
 
+@mod.route('/styleguide/modals')
+def modals():
+    return render_template('styleguide/modals.html')
+
 @mod.route('/styleguide/utilities')
 def utilities():
     return render_template('styleguide/utilities.html')
@@ -36,10 +40,6 @@ def utilities():
 @mod.route('/styleguide/media_queries')
 def media_queries():
     return render_template('styleguide/media_queries.html')
-
-@mod.route('/styleguide/modals')
-def modals():
-    return render_template('styleguide/modals.html')
 
 @mod.route('/styleguide/templating')
 def templating():

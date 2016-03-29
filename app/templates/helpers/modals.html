@@ -1,0 +1,17 @@
+<!-- If you add another macro to this file or significatly edit an existing one, 
+dont' forget to add a description of your changes to the appropriate styleguide
+section (app/templates/styleguide/templating#modal-helpers)
+-->
+
+{% macro render_modal(id, title, content, button_text, button_class) %}
+<a class="button-modal {{ button_class }}" data-target="{{ id }}">{{ button_text }}</a>
+<div id="{{ id }}" class="modal">
+    <div>
+        <h3 class="u-pull-left">{{ title }}</h3>
+        <a href="#" class="button-modal-close u-pull-right">
+            <img src="{{ url_for('static', filename='open-iconic/svg/x.svg') }}" alt="X" />
+        </a>
+        <p class="u-cf">{{ content }}</p>
+    </div>
+</div>
+{% endmacro %}

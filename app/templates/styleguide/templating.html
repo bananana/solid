@@ -26,6 +26,10 @@
 
         <h2>Templating</h2>
         <p>We're using <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a> templating engine which comes with Flask by default. All documentation can be found <a href="http://jinja.pocoo.org/docs/dev/" target="_blank">here</a>. All the template can be found in <code>app/templates</code>, broken up into sub-directories by their respective modules. There's a special directory called <code>app/templates/helpers</code>, which contains helper macros that are recycled multiple times in other templates.</p>
+        <p>Remember that all macros have to be imported inside <code>&#123;&#37; block content &#37;&#125;</code>. For example, here's how you import the modals macro:</p>
+        <pre>
+&#123;&#37; from "helpers/modals.html" import render_modal &#37;&#125;</pre>
+
         <hr>
 
         <h3 class="scrollspy-section"><a id="base-layout"></a>Base Layout</h3>
@@ -230,6 +234,48 @@ def some_view():
                 <ul>
                     <li><code><strong>caption</strong></code> : alphanumeric caption that will appear at the top of the whole section.</li>
                     <li><code><strong>actions</strong></code> : a list of action objects passed from the view.</li>
+                </ul>
+            </dd>
+        </dl>
+        <hr>
+
+        <h3 class="scrollspy-section"><a id="modal-helpers"></a>Modal Helpers</h3>
+        <p>Modal helpers are located in <code>app/templates/helpers/modals.html</code> file. Full description of implementation can be found in the <a href="{{ url_for('styleguide.modals') }}">Modal section</a>.</p>
+        <p>If you're going to use modals on a page, don't forget to import <code>app/static/js/modal.js</code> file inside <code>&#123;&#37; block scripts &#37;&#125;</code>. Here's an example:</p>
+        <pre>
+&#123;&#37; block content &#37;&#125;
+
+    &lt;!-- Import the modal JavaScript --&gt;
+    &lt;script src="&#123;&#123; url_for('static', filename='js/modal.js') &#125;&#125;"&gt;&lt;/script&gt;
+
+&#123;&#37; endblock &#37;&#125;
+
+&#123;&#37; block content &#37;&#125;
+
+    &lt;!-- Import the modal helpers --&gt;
+    &#123;&#37; from "helpers/modals.html" import render_modal &#37;&#125;
+
+    &#123;&#123; render_modal('modal-demo', 
+                    'Modal Demo',
+                    'Modal demo content',
+                    'Click here to see a modal',
+                    'button') &#125;&#125;
+
+&#123;&#37; endblock &#37;&#125;</pre>
+        <p>Currently there's only one modal macro:</p>
+        <dl>
+            <dt><code><strong>render_macro(id, title, content, button_class, button_text)</strong></code></dt>
+            <dd>
+                <strong>Description:</strong><br>
+                Automatically render a modal based on the <a href="{{ url_for('styleguide.modals') }}">Modal section</a>. The element that activates the modal is always <code>&lt;a&gt;</code>.
+                <br><br>
+                <strong>Arguments:</strong>
+                <ul>
+                    <li><code><strong>id</strong></code> : a unique identifier assigned to buth the modal element and the button's <code>data-target</code> attribute. Must not contain spaces.</li>
+                    <li><code><strong>title</strong></code> : title to be displayed at the top of the modal box.</li>
+                    <li><code><strong>content</strong></code> : content of the modal.</li>
+                    <li><code><strong>button_text</strong></code> : text to be displayed in the element that triggers the modal.</li>
+                    <li><code><strong>button_class</strong></code> : class assigned to the element that triggers the modal. Usually something like <code>button</code> and/or <code>button-primary</code>. If left blank will just display as a link.</li>
                 </ul>
             </dd>
         </dl>
