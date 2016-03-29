@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, url_for
 from app import app
+from app.styleguide import constants as STYLEGUIDE
 
 mod = Blueprint('styleguide', __name__)
 
@@ -7,11 +8,15 @@ mod = Blueprint('styleguide', __name__)
 @mod.route('/styleguide')
 @mod.route('/styleguide/about')
 def styleguide():
-    return render_template('styleguide/index.html')
+    return render_template('styleguide/index.html',
+                           title=STYLEGUIDE.TITLE,
+                           version=STYLEGUIDE.VERSION)
 
 @mod.route('/styleguide/grid_system')
 def grid_system():
-    return render_template('styleguide/grid_system.html')
+    return render_template('styleguide/grid_system.html',
+                           title=STYLEGUIDE.TITLE,
+                           version=STYLEGUIDE.VERSION)
 
 @mod.route('/styleguide/typography')
 def typography():
@@ -19,7 +24,9 @@ def typography():
 
 @mod.route('/styleguide/forms')
 def forms():
-    return render_template('styleguide/forms.html')
+    return render_template('styleguide/forms.html',
+                           title=STYLEGUIDE.TITLE,
+                           version=STYLEGUIDE.VERSION)
 
 @mod.route('/styleguide/tables')
 def tables():
@@ -27,7 +34,9 @@ def tables():
 
 @mod.route('/styleguide/alerts')
 def alerts():
-    return render_template('styleguide/alerts.html')
+    return render_template('styleguide/alerts.html', 
+                           title=STYLEGUIDE.TITLE,
+                           version=STYLEGUIDE.VERSION)
 
 @mod.route('/styleguide/modals')
 def modals():
