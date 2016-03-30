@@ -59,7 +59,7 @@ class User(UserMixin, CRUDMixin, db.Model):
             return False
 
     def generate_initials(self):
-        if self.full_name is not None:
+        if self.full_name is not None and self.private_full_name is False:
             initials = ''.join([n[0] for n in self.full_name.split()])
         else:
             initials = 'A'
@@ -79,4 +79,4 @@ class User(UserMixin, CRUDMixin, db.Model):
             self.save()
 
     def __repr__(self):
-        return '<User %r>' % (self.nickname)    
+        return '<User %r>' % (self.nickname) 

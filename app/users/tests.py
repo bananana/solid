@@ -1,32 +1,40 @@
 from app import app, bcrypt
 from app.tests_base import BaseTestCase
 from app.users.models import User
+from app.causes.models import Cause
 from flask.ext.login import current_user
 
 class UserViewsTests(BaseTestCase):
 
     #: Dummy user profile to be recycled by tests
     test_user = {
-        'nickname' : 'Tester',
-        'password' : bcrypt.generate_password_hash('test'),
+        'nickname'  : 'Tester',
+        'password'  : bcrypt.generate_password_hash('test'),
         'full_name' : 'Test Testov',
-        'email' : 'test@test.com',
-        'phone' : 1234567890,
-        'zip' : 12345,
-        'employer' : 'Boss'
+        'email'     : 'test@test.com',
+        'phone'     : 1234567890,
+        'zip'       : 12345,
+        'employer'  : 'Boss'
+    }
+
+    #: Dummpy cause to be recycled by tests
+    test_cause = { 
+        'title'     : 'Test Cause',
+        'slug'      : 'test_cause',
+        'boss'      : 'Boss'
     }
 
     def signup(self, context, email, nickname, password, verify_password):
         return context.post('/signup', data={
-            'email' : email,
-            'nickname' : nickname,
-            'password' : password,
+            'email'           : email,
+            'nickname'        : nickname,
+            'password'        : password,
             'verify_password' : verify_password
         }, follow_redirects=True)
 
     def login(self, context, email, password):
         return context.post('/login', data={
-            'email' : email,
+            'email'    : email,
             'password' : password,
             'remember' : 'n'
         }, follow_redirects=True)
@@ -75,13 +83,13 @@ class UserViewsTests(BaseTestCase):
         with app.test_client() as c:
             self.login(c, 'test@test.com', 'test')
             self.edit(c, 'Tester', fields={
-                'nickname':'Tester2',
-                'full_name':'Different Name',
-                'email':'different.email@test.com',
-                'phone':9876543210,
-                'zip':54321,
-                'employer':'Another Employer',
-                'description':'Test description'
+                'nickname'    : 'Tester2',
+                'full_name'   : 'Different Name',
+                'email'       : 'different.email@test.com',
+                'phone'       : 9876543210,
+                'zip'         : 54321,
+                'employer'    : 'Another Employer',
+                'description' : 'Test description'
             })
             self.assertEqual(current_user.nickname, 'Tester2')
             self.assertEqual(current_user.full_name, 'Different Name')
@@ -97,3 +105,17 @@ class UserViewsTests(BaseTestCase):
             self.login(c, 'test@test.com', 'test')
             current_user.generate_initials()
             self.assertTrue(current_user.initials, 'IT')
+
+    def test_user_cause_support(self):
+        user = User.create(**self.test_user)
+        cause = Cause.create(**self.test_cause)
+        user.support(cause)
+        self.assertTrue(user.is_supporting(cause))
+
+    def test_user_cause_unsupport(self):
+        user = User.create(**self.test_user)
+        cause = Cause.create(**self.test_cause)
+        user.support(cause)
+        user.unsupport(cause) 
+        self.assertFalse(user.is_supporting(cause))
+
