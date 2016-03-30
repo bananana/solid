@@ -18,6 +18,7 @@
 <hr>
 <div class="row">
     <div class="six columns">
+        <h3>Profile</h3>
         <table class="u-full-width">
             <tbody>
                 <tr><th>full_name</th><td>{{ user.full_name }}</td></tr>
@@ -28,6 +29,14 @@
                 <tr><th>description</th><td>{{ user.description }}</td></tr>
             </tbody>
         </table>
+    </div>
+    <div class="six columns">
+        <h3>Supported Causes</h3>
+        <ul>
+        {% for cause in user.supports %}
+            <li>{{ cause.title }}</li>
+        {% endfor %}
+        </ul>
     </div>
 </div>
 {% endblock %}

@@ -8,6 +8,7 @@ from app import app, db, lm
 from app.users import constants as USER
 from app.users.forms import LoginForm, SignupForm, EditForm
 from app.users.models import User
+from app.causes.models import Cause
 
 #: Module blueprint
 mod = Blueprint('users', __name__)

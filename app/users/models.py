@@ -1,5 +1,6 @@
 from app import db, bcrypt
 from app.mixins import CRUDMixin 
+from app.causes.models import supporters 
 from flask.ext.login import UserMixin
 
 
@@ -19,6 +20,11 @@ class User(UserMixin, CRUDMixin, db.Model):
     employer    = db.Column(db.String(64), index=True)
     description = db.Column(db.Text)
     private_full_name = db.Column(db.Boolean)
+
+    supports    = db.relationship('Cause', 
+                                  secondary=supporters,
+                                  backref='causes_supported', 
+                                  lazy='dynamic')
 
     def __init__(self, social_id=None, is_admin=False, nickname=None, 
                  password=None, full_name='Anonymous', initials=None, 
@@ -58,6 +64,19 @@ class User(UserMixin, CRUDMixin, db.Model):
         else:
             initials = 'A'
         self.update(**{'initials': initials})
+
+    def is_supporting(self, cause):
+        return self.supports.filter(supporters.c.cause_id == cause.id).count() > 0
+
+    def support(self, cause):
+        if not self.is_supporting(cause):
+            self.supports.append(cause)
+            self.save()
+    
+    def unsupport(self, cause):
+        if self.is_supporting(cause):
+            self.supports.remove(cause)
+            self.save()
 
     def __repr__(self):
         return '<User %r>' % (self.nickname)    
