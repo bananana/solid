@@ -2,19 +2,14 @@
 {% set active_page = "styleguide_modals" %}
 
 {% block scripts %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock %}
 
 {% block content %}
 {% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
+{% from "helpers/styleguide.html" import render_header %}
 {% from "helpers/modals.html" import render_modal %}
 <div class="row">
-    <div class="eight columns">
-        <h1 class="u-remove-margin-bottom">Style Guide</h1>
-    </div>
-    <div class="four columns">
-        <h1 class="u-remove-margin-bottom u-text-right"><small>v 0.1.0</small></h1>
-    </div>
+    {{ render_header(title, version) }}
 </div>
 <hr class="u-remove-margin-bottom">
 <div class="row">

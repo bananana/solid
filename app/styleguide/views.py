@@ -20,7 +20,9 @@ def grid_system():
 
 @mod.route('/styleguide/typography')
 def typography():
-    return render_template('styleguide/typography.html')
+    return render_template('styleguide/typography.html',
+                           title=STYLEGUIDE.TITLE,
+                           version=STYLEGUIDE.VERSION)
 
 @mod.route('/styleguide/forms')
 def forms():
@@ -30,7 +32,9 @@ def forms():
 
 @mod.route('/styleguide/tables')
 def tables():
-    return render_template('styleguide/tables.html')
+    return render_template('styleguide/tables.html',
+                           title=STYLEGUIDE.TITLE,
+                           version=STYLEGUIDE.VERSION)
 
 @mod.route('/styleguide/alerts')
 def alerts():
@@ -40,16 +44,24 @@ def alerts():
 
 @mod.route('/styleguide/modals')
 def modals():
-    return render_template('styleguide/modals.html')
+    return render_template('styleguide/modals.html',
+                           title=STYLEGUIDE.TITLE,
+                           version=STYLEGUIDE.VERSION)
 
 @mod.route('/styleguide/utilities')
 def utilities():
-    return render_template('styleguide/utilities.html')
+    return render_template('styleguide/utilities.html',
+                           title=STYLEGUIDE.TITLE,
+                           version=STYLEGUIDE.VERSION)
 
 @mod.route('/styleguide/media_queries')
 def media_queries():
-    return render_template('styleguide/media_queries.html')
+    return render_template('styleguide/media_queries.html',
+                           title=STYLEGUIDE.TITLE,
+                           version=STYLEGUIDE.VERSION)
 
 @mod.route('/styleguide/templating')
 def templating():
-    return render_template('styleguide/templating.html')
+    return render_template('styleguide/templating.html',
+                           title=STYLEGUIDE.TITLE,
+                           version=STYLEGUIDE.VERSION)
