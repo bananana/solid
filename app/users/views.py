@@ -169,8 +169,6 @@ def user(nickname):
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
 
-    #: Posts by supported causes to be displayed in the feed
-    print user.supported_causes()
     return render_template('users/index.html', user=user)
 
 
