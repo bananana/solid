@@ -8,7 +8,7 @@ from app import app, db, lm
 from app.users import constants as USER
 from app.users.forms import LoginForm, SignupForm, EditForm
 from app.users.models import User
-from app.causes.models import Cause
+from app.discussions.models import Post
 
 #: Module blueprint
 mod = Blueprint('users', __name__)
@@ -168,6 +168,9 @@ def user(nickname):
     '''
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
+
+    #: Posts by supported causes to be displayed in the feed
+    print user.supported_causes()
     return render_template('users/index.html', user=user)
 
 
