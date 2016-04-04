@@ -31,6 +31,16 @@
         </table>
     </div>
     <div class="six columns">
+        <h3>Feed</h3>
+        <ul>
+        {% for post in feed[0] %}
+            <li><strong>{{ post.title }}</strong> by <em>{{ post.author.nickname }}</em><br>{{ post.body }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="six columns">
         <h3>Supported Causes</h3>
         <ul>
         {% for cause in user.supports %}

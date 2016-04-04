@@ -169,7 +169,13 @@ def user(nickname):
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
 
-    return render_template('users/index.html', user=user)
+    #: Causes supported by user being viewd
+    supported_causes = user.supports.all()
+    feed = []
+    for cause in supported_causes:
+       feed.append(Post.query.filter_by(cause_id=cause.id).all())
+    print feed 
+    return render_template('users/index.html', user=user, feed=feed)
 
 
 @mod.route('/user/<nickname>/edit', methods=['GET', 'POST'])
