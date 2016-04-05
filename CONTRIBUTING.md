@@ -85,8 +85,8 @@ Unit tests are organized on per module basis with `tests_base.py` being reused b
 
 To run test on all modules do:
 
-    python -m unittest discover
+    ./app.py test -a 
 
 To run tests for a particular module (like *users* module) do:
 
-    python -m unittest app.users.tests
+    ./app.py test -m users 

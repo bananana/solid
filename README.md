@@ -51,5 +51,6 @@ For now all app management is done through the `app.py` utility. To get help:
     ./app.py db --help
     ./app.py mod --help
     ./app.py run --help
+    ./app.py test --help
 
 ## [Contributing](CONTRIBUTING.md)

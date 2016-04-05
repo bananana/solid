@@ -2,12 +2,14 @@
 #
 # Name........: app.py
 # Author......: Pavel Mamontov
-# Version.....: 0.1
+# Version.....: 0.2
 # Description.: Unified manager for Flask apps. Manipulates database, creates
 #               modules, runs the app in Werkzeug.
 # License.....: GPLv3 (see LICENSE file)
 #
-import argparse, imp
+import argparse
+import imp
+import unittest
 from sys import argv
 from os import path, walk, listdir, makedirs
 from app import app, db
@@ -174,7 +176,8 @@ class AppManager(object):
         elif args.name:
             try:
                 module.create(args.name) 
-                print(bcolors.OKGREEN + 'Module ' + args.name + ' created successfully' + bcolors.ENDC)
+                print(bcolors.OKGREEN + 'Module ' + args.name + \
+                      ' created successfully' + bcolors.ENDC)
                 exit(0)
             except Exception as e:
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
@@ -215,6 +218,58 @@ class AppManager(object):
         # Run the app. No need for a separate class.
         app.run(host=args.host, port=args.port, debug=args.debug)
 
+    def test(self):
+        '''Run unit tests for the app.
+        '''
+        parser=argparse.ArgumentParser(
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            description=dedent('''\
+                description:
+                  run unit tests for the app'''),
+            usage='''./app.py run [-h] [-a] [-m MODULE] [-v]''')
+        parser.add_argument('-a',
+                            '--all',
+                            action='store_true',
+                            help='test all')
+        parser.add_argument('-m',
+                            '--module',
+                            action='store',
+                            help='test a specific module')
+        parser.add_argument('-v',
+                            '--verbose',
+                            action='store_true',
+                            help='verbose')
+        args = parser.parse_args(argv[2:])
+
+        # If verbose flag is set, increase verbosity level to 2, otherwise leave
+        # it as 1, which is default.
+        verbosity = args.verbose and 2 or 1
+
+        # Process subcommands for test 
+        if args.all:
+            try:
+                suite = unittest.TestLoader() \
+                                .discover(start_dir='.', pattern='test*.py')
+                unittest.TextTestRunner(verbosity=verbosity).run(suite)
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
+        elif args.module:
+            try:
+                suite = unittest.TestLoader() \
+                                .loadTestsFromName('app.' + args.module + '.tests')
+                unittest.TextTestRunner(verbosity=verbosity).run(suite)
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
+        else:
+            parser.print_help()
+            exit(0)
+
 
 class Database(object):
     '''Manipulates the database. Including creating, upgrading, downgrading and
@@ -253,7 +308,7 @@ class Database(object):
     def migrate(self):
         '''Creates SQLAlchemy migration by comparing the structure of the database
         (obtained from app.db) against the structure of the models (obtained from 
-        app/models.py). The differences between the two are recorded as a migration
+        models.py). The differences between the two are recorded as a migration
         script inside the migration repository. The migration script knows how to 
         apply a migration or undo it, so it is always possible to upgrade or
         downgrade the database format.
