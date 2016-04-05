@@ -90,3 +90,7 @@ To run test on all modules do:
 To run tests for a particular module (like *users* module) do:
 
     ./app.py test -m users 
+
+For verbose mode, pass a -v flag:
+
+    ./app.py test -a -v
