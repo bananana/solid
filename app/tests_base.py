@@ -1,22 +1,24 @@
 import os
-import unittest
-from config import basedir
+from flask.ext.testing import TestCase
 from app import app, db
+from config import basedir
 
+class BaseTestCase(TestCase):
 
-class BaseTestCase(unittest.TestCase):
-
-    def setUp(self):
+    def create_app(self):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'test.db')
-        self.app = app.test_client()
+        return app
+
+    def setUp(self):
         db.create_all()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
 
+    '''
     def login(self, email, password):
         return self.app.post('/login', data=dict(
             email=email,
@@ -26,3 +28,4 @@ class BaseTestCase(unittest.TestCase):
 
     def logout(self):
         return self.app.get('/logout', follow_redirects=True)
+    '''

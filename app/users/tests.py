@@ -1,11 +1,84 @@
-from app import app, bcrypt
+from flask import url_for
+from flask.ext.login import current_user
+from app.tests_base import BaseTestCase
+from app.users.models import User
+
+class UserViewsTests(BaseTestCase):
+
+    render_templates = False
+
+    def test_user_signup(self):
+        with self.client: 
+            response = self.client.post(url_for('users.signup'), data={
+                'email'           : 'test@test.com',
+                'nickname'        : 'Tester',
+                'password'        : 'test',
+                'verify_password' : 'test' 
+            })
+            self.assert_redirects(response, 
+                                  url_for('users.user', nickname='Tester'))
+            self.assertTrue(current_user.is_authenticated)
+            self.assertFalse(current_user.is_anonymous)
+            self.assertEqual(current_user.nickname, 'Tester')
+            self.assertEqual(current_user.email, 'test@test.com')
+
+    def test_user_signup_fail(self):
+        with self.client: 
+            response = self.client.post(url_for('users.signup'), data={
+                'email'           : 'test@test.com',
+                'nickname'        : 'Tester',
+                'password'        : 'test',
+                'verify_password' : 'tset' 
+            })
+            self.assertFalse(current_user.is_authenticated)
+            self.assertTrue(current_user.is_anonymous)
+            self.assert_200(response)
+
+    def test_user_login(self):
+        u = User.create(**{
+            'nickname'  : 'Tester',
+            'email'     : 'test@test.com',
+        })
+        u.set_password('test')
+        with self.client:
+            response = self.client.post(url_for('users.login'), data={
+                'email'    : 'test@test.com',
+                'password' : 'test',
+                'remember' : 'n'
+            })
+            self.assert_redirects(response, 
+                                  url_for('users.user', nickname='Tester'))
+            self.assertTrue(current_user.is_authenticated)
+            self.assertFalse(current_user.is_anonymous)
+            self.assertEqual(current_user.nickname, 'Tester')
+            self.assertEqual(current_user.email, 'test@test.com')
+
+    def test_user_login_fail(self):
+        u = User.create(**{
+            'nickname'  : 'Tester',
+            'email'     : 'test@test.com',
+        })
+        u.set_password('test')
+        with self.client:
+            response = self.client.post(url_for('users.login'), data={
+                'email'    : 'test@test.com',
+                'password' : 'password',
+                'remember' : 'n'
+            })
+            self.assertFalse(current_user.is_authenticated)
+            self.assertTrue(current_user.is_anonymous)
+            self.assert_200(response)
+
+
+'''
+from app import bcrypt
 from app.tests_base import BaseTestCase
 from app.users.models import User
 from app.causes.models import Cause
 from flask.ext.login import current_user
+#from flask import url_for
 
 class UserViewsTests(BaseTestCase):
-
     #: Dummy user profile to be recycled by tests
     test_user = {
         'nickname'  : 'Tester',
@@ -118,4 +191,4 @@ class UserViewsTests(BaseTestCase):
         user.support(cause)
         user.unsupport(cause) 
         self.assertFalse(user.is_supporting(cause))
-
+'''
