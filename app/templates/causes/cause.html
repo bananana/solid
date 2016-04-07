@@ -5,57 +5,48 @@
 {% endblock %}
 
 {% block content %}
-{% from "helpers/navigation.html" import render_cause_nav %}
 {% from "helpers/causes.html" import render_cause_info, render_cause_stat, render_cause_support_actions %}
-<div class="row">
-    <div class="eight columns">
-        <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+<div class="masthead"
+        {% if cause.image %}style="background-image: linear-gradient(190deg, rgba(255, 255, 255, 0), white, white), url({{ url_for('static', filename=cause.image) }});"{% endif %}>
+    <div class="row" >
+    <h1 class="twelve columns">{{ cause.title }}</h1>
+    <p class="twelve columns">
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text
+        ever since the 1500s, when an unknown printer took a galley of type
+        and scrambled it to make a type specimen book
+    </p>
     </div>
-    <div class="four columns">
-        <h1 class="u-remove-margin-bottom u-text-right"><small>vs. {{ cause.boss }}</small></h1>
+    <div class="row">
+        <div class="eight columns">
+            {{ render_cause_stat('Supporters:', cause.supporters.count(), cause.supporters, '#') }}
+        </div>
+        <div class="four columns">
+            {% if supporter %}
+            <a class="button button-disabled u-full-width"
+                    href="#">
+                Supporting</a>
+            {% else %}
+            <a class="button button-primary u-full-width"
+                    href="{{ url_for('causes.cause_support', slug=cause.slug) }}">
+                Stand with us!</a>
+            {% endif %}
+        </div>
     </div>
 </div>
 <hr class="u-remove-margin-bottom">
-<div class="row">
+<div class="row u-add-margin-top">
+    <h2 class="twelve columns">
+        Take action to win
+        <span>({{ cause.actions.count() }} current)</span>
+    </h2>
     <div class="twelve columns">
-        {{ render_cause_nav(active_page, cause) }}
+        {{ render_cause_support_actions('', cause.actions.all()) }}
     </div>
 </div>
 <div class="row u-add-margin-top">
-    <div class="eight columns">
-        {% if cause.video %}
-            <!-- render video embed here -->
-        {% elif cause.image %}
-            <img class="u-full-width" src="{{ url_for('static', filename=cause.image) }}">
-        {% endif %}
-        <hr>
-        <h3>{{ cause.story_heading }}</h3>
-        <p>{{ cause.story_content }}</p>    
-    </div>
-    <div class="four columns">
-        {% if supporter %}
-        <a class="button u-full-width"
-                href="#">
-            Supporting</a>
-        {% else %}
-        <a class="button button-primary u-full-width"
-                href="{{ url_for('causes.cause_support', slug=cause.slug) }}">
-            Support!</a>
-        {% endif %}
-        {{ render_cause_info('Created on:', cause.created_on.strftime('%b. %d, %Y')) }}
-        {{ render_cause_info('Location:', cause.location) }}
-        {{ render_cause_stat('Creators:', cause.creators.count() , cause.creators, '#') }}
-        {{ render_cause_stat('Supporters:', cause.supporters.count(), cause.supporters, '#') }}
-        {{ render_cause_support_actions('Support actions:', cause.actions.all()) }}
-        {% if creator %}
-        <p class="u-cf u-add-margin-top u-remove-margin-bottom">
-            <strong>Admin</strong>
-        </p>
-        <p>
-            <a class="button button-primary"
-                href="{{ url_for('causes.cause_edit', slug=cause.slug) }}">Edit</a>
-        </p>
-        {% endif %}
-    </div>
+    <h2 class="twelve columns">
+        Conversation
+    </h2>
 </div>
 {% endblock %}
