@@ -1,6 +1,6 @@
 from app import db, bcrypt
 from app.mixins import CRUDMixin 
-from app.causes.models import supporters 
+from app.causes.models import cause_supporters 
 from flask.ext.login import UserMixin
 
 
@@ -22,7 +22,7 @@ class User(UserMixin, CRUDMixin, db.Model):
     private_full_name = db.Column(db.Boolean)
 
     supports    = db.relationship('Cause', 
-                                  secondary=supporters,
+                                  secondary=cause_supporters,
                                   backref='causes_supported', 
                                   lazy='dynamic')
 

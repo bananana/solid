@@ -152,6 +152,9 @@ small {
 .content {
     margin-top: 9rem;
 }
+.masthead {
+    background-size: cover;
+}
 .support-action {
     display: block;
     border: 1px solid #bbb;
@@ -164,6 +167,9 @@ small {
     border-color: #888;
     color: #333;
     cursor: pointer;
+}
+h2 span {
+    font-size: 50%;
 }
 .support-action p {
     font-size: 12px;
@@ -406,7 +412,6 @@ input[type="submit"]:disabled {
     color: #fff;
     background-color: #ccc;
     border-color: #bbb;
-    text-decoration: line-through;
 }
 .button-disabled:hover,
 .button-disabled:active,
