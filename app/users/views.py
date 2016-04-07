@@ -242,8 +242,12 @@ def delete(nickname):
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
     
-    if current_user.id is user.id or current_user.is_admin:
+    if user is not None and current_user.id is user.id:
         logout_user()
         user.delete()
+    elif user is not None and current_user.is_admin:
+        user.delete()
+    else:
+        abort(404)
 
-    return redirect('/') 
+    return redirect(url_for('index')) 
