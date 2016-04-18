@@ -4,7 +4,7 @@
 $(document).ready(function () {
     // Event listener
     $('[data-target^="modal"]').on('click', function(e) {
-        var $a = $(e.target),
+        var $a = $(e.currentTarget),
             $target = $('#' + $a.data('target'));
 
         $target.css('visibility', 'visible'); 

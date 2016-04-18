@@ -162,6 +162,7 @@ small {
     margin-top: 1em;
     padding: 0.5em 1em;
     color: #555;
+    text-decoration: none;
 }
 .support-action:hover {
     border-color: #888;
