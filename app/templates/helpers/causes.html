@@ -25,12 +25,12 @@ section (app/templates/styleguide/templating#cause-helpers)
 </div>
 {% endmacro %}
 
-{% macro render_cause_support_actions(caption, actions) %}
+{% macro render_cause_support_actions(caption, cause) %}
 <p class="u-cf u-remove-margin-bottom">
     <strong>{{ caption }}</strong>
 </p>
-    {% for action in actions %}
-        <a class="support-action">
+    {% for action in cause.actions.all() %}
+    <a class="support-action" href="{{ url_for('causes.action_support', slug=cause.slug, pk=action.id) }}">
             <h4>{{ action.title }}</h4>
             <strong>{{ action.heading }}</strong>
             <p>{{ action.description }}</p>

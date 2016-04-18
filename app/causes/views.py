@@ -165,10 +165,10 @@ def action_add(slug):
 @mod.route('/cause/<slug>/actions/<pk>/edit', methods=('GET', 'POST'))
 @login_required
 @cause_required
-def action_edit(slug):
+def action_edit(slug, pk):
     cause = Cause.query.filter_by(slug=slug).first()
 
-    action = cause.actions.filter(id=pk).first()
+    action = cause.actions.filter_by(id=pk).first()
 
     if cause is None or action is None:
         abort(404)
@@ -187,3 +187,19 @@ def action_edit(slug):
     }
 
     return render_template('causes/action_form.html', **context)
+
+
+@mod.route('/cause/<slug>/actions/<pk>/support', methods=('GET', 'POST'))
+@login_required
+@cause_required
+def action_support(slug, pk):
+    cause = Cause.query.filter_by(slug=slug).first()
+
+    action = cause.actions.filter_by(id=pk).first()
+
+    if action.supporters.filter_by(id=current_user.id).count() == 0:
+        action.supporters.append(current_user)
+        db.session.commit()
+        flash('Thanks for supporting this action!')
+
+    return redirect(url_for('.cause_detail', slug=slug))
