@@ -1,2 +1,4 @@
 # Set default line endings to unix
 * text eol=lf
+*.png -text
+*.jpg -text
