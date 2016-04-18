@@ -67,7 +67,7 @@
     </h2>
     {% for action in cause.actions.all() %}
     <a class="four columns support-action" 
-        href="{{ url_for('causes.action_support', slug=cause.slug, pk=action.id) }}">
+        data-target="modal-action-{{ action.id }}">
             <h4>{{ action.title }}</h4>
             <strong>{{ action.heading }}</strong>
             <p>{{ action.description }}</p>
@@ -76,6 +76,21 @@
             <h6>Expires: {{ action.expiration.strftime('%b. %d, %Y') }}</h6>
             {% endif %}
         </a>
+    <div id="modal-action-{{ action.id }}" class="modal">
+        <div>
+            <h3 class="u-pull-left">Take action!</h3>
+            <a href="#" class="button-modal-close u-pull-right">
+                <img src="/static/open-iconic/svg/x.svg" alt="X" />
+            </a>
+            <p class="u-cf">
+                {{ action.description }}
+            </p>
+            <p>
+                <a href="{{ url_for('causes.action_support', slug=cause.slug,
+                    pk=action.id) }}">Support!</a>
+            </p>
+        </div>
+    </div>
     {% endfor %}
 </div>
 <div class="row u-add-margin-top">
