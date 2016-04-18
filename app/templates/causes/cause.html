@@ -2,6 +2,7 @@
 {% set active_page = "dashboard" %}
 
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -9,17 +10,37 @@
 <div class="masthead"
         {% if cause.image %}style="background-image: linear-gradient(190deg, rgba(255, 255, 255, 0), white, white), url({{ url_for('static', filename=cause.image) }});"{% endif %}>
     <div class="row" >
-    <h1 class="twelve columns">{{ cause.title }}</h1>
-    <p class="twelve columns">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text
-        ever since the 1500s, when an unknown printer took a galley of type
-        and scrambled it to make a type specimen book
-    </p>
+        <h1 class="twelve columns">{{ cause.title }}</h1>
+    </div>
+    <div class="row" >
+        <p class="two columns">
+            <button>Share</button>
+        </p>
+        <div class="ten columns">
+            <strong>Creators:</strong>
+            {% for u in cause.creators.all() %}
+            <a href="{{ url_for('users.user', nickname=u.nickname) }}" 
+                class="avatar-sm" 
+                title="{{ u.full_name  }}">{{ u.initials }}</a>
+            {% endfor %}
+        </div>
+    <div class="row" >
+    </div>
+        <p class="twelve columns">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book
+        </p>
     </div>
     <div class="row">
         <div class="eight columns">
-            {{ render_cause_stat('Supporters:', cause.supporters.count(), cause.supporters, '#') }}
+            <h3>{{ cause.supporters.count() }} supporters:</h3>
+            {% for u in cause.supporters.all() %}
+            <a href="{{ url_for('users.user', nickname=unickname) }}" 
+                class="avatar-sm" 
+                title="{{ u.full_name  }}">{{ u.initials }}</a>
+            {% endfor %}
         </div>
         <div class="four columns">
             {% if supporter %}
@@ -28,8 +49,12 @@
                 Supporting</a>
             {% else %}
             <a class="button button-primary u-full-width"
+                    data-target="modal-support"
                     href="{{ url_for('causes.cause_support', slug=cause.slug) }}">
                 Stand with us!</a>
+            <a class="button button-primary u-full-width"
+                data-target="modal-support">
+                No url</a>
             {% endif %}
         </div>
     </div>
@@ -40,13 +65,37 @@
         Take action to win
         <span>({{ cause.actions.count() }} current)</span>
     </h2>
-    <div class="twelve columns">
-        {{ render_cause_support_actions('', cause) }}
-    </div>
+    {% for action in cause.actions.all() %}
+    <a class="four columns support-action" 
+        href="{{ url_for('causes.action_support', slug=cause.slug, pk=action.id) }}">
+            <h4>{{ action.title }}</h4>
+            <strong>{{ action.heading }}</strong>
+            <p>{{ action.description }}</p>
+            <h6 class="u-remove-margin-bottom">Supporters: {{ action.supporters.count() }}</h6>
+            {% if action.expiration %}
+            <h6>Expires: {{ action.expiration.strftime('%b. %d, %Y') }}</h6>
+            {% endif %}
+        </a>
+    {% endfor %}
 </div>
 <div class="row u-add-margin-top">
     <h2 class="twelve columns">
         Conversation
     </h2>
+</div>
+
+<div id="modal-support" class="modal">
+    <div>
+        <h3 class="u-pull-left">Stand with us!</h3>
+        <a href="#" class="button-modal-close u-pull-right">
+            <img src="/static/open-iconic/svg/x.svg" alt="X" />
+        </a>
+        <p class="u-cf">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+        </p>
+        <p class="u-cf">
+            Standing with this cause means dolor sit amet.
+        </p>
+    </div>
 </div>
 {% endblock %}
