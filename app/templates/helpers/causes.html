@@ -9,35 +9,3 @@ section (app/templates/styleguide/templating#cause-helpers)
 </p>
 <h2>{{ info }}</h2>
 {% endmacro %}
-
-{% macro render_cause_stat(caption, stat, users_contributing, more_url) %}
-<p class="u-cf u-remove-margin-bottom">
-    <strong>{{ caption }}</strong>
-</p>
-<h2 class="u-pull-left">{{ stat }}</h2>
-<div class="u-pull-right" style="margin-top: .75em">
-    {% for user in users_contributing %}
-        {% if loop.index <= 3 %}
-            <a href="{{ url_for('users.user', nickname=user.nickname) }}" class="avatar-sm" title="{{ user.full_name  }}">{{ user.initials }}</a>
-        {% endif %}
-    {% endfor %}
-    <a href="{{ more_url }}" class="avatar-sm" title="View all">...</a>
-</div>
-{% endmacro %}
-
-{% macro render_cause_support_actions(caption, cause) %}
-<p class="u-cf u-remove-margin-bottom">
-    <strong>{{ caption }}</strong>
-</p>
-    {% for action in cause.actions.all() %}
-    <a class="support-action" href="{{ url_for('causes.action_support', slug=cause.slug, pk=action.id) }}">
-            <h4>{{ action.title }}</h4>
-            <strong>{{ action.heading }}</strong>
-            <p>{{ action.description }}</p>
-            <h6 class="u-remove-margin-bottom">Supporters: {{ action.supporters.count() }}</h6>
-            {% if action.expiration %}
-            <h6>Expires: {{ action.expiration.strftime('%b. %d, %Y') }}</h6>
-            {% endif %}
-        </a>
-    {% endfor %}
-{% endmacro %}

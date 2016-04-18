@@ -189,52 +189,6 @@ def some_view():
         </dl>
         <hr>
 
-        <h3 class="scrollspy-section"><a id="cause-helpers"></a>Cause Helpers</h3>
-        <p>These helpers are useful for generating cause layout. This is section will probably be constantly changing during development.</p>
-        <p>Currently available macros are:</p>
-        <dl>
-            <dt><code><strong>render_cause_info(caption, info)</strong></code></dt>
-            <dd>
-                <strong>Description:</strong><br>
-                Render static, non-interactive info.
-                <br><br>
-                <strong>Arguments:</strong>
-                <ul>
-                    <li><code><strong>caption</strong></code> : alphanumeric caption that will appear at the top.</li>
-                    <li><code><strong>info</strong></code> : info to be displayed, usually it would be something from the <em>cause</em> object.</li>
-                </ul>
-            </dd>
-        </dl>
-        <dl>
-            <dt><code><strong>render_cause_stat(caption, stat, users_contributing, more_url)</strong></code></dt>
-            <dd>
-                <strong>Description:</strong><br>
-                Render a cause statistic and users contributing to that satistic. Usually used for counters, like the ones that display creator or supporters.
-                <br><br>
-                <strong>Arguments:</strong>
-                <ul>
-                    <li><code><strong>caption</strong></code> : alphanumeric caption that will appear at the top.</li>
-                    <li><code><strong>stat</strong></code> : a number for this stat.</li>
-                    <li><code><strong>users_contributing</strong></code> : a list of users contributing to this stat.</li>
-                    <li><code><strong>more_url</strong></code> : a URL to a view of all the users contributing to this stat.</li>
-                </ul>
-            </dd>
-        </dl>
-        <dl>
-            <dt><code><strong>render_cause_support_actions(caption, actions)</strong></code></dt>
-            <dd>
-                <strong>Description:</strong><br>
-                Render support actions inside boxes. Each box includes a title, a brief explanation and some stats.
-                <br><br>
-                <strong>Arguments:</strong>
-                <ul>
-                    <li><code><strong>caption</strong></code> : alphanumeric caption that will appear at the top of the whole section.</li>
-                    <li><code><strong>actions</strong></code> : a list of action objects passed from the view.</li>
-                </ul>
-            </dd>
-        </dl>
-        <hr>
-
         <h3 class="scrollspy-section"><a id="modal-helpers"></a>Modal Helpers</h3>
         <p>Modal helpers are located in <code>app/templates/helpers/modals.html</code> file. Full description of implementation can be found in the <a href="{{ url_for('styleguide.modals') }}">Modal section</a>.</p>
         <p>If you're going to use modals on a page, don't forget to import <code>app/static/js/modal.js</code> file inside <code>&#123;&#37; block scripts &#37;&#125;</code>. Here's an example:</p>

@@ -149,7 +149,6 @@ def action_add(slug):
     if form.validate_on_submit():
         form.populate_obj(action)
         action.cause = cause
-        from pdb import set_trace; set_trace() 
         action.save()
         flash('Action added!', 'success')
         return redirect(url_for('.cause_detail', slug=slug))
