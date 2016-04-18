@@ -77,8 +77,7 @@ def login():
         if user_query is not None and \
            user_query.is_valid_password(form.password.data):
             login_user(user_query, remember=remember)
-            return redirect(request.args.get('next') or 
-                            url_for('.user', nickname=g.user.nickname))
+            return redirect(request.args.get('next') or '/')
         else:
             flash('Email or Password is invalid', 'error')
 
