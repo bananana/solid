@@ -3,48 +3,6 @@ dont' forget to add a description of your changes to the appropriate styleguide
 section (app/templates/styleguide/templating#navigation-helpers)
 -->
 
-{% macro render_cause_nav(active_section, cause) %}
-<div class="nav-tabs-container">
-    <ul class="nav nav-tabs nav-horizontal u-pull-left">
-        <li {% if active_section == "dashboard" %}class="active"{% endif %}>
-            <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">Story</a>
-        </li>
-        <li {% if active_section == "demands" %}class="active"{% endif %}>
-            <a href="">Demands</a>
-        </li>
-        <li {% if active_section == "updates" %}class="active"{% endif %}>
-            <a href="#">Updates <sup>{# updates #}</sup></a>
-        </li>
-        <li {% if active_section == "discussion" %}class="active"{% endif %}>
-            <a href="{{ url_for('discussions.post_list', slug=cause.slug) }}">Discussion <sup>{#new_comments#}</sup></a>
-        </li>
-    </ul>
-    <ul class="nav nav-tabs nav-horizontal nav-social u-pull-right u-hide-on-mobile">
-        <li>
-            <a href="#">
-                <img class="icon-social" src="{{ url_for('static', filename='icons/twitter.svg') }}">
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <img class="icon-social" src="{{ url_for('static', filename='icons/reddit.svg') }}">
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <img class="icon-social" src="{{ url_for('static', filename='icons/tumblr.svg') }}">
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.svg') }}">
-            </a>
-        </li>
-    </ul>
-    <span class="u-cf"></span>
-</div>
-{% endmacro %}
-
 {% macro render_styleguide_nav(active_section) %}
 <div class="nav-tabs-container">
     <ul class="nav nav-tabs nav-horizontal u-pull-left">
