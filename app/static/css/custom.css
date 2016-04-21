@@ -149,6 +149,14 @@ small {
 .header .button {
     margin-top: 1.2rem;
 }
+.header .user {
+    margin: 1.3em 1em 0 0;
+    float: right;
+}
+.header .user a {
+    font-weight: bold;
+    text-decoration: none;
+}
 .content {
     margin-top: 9rem;
 }
