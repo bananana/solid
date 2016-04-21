@@ -26,7 +26,7 @@
                 title="{{ post.author.full_name  }}">{{ post.author.initials }}</a>
             <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
             {% if post.author == current_user %}
-            <a href="{{ url_for('discussions.post_edit', slug=cause.slug, pk=post.id) }}">
+            <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
                 edit
             </a>
             {% endif %}
@@ -47,7 +47,7 @@
     {% endfor %}
     <div class="six columns offset-by-three">
         {% from "helpers/forms.html" import render_field, render_boolean, render_f %}
-        <form id="cause" name="cause" action="{{ url_for('discussions.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
+        <form id="cause" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
             {{ comment_form.hidden_tag() }}
             <fieldset class="no-label">
                 {{ render_f(comment_form.body, "u-full-width") }}

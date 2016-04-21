@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% set active_page = "discussion" %}
+
+{% block content %}
+{% from "helpers/posts.html" import render_post_list %}
+<div class="row">
+    <div class="eight columns">
+        <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+    </div>
+    <div class="four columns">
+        <h1 class="u-remove-margin-bottom u-text-right"><small>vs. {{ cause.boss }}</small></h1>
+    </div>
+</div>
+<hr class="u-remove-margin-bottom">
+
+<div class="row">
+    {{ render_post_list(cause) }}
+</div>
+{% endblock %}

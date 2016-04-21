@@ -33,8 +33,8 @@ app.register_blueprint(causesModule)
 from app.styleguide.views import mod as styleguideModule
 app.register_blueprint(styleguideModule)
 
-from app.discussions.views import mod as discussionsModule
-app.register_blueprint(discussionsModule)
+from app.posts.views import mod as postsModule
+app.register_blueprint(postsModule)
 
 from flask_dance.contrib.twitter import make_twitter_blueprint
 twitter_blueprint = make_twitter_blueprint(

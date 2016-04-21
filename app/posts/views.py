@@ -7,7 +7,7 @@ from app.causes.views import cause_required
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
 
-mod = Blueprint('discussions', __name__)
+mod = Blueprint('posts', __name__)
 
 @mod.route('/cause/<slug>/posts')
 @cause_required
@@ -17,7 +17,7 @@ def post_list(slug):
         "cause": cause,
         "posts": cause.posts.all()
     }
-    return render_template('discussions/post_list.html', **context)
+    return render_template('posts/post_list.html', **context)
 
 
 @mod.route('/cause/<slug>/posts/add', methods=('GET', 'POST'))
@@ -43,7 +43,7 @@ def post_add(slug):
         "form": form,
     }
 
-    return render_template('discussions/post_form.html', **context)
+    return render_template('posts/post_form.html', **context)
 
 
 @mod.route('/cause/<slug>/posts/<pk>')
@@ -61,7 +61,7 @@ def post_detail(slug, pk):
         'comment_form': comment_form
     }
 
-    return render_template('discussions/post.html', **context)
+    return render_template('posts/post.html', **context)
 
 
 @mod.route('/cause/<slug>/posts/<pk>/edit', methods=('GET', 'POST'))
@@ -84,7 +84,7 @@ def post_edit(slug, pk):
         "form": form,
     }
 
-    return render_template('discussions/post_form.html', **context)
+    return render_template('posts/post_form.html', **context)
 
 
 @mod.route('/cause/<slug>/posts/<pk>/comments/add', methods=('GET', 'POST'))
@@ -115,4 +115,4 @@ def comment_add(slug, pk):
         "form": form,
     }
 
-    return render_template('discussions/comment_form.html', **context)
+    return render_template('posts/comment_form.html', **context)

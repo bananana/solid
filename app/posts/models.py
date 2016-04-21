@@ -15,6 +15,7 @@ class Post(CRUDMixin, db.Model):
     cause         = db.relationship('Cause', backref=db.backref('posts', lazy='dynamic'))
 
     title         = db.Column(db.String(128))
+    summary       = db.Column(db.Text)
     body          = db.Column(db.Text)
     author_id     = db.Column(db.Integer, db.ForeignKey('users_user.id'))
     author        = db.relationship('User', backref=db.backref('posts', lazy='dynamic'))
