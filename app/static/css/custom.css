@@ -1,17 +1,18 @@
 /*
-* v0.1.0
-* Copyright 2016, Pavel Mamontov 
-* pavelmamontov.com
-* Free to use under the MIT license.
-* http://www.opensource.org/licenses/mit-license.php
-* 2016-02-17
-*/
+ * v0.2.0
+ * Copyright 2016, Pavel Mamontov 
+ * pavelmamontov.com
+ * Free to use under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ * 2016-02-17
+ */
 
 
 /* Table of contents
 ––––––––––––––––––––––––––––––––––––––––––––––––––
+- Color Scheme
 - General
-- Style Guide
+- Links
 - Alerts 
 - Images
 - Layout 
@@ -26,14 +27,48 @@
 - Animations
 */
 
+/* Color Scheme 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/*
+ * Base.........: #ff9900
+ * Accent.......: #3299bb
+ * Accent2......: #1eaeda
+ * Black........: #161310
+ * Dark Gray....: #524535
+ * Light Gray...: #fbfaf9
+ * Neutral Gray.: #e5e5e5
+ * White........: #ffffff
+ * Success FG...: #3c773d
+ * Success BG...: #dfefd8
+ * Warning FG...: #ffc63d
+ * Warning BG...: #fbf7e4
+ * Error FG.....: #f15c40
+ * Error BG.....: #f3dede  
+ */
+
 
 /* General
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 html, body {
     height: 100%;
 }
+body {
+    color: #161310;
+}
+hr {
+    border-color: #ff9900;
+}
 small {
-    color: #ccc;
+    color: #e5e5e5;
+}
+
+/* Links 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+a {
+    color: #3299bb;
+}
+a:hover {
+    color: #1eaeda;
 }
 
 /* Alerts 
@@ -131,8 +166,8 @@ small {
     z-index: 100;
     width: 100%;
     height: 6.5rem;
-    background: #fff;
-    border-bottom: 1px solid #eee;
+    background: #fbfaf9;
+    border-bottom: 1px solid #ff9900;
 }
 .progress {
     display: block;
@@ -215,7 +250,7 @@ h2 span {
     display: inline-block;
 }
 .nav-tabs-container {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e5e5e5;
     margin-bottom: 1em;
 }
 .nav-stacked-fixed {
@@ -241,14 +276,14 @@ h2 span {
 .nav > li > a:hover,
 .nav > li > a:focus {
     text-decoration: none;
-    background-color: #f8f8f8;
+    background-color: #fbfaf9;
 }
 .nav > li.disabled > a {
-    color: #777;
+    color: #524535;
 }
 .nav > li.disabled > a:hover,
 .nav > li.disabled > a:focus {
-    color: #777;
+    color: #524535;
     text-decoration: none;
     cursor: not-allowed;
     background-color: transparent;
@@ -273,7 +308,7 @@ h2 span {
 }
 .nav-tabs > li > a:hover
 .nav-stacked > li > a:hover {
-    color: #0fa0ce;
+    color: #fbfaf9;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
@@ -287,7 +322,7 @@ h2 span {
     .nav-tabs > li.active > a:focus {
         text-decoration: none;
         border-bottom-style: solid;
-        border-bottom-color: #1EAEDB;
+        border-bottom-color: #3299bb;
         border-radius: 3px;
     }
 }
@@ -299,7 +334,7 @@ h2 span {
     margin-left: 0;
     background-color: #fff;
     border-left-style: solid;
-    border-left-color: #1EAEDB;
+    border-left-color: #3299bb;
 }
 .nav-tabs.nav-horizontal > li.active > a,
 .nav-tabs.nav-horizontal > li.active > a:hover,
@@ -320,6 +355,7 @@ h2 span {
 .nav-social img {
     margin-top: 0.5em;
 }
+
 
 /* Modals 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -411,6 +447,48 @@ h2 span {
 
 /* Input 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+    border-color: #e5e5e5;
+}
+.button, 
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+    color: #161310;
+    border-color: #3299bb;
+    background-color: #fbfaf9;
+}
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+.button:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+    color: #161310;
+    border-color: #1eaedb;
+    background-color: #fff;
+}
+.button.button-primary,
+button.button-primary, 
+input.button-primary[type="submit"],
+input.button-primary[type="reset"],
+input.button-primary[type="button"] {
+    background-color: #3299bb;
+    border-color: #3299bb;
+}
 .button-login {
     margin-left: 1em;
 }
@@ -419,8 +497,8 @@ button:disabled,
 input[type="button"]:disabled,
 input[type="submit"]:disabled {
     color: #fff;
-    background-color: #ccc;
-    border-color: #bbb;
+    background-color: #e5e5e5;
+    border-color: #e5e5e5;
 }
 .button-disabled:hover,
 .button-disabled:active,
@@ -434,9 +512,11 @@ input[type="button"]:disabled:focus,
 input[type="submit"]:disabled:hover,
 input[type="submit"]:disabled:active,
 input[type="submit"]:disabled:focus {
-    color: #A94442;
-    background-color: #F3DEDE;
-    border-color: #EBCCD1;
+    color: #f15c40;
+    background-color: #f3dede;
+    border-color: #f15c40;
+    cursor: not-allowed;
+    text-decoration: line-through;
 }
 .selected {
     color: #1EAEDB;
@@ -520,7 +600,7 @@ input[type="submit"]:disabled:focus {
 .u-link-color-override:hover,
 .u-link-color-override:active,
 .u-link-color-override:focus {
-    color: #222;
+    color: #524535;
     display: block;
 }
 .u-add-margin-top {
@@ -678,10 +758,14 @@ blockquote {
 
 /* Code 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+code {
+    background: #fbfaf9;
+    border-color: #e5e5e5;
+}
 pre {
     padding: 10px 0 10px 15px;
     color: #fff;
-    background-color: #222;
+    background-color: #161310;
     overflow-x: auto;
     font-size: small;
     text-align: left;
