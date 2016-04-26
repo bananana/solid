@@ -10,13 +10,15 @@ First, clone the repo and install submodules
     cd solid
     git submodule update --init
 
-Then create and start  a python virtual environment, install requirements and
+Then create and start a python virtual environment, install requirements and
 create a database
 
     virtualenv venv
     . venv/bin/activate
     pip install -r requirements.txt
     ./app.py db --create
+
+**Note** `Flask-Misaka` requires that the following packages are installed on your computer: `gcc`, `libffi-dev`, `python-dev` and `python-cffi`. Make sure you install them using your distro's package manager before running `pip install -r requirements.txt`.
 
 ## Running the App
 

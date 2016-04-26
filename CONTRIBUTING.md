@@ -27,6 +27,8 @@ Clone the repository and install dependencies:
     . venv/bin/activate
     pip install -r requirement.txt
 
+**Note** `Flask-Misaka` requires that the following packages are installed on your computer: `gcc`, `libffi-dev`, `python-dev` and `python-cffi`. Make sure you install them using your distro's package manager before running `pip install -r requirements.txt`.
+
 For now all app management is done through the `app.py` utility. To get help:
 
     ./app.py -h
