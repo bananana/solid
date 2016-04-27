@@ -3,7 +3,7 @@
 
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.form-validator.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='jQuery-Form-Validator/form-validator/jquery.form-validator.min.js') }}"></script>
 <script>
 $(document).ready(function() {
     $.validate({
@@ -54,6 +54,14 @@ $(document).ready(function() {
 &lt;button class="button-primary"&gt;Button Element&lt;/button&gt;
 &lt;input type="button" class="button button-primary" value="Input Button"&gt;
 &lt;input type="submit" class="button button-primary" value="Submit Button"&gt;</pre>
+        <p>You may use <code>success</code>, <code>warning</code> or <code>danger</code> classes to style buttons for specific purposes.</p>
+        <button class="success">Success</button>
+        <button class="warning">Warning</button>
+        <button class="error">Error</button>
+        <pre>
+&lt;button class="success"&gt;Success&lt;/button&gt;
+&lt;button class="warning"&gt;Warning&lt;/button&gt;
+&lt;button class="error"&gt;Error&lt;/button&gt;</pre>
         <p><code>&lt;button&gt;</code> and <code>&lt;input&gt;</code> elements with <code>disabled</code> parameter will automatically get styled accordingly. <code>&lt;a&gt;</code> tag has to have <code>button-disabled</code> class to get styled.</p>
         <a class="button button-disabled">Anchor Element</a>
         <button class="button-primary" disabled>Button Element</button>
