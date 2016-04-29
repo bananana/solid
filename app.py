@@ -10,7 +10,7 @@
 import argparse
 import imp
 import unittest
-import glob
+import fnmatch 
 from sys import argv
 from os import path, walk, listdir, makedirs, remove
 from app import app, db
@@ -212,15 +212,16 @@ class AppManager(object):
                             help='clean up temporary files like .swp or ones ending in \'~\'')
         args = parser.parse_args(argv[2:])
 
-        # Process subcommand for clean
+        # Process subcommands for clean
         if args.all:
-            print(glob.glob('.*.swp'))
-            print(glob.glob('*.pyc'))
-            print(glob.glob('*~'))
+            dirt = []
+            for root, dirs, files in walk('.'):
+                for file in fnmatch.filter(files, '*.*.sw?'):
+                    print(path.join(root, file))
         elif args.pyc:
             print(glob.glob('*.pyc'))
         elif args.temp:
-            print(glob.glob('.*.swp'))
+            print(glob.glob('.*.sw?'))
             print(glob.glob('*~'))
         else:
             parser.print_help()

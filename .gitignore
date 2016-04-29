@@ -5,8 +5,7 @@ venv/
 virtualenv/
 
 # Vim
-*.swp
-*.swo
+*.sw?
 *~
 
 # App specific
