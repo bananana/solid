@@ -2,16 +2,17 @@
 #
 # Name........: app.py
 # Author......: Pavel Mamontov
-# Version.....: 0.2
+# Version.....: 0.3
 # Description.: Unified manager for Flask apps. Manipulates database, creates
-#               modules, runs the app in Werkzeug.
+#               modules, runs the app in Werkzeug, cleans up temporary files.
 # License.....: GPLv3 (see LICENSE file)
 #
 import argparse
 import imp
 import unittest
+import glob
 from sys import argv
-from os import path, walk, listdir, makedirs
+from os import path, walk, listdir, makedirs, remove
 from app import app, db
 from migrate.exceptions import DatabaseAlreadyControlledError
 from migrate.versioning import api
@@ -46,6 +47,7 @@ class AppManager(object):
               db          manipluate the database
               mod         create new module scaffolding 
               run         run the Flask app
+              test        run unit tests
             '''))
         parser.add_argument('command', help='subcommand to run')
         args = parser.parse_args(argv[1:2])
@@ -183,6 +185,43 @@ class AppManager(object):
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
 
+        else:
+            parser.print_help()
+            exit(0)
+
+    def clean(self):
+        '''Clean pyc and temporary files.
+        '''
+        parser=argparse.ArgumentParser(
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            description=dedent('''\
+                description:
+                  clean up .pyc and/or temporary files'''),
+            usage='''./app.py clean [-a] [-p] [-t]''')
+        parser.add_argument('-a',
+                            '--all',
+                            action='store_true',
+                            help='clean up both .pyc and other temporary files')
+        parser.add_argument('-p',
+                            '--pyc',
+                            action='store_true',
+                            help='only clean .pyc files')
+        parser.add_argument('-t',
+                            '--temp',
+                            action='store_true',
+                            help='clean up temporary files like .swp or ones ending in \'~\'')
+        args = parser.parse_args(argv[2:])
+
+        # Process subcommand for clean
+        if args.all:
+            print(glob.glob('.*.swp'))
+            print(glob.glob('*.pyc'))
+            print(glob.glob('*~'))
+        elif args.pyc:
+            print(glob.glob('*.pyc'))
+        elif args.temp:
+            print(glob.glob('.*.swp'))
+            print(glob.glob('*~'))
         else:
             parser.print_help()
             exit(0)
