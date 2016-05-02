@@ -202,6 +202,10 @@ class AppManager(object):
                             '--all',
                             action='store_true',
                             help='clean up both .pyc and other temporary files')
+        parser.add_argument('-l',
+                            '--list',
+                            action='store_true',
+                            help='list all files that can be removed')
         parser.add_argument('-p',
                             '--pyc',
                             action='store_true',
@@ -214,15 +218,25 @@ class AppManager(object):
 
         # Process subcommands for clean
         if args.all:
-            dirt = []
-            for root, dirs, files in walk('.'):
-                for file in fnmatch.filter(files, '*.*.sw?'):
-                    print(path.join(root, file))
+            dirt = DirtCleaner()
+            dirt.find(['*.*.sw?', '*~', '*.pyc'])
+            dirt.rem()
+            exit(0)
+        elif args.list:
+            dirt = DirtCleaner()
+            dirt.find(['*.*.sw?', '*~', '*.pyc'])
+            dirt.lst()
+            exit(0)
         elif args.pyc:
-            print(glob.glob('*.pyc'))
+            dirt = DirtCleaner()
+            dirt.find(['*.pyc'])
+            dirt.rem()
+            exit(0)
         elif args.temp:
-            print(glob.glob('.*.sw?'))
-            print(glob.glob('*~'))
+            dirt = DirtCleaner()
+            dirt.find(['*.*.sw?', '*~'])
+            dirt.rem()
+            exit(0)
         else:
             parser.print_help()
             exit(0)
@@ -442,6 +456,33 @@ class Module(object):
         print('  from app.' + name + '.views import mod as ' + name + 'Module')  
         print('  app.register_blueprint(' + name + 'Module)')
 
+class DirtCleaner(object):
+    '''Finds/deletes temporary and compiled pyc files.
+    '''
+    def __init__(self, start_dir=None, dirt=None):
+        self.start_dir = '.'
+        self.dirt = [] 
+
+    def find(self, file_types):
+        for t in file_types:
+            for root, dirs, files in walk(self.start_dir):
+                for file in fnmatch.filter(files, t):
+                    self.dirt.append(path.join(root, file))
+
+    def lst(self):
+        if len(self.dirt):
+            for file in self.dirt:
+                print(file)
+        else:
+            print('Nothing found')
+
+    def rem(self):
+        if len(self.dirt):
+            for file in self.dirt:
+                remove(file)
+        else:
+            print('Nothing to delete')
+        
 
 if __name__ == '__main__':
     AppManager() 
