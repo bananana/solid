@@ -2,7 +2,7 @@
 #
 # Name........: app.py
 # Author......: Pavel Mamontov
-# Version.....: 0.3
+# Version.....: 0.4
 # Description.: Unified manager for Flask apps. Manipulates database, creates
 #               modules, runs the app in Werkzeug, cleans up temporary files.
 # License.....: GPLv3 (see LICENSE file)
@@ -14,6 +14,7 @@ import fnmatch
 from sys import argv
 from os import path, walk, listdir, makedirs, remove
 from app import app, db
+from app.users.models import User
 from migrate.exceptions import DatabaseAlreadyControlledError
 from migrate.versioning import api
 from app.config.local import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
@@ -45,6 +46,7 @@ class AppManager(object):
 
             commands:
               db          manipluate the database
+              clean       clean temporary and/or compiled files
               mod         create new module scaffolding 
               run         run the Flask app
               test        run unit tests
@@ -100,20 +102,25 @@ class AppManager(object):
             print('Creating database...')
             try:
                 database.create()
-                print(bcolors.OKGREEN + 'Database app.db created successfully' + bcolors.ENDC)
+                print(bcolors.OKGREEN + 'Database app.db created successfully' + \
+                      bcolors.ENDC)
                 exit(0)
             except DatabaseAlreadyControlledError:
-                print(bcolors.FAIL + 'Error: Database already exists for this project' + bcolors.ENDC)
+                print(bcolors.FAIL + \
+                      'Error: Database already exists for this project' + \
+                      bcolors.ENDC)
                 exit(1)
             except Exception as e:
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
 
         elif args.downgrade:
-            print('Downgrading database by ' + str(args.downgrade) + ' version(s)...')
+            print('Downgrading database by ' + str(args.downgrade) + \
+                  ' version(s)...')
             try:
                 database.downgrade(args.downgrade)
-                print(bcolors.OKGREEN + 'Database downgraded successfully' + bcolors.ENDC)
+                print(bcolors.OKGREEN + 'Database downgraded successfully' + \
+                      bcolors.ENDC)
                 exit(0)
             except Exception as e:
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
@@ -123,7 +130,8 @@ class AppManager(object):
             print('Migrating database...')
             try:
                 database.migrate()
-                print(bcolors.OKGREEN + 'Database migrated successfully' + bcolors.ENDC)
+                print(bcolors.OKGREEN + 'Database migrated successfully' + \
+                      bcolors.ENDC)
                 exit(0)
             except Exception as e:
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
@@ -133,10 +141,12 @@ class AppManager(object):
             print('Upgrading database by ' + str(args.upgrade) + ' version(s)...')
             try:
                 database.upgrade(args.upgrade)
-                print(bcolors.OKGREEN + 'Database upgraded successfully' + bcolors.ENDC)
+                print(bcolors.OKGREEN + 'Database upgraded successfully' + \
+                      bcolors.ENDC)
                 exit(0)
             except KeyError:
-                print (bcolors.FAIL + 'Error: Already at most recent version' + bcolors.ENDC)
+                print (bcolors.FAIL + 'Error: Already at most recent version' + \
+                       bcolors.ENDC)
                 exit(1)
             except Exception as e:
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
@@ -189,54 +199,123 @@ class AppManager(object):
             parser.print_help()
             exit(0)
 
-    def clean(self):
-        '''Clean pyc and temporary files.
+    def create(self):
+        '''Create users, causes, posts or discussions.
         '''
         parser=argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description=dedent('''\
                 description:
-                  clean up .pyc and/or temporary files'''),
+                  create new users, causes, posts or discussions'''),
+            usage='''./app.py create [-u] [-c] [-p] [-d]''')
+        parser.add_argument('-u',
+                            '--user',
+                            action='store_true',
+                            help='create new user')
+        parser.add_argument('-c',
+                            '--cause',
+                            action='store_true',
+                            help='create new cause')
+        parser.add_argument('-p',
+                            '--post',
+                            action='store_true',
+                            help='create new post')
+        parser.add_argument('-d',
+                            '--discussion',
+                            action='store_true',
+                            help='create new duscussion')
+        args = parser.parse_args(argv[2:])
+
+        # Process subcommands for create
+        if args.user:
+            u = User()
+            user_model = u.__dict__.keys()[1:]
+            for field in user_model:
+
+            print(user_model)
+        elif args.cause:
+            print('create cause')
+        elif args.post:
+            print('create post')
+        elif args.discussion:
+            print('create discussion')
+        else:
+            parser.print_help()
+            exit(0)
+
+    def clean(self):
+        '''Clean python and vim temporary files.
+        '''
+        parser=argparse.ArgumentParser(
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            description=dedent('''\
+                description:
+                  clean up temporary files for python and/or vim'''),
             usage='''./app.py clean [-a] [-p] [-t]''')
         parser.add_argument('-a',
                             '--all',
                             action='store_true',
-                            help='clean up both .pyc and other temporary files')
+                            help='clean up both python and vim temporary files')
         parser.add_argument('-l',
                             '--list',
                             action='store_true',
                             help='list all files that can be removed')
         parser.add_argument('-p',
-                            '--pyc',
+                            '--python',
                             action='store_true',
-                            help='only clean .pyc files')
+                            help='only clean python files')
         parser.add_argument('-t',
                             '--temp',
                             action='store_true',
-                            help='clean up temporary files like .swp or ones ending in \'~\'')
+                            help='only clean vim temporary files')
+        parser.add_argument('-v',
+                            '--verbose',
+                            action='store_true',
+                            help='verbose')
         args = parser.parse_args(argv[2:])
 
         # Process subcommands for clean
+        verbose = args.verbose
         if args.all:
             dirt = DirtCleaner()
-            dirt.find(['*.*.sw?', '*~', '*.pyc'])
-            dirt.rem()
-            exit(0)
+            try:
+                dirt.find(['*.*.sw?', '*~', '*.pyc', '*.stackdump'])
+                dirt.rem()
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
         elif args.list:
+            dirt = DirtCleaner(verbose)
+            try:
+                dirt.find(['*.*.sw?', '*~', '*.pyc', '*.stackdump'])
+                dirt.lst()
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
+        elif args.python:
             dirt = DirtCleaner()
-            dirt.find(['*.*.sw?', '*~', '*.pyc'])
-            dirt.lst()
-            exit(0)
-        elif args.pyc:
-            dirt = DirtCleaner()
-            dirt.find(['*.pyc'])
-            dirt.rem()
-            exit(0)
+            try:
+                dirt.find(['*.pyc', '*.stackdump'])
+                dirt.rem()
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
         elif args.temp:
             dirt = DirtCleaner()
-            dirt.find(['*.*.sw?', '*~'])
-            dirt.rem()
-            exit(0)
+            try:
+                dirt.find(['*.*.sw?', '*~'])
+                dirt.rem()
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
         else:
             parser.print_help()
             exit(0)
@@ -450,16 +529,19 @@ class Module(object):
         # Print a message to remind user to register their module blueprint
         print('Module files are here.....: ' + mod_path)
         print('Module templates are here.: ' + template_path)
-        print(bcolors.WARNING + "Don\'t forget to register your module blueprint in " + \
+        print(bcolors.WARNING + \
+              "Don\'t forget to register your module blueprint in " + \
               bcolors.BOLD + "app/__init__.py " + bcolors.ENDC + \
               bcolors.WARNING + "like so:" + bcolors.ENDC)
         print('  from app.' + name + '.views import mod as ' + name + 'Module')  
         print('  app.register_blueprint(' + name + 'Module)')
 
+
 class DirtCleaner(object):
     '''Finds/deletes temporary and compiled pyc files.
     '''
-    def __init__(self, start_dir=None, dirt=None):
+    def __init__(self, verbose, start_dir=None, dirt=None):
+        self.verbose = verbose
         self.start_dir = '.'
         self.dirt = [] 
 
@@ -470,18 +552,27 @@ class DirtCleaner(object):
                     self.dirt.append(path.join(root, file))
 
     def lst(self):
-        if len(self.dirt):
+        if len(self.dirt) and self.verbose:
             for file in self.dirt:
                 print(file)
+        elif len(self.dirt) and not self.verbose:
+            print(bcolors.OKGREEN + 'Found ' + \
+                  str(len(self.dirt)) + ' files' + bcolors.ENDC)
         else:
             print('Nothing found')
 
     def rem(self):
-        if len(self.dirt):
+        if len(self.dirt) and self.verbose:
+            for file in self.dirt:
+                print('rm ' + file)
+                remove(file)
+        elif len(self.dirt) and not self.verbose:
             for file in self.dirt:
                 remove(file)
+            print(bcolors.OKGREEN + 'Removed ' + \
+                  str(len(self.dirt)) + ' files' + bcolors.ENDC)
         else:
-            print('Nothing to delete')
+            print('Nothing to remove')
         
 
 if __name__ == '__main__':
