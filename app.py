@@ -15,10 +15,13 @@ from sys import argv
 from os import path, walk, listdir, makedirs, remove
 from app import app, db
 from app.users.models import User
+from app.config.local import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
+from sqlalchemy import inspect
 from migrate.exceptions import DatabaseAlreadyControlledError
 from migrate.versioning import api
-from app.config.local import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
 from textwrap import dedent
+from terminaltables import AsciiTable
+from distutils.util import strtobool
 
 
 class bcolors:
@@ -199,46 +202,133 @@ class AppManager(object):
             parser.print_help()
             exit(0)
 
-    def create(self):
-        '''Create users, causes, posts or discussions.
+    def user(self):
+        '''Create, delete, modify or list users. 
         '''
         parser=argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description=dedent('''\
                 description:
-                  create new users, causes, posts or discussions'''),
-            usage='''./app.py create [-u] [-c] [-p] [-d]''')
-        parser.add_argument('-u',
-                            '--user',
+                  create, delete, modify or list users'''),
+            usage='''./app.py create [-c] [-d USER] [-l] [-m USER] [-s USER]''')
+        parser.add_argument('-c',
+                            '--create',
                             action='store_true',
                             help='create new user')
-        parser.add_argument('-c',
-                            '--cause',
-                            action='store_true',
-                            help='create new cause')
-        parser.add_argument('-p',
-                            '--post',
-                            action='store_true',
-                            help='create new post')
         parser.add_argument('-d',
-                            '--discussion',
+                            '--delete',
+                            type=str,
+                            action='store',
+                            help='delete user')
+        parser.add_argument('-l',
+                            '--list',
                             action='store_true',
-                            help='create new duscussion')
+                            help='list all users')
+        parser.add_argument('-m',
+                            '--modify',
+                            type=str,
+                            action='store',
+                            help='modify user')
+        parser.add_argument('-s',
+                            '--search',
+                            type=str,
+                            action='store',
+                            help='search for user')
         args = parser.parse_args(argv[2:])
 
-        # Process subcommands for create
-        if args.user:
+        # Process subcommands for user 
+        if args.create:
             u = User()
-            user_model = u.__dict__.keys()[1:]
-            for field in user_model:
+            
+            #: Inspect user model so we can get database column types later on
+            insp = inspect(User)
 
-            print(user_model)
-        elif args.cause:
-            print('create cause')
-        elif args.post:
-            print('create post')
-        elif args.discussion:
-            print('create discussion')
+            #: Automatically generated keys from the User model
+            #keys = sorted(u.__dict__.keys()[1:])
+
+            #: Manually created list of keys in appropriate order
+            keys = ['nickname', 'email', 'full_name', 'private_full_name', 
+                    'is_admin', 'password', 'social_id', 'phone', 'zip',
+                    'employer', 'description']
+
+            #: Empty arrays to store user input
+            values = []
+
+            for k in keys:
+                #: Get type of database column and cast the input into that type
+                val_type = str(getattr(insp.columns, k).type)
+                if val_type == 'INTEGER':
+                    inpt = raw_input(k + ' (int): ')
+                    values.append(None if inpt == '' else int(inpt))
+                elif fnmatch.fnmatch(val_type, 'VARCHAR*'):
+                    inpt = raw_input(k + ' (str): ')
+                    values.append(None if inpt == '' else str(inpt))
+                elif val_type == 'TEXT':
+                    inpt = raw_input(k + ' (text): ')
+                    values.append(None if inpt == '' else str(inpt))
+                elif val_type == 'BOOLEAN':
+                    inpt = raw_input(k + ' (bool): ')
+                    values.append(None if inpt == '' else strtobool(inpt))
+                else:
+                    values.append(raw_input(k + ': '))
+            
+            #: Key-value pairs to be used in the create() method of mixins.py 
+            kv = dict(zip(keys,values))
+
+            #: Remove password from the above list because it has to be set with
+            #: set_password() method
+            passwd = kv.pop('password')
+
+            # Try to create the user
+            try:
+                u.create(**kv)
+                new_user = User.query.filter_by(nickname=kv.get('nickname')).first()
+                new_user.generate_initials()
+                new_user.set_password(passwd)
+                print(bcolors.OKGREEN + 'User ' + kv.get('nickname') + \
+                      ' created successfully' + bcolors.ENDC)
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
+        elif args.delete:
+            #: User to delete
+            to_del = User.query.filter_by(nickname=args.delete).first()
+
+            try:
+                to_del.delete()
+                print(bcolors.OKGREEN + 'User ' + args.delete + \
+                      ' deleted successfully' + bcolors.ENDC)
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
+        elif args.list:
+            users = User.query.all()
+            keys = ['id', 'nickname', 'email', 'full_name', 'private_full_name', 
+                    'is_admin', 'phone', 'zip', 'employer']
+            table_data = [keys]
+            for u in users:
+                usr = []
+                for k in keys:
+                    attr = getattr(u, k)
+                    usr.append(('None' if attr is None else str(attr)))
+                table_data.append(usr)
+            table = AsciiTable(table_data)
+            print(table.table)
+
+        elif args.modify:
+            print('modify user')
+
+        elif args.search:
+            #: User search by nickname 
+            usr_sr = raw_input('Search for user (nickname): ')
+
+            #: User search query 
+            sr_q = User.query.filter_by(nickname=to_del).first()
+
         else:
             parser.print_help()
             exit(0)
@@ -277,7 +367,7 @@ class AppManager(object):
         # Process subcommands for clean
         verbose = args.verbose
         if args.all:
-            dirt = DirtCleaner()
+            dirt = DirtCleaner(verbose)
             try:
                 dirt.find(['*.*.sw?', '*~', '*.pyc', '*.stackdump'])
                 dirt.rem()
@@ -297,7 +387,7 @@ class AppManager(object):
                 exit(1)
 
         elif args.python:
-            dirt = DirtCleaner()
+            dirt = DirtCleaner(verbose)
             try:
                 dirt.find(['*.pyc', '*.stackdump'])
                 dirt.rem()
@@ -307,7 +397,7 @@ class AppManager(object):
                 exit(1)
 
         elif args.temp:
-            dirt = DirtCleaner()
+            dirt = DirtCleaner(verbose)
             try:
                 dirt.find(['*.*.sw?', '*~'])
                 dirt.rem()
