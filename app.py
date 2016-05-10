@@ -326,7 +326,11 @@ class AppManager(object):
             exit(0)
 
         elif args.modify:
-            u = User.query.filter_by(nickname=args.modify).first()
+            try:
+                u = User.query.filter_by(nickname=args.modify).first()
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
             
             #: Inspect user model so we can get database column types later on
             insp = inspect(User)
@@ -345,7 +349,10 @@ class AppManager(object):
             for k in keys:
                 #: Get type of database column and cast the input into that type
                 val_type = str(getattr(insp.columns, k).type)
+
+                #: Get attribute that is being modified
                 current_attr = getattr(u, k)
+
                 if val_type == 'INTEGER':
                     inpt = raw_input(k + ' (int) [' + str(current_attr) + ']: ')
                     values.append(current_attr if inpt == '' else int(inpt))
