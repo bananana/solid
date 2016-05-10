@@ -323,11 +323,20 @@ class AppManager(object):
             print('modify user')
 
         elif args.search:
-            #: User search by nickname 
-            usr_sr = raw_input('Search for user (nickname): ')
 
             #: User search query 
-            sr_q = User.query.filter_by(nickname=to_del).first()
+            query = User.query.filter_by(nickname=args.search).all()
+            keys = ['id', 'nickname', 'email', 'full_name', 'private_full_name', 
+                    'is_admin', 'phone', 'zip', 'employer']
+            table_data = [keys]
+            for u in query:
+                usr = []
+                for k in keys:
+                    attr = getattr(u, k)
+                    usr.append(('None' if attr is None else str(attr)))
+                table_data.append(usr)
+            table = AsciiTable(table_data)
+            print(table.table)
 
         else:
             parser.print_help()
