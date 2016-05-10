@@ -159,6 +159,7 @@ class AppManager(object):
             parser.print_help()
             exit(0)
 
+
     def mod(self):
         '''Module manipulation commands.
         '''
@@ -201,6 +202,7 @@ class AppManager(object):
         else:
             parser.print_help()
             exit(0)
+
 
     def user(self):
         '''Create, delete, modify or list users. 
@@ -293,10 +295,8 @@ class AppManager(object):
                 exit(1)
 
         elif args.delete:
-            #: User to delete
-            to_del = User.query.filter_by(nickname=args.delete).first()
-
             try:
+                to_del = User.query.filter_by(nickname=args.delete).first()
                 to_del.delete()
                 print(bcolors.OKGREEN + 'User ' + args.delete + \
                       ' deleted successfully' + bcolors.ENDC)
@@ -306,7 +306,12 @@ class AppManager(object):
                 exit(1)
 
         elif args.list:
-            users = User.query.all()
+            try:
+                users = User.query.all()
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
             keys = ['id', 'nickname', 'email', 'full_name', 'private_full_name', 
                     'is_admin', 'phone', 'zip', 'employer']
             table_data = [keys]
@@ -318,18 +323,76 @@ class AppManager(object):
                 table_data.append(usr)
             table = AsciiTable(table_data)
             print(table.table)
+            exit(0)
 
         elif args.modify:
-            print('modify user')
+            u = User.query.filter_by(nickname=args.modify).first()
+            
+            #: Inspect user model so we can get database column types later on
+            insp = inspect(User)
+
+            #: Automatically generated keys from the User model
+            #keys = sorted(u.__dict__.keys()[1:])
+
+            #: Manually created list of keys in appropriate order
+            keys = ['nickname', 'email', 'full_name', 'private_full_name', 
+                    'is_admin', 'password', 'social_id', 'phone', 'zip',
+                    'employer', 'description']
+
+            #: Empty arrays to store user input
+            values = []
+
+            for k in keys:
+                #: Get type of database column and cast the input into that type
+                val_type = str(getattr(insp.columns, k).type)
+                current_attr = getattr(u, k)
+                if val_type == 'INTEGER':
+                    inpt = raw_input(k + ' (int) [' + str(current_attr) + ']: ')
+                    values.append(current_attr if inpt == '' else int(inpt))
+                elif fnmatch.fnmatch(val_type, 'VARCHAR*'):
+                    inpt = raw_input(k + ' (str) [' + str(current_attr) + ']: ')
+                    values.append(current_attr if inpt == '' else str(inpt))
+                elif val_type == 'TEXT':
+                    inpt = raw_input(k + ' (text) [' + str(current_attr) + ']: ')
+                    values.append(current_attr if inpt == '' else str(inpt))
+                elif val_type == 'BOOLEAN':
+                    inpt = raw_input(k + ' (bool) [' + str(current_attr) + ']: ')
+                    values.append(current_attr if inpt == '' else strtobool(inpt))
+                else:
+                    values.append(raw_input(k + ' ['+ str(current_attr) + ']: '))
+            
+            #: Key-value pairs to be used in the create() method of mixins.py 
+            kv = dict(zip(keys,values))
+
+            #: Remove password from the above list because it has to be set with
+            #: set_password() method
+            passwd = kv.pop('password')
+
+            # Try to create the user
+            try:
+                u.update(**kv)
+                #new_user = User.query.filter_by(nickname=kv.get('nickname')).first()
+                u.generate_initials()
+                u.set_password(passwd)
+                print(bcolors.OKGREEN + 'User ' + kv.get('nickname') + \
+                      ' updated successfully' + bcolors.ENDC)
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
 
         elif args.search:
+            try:
+                usr_sr = User.query.filter_by(nickname=args.search).all()
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
 
-            #: User search query 
-            query = User.query.filter_by(nickname=args.search).all()
             keys = ['id', 'nickname', 'email', 'full_name', 'private_full_name', 
                     'is_admin', 'phone', 'zip', 'employer']
             table_data = [keys]
-            for u in query:
+            for u in usr_sr:
                 usr = []
                 for k in keys:
                     attr = getattr(u, k)
@@ -341,6 +404,7 @@ class AppManager(object):
         else:
             parser.print_help()
             exit(0)
+
 
     def clean(self):
         '''Clean python and vim temporary files.
@@ -419,6 +483,7 @@ class AppManager(object):
             parser.print_help()
             exit(0)
 
+
     def run(self):
         '''Running the app.
         '''
@@ -449,6 +514,7 @@ class AppManager(object):
 
         # Run the app. No need for a separate class.
         app.run(host=args.host, port=args.port, debug=args.debug)
+
 
     def test(self):
         '''Run unit tests for the app.
