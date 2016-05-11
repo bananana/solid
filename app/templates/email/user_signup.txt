@@ -6,4 +6,4 @@ You can now log in at {{ url_for('users.login', _external=True) }}.
 
 Solidarity,
 
-The BSolid Team
+The BSolid team

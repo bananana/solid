@@ -10,9 +10,12 @@ from flask_dance.contrib.facebook import facebook
 from slugify import slugify
 
 from app import app, db, lm
-from app.users import constants as USER
-from app.users.forms import LoginForm, SignupForm, EditForm
-from app.users.models import User
+from app.email import send_email
+
+from . import constants as USER
+from .forms import LoginForm, SignupForm, EditForm
+from .models import User
+
 from app.posts.models import Post
 
 #: Module blueprint
@@ -55,6 +58,10 @@ def signup():
         new_user.generate_initials()
         new_user.generate_color()
         login_user(new_user)
+        send_email('Welcome to BSolid',
+                   [new_user.email,],
+                   {'user': new_user},
+                   'email/user_signup.txt')
         return redirect(url_for('.user', nickname=g.user.nickname))
 
     return render_template('users/signup.html', form=form)

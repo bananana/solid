@@ -1,0 +1,10 @@
+Hi folks,
+
+There's a new supporter for "{{ cause.title }}":
+
+	Name: {{ user.full_name }}
+	E-mail: {{ user.email }}
+
+Solidarity,
+
+The BSolid team

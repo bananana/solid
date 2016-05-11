@@ -134,6 +134,10 @@ def cause_support(slug):
                    [current_user.email,],
                    {'user': current_user, 'cause': cause},
                    'email/cause_support_supporter.txt')
+        send_email('New supporter for "{0.title}"'.format(cause),
+                [s.email for s in cause.creators.all()],
+                   {'user': current_user, 'cause': cause},
+                   'email/cause_support_creators.txt')
         flash('Thanks for supporting this cause!')
 
     return redirect(url_for('.cause_detail', slug=slug))
