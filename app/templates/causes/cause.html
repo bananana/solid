@@ -36,7 +36,7 @@
         <div class="eight columns">
             <h3>{{ cause.supporters.count() }} supporters:</h3>
             {% for u in cause.supporters.all() %}
-            <a href="{{ url_for('users.user', nickname=unickname) }}" 
+            <a href="{{ url_for('users.user', nickname=u.nickname) }}" 
                 class="avatar-sm" 
                 title="{{ u.full_name  }}">{{ u.initials }}</a>
             {% endfor %}
