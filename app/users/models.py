@@ -66,7 +66,7 @@ class User(UserMixin, CRUDMixin, db.Model):
         self.update(**{'initials': initials})
 
     def is_supporting(self, cause):
-        return self.supports.filter(supporters.c.cause_id == cause.id).count() > 0
+        return self.supports.filter(cause_supporters.c.cause_id == cause.id).count() > 0
 
     def support(self, cause):
         if not self.is_supporting(cause):

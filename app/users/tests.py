@@ -26,6 +26,7 @@ class UserViewsTests(BaseTestCase):
         'zip'       : 54321,
         'employer'  : 'Moss'
     }
+
     #: Dummy admin profile
     test_admin = {
         'nickname'  : 'Buster',
@@ -34,7 +35,7 @@ class UserViewsTests(BaseTestCase):
         'is_admin'  : True
     }
 
-    #: Dummpy cause
+    #: Dummy cause
     test_cause = { 
         'title'     : 'Test Cause',
         'slug'      : 'test_cause',
