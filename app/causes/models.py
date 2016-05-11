@@ -42,7 +42,7 @@ class Cause(CRUDMixin, db.Model):
         if not self.slug and self.title:
             # even if cause title changes subsequently, the slug should remain
             # the same
-            self.slug = slugify(self.title)
+            self.slug = slugify(unicode(self.title))
 
         if not self.created_on:
             self.created_on = datetime.datetime.utcnow()

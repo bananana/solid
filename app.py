@@ -15,6 +15,7 @@ from sys import argv
 from os import path, walk, listdir, makedirs, remove
 from app import app, db
 from app.users.models import User
+from app.causes.models import Cause
 from app.config.local import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
 from sqlalchemy import inspect
 from migrate.exceptions import DatabaseAlreadyControlledError
@@ -378,7 +379,6 @@ class AppManager(object):
             # Try to create the user
             try:
                 u.update(**kv)
-                #new_user = User.query.filter_by(nickname=kv.get('nickname')).first()
                 u.generate_initials()
                 u.set_password(passwd)
                 print(bcolors.OKGREEN + 'User ' + kv.get('nickname') + \
@@ -411,6 +411,200 @@ class AppManager(object):
         else:
             parser.print_help()
             exit(0)
+
+
+    def cause(self):
+        '''Create, delete, modify or list causes. 
+        '''
+        parser=argparse.ArgumentParser(
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            description=dedent('''\
+                description:
+                  create, delete, modify or list causes'''),
+            usage='''./app.py create [-c] [-d CAUSE] [-l] [-m CAUSE] [-s CAUSE]''')
+        parser.add_argument('-c',
+                            '--create',
+                            action='store_true',
+                            help='create new cause')
+        parser.add_argument('-d',
+                            '--delete',
+                            type=str,
+                            action='store',
+                            help='delete cause')
+        parser.add_argument('-l',
+                            '--list',
+                            action='store_true',
+                            help='list all causes')
+        parser.add_argument('-m',
+                            '--modify',
+                            type=str,
+                            action='store',
+                            help='modify cause')
+        parser.add_argument('-s',
+                            '--search',
+                            type=str,
+                            action='store',
+                            help='search for cause')
+        args = parser.parse_args(argv[2:])
+
+        # Process subcommands for user 
+        if args.create:
+            c = Cause()
+            
+            #: Inspect user model so we can get database column types later on
+            insp = inspect(Cause)
+
+            #: Automatically generated keys from the Cause model
+            #keys = sorted(c.__dict__.keys()[1:])
+
+            #: Manually created list of keys in appropriate order
+            keys = ['title', 'boss', 'location', 'video', 'image',
+                    'story_heading', 'story_content']
+
+            #: Empty arrays to store user input
+            values = []
+
+            for k in keys:
+                #: Get type of database column and cast the input into that type
+                val_type = str(getattr(insp.columns, k).type)
+                if val_type == 'INTEGER':
+                    inpt = raw_input(k + ' (int): ')
+                    values.append(None if inpt == '' else int(inpt))
+                elif fnmatch.fnmatch(val_type, 'VARCHAR*'):
+                    inpt = raw_input(k + ' (str): ')
+                    values.append(None if inpt == '' else str(inpt))
+                elif val_type == 'TEXT':
+                    inpt = raw_input(k + ' (text): ')
+                    values.append(None if inpt == '' else str(inpt))
+                elif val_type == 'BOOLEAN':
+                    inpt = raw_input(k + ' (bool): ')
+                    values.append(None if inpt == '' else strtobool(inpt))
+                else:
+                    values.append(raw_input(k + ': '))
+            
+            #: Key-value pairs to be used in the create() method of mixins.py 
+            kv = dict(zip(keys,values))
+
+            # Try to create the cause 
+            try:
+                c.create(**kv)
+                print(bcolors.OKGREEN + 'Cause ' + kv.get('title') + \
+                      ' created successfully' + bcolors.ENDC)
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
+        elif args.delete:
+            try:
+                to_del = Cause.query.filter_by(slug=args.delete).first()
+                to_del.delete()
+                print(bcolors.OKGREEN + 'Cause ' + args.delete + \
+                      ' deleted successfully' + bcolors.ENDC)
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
+        elif args.list:
+            try:
+                causes = Cause.query.all()
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
+            keys = ['id', 'title', 'slug', 'boss', 'location', 
+                    'video', 'image', 'story_heading', 'story_content']
+            table_data = [keys]
+            for c in causes:
+                cause = []
+                for k in keys:
+                    attr = getattr(c, k)
+                    cause.append(('None' if attr is None else str(attr)))
+                table_data.append(cause)
+            table = AsciiTable(table_data)
+            print(table.table)
+            exit(0)
+
+        elif args.modify:
+            try:
+                c = Cause.query.filter_by(slug=args.modify).first()
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+            
+            #: Inspect user model so we can get database column types later on
+            insp = inspect(Cause)
+
+            #: Automatically generated keys from the Cause model
+            #keys = sorted(c.__dict__.keys()[1:])
+
+            #: Manually created list of keys in appropriate order
+            keys = ['title', 'boss', 'location', 'video', 'image',
+                    'story_heading', 'story_content']
+
+            #: Empty arrays to store user input
+            values = []
+
+            for k in keys:
+                #: Get type of database column and cast the input into that type
+                val_type = str(getattr(insp.columns, k).type)
+
+                #: Get attribute that is being modified
+                current_attr = getattr(c, k)
+
+                if val_type == 'INTEGER':
+                    inpt = raw_input(k + ' (int) [' + str(current_attr) + ']: ')
+                    values.append(current_attr if inpt == '' else int(inpt))
+                elif fnmatch.fnmatch(val_type, 'VARCHAR*'):
+                    inpt = raw_input(k + ' (str) [' + str(current_attr) + ']: ')
+                    values.append(current_attr if inpt == '' else str(inpt))
+                elif val_type == 'TEXT':
+                    inpt = raw_input(k + ' (text) [' + str(current_attr) + ']: ')
+                    values.append(current_attr if inpt == '' else str(inpt))
+                elif val_type == 'BOOLEAN':
+                    inpt = raw_input(k + ' (bool) [' + str(current_attr) + ']: ')
+                    values.append(current_attr if inpt == '' else strtobool(inpt))
+                else:
+                    values.append(raw_input(k + ' ['+ str(current_attr) + ']: '))
+            
+            #: Key-value pairs to be used in the create() method of mixins.py 
+            kv = dict(zip(keys,values))
+
+            # Try to update the cause 
+            try:
+                c.update(**kv)
+                print(bcolors.OKGREEN + 'Cause ' + kv.get('title') + \
+                      ' updated successfully' + bcolors.ENDC)
+                exit(0)
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
+
+        elif args.search:
+            try:
+                cause_sr = Cause.query.filter_by(slug=args.search).all()
+            except Exception as e:
+                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+                exit(1)
+
+            keys = ['id', 'title', 'slug', 'boss', 'location', 
+                    'video', 'image', 'story_heading', 'story_content']
+            table_data = [keys]
+            for c in cause_sr:
+                cause = []
+                for k in keys:
+                    attr = getattr(c, k)
+                    cause.append(('None' if attr is None else str(attr)))
+                table_data.append(cause)
+            table = AsciiTable(table_data)
+            print(table.table)
+
+        else:
+            parser.print_help()
+            exit(0)
+
 
 
     def clean(self):
