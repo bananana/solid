@@ -22,7 +22,7 @@ def cause_required(f):
 
         if len(causes) == 0:
             flash('No causes found', 'error')
-            return redirect(url_for('causes.create'))
+            return redirect(url_for('causes.cause_add'))
 
         return f(*args, **kwargs)
     return decorated_function
@@ -34,7 +34,7 @@ def multi_cause(f):
         causes = Cause.query.all()
 
         if len(causes) < 2:
-            return redirect(url_for('causes.cause_detail', slug=causes[0].title))
+            return redirect(url_for('causes.cause_detail', slug=causes[0].slug))
 
         return f(*args, **kwargs)
     return decorated_function
