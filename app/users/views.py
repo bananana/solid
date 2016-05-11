@@ -52,6 +52,7 @@ def signup():
             'nickname' : form.nickname.data,
         })
         new_user.set_password(form.password.data)
+        new_user.generate_initials()
         login_user(new_user)
         return redirect(url_for('.user', nickname=g.user.nickname))
 
@@ -112,6 +113,7 @@ def authorize_google():
             'nickname'  : nickname,
             'email'     : email
         })
+        new_user.generate_initials()
         login_user(new_user)
         return redirect(url_for('.user', nickname=g.user.nickname))
     else:
@@ -176,6 +178,7 @@ def authorize_facebook():
             'initials'  : "".join([w[0] for w in r['name'].split(' ')]).upper()
 
         })
+        new_user.generate_initials()
         login_user(new_user)
         return redirect(url_for('.user', nickname=g.user.nickname))
     else:
@@ -247,6 +250,7 @@ def edit(nickname):
             user.set_password(form.new_password.data)
 
         user.update(**form_data)
+        user.generate_initials()
         flash('Changes submitted successfully', 'success')
         return redirect(url_for('.edit', nickname=nickname))
     else:
