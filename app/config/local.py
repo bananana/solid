@@ -2,6 +2,11 @@ from app.config.base import *
 
 DEBUG = True
 
+SERVER_NAME = 'localhost:5000'
+
+MAIL_PORT = 1025
+MAIL_DEFAULT_SENDER = 'noreply@bsolid.org'
+
 GOOGLE_OAUTH_CLIENT_ID = '503238832994-jm4b9p95s1383m66cdalpfuo1jm4avam.apps.googleusercontent.com'
 GOOGLE_OAUTH_CLIENT_SECRET = 'BjAn1ORGIFDDT-S5YPr4w995'
 

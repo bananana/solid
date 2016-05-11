@@ -1,0 +1,9 @@
+Hi {{ user.initials }}!
+
+Thanks for supporting "{{ cause.title }}".
+
+FIXME add content
+
+Solidarity,
+
+The BSolid team

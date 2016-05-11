@@ -11,6 +11,8 @@ from app.users.models import User
 from .models import Cause, Action
 from .forms import CauseForm, ActionForm
 
+from ..email import send_email
+
 
 mod = Blueprint('causes', __name__)
 
@@ -128,6 +130,10 @@ def cause_support(slug):
     if cause.supporters.filter_by(id=current_user.id).count() == 0:
         cause.supporters.append(current_user)
         db.session.commit()
+        send_email('Thanks for supporting "{0.title}"'.format(cause),
+                   [current_user.email,],
+                   {'user': current_user, 'cause': cause},
+                   'email/cause_support_supporter.txt')
         flash('Thanks for supporting this cause!')
 
     return redirect(url_for('.cause_detail', slug=slug))

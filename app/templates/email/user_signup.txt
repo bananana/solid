@@ -1,0 +1,9 @@
+Hi {{ user.initials }}!
+
+Thanks for signing up at BSolid.
+
+You can now log in at {{ url_for('users.login', _external=True) }}.
+
+Solidarity,
+
+The BSolid Team

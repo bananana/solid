@@ -22,6 +22,9 @@ bcrypt = Bcrypt(app)
 from flask.ext.misaka import Misaka
 mikasa = Misaka(app)
 
+from flask.ext.mail import Mail
+mail = Mail(app)
+
 # Register blueprints
 from app.users.views import mod as usersModule
 app.register_blueprint(usersModule)
