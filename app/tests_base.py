@@ -1,7 +1,7 @@
 import os
 from flask.ext.testing import TestCase
 from app import app, db
-from config import basedir
+from app.config.base import basedir
 
 class BaseTestCase(TestCase):
 
