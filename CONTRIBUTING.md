@@ -32,9 +32,12 @@ Clone the repository and install dependencies:
 For now all app management is done through the `app.py` utility. To get help:
 
     ./app.py -h
+    ./app.py cause -h
+    ./app.py user -h
     ./app.py db -h
     ./app.py mod -h
     ./app.py run -h
+    ./app.py test -h
 
 If you have just cloned the project, you'll need to create a database:
 
@@ -55,6 +58,10 @@ By default the app will run on *localhost:5000*. To run on a different host or p
 or edit `app/config/local.py` to change the default local (development)
 settings.
 
+You can create users and cause straight from the command line, to do so run:
+    
+    ./app.py user -c
+    ./app.py cause -c
 
 ## Configuration
 

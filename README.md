@@ -38,6 +38,8 @@ settings.
 For now all app management is done through the `app.py` utility. To get help:
 
     ./app.py --help
+    ./app.py cause --help
+    ./app.py user --help
     ./app.py db --help
     ./app.py mod --help
     ./app.py run --help

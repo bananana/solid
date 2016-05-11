@@ -50,6 +50,8 @@ class AppManager(object):
 
             commands:
               db          manipluate the database
+              cause       manipulate causes
+              user        manipulate users
               clean       clean temporary and/or compiled files
               mod         create new module scaffolding 
               run         run the Flask app
