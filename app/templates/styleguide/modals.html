@@ -29,7 +29,7 @@
         <p>You can either render modals manually or <a href="{{ url_for('styleguide.templating') }}#modal-helpers">use the included macro</a>. Below is an example manual implementation. First, import <code>modal.js</code> file inside <code>&#123;&#37; block scripts &#37;&#125;</code>.</p>
         <pre>
 &lt;script src="&#123;&#123; url_for('static', filename='js/modal.js') &#125;&#125;"&gt;&lt;/script&gt;</pre>
-        <p>Then, somewhere inside <code>&#123;&#37; block scripts &#37;&#125;</code>, create a button like so:</p>
+        <p>Then, somewhere inside <code>&#123;&#37; block content &#37;&#125;</code>, create a button like so:</p>
         <pre>
 &lt;a class="button button-modal" data-target="modal-demo"&gt;Modal Demo&lt;/a&gt;</pre>
         <p>The modal itself is always hidden by default and you can put it anywhere inside <code>&lt;body&gt;</code>. Note that trigger button's <code>data-target</code> parameter and modal's <code>id</code> match up. This is so the script knows which button triggers which modal.</p>
