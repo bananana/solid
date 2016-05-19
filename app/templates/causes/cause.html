@@ -8,7 +8,9 @@
 {% block content %}
 {% from "helpers/modals.html" import render_modal %}
 <div class="masthead"
-        {% if cause.image %}style="background-image: linear-gradient(190deg, rgba(255, 255, 255, 0), white, white), url({{ url_for('static', filename=cause.image) }});"{% endif %}>
+    {% if cause.image %}
+     style="background-image: linear-gradient(190deg, rgba(255, 255, 255, 0), white, white), url({{ url_for('static', filename=cause.image) }});"
+    {% endif %}>
     <div class="row" >
         <h1 class="twelve columns">{{ cause.title }}</h1>
     </div>
@@ -48,9 +50,6 @@
                                 'Lorem Ipsum is simply dummy text of printing and typesetting',
                                 'Stand with us!',
                                 'button button-primary u-full-width') }}
-            <a class="button button-primary u-full-width"
-                data-target="modal-support">
-                No url</a>
             {% endif %}
         </div>
     </div>
