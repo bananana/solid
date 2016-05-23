@@ -9,7 +9,7 @@
 {% from "helpers/modals.html" import render_modal %}
 <div class="masthead"
     {% if cause.image %}
-     style="background-image: linear-gradient(190deg, rgba(255, 255, 255, 0), white, white), url({{ url_for('static', filename=cause.image) }});"
+     style="background-image: url({{ url_for('static', filename=cause.image) }});"
     {% endif %}>
     <div class="row" >
         <h1 class="twelve columns">{{ cause.title }}</h1>
