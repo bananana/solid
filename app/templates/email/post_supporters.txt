@@ -1,0 +1,11 @@
+Hi!
+
+One of the people behind "{{ cause.title }}" has posted something on the cause
+page.
+
+"{{ post.title }}" by {{ post.author.initials }}
+{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id, _external=True) }}
+
+Solidarity,
+
+The BSolid team

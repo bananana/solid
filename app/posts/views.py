@@ -7,7 +7,11 @@ from app.causes.views import cause_required
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
 
+from ..email import send_email
+
+
 mod = Blueprint('posts', __name__)
+
 
 @mod.route('/cause/<slug>/posts')
 @cause_required
@@ -35,6 +39,13 @@ def post_add(slug):
         post.author = current_user
         post.cause = cause
         post.save()
+
+        if current_user in cause.creators.all():
+            send_email('"{0.title}" - "{1.title}"'.format(post, cause),
+                    [s.email for s in cause.supporters.all() if s.id != current_user.id],
+                       {'cause': cause, 'post': post},
+                       'email/post_supporters.txt')
+
         flash('Post added!', 'success')
         return redirect(url_for('.post_list', slug=cause.slug))
 

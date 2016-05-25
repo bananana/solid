@@ -2,7 +2,6 @@
 {% set active_page = "discussion" %}
 
 {% block content %}
-{% from "helpers/navigation.html" import render_cause_nav %}
 <div class="row">
     <div class="eight columns">
         <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
@@ -12,11 +11,6 @@
     </div>
 </div>
 <hr class="u-remove-margin-bottom">
-<div class="row">
-    <div class="twelve columns">
-        {{ render_cause_nav(active_page, cause) }}
-    </div>
-</div>
 <div class="row u-add-margin-top">
     <div class="eight columns post offset-by-two">
         <h2>{{ post.title }}</h2>
