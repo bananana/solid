@@ -11,9 +11,11 @@
      {% if cause.image %}
      style="background-image: url({{ url_for('static', filename=cause.image) }});"
      {% endif %}>
-    <div class="row" >
+    <div class="row masthead-title" >
         <h1 class="twelve columns">{{ cause.title }}</h1>
     </div>
+</div>
+<div class="full-width-container u-add-margin-top">
     <div class="row" >
         <div class="twelve columns">
             <h3>Creators:</h3>
@@ -48,8 +50,6 @@
             <a class="button u-full-width">Share</a>
         </div>
     </div>
-</div>
-<div class="full-width-container u-add-margin-top">
     <div class="row">
         <p class="twelve columns">
             {{ cause.story_content }}
