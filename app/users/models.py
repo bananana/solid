@@ -2,6 +2,7 @@ from app import db, bcrypt
 from app.mixins import CRUDMixin 
 from app.causes.models import cause_supporters 
 from flask.ext.login import UserMixin
+from random import randint
 
 
 class User(UserMixin, CRUDMixin, db.Model):
@@ -14,6 +15,7 @@ class User(UserMixin, CRUDMixin, db.Model):
     password    = db.Column(db.String(128))
     full_name   = db.Column(db.String(64))
     initials    = db.Column(db.String(8))
+    color       = db.Column(db.String(7))
     email       = db.Column(db.String(128), index=True)
     phone       = db.Column(db.Integer, index=True)
     zip         = db.Column(db.Integer, index=True)
@@ -28,7 +30,7 @@ class User(UserMixin, CRUDMixin, db.Model):
 
     def __init__(self, social_id=None, is_admin=False, nickname=None, 
                  password=None, full_name='Anonymous', initials=None, 
-                 email=None, phone=None, zip=None, employer=None, 
+                 color='#e5e5e5', email=None, phone=None, zip=None, employer=None, 
                  description=None, private_full_name=False):
         self.social_id = social_id
         self.is_admin = is_admin
@@ -36,6 +38,7 @@ class User(UserMixin, CRUDMixin, db.Model):
         self.password = password
         self.full_name = full_name
         self.initials = initials 
+        self.color = color
         self.email = email
         self.phone = phone
         self.zip = zip
@@ -64,6 +67,9 @@ class User(UserMixin, CRUDMixin, db.Model):
         else:
             initials = 'A'
         self.update(**{'initials': initials})
+
+    def generate_color(self):
+        self.color = '#%06x' % randint(0, 0xFFFFFF)
 
     def is_supporting(self, cause):
         return self.supports.filter(cause_supporters.c.cause_id == cause.id).count() > 0

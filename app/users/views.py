@@ -53,6 +53,7 @@ def signup():
         })
         new_user.set_password(form.password.data)
         new_user.generate_initials()
+        new_user.generate_color()
         login_user(new_user)
         return redirect(url_for('.user', nickname=g.user.nickname))
 

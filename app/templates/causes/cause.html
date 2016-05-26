@@ -68,12 +68,14 @@
             {% for u in cause.creators.all() %}
                 <a href="{{ url_for('users.user', nickname=u.nickname) }}" 
                    class="avatar-sm" 
+                   style="background-color:{{ u.color }}"
                    title="{{ u.full_name  }}">{{ u.initials }}</a>
             {% endfor %}
             <h3>{{ cause.supporters.count() }} supporters:</h3>
             {% for u in cause.supporters.all() %}
                 <a href="{{ url_for('users.user', nickname=u.nickname) }}" 
                    class="avatar-sm" 
+                   style="background-color:{{ u.color }}"
                    title="{{ u.full_name  }}">{{ u.initials }}</a>
             {% endfor %}
         </div>

@@ -289,6 +289,7 @@ class AppManager(object):
                 u.create(**kv)
                 new_user = User.query.filter_by(nickname=kv.get('nickname')).first()
                 new_user.generate_initials()
+                new_user.generate_color()
                 new_user.set_password(passwd)
                 print(bcolors.OKGREEN + 'User ' + kv.get('nickname') + \
                       ' created successfully' + bcolors.ENDC)
