@@ -64,14 +64,15 @@
             {% endfor %}
         </div>
         <div class="three columns">
-            <h3>Creators:</h3>
+            <a class="button u-full-width">Share</a>
+            <h4>Creators:</h4>
             {% for u in cause.creators.all() %}
                 <a href="{{ url_for('users.user', nickname=u.nickname) }}" 
                    class="avatar-sm" 
                    style="background-color:{{ u.color }}"
                    title="{{ u.full_name  }}">{{ u.initials }}</a>
             {% endfor %}
-            <h3>{{ cause.supporters.count() }} supporters:</h3>
+            <h4>{{ cause.supporters.count() }} supporters:</h4>
             {% for u in cause.supporters.all() %}
                 <a href="{{ url_for('users.user', nickname=u.nickname) }}" 
                    class="avatar-sm" 
@@ -89,7 +90,7 @@
             </p>
         </div>
         <div class="three columns">
-            <h2>Conversation</h2>
+            <h4>Conversation</h4>
             {% from "helpers/posts.html" import render_post_list %}
             {{ render_post_list(cause) }}
         </div>

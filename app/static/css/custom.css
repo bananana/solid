@@ -583,9 +583,16 @@ input[type="submit"]:disabled:focus {
     text-decoration: line-through;
 }
 .button-large {
-    height: 7rem;
-    font-size: 3rem;
-    line-height: 7rem;
+    height: 38px;
+    font-size: 11px;
+    line-height: 38px;
+}
+@media (min-width: 1000px) {
+    .button-large {
+        height: 7rem;
+        font-size: 1.5vw;
+        line-height: 7rem;
+    }
 }
 .selected {
     color: #1EAEDB;
