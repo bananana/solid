@@ -204,8 +204,6 @@ a:hover {
     background-size: cover;
     padding: 9rem 0;
     height: 24vw;
-    /*
-    */
 }
 .masthead-title {
     padding: 0 9rem;
@@ -583,6 +581,11 @@ input[type="submit"]:disabled:focus {
     border-color: #e5e5e5;
     cursor: not-allowed;
     text-decoration: line-through;
+}
+.button-large {
+    height: 7rem;
+    font-size: 3rem;
+    line-height: 7rem;
 }
 .selected {
     color: #1EAEDB;
