@@ -6,24 +6,26 @@
 # Description.: Unified manager for Flask apps. Manipulates database, creates
 #               modules, runs the app in Werkzeug, cleans up temporary files.
 # License.....: GPLv3 (see LICENSE file)
-#
+
 import argparse
-import imp
-import unittest
+from distutils.util import strtobool
 import fnmatch 
-from sys import argv
+import imp
 from os import path, walk, listdir, makedirs, remove
-from app import app, db
-from app.users.models import User
-from app.causes.models import Cause, Action
-from app.config.local import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
+from sys import argv
+import unittest
+
+
 from sqlalchemy import inspect
 from migrate.exceptions import DatabaseAlreadyControlledError
 from migrate.versioning import api
 from textwrap import dedent
 from terminaltables import AsciiTable
-from distutils.util import strtobool
 
+from app import app, db
+from app.users.models import User
+from app.causes.models import Cause
+from app.causes.models import Cause, Action
 
 class bcolors:
     '''Unicode color codes. Borrowed from Blender build scripts.
@@ -100,7 +102,11 @@ class AppManager(object):
         args = parser.parse_args(argv[2:])
 
         # Process subcommands for db 
-        database = Database(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
+        with app.app_context():
+            database = Database(
+                app.config['SQLALCHEMY_DATABASE_URI'],
+                app.config['SQLALCHEMY_MIGRATE_REPO']
+            )
         if args.version:
             database.print_version()
             exit(0)
@@ -109,7 +115,7 @@ class AppManager(object):
             print('Creating database...')
             try:
                 database.create()
-                print(bcolors.OKGREEN + 'Database app.db created successfully' + \
+                print(bcolors.OKGREEN + 'Database created successfully' + \
                       bcolors.ENDC)
                 exit(0)
             except DatabaseAlreadyControlledError:
@@ -796,7 +802,6 @@ class AppManager(object):
         else:
             parser.print_help()
             exit(0)
-
 
 
     def clean(self):
