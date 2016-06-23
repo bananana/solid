@@ -9,6 +9,7 @@
 
 {% block content %}
 {% from "helpers/modals.html" import render_modal %}
+{% from "helpers/users.html" import render_avatar %}
 <div class="masthead"
      {% if cause.image %}
      style="background-image: url({{ url_for('static', filename=cause.image) }});"
@@ -69,17 +70,11 @@
             <a class="button u-full-width">Share</a>
             <h4>Creators:</h4>
             {% for u in cause.creators.all() %}
-                <a href="{{ url_for('users.user', nickname=u.nickname) }}" 
-                   class="avatar-sm" 
-                   style="background-color:{{ u.color }}"
-                   title="{{ u.full_name  }}">{{ u.initials }}</a>
+                {{ render_avatar(u) }}
             {% endfor %}
             <h4>{{ cause.supporters.count() }} supporters:</h4>
             {% for u in cause.supporters.all() %}
-                <a href="{{ url_for('users.user', nickname=u.nickname) }}" 
-                   class="avatar-sm" 
-                   style="background-color:{{ u.color }}"
-                   title="{{ u.full_name  }}">{{ u.initials }}</a>
+                {{ render_avatar(u) }}
             {% endfor %}
         </div>
     </div>

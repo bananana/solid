@@ -5,48 +5,43 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="ten columns">
-        <h1>{{ user.nickname }} {% if user.is_admin %}<sup><small>Admin</small></sup>{% endif %}</h1>
+{% from "helpers/users.html" import render_avatar %}
+<div class="full-width-container">
+    <div class="row u-add-margin-top">
+        <div class="three columns">
+            <span>
+                {{ render_avatar(user) }} 
+                <strong>{{ user.nickname }}</strong> 
+                {% if user.is_admin %} | <small>Admin</small>{% endif %}
+            </span>
+            {% if current_user == user or current_user.is_admin %}
+                <a href="{{ url_for('users.edit', nickname=user.nickname) }}" class="button u-pull-right u-remove-margin-top">Edit</a>
+            {% endif %}
+            <h5 class="u-remove-margin-bottom">{{ user.full_name }}</h5>
+            <div>{{ user.email }}</div>
+            <div>{{ user.phone }}</div>
+            <div>{{ user.zip }}</div>
+            <hr>
+            <h5>Supporting {{ user.supports.count() }} causes</h5>
+            <ul>
+            {% for cause in user.supports %}
+                <li>{{ cause.title }}</li>
+            {% endfor %}
+            </ul>
+            <hr>
+            <h5>Following</h5>
+        </div>
+        <div class="six columns">
+            <ul>
+            {% for post in feed[0] %}
+                <li><strong>{{ post.title }}</strong> by <em>{{ post.author.nickname }}</em><br>{{ post.body }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="three columns">
+            <h5>Suggested</h5>
+        </div>
     </div>
-    <div class="two columns">
-        {% if current_user == user or current_user.is_admin %}
-        <a href="{{ url_for('users.edit', nickname=user.nickname) }}" class="button u-full-width u-add-margin-top">Edit</a>
-        {% endif %}
-    </div>
-</div>
-<hr>
-<div class="row">
-    <div class="six columns">
-        <h3>Profile</h3>
-        <table class="u-full-width">
-            <tbody>
-                <tr><th>full_name</th><td>{{ user.full_name }}</td></tr>
-                <tr><th>email</th><td>{{ user.email }}</td></tr>
-                <tr><th>phone</th><td>{{ user.phone }}</td></tr>
-                <tr><th>zip</th><td>{{ user.zip }}</td></tr>
-                <tr><th>employer</th><td>{{ user.employer }}</td></tr>
-                <tr><th>description</th><td>{{ user.description }}</td></tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="six columns">
-        <h3>Feed</h3>
-        <ul>
-        {% for post in feed[0] %}
-            <li><strong>{{ post.title }}</strong> by <em>{{ post.author.nickname }}</em><br>{{ post.body }}</li>
-        {% endfor %}
-    </ul>
-    </div>
-</div>
-<div class="row">
-    <div class="six columns">
-        <h3>Supported Causes</h3>
-        <ul>
-        {% for cause in user.supports %}
-            <li>{{ cause.title }}</li>
-        {% endfor %}
-        </ul>
-    </div>
+
 </div>
 {% endblock %}
