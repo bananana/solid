@@ -54,6 +54,7 @@ html, body {
 }
 body {
     color: #161310;
+    padding-top: 6.5rem;
 }
 hr {
     border-color: #ff9900;
