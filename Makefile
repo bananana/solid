@@ -39,5 +39,8 @@ link:
 	@ tput setaf 5; tput bold; echo "Updating release symlink"; tput sgr0
 	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo -u bsolid sh -c 'rm -f $(ROOT)/previous && mv $(ROOT)/current $(ROOT)/previous || true && ln -s $(RELEASE) $(ROOT)/current'"
 
+restart:
+	@ tput setaf 5; tput bold; echo "Restarting gunicorn server"; tput sgr0
+	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo systemctl restart bsolid.service"
 
-.PHONY : deploy archive upload clean extract pip migrate
+.PHONY : deploy archive upload clean extract pip migrate link restart
