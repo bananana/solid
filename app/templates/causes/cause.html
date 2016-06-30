@@ -2,8 +2,6 @@
 {% set active_page = "dashboard" %}
 
 {% block scripts %}
-{% from "helpers/analytics.html" import inject_tracking_code %}
-{{ inject_tracking_code() }}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock %}
 
