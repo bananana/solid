@@ -230,14 +230,18 @@ a:hover {
     display: block;
     border: 1px solid #bbb;
     border-radius: 4px;
+    border-color: #3299bb;
+    background-color: #fbfaf9;
     margin-top: 1em;
     padding: 0.5em 1em;
-    color: #555;
+    color: #552453;
     text-decoration: none;
+
 }
 .support-action:hover {
-    border-color: #888;
-    color: #333;
+    border-color: #1eaeda;
+    color: #552453;
+    background-color: #fff;
     cursor: pointer;
 }
 h2 span {
