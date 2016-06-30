@@ -3,6 +3,16 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script>
+$('#stand-with-us').click(function() {
+    ga('send', {
+        hitType: 'event',
+        eventCategory: 'Causes',
+        eventAction: 'support',
+        eventLabel: 'Supported a cause'
+    });
+});
+</script>
 {% endblock %}
 
 {% block content %}
@@ -20,11 +30,12 @@
             {% if supporter %}
                 <a class="button button-disabled button-large u-full-width" href="#">Supporting</a>
             {% else %}
-                {{ render_modal('modal-support',
+                <a id="stand-with-us" class="button button-primary button-large u-full-width" href="{{ url_for('causes.cause_support', slug=cause.slug) }}">Stand with us!</a>
+                {# render_modal('modal-support',
                                 'Stand with us!',
                                 'Lorem Ipsum is simply dummy text of printing and typesetting',
                                 'Stand with us!',
-                                'button button-primary button-large u-full-width') }}
+                                'button button-primary button-large u-full-width') #}
             {% endif %}
         </div>
     </div>
