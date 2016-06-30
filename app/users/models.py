@@ -69,7 +69,8 @@ class User(UserMixin, CRUDMixin, db.Model):
         self.update(**{'initials': initials})
 
     def generate_color(self):
-        self.color = '#%06x' % randint(0, 0xFFFFFF)
+        rand_color = '#%06x' % randint(0, 0xFFFFFF)
+        self.update(**{'color': rand_color})
 
     def is_supporting(self, cause):
         return self.supports.filter(cause_supporters.c.cause_id == cause.id).count() > 0
