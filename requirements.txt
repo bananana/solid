@@ -7,9 +7,9 @@ Flask-Misaka>=0.4.1
 Flask-SQLAlchemy>=2.1
 Flask-WTF>=0.12
 Flask-Testing>=0.4
+gunicorn==19.6.0
 SQLAlchemy>=1.0.12
 SQLAlchemy-Utils>=0.31.6
 SQLAlchemy-Migrate>=0.10.0
 slugify==0.0.1
 terminaltables==2.1.0
-uWSGI==2.0.13.1
