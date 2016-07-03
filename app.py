@@ -45,7 +45,6 @@ class AppManager(object):
     from here and all exception handling is happening here.
     '''
     def __init__(self):
-
         parser = argparse.ArgumentParser(
             usage=dedent('''\
             ./app.py [-h] [command]
@@ -169,7 +168,6 @@ class AppManager(object):
             parser.print_help()
             exit(0)
 
-
     def mod(self):
         '''Module manipulation commands.
         '''
@@ -213,7 +211,6 @@ class AppManager(object):
             parser.print_help()
             exit(0)
 
-
     def user(self):
         '''Create, delete, modify or list users. 
         '''
@@ -232,6 +229,10 @@ class AppManager(object):
                             type=str,
                             action='store',
                             help='delete user')
+        parser.add_argument('-r',
+                            '--regenerate-colors',
+                            action='store_true',
+                            help='Generate a random color for each user')
         parser.add_argument('-l',
                             '--list',
                             action='store_true',
@@ -418,10 +419,13 @@ class AppManager(object):
             table = AsciiTable(table_data)
             print(table.table)
 
+        elif args.regenerate_colors:
+            for user in User.query.all():
+                user.generate_color()
+
         else:
             parser.print_help()
             exit(0)
-
 
     def cause(self):
         '''Create, delete, modify or list causes. 
@@ -803,7 +807,6 @@ class AppManager(object):
             parser.print_help()
             exit(0)
 
-
     def clean(self):
         '''Clean python and vim temporary files.
         '''
@@ -881,7 +884,6 @@ class AppManager(object):
             parser.print_help()
             exit(0)
 
-
     def run(self):
         '''Running the app.
         '''
@@ -912,7 +914,6 @@ class AppManager(object):
 
         # Run the app. No need for a separate class.
         app.run(host=args.host, port=args.port, debug=args.debug)
-
 
     def test(self):
         '''Run unit tests for the app.
