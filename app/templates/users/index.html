@@ -35,11 +35,18 @@
             <ul>
             {% for post in feed[0] %}
                 <li><strong>{{ post.title }}</strong> by <em>{{ post.author.nickname }}</em><br>{{ post.body }}</li>
+            {% else %}
+                <li>
+                    <em>There's nothing to show here yet!
+                    <a href="{{ url_for('index') }}">Support a cause</a> to see
+                    a feed of recent discussion on this page.</em>
+                </li>
             {% endfor %}
             </ul>
         </div>
         <div class="three columns">
             <h5>Suggested</h5>
+            <p><strong>FIXME add content or remove</strong></p>
         </div>
     </div>
 
