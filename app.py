@@ -228,6 +228,7 @@ class AppManager(object):
                             '--delete',
                             type=str,
                             action='store',
+                            metavar='USERNAME',
                             help='delete user')
         parser.add_argument('-r',
                             '--regenerate-colors',
@@ -241,11 +242,13 @@ class AppManager(object):
                             '--modify',
                             type=str,
                             action='store',
+                            metavar='USERNAME',
                             help='modify user')
         parser.add_argument('-s',
                             '--search',
                             type=str,
                             action='store',
+                            metavar='USERNAME',
                             help='search for user')
         args = parser.parse_args(argv[2:])
 
@@ -444,6 +447,7 @@ class AppManager(object):
                             '--delete',
                             type=str,
                             action='store',
+                            metavar='SLUG',
                             help='delete cause')
         parser.add_argument('-l',
                             '--list',
@@ -453,11 +457,13 @@ class AppManager(object):
                             '--modify',
                             type=str,
                             action='store',
+                            metavar='SLUG',
                             help='modify cause')
         parser.add_argument('-s',
                             '--search',
                             type=str,
                             action='store',
+                            metavar='SLUG',
                             help='search for cause')
         args = parser.parse_args(argv[2:])
 
@@ -544,7 +550,13 @@ class AppManager(object):
             try:
                 c = Cause.query.filter_by(slug=args.modify).first()
             except Exception as e:
+                c = None
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+
+            if c is None:
+                print(bcolors.FAIL + 'Error: no cause found for slug "{0}"'.format(
+                    args.modify
+                ) + bcolors.ENDC)
                 exit(1)
             
             #: Inspect user model so we can get database column types later on
