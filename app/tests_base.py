@@ -9,6 +9,7 @@ class BaseTestCase(TestCase):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'test.db')
+        app.config['SERVER_NAME'] = 'localhost'
         return app
 
     def setUp(self):

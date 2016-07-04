@@ -74,7 +74,6 @@ def internal_error(error):
 # Default app view, same for all modules
 from app.causes.views import cause_required, multi_cause
 @app.route('/')
-@app.route('/index')
 @cause_required
 @multi_cause
 def index():

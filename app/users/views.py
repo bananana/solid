@@ -62,7 +62,7 @@ def signup():
                    [new_user.email,],
                    {'user': new_user},
                    'email/user_signup.txt')
-        return redirect(url_for('.user', nickname=g.user.nickname))
+        return redirect(request.args.get('next') or url_for('index'))
 
     return render_template('users/signup.html', form=form)
 
@@ -86,8 +86,7 @@ def login():
         if user_query is not None and \
            user_query.is_valid_password(form.password.data):
             login_user(user_query, remember=remember)
-            #return redirect(request.args.get('next') or '/')
-            return redirect(url_for('.user', nickname=user_query.nickname))
+            return redirect(request.args.get('next') or url_for('index'))
         else:
             flash('Email or Password is invalid', 'error')
 
@@ -124,10 +123,10 @@ def authorize_google():
         })
         new_user.generate_initials()
         login_user(new_user)
-        return redirect(url_for('.user', nickname=g.user.nickname))
+        return redirect(request.args.get('next') or url_for('index'))
     else:
         login_user(user_query)
-        return redirect(url_for('.user', nickname=g.user.nickname))
+        return redirect(request.args.get('next') or url_for('index'))
 
 
 @mod.route('/authorize/twitter')
@@ -161,10 +160,10 @@ def authorize_twitter():
             #'email'     : email
         })
         login_user(new_user)
-        return redirect(url_for('.user', nickname=g.user.nickname))
+        return redirect(request.args.get('next') or url_for('index'))
     else:
         login_user(user_query)
-        return redirect(url_for('.user', nickname=g.user.nickname))
+        return redirect(request.args.get('next') or url_for('index'))
 
 
 @mod.route('/authorize/facebook')
@@ -189,10 +188,10 @@ def authorize_facebook():
         })
         new_user.generate_initials()
         login_user(new_user)
-        return redirect(url_for('.user', nickname=g.user.nickname))
+        return redirect(request.args.get('next') or url_for('index'))
     else:
         login_user(user_query)
-        return redirect(url_for('.user', nickname=g.user.nickname))
+        return redirect(request.args.get('next') or url_for('index'))
 
 
 @mod.route('/logout')

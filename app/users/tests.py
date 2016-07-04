@@ -51,7 +51,7 @@ class UserViewsTests(BaseTestCase):
                 'verify_password' : 'test' 
             })
             self.assert_redirects(response, 
-                                  url_for('users.user', nickname='Tester'))
+                                  url_for('index'))
             self.assertTrue(current_user.is_authenticated)
             self.assertFalse(current_user.is_anonymous)
             self.assertEqual(current_user.nickname, 'Tester')
@@ -79,7 +79,7 @@ class UserViewsTests(BaseTestCase):
                 'remember' : 'n'
             })
             self.assert_redirects(response, 
-                                  url_for('users.user', nickname='Tester'))
+                                  url_for('index'))
             self.assertTrue(current_user.is_authenticated)
             self.assertFalse(current_user.is_anonymous)
             self.assertEqual(current_user.nickname, 'Tester')
