@@ -25,7 +25,14 @@
             <h5>Supporting {{ user.supports.count() }} causes</h5>
             <ul>
             {% for cause in user.supports %}
-                <li>{{ cause.title }}</li>
+                <li><a href="/cause/{{ cause.slug }}">{{ cause.title }}</a></li>
+            {% endfor %}
+            </ul>
+            <hr>
+            <h5>Created {{ user.created.count() }} causes</h5>
+            <ul>
+            {% for cause in user.created %}
+                <li><a href="/cause/{{ cause.slug }}">{{ cause.title }}</a></li>
             {% endfor %}
             </ul>
             <hr>
