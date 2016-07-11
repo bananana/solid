@@ -218,6 +218,12 @@ a:hover {
     margin-bottom:0;
     color: #fbfaf9;
 }
+.masthead h5 {
+    font-size: 3rem;
+    margin-top: 4rem;
+    margin-bottom:0;
+    color: #fbfaf9;
+}
 @media (min-width: 750px) {
     .masthead h1 {
         font-size: 7.5rem;

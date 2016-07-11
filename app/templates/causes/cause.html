@@ -28,7 +28,7 @@ $('#stand-with-us').click(function() {
         </div>
         <div class="three columns">
             {% if supporter %}
-                <a class="button button-disabled button-large u-full-width" href="#">Supporting</a>
+                <h5 class="u-text-right">&#10004; Supporting</h5>
             {% else %}
                 <a id="stand-with-us" class="button button-primary button-large u-full-width" href="{{ url_for('causes.cause_support', slug=cause.slug) }}">Stand with us!</a>
                 {# render_modal('modal-support',
