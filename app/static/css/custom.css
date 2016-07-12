@@ -822,13 +822,25 @@ td code {
 
 /* Lists 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-ul, ol {
+ul {
     list-style: circle outside;
     margin-left: 1em;
 }
-ol ol {
-    list-style-type: lower-alpha;
+ol {
+    counter-reset: section;
+    list-style-type: none;
 }
+ol li::before {
+    counter-increment: section;
+    content: counters(section,".") ". ";
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  font-size: 100%; 
+}
+
 dl dt {
     margin-bottom: 1.5em;
 }
