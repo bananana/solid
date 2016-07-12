@@ -17,80 +17,81 @@ $(document).ready(function() {
 {% block content %}
 {% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
 {% from "helpers/styleguide.html" import render_header %}
-<div class="row">
-    {{ render_header(title, version) }}
-</div>
-<hr class="u-remove-margin-bottom">
-<div class="row">
-    <div class="twelve columns">
-        {{ render_styleguide_nav(active_page) }}
+<div class="container">
+    <div class="row">
+        {{ render_header(title, version) }}
     </div>
-</div>
-<div class="row u-add-margin-top">
-    <div class="nine columns">
+    <hr class="u-remove-margin-bottom">
+    <div class="row">
+        <div class="twelve columns">
+            {{ render_styleguide_nav(active_page) }}
+        </div>
+    </div>
+    <div class="row u-add-margin-top">
+        <div class="nine columns">
 
-        <h2>Forms</h2>
-        <p>All form inputs are responsive out of the box. Form elements, including labels, are styled automatically, so no need to add any special classes to them. You can put them inside <a href="{{ url_for('styleguide.grid_system') }}">grid columns</a> for an inline or stacked look. To make the element take up a whole column, use the <code>u-full-width</code> class.</p>
-        <hr>
+            <h2>Forms</h2>
+            <p>All form inputs are responsive out of the box. Form elements, including labels, are styled automatically, so no need to add any special classes to them. You can put them inside <a href="{{ url_for('styleguide.grid_system') }}">grid columns</a> for an inline or stacked look. To make the element take up a whole column, use the <code>u-full-width</code> class.</p>
+            <hr>
 
-        <h3 class="scrollspy-section"><a id="buttons"></a>Buttons</h3>
-        <p>You can style any element such as <code>&lt;a&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code> or <code>&lt;submit&gt;</code> by giving it a <code>button</code> class.</p>
-        <a class="button">Anchor Element</a>
-        <button>Button Element</button>
-        <input type="button" value="Input Button">
-        <input type="submit" value="Submit Button">
-        <pre>
+            <h3 class="scrollspy-section"><a id="buttons"></a>Buttons</h3>
+            <p>You can style any element such as <code>&lt;a&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code> or <code>&lt;submit&gt;</code> by giving it a <code>button</code> class.</p>
+            <a class="button">Anchor Element</a>
+            <button>Button Element</button>
+            <input type="button" value="Input Button">
+            <input type="submit" value="Submit Button">
+            <pre>
 &lt;a class="button"&gt;Anchor Element&lt;/a&gt;
 &lt;button&gt;Button Element&lt;/button&gt;
 &lt;input type="button" value="Input Button"&gt;
 &lt;input type="submit" value="Submit Button"&gt;</pre>
-        <p>Adding <code>button-primary</code> class will turn it into a primary button that is styled to be more prominent.</p>
-        <a class="button button-primary">Anchor Element</a>
-        <button class="button-primary">Button Element</button>
-        <input type="button" class="button button-primary" value="Input Button">
-        <input type="submit" class="button button-primary" value="Submit Button">
-        <pre>
+            <p>Adding <code>button-primary</code> class will turn it into a primary button that is styled to be more prominent.</p>
+            <a class="button button-primary">Anchor Element</a>
+            <button class="button-primary">Button Element</button>
+            <input type="button" class="button button-primary" value="Input Button">
+            <input type="submit" class="button button-primary" value="Submit Button">
+            <pre>
 &lt;a class="button button-primary"&gt;Anchor Element&lt;/a&gt;
 &lt;button class="button-primary"&gt;Button Element&lt;/button&gt;
 &lt;input type="button" class="button button-primary" value="Input Button"&gt;
 &lt;input type="submit" class="button button-primary" value="Submit Button"&gt;</pre>
-        <p>You may use <code>success</code>, <code>warning</code> or <code>danger</code> classes to style buttons for specific purposes.</p>
-        <button class="success">Success</button>
-        <button class="warning">Warning</button>
-        <button class="error">Error</button>
-        <pre>
+            <p>You may use <code>success</code>, <code>warning</code> or <code>danger</code> classes to style buttons for specific purposes.</p>
+            <button class="success">Success</button>
+            <button class="warning">Warning</button>
+            <button class="error">Error</button>
+            <pre>
 &lt;button class="success"&gt;Success&lt;/button&gt;
 &lt;button class="warning"&gt;Warning&lt;/button&gt;
 &lt;button class="error"&gt;Error&lt;/button&gt;</pre>
-        <p><code>&lt;button&gt;</code> and <code>&lt;input&gt;</code> elements with <code>disabled</code> parameter will automatically get styled accordingly. <code>&lt;a&gt;</code> tag has to have <code>button-disabled</code> class to get styled.</p>
-        <a class="button button-disabled">Anchor Element</a>
-        <button class="button-primary" disabled>Button Element</button>
-        <input type="button" class="button button-primary" value="Input Button" disabled>
-        <input type="submit" class="button button-primary" value="Submit Button" disabled>
-        <pre>
+            <p><code>&lt;button&gt;</code> and <code>&lt;input&gt;</code> elements with <code>disabled</code> parameter will automatically get styled accordingly. <code>&lt;a&gt;</code> tag has to have <code>button-disabled</code> class to get styled.</p>
+            <a class="button button-disabled">Anchor Element</a>
+            <button class="button-primary" disabled>Button Element</button>
+            <input type="button" class="button button-primary" value="Input Button" disabled>
+            <input type="submit" class="button button-primary" value="Submit Button" disabled>
+            <pre>
 &lt;a class="button button-disabled"&gt;Anchor Element&lt;/a&gt;
 &lt;button class="button-primary" disabled&gt;Button Element&lt;/button&gt;
 &lt;input type="button" class="button button-primary" value="Input Button" disabled&gt;
 &lt;input type="submit" class="button button-primary" value="Submit Button" disabled&gt;</pre>
-        <hr>
+            <hr>
 
-        <h3 class="scrollspy-section"><a id="text-input"></a>Text Input</h3>
-        <p>No additional classes are necessary to style <code>&lt;input&gt;</code> elements.</p>
-        <div class="row">
-            <div class="one-third column">
-                <label for="text-input-field-demo">Text Input Field Demo</label>
-                <input id="text-input-field-demo" class="u-full-width" type="text" placeholder="Placeholder">
+            <h3 class="scrollspy-section"><a id="text-input"></a>Text Input</h3>
+            <p>No additional classes are necessary to style <code>&lt;input&gt;</code> elements.</p>
+            <div class="row">
+                <div class="one-third column">
+                    <label for="text-input-field-demo">Text Input Field Demo</label>
+                    <input id="text-input-field-demo" class="u-full-width" type="text" placeholder="Placeholder">
+                </div>
+                <div class="one-third column">
+                    <label for="password-input-field-demo">Password Input Field Demo</label>
+                    <input id="password-input-field-demo" class="u-full-width" type="password" placeholder="Placeholder">
+                </div>
+                <div class="one-third column">
+                    <label for="email-input-field-demo">Email Input Field Demo</label>
+                    <input id="email-input-field-demo" class="u-full-width" type="email" placeholder="email@example.com">
+                </div>
             </div>
-            <div class="one-third column">
-                <label for="password-input-field-demo">Password Input Field Demo</label>
-                <input id="password-input-field-demo" class="u-full-width" type="password" placeholder="Placeholder">
-            </div>
-            <div class="one-third column">
-                <label for="email-input-field-demo">Email Input Field Demo</label>
-                <input id="email-input-field-demo" class="u-full-width" type="email" placeholder="email@example.com">
-            </div>
-        </div>
-        <pre>
+            <pre>
 &lt;div class="row"&gt;
     &lt;div class="one-third column"&gt;
         &lt;!-- Standard text input --&gt;
@@ -117,45 +118,45 @@ $(document).ready(function() {
                placeholder="email@example.com"&gt;
     &lt;/div&gt;
 &lt;/div&gt;</pre>
-        <hr>
+            <hr>
 
-        <h3 class="scrollspy-section"><a id="textarea"></a>Textarea</h3>
-        <p><code>&lt;textarea&gt;</code> can have all the standard <code>cols</code> and <code>rows</code> properties to control it's size. Alternatively, you can use the <code>u-full-width</code> class to make it take up an entire column.</p>
-        <label for="textarea-demo">Textarea Demo</label>
-        <textarea id="textarea-demo" cols="32" placeholder="Textarea placeholder"></textarea>
-        <pre>
+            <h3 class="scrollspy-section"><a id="textarea"></a>Textarea</h3>
+            <p><code>&lt;textarea&gt;</code> can have all the standard <code>cols</code> and <code>rows</code> properties to control it's size. Alternatively, you can use the <code>u-full-width</code> class to make it take up an entire column.</p>
+            <label for="textarea-demo">Textarea Demo</label>
+            <textarea id="textarea-demo" cols="32" placeholder="Textarea placeholder"></textarea>
+            <pre>
 &lt;label for="textarea-demo"&gt;Textarea Demo&lt;/label&gt;
 &lt;textarea id="textarea-demo" cols="32" placeholder="Textarea placeholder"&gt;&lt;/textarea&gt;</pre>
-        <hr>
+            <hr>
 
-        <h3 class="scrollspy-section"><a id="select-field"></a>Select Field</h3>
-        <p></p>
-        <div class="row">
-            <div class="one-half column">
-                <label for="select-field-demo">Select Field Demo</label>
-                <select id="select-field-demo" class="u-full-width">
-                    <option value="option-1">Option 1</option>
-                    <option value="option-2">Option 2</option>
-                    <option value="option-3">Option 3</option>
-                </select>
-            </div>
-            <div class="one-half column">
-                <label for="select-field-demo-2">Select Field Demo <small>(with optgroups)</small></label>
-                <select id="select-field-demo-2" class="u-full-width">
-                    <optgroup label="Group 1">
+            <h3 class="scrollspy-section"><a id="select-field"></a>Select Field</h3>
+            <p></p>
+            <div class="row">
+                <div class="one-half column">
+                    <label for="select-field-demo">Select Field Demo</label>
+                    <select id="select-field-demo" class="u-full-width">
                         <option value="option-1">Option 1</option>
                         <option value="option-2">Option 2</option>
                         <option value="option-3">Option 3</option>
-                    </optgroup>
-                    <optgroup label="Group 2">
-                        <option value="option-4">Option 4</option>
-                        <option value="option-5">Option 5</option>
-                        <option value="option-6">Option 6</option>
-                    </optgroup>
-                </select>
+                    </select>
+                </div>
+                <div class="one-half column">
+                    <label for="select-field-demo-2">Select Field Demo <small>(with optgroups)</small></label>
+                    <select id="select-field-demo-2" class="u-full-width">
+                        <optgroup label="Group 1">
+                            <option value="option-1">Option 1</option>
+                            <option value="option-2">Option 2</option>
+                            <option value="option-3">Option 3</option>
+                        </optgroup>
+                        <optgroup label="Group 2">
+                            <option value="option-4">Option 4</option>
+                            <option value="option-5">Option 5</option>
+                            <option value="option-6">Option 6</option>
+                        </optgroup>
+                    </select>
+                </div>
             </div>
-        </div>
-        <pre>
+            <pre>
 &lt;div class="row"&gt;
     &lt;div class="one-half column"&gt;
         &lt;label for="select-field-demo"&gt;Select Field Demo&lt;/label&gt;
@@ -184,43 +185,43 @@ $(document).ready(function() {
         &lt;/select&gt;
     &lt;/div&gt;
 &lt;/div&gt;</pre>
-        <hr>
-        
-        <h3 class="scrollspy-section"><a id="radio-and-checkboxes"></a>Radio &amp; Checkboxes</h3>
-        <p>Radio buttons and checkboxes are rendered by putting the <code>&lt;input&gt;</code> tag inside the <code>&lt;label&gt;</code> tag. This is done so clicking on the label can activate the radio/checkbox.</p>
-        <div class="row">
-            <div class="one-half column">
-                <label for="option-1">
-                    <input type="radio" name="radio-demo" id="option-1">
-                    Option 1
-                </label>
-                <label for="option-2">
-                    <input type="radio" name="radio-demo" id="option-2">
-                    Option 2
-                </label>
-                <label for="option-3">
-                    <input type="radio" name="radio-demo" id="option-3">
-                    Option 3
-                </label>
-            </div>
-            <div class="one-half column">
+            <hr>
+            
+            <h3 class="scrollspy-section"><a id="radio-and-checkboxes"></a>Radio &amp; Checkboxes</h3>
+            <p>Radio buttons and checkboxes are rendered by putting the <code>&lt;input&gt;</code> tag inside the <code>&lt;label&gt;</code> tag. This is done so clicking on the label can activate the radio/checkbox.</p>
+            <div class="row">
                 <div class="one-half column">
-                    <label for="checkbox-1">
-                        <input type="checkbox" id="checkbox-1">
-                        Checkbox 1
+                    <label for="option-1">
+                        <input type="radio" name="radio-demo" id="option-1">
+                        Option 1
                     </label>
-                    <label for="checkbox-2">
-                        <input type="checkbox" id="checkbox-2">
-                        Checkbox 2
+                    <label for="option-2">
+                        <input type="radio" name="radio-demo" id="option-2">
+                        Option 2
                     </label>
-                    <label for="checkbox-3">
-                        <input type="checkbox" id="checkbox-3">
-                        Checkbox 3
+                    <label for="option-3">
+                        <input type="radio" name="radio-demo" id="option-3">
+                        Option 3
                     </label>
                 </div>
+                <div class="one-half column">
+                    <div class="one-half column">
+                        <label for="checkbox-1">
+                            <input type="checkbox" id="checkbox-1">
+                            Checkbox 1
+                        </label>
+                        <label for="checkbox-2">
+                            <input type="checkbox" id="checkbox-2">
+                            Checkbox 2
+                        </label>
+                        <label for="checkbox-3">
+                            <input type="checkbox" id="checkbox-3">
+                            Checkbox 3
+                        </label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <pre>
+            <pre>
 &lt;div class="row"&gt;
     &lt;div class="one-half column"&gt;
         &lt;label for="option-1"&gt;
@@ -253,18 +254,18 @@ $(document).ready(function() {
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;</pre>
-        <hr>
+            <hr>
 
-        <h3 class="scrollspy-section"><a id="bool-checkbox"></a>Bool Checkbox</h3>
-        <p>There a way to style checkboxes that need more prominent status, usually reserved for boolean variables like <em>Remember Me</em> questions. The checkbox and label both need to be in a <code>&lt;div&gt;</code> container with class <code>checkbox-container</code>, then the checkbox itself has to be inside a <code>&lt;div&gt;</code> with a <code>checkbox</code> class. Additionally, a special empty <code>&lt;div&gt;</code> with class <code>checkbox-replacement</code> has to be below the checkbox <code>&lt;input&gt;</code> tag itself. Here's an example of what it looks like:</p>
-        <div class="checkbox-container">
-            <div class="checkbox">
-                <input type="checkbox" id="bool-checkbox-demo" value="y">
-                <div class="checkbox-replacement"></div>
+            <h3 class="scrollspy-section"><a id="bool-checkbox"></a>Bool Checkbox</h3>
+            <p>There a way to style checkboxes that need more prominent status, usually reserved for boolean variables like <em>Remember Me</em> questions. The checkbox and label both need to be in a <code>&lt;div&gt;</code> container with class <code>checkbox-container</code>, then the checkbox itself has to be inside a <code>&lt;div&gt;</code> with a <code>checkbox</code> class. Additionally, a special empty <code>&lt;div&gt;</code> with class <code>checkbox-replacement</code> has to be below the checkbox <code>&lt;input&gt;</code> tag itself. Here's an example of what it looks like:</p>
+            <div class="checkbox-container">
+                <div class="checkbox">
+                    <input type="checkbox" id="bool-checkbox-demo" value="y">
+                    <div class="checkbox-replacement"></div>
+                </div>
+                <label for="bool-checkbox-demo">Bool Checkbox Demo</label>
             </div>
-            <label for="bool-checkbox-demo">Bool Checkbox Demo</label>
-        </div>
-        <pre>
+            <pre>
 &lt;!-- Main container for the whole component --&gt;
 &lt;div class="checkbox-container"&gt;
     &lt;!-- Container for the checkbox itself --&gt;
@@ -276,22 +277,22 @@ $(document).ready(function() {
     &lt;!-- Label for the checkbox --&gt;
     &lt;label for="bool-checkbox-demo"&gt;Bool Checkbox Demo&lt;/label&gt;
 &lt;/div&gt;</pre>
-        <hr>
+            <hr>
 
-        <h3 class="scrollspy-section"><a id="validation"></a>Validation</h3>
-        <p>Front-end form validation is handled by <a href="http://www.formvalidator.net/" target="_blank">jQuery Form Validator</a>. Back-end validation is handled by <a href="http://flask-wtf.readthedocs.org/en/latest/" target="_blank">Flask-WTF</a>. In order for the front-end validation to be rendered correctly, first you'll need to include the validator library and an initialization sattement in <code>{&#37; block scripts &#37;}</code> of your template. It is not included by default because most pages never have forms and don't need validation.</p>
-        <p>Here's an example of a field that checks if input is a valid email address when the field looses focus:</p>
-        <div class="row">
-            <div class="one-half column">
-                <form id="validation-demo" action="">
-                    <label for="email">
-                        Email * <span id="form-email-error" class="u-pull-right"></span>
-                    </label>
-                    <input class="u-full-width" data-validation="email" data-validation-error-msg="Incorrect" data-validation-error-msg-container="#form-email-error" id="email" name="email" type="text" value="">
-                </form>
-            </div>
-        </div>   
-        <pre>
+            <h3 class="scrollspy-section"><a id="validation"></a>Validation</h3>
+            <p>Front-end form validation is handled by <a href="http://www.formvalidator.net/" target="_blank">jQuery Form Validator</a>. Back-end validation is handled by <a href="http://flask-wtf.readthedocs.org/en/latest/" target="_blank">Flask-WTF</a>. In order for the front-end validation to be rendered correctly, first you'll need to include the validator library and an initialization sattement in <code>{&#37; block scripts &#37;}</code> of your template. It is not included by default because most pages never have forms and don't need validation.</p>
+            <p>Here's an example of a field that checks if input is a valid email address when the field looses focus:</p>
+            <div class="row">
+                <div class="one-half column">
+                    <form id="validation-demo" action="">
+                        <label for="email">
+                            Email * <span id="form-email-error" class="u-pull-right"></span>
+                        </label>
+                        <input class="u-full-width" data-validation="email" data-validation-error-msg="Incorrect" data-validation-error-msg-container="#form-email-error" id="email" name="email" type="text" value="">
+                    </form>
+                </div>
+            </div>   
+            <pre>
 &lt;script type="text/javascript" src="{&#123; url_for('static', filename='jQuery-Form-Validator/form-validator/jquery.form-validator.min.js') &#125;}"&gt;&lt;/script&gt;
 &lt;script&gt;
 $(document).ready(function() {
@@ -319,13 +320,14 @@ $(document).ready(function() {
                     form.email.flags) &#125;&#125;
 
 &lt;/form&gt;</pre>
-        <p>The <code>render_field()</code> macro is describe in the  <a href="{{ url_for('styleguide.templating') }}#form-helpers">Form Helpers</a> section of this style guide. A full list of possible validators is available on the <a href="http://www.formvalidator.net/" target="_blank">jQuery Form Validator website</a>.</p>
+            <p>The <code>render_field()</code> macro is describe in the  <a href="{{ url_for('styleguide.templating') }}#form-helpers">Form Helpers</a> section of this style guide. A full list of possible validators is available on the <a href="http://www.formvalidator.net/" target="_blank">jQuery Form Validator website</a>.</p>
+
+        </div>
+
+        <div class="three columns">
+            {{ render_scrollspy() }}
+        </div>
 
     </div>
-
-    <div class="three columns">
-        {{ render_scrollspy() }}
-    </div>
-
 </div>
 {% endblock %}

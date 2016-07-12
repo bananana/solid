@@ -7,32 +7,34 @@
 {% block content %}
 {% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
 {% from "helpers/styleguide.html" import render_header %}
-<div class="row">
-    {{ render_header(title, version) }}
-</div>
-<hr class="u-remove-margin-bottom">
-<div class="row">
-    <div class="twelve columns">
-        {{ render_styleguide_nav(active_page) }}
+<div class="container">
+    <div class="row">
+        {{ render_header(title, version) }}
     </div>
-</div>
-<div class="row u-add-margin-top">
-    <div class="nine columns">
+    <hr class="u-remove-margin-bottom">
+    <div class="row">
+        <div class="twelve columns">
+            {{ render_styleguide_nav(active_page) }}
+        </div>
+    </div>
+    <div class="row u-add-margin-top">
+        <div class="nine columns">
 
-        <h2>Alerts</h2>
-        <p>Alerts are usually rendered using Flask's <a href="http://flask.pocoo.org/docs/0.10/quickstart/#message-flashing"><code>flash()</code></a> method, but they can always be rendered by applying <code>flash</code> class to a <code>&lt;div&gt;</code>.</p>
-        <p>Here are a few examples. Adding <code>success</code> or <code>good</code> class generates a success alert. Adding <code>warning</code> or <code>unknown</code> class generates a warning alert. Adding <code>danger</code>, <code>bad</code> or <code>error</code> class generates an error alert. By default all alerts have their width set to 100%, so they take up an entire parent block. Don't forget to add <code>role="alert"</code> property for accessability.</p> 
-        <div class="flash" role="alert">Example of a generic flashed message</div>
-        <div class="flash success" role="alert">Example of a succeess flashed message</div>
-        <div class="flash warning" role="alert">Example of a warning flashed message</div>
-        <div class="flash error" role="alert">Example of an error flashed message</div>
-        <pre>
-&lt;div class="flash" role="alert"&gt;Example of a generic flashed message&lt;/div&gt;
-&lt;div class="flash success" role="alert"&gt;Example of a succeess flashed message&lt;/div&gt;
-&lt;div class="flash warning" role="alert"&gt;Example of a warning flashed message&lt;/div&gt;
-&lt;div class="flash error" role="alert"&gt;Example of an error flashed message&lt;/div&gt;</pre>
+            <h2>Alerts</h2>
+            <p>Alerts are usually rendered using Flask's <a href="http://flask.pocoo.org/docs/0.10/quickstart/#message-flashing"><code>flash()</code></a> method, but they can always be rendered by applying <code>flash</code> class to a <code>&lt;div&gt;</code>.</p>
+            <p>Here are a few examples. Adding <code>success</code> or <code>good</code> class generates a success alert. Adding <code>warning</code> or <code>unknown</code> class generates a warning alert. Adding <code>danger</code>, <code>bad</code> or <code>error</code> class generates an error alert. By default all alerts have their width set to 100%, so they take up an entire parent block. Don't forget to add <code>role="alert"</code> property for accessability.</p> 
+            <div class="flash" role="alert">Example of a generic flashed message</div>
+            <div class="flash success" role="alert">Example of a succeess flashed message</div>
+            <div class="flash warning" role="alert">Example of a warning flashed message</div>
+            <div class="flash error" role="alert">Example of an error flashed message</div>
+            <pre>
+    &lt;div class="flash" role="alert"&gt;Example of a generic flashed message&lt;/div&gt;
+    &lt;div class="flash success" role="alert"&gt;Example of a succeess flashed message&lt;/div&gt;
+    &lt;div class="flash warning" role="alert"&gt;Example of a warning flashed message&lt;/div&gt;
+    &lt;div class="flash error" role="alert"&gt;Example of an error flashed message&lt;/div&gt;</pre>
+
+        </div>
 
     </div>
-
 </div>
 {% endblock %}

@@ -20,74 +20,75 @@
 {% block content %}
 {% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}
 {% from "helpers/styleguide.html" import render_header %}
-<div class="row">
-    {{ render_header(title, version) }}
-</div>
-<hr class="u-remove-margin-bottom">
-<div class="row">
-    <div class="twelve columns">
-        {{ render_styleguide_nav(active_page) }}
+<div class="container">
+    <div class="row">
+        {{ render_header(title, version) }}
     </div>
-</div>
-<div class="row u-add-margin-top">
-    <div class="nine columns">
-        
-        <h2>Grid System</h2>
-        <p>The grid system is borrowed directly from Skeleton. It is a fluid 12-column grid with a max width of 960px. It is completely responsive.</p>
-        <hr>
-
-        <h3 class="scrollspy-section"><a id="basic-grid"></a>Basic Grid</h3>
-        <p>Here's an example of what a basic grid looks like:</p>
-        <div class="styleguide-grid-container">
-            <div class="row">
-                <div class="one column">One</div>
-                <div class="eleven columns">Eleven</div>
-            </div>
-            <div class="row">
-                <div class="two columns">Two</div>
-                <div class="ten columns">Ten</div>
-            </div>
-            <div class="row">
-                <div class="three columns">Three</div>
-                <div class="nine columns">Nine</div>
-            </div>
-            <div class="row">
-                <div class="four columns">Four</div>
-                <div class="eight columns">Eight</div>
-            </div>
-            <div class="row">
-                <div class="five columns">Five</div>
-                <div class="seven columns">Seven</div>
-            </div>
-            <div class="row">
-                <div class="six columns">Six</div>
-                <div class="six columns">Six</div>
-            </div>
-            <div class="row">
-                <div class="seven columns">Seven</div>
-                <div class="five columns">Five</div>
-            </div>
-            <div class="row">
-                <div class="eight columns">Eight</div>
-                <div class="four columns">Four</div>
-            </div>
-            <div class="row">
-                <div class="nine columns">Nine</div>
-                <div class="three columns">Three</div>
-            </div>
-            <div class="row">
-                <div class="ten columns">Ten</div>
-                <div class="two columns">Two</div>
-            </div>
-            <div class="row">
-                <div class="eleven columns">Eleven</div>
-                <div class="one column">One</div>
-            </div>
-            <div class="row">
-                <div class="twelve columns">Twelve</div>
-            </div>
+    <hr class="u-remove-margin-bottom">
+    <div class="row">
+        <div class="twelve columns">
+            {{ render_styleguide_nav(active_page) }}
         </div>
-        <pre class="u-full-width">
+    </div>
+    <div class="row u-add-margin-top">
+        <div class="nine columns">
+            
+            <h2>Grid System</h2>
+            <p>The grid system is borrowed directly from Skeleton. It is a fluid 12-column grid with a max width of 960px. It is completely responsive.</p>
+            <hr>
+
+            <h3 class="scrollspy-section"><a id="basic-grid"></a>Basic Grid</h3>
+            <p>Here's an example of what a basic grid looks like:</p>
+            <div class="styleguide-grid-container">
+                <div class="row">
+                    <div class="one column">One</div>
+                    <div class="eleven columns">Eleven</div>
+                </div>
+                <div class="row">
+                    <div class="two columns">Two</div>
+                    <div class="ten columns">Ten</div>
+                </div>
+                <div class="row">
+                    <div class="three columns">Three</div>
+                    <div class="nine columns">Nine</div>
+                </div>
+                <div class="row">
+                    <div class="four columns">Four</div>
+                    <div class="eight columns">Eight</div>
+                </div>
+                <div class="row">
+                    <div class="five columns">Five</div>
+                    <div class="seven columns">Seven</div>
+                </div>
+                <div class="row">
+                    <div class="six columns">Six</div>
+                    <div class="six columns">Six</div>
+                </div>
+                <div class="row">
+                    <div class="seven columns">Seven</div>
+                    <div class="five columns">Five</div>
+                </div>
+                <div class="row">
+                    <div class="eight columns">Eight</div>
+                    <div class="four columns">Four</div>
+                </div>
+                <div class="row">
+                    <div class="nine columns">Nine</div>
+                    <div class="three columns">Three</div>
+                </div>
+                <div class="row">
+                    <div class="ten columns">Ten</div>
+                    <div class="two columns">Two</div>
+                </div>
+                <div class="row">
+                    <div class="eleven columns">Eleven</div>
+                    <div class="one column">One</div>
+                </div>
+                <div class="row">
+                    <div class="twelve columns">Twelve</div>
+                </div>
+            </div>
+            <pre class="u-full-width">
 &lt;!-- .container is the main centered wrapper --&gt;
 &lt;div class="container"&gt;
 
@@ -103,15 +104,15 @@
 &lt;/div&gt;
 
 &lt;/div&gt;</pre>
-        <p>Each row supports up to twelve columns.</p>
-        <div class="styleguide-grid-container">
-            <div class="row">
-                <div class="three columns">Three</div>
-                <div class="four columns">Four</div>
-                <div class="five columns">Five</div>
+            <p>Each row supports up to twelve columns.</p>
+            <div class="styleguide-grid-container">
+                <div class="row">
+                    <div class="three columns">Three</div>
+                    <div class="four columns">Four</div>
+                    <div class="five columns">Five</div>
+                </div>
             </div>
-        </div>
-        <pre class="u-full-width">
+            <pre class="u-full-width">
 &lt;div class="container"&gt;
 
 &lt;div class="row"&gt;
@@ -121,21 +122,21 @@
 &lt;/div&gt;
 
 &lt;/div&gt;</pre>
-        <hr>
+            <hr>
 
-        <h3 class="scrollspy-section"><a id="fractional-column-sizes"></a>Fractional Columns Sizes</h3>
-        <p>Shorthand for fractional column widths is also supported.</p>
-        <div class="styleguide-grid-container">
-            <div class="row">
-                <div class="one-third column">One Third</div>
-                <div class="two-thirds column">Two Thirds</div>
+            <h3 class="scrollspy-section"><a id="fractional-column-sizes"></a>Fractional Columns Sizes</h3>
+            <p>Shorthand for fractional column widths is also supported.</p>
+            <div class="styleguide-grid-container">
+                <div class="row">
+                    <div class="one-third column">One Third</div>
+                    <div class="two-thirds column">Two Thirds</div>
+                </div>
+                <div class="row">
+                    <div class="one-half column">One Half</div>
+                    <div class="one-half column">One Half</div>
+                </div>
             </div>
-            <div class="row">
-                <div class="one-half column">One Half</div>
-                <div class="one-half column">One Half</div>
-            </div>
-        </div>
-        <pre class="u-full-width">
+            <pre class="u-full-width">
 &lt;div class="container"&gt;
 
 &lt;div class="row"&gt;
@@ -148,19 +149,19 @@
 &lt;/div&gt;
 
 &lt;/div&gt;</pre>
-        <hr>
+            <hr>
 
-        <h3 class="scrollspy-section"><a id="column-offsets"></a>Column Offsets</h3>
-        <p>Sometimes it is necessary to offset a column by a certain amount. This is pretty easy to do, just use <code>offset-by-[amount]</code> class, where <code>[amount]</code> is the number of columns like; <em>one</em>, <em>two</em>, <em>three</em> and so on all the way to <em>eleven</em>.</p>
-        <div class="styleguide-grid-container">
-            <div class="row">
-                <div class="eight columns offset-by-four">Eight columns offset by four</div>
+            <h3 class="scrollspy-section"><a id="column-offsets"></a>Column Offsets</h3>
+            <p>Sometimes it is necessary to offset a column by a certain amount. This is pretty easy to do, just use <code>offset-by-[amount]</code> class, where <code>[amount]</code> is the number of columns like; <em>one</em>, <em>two</em>, <em>three</em> and so on all the way to <em>eleven</em>.</p>
+            <div class="styleguide-grid-container">
+                <div class="row">
+                    <div class="eight columns offset-by-four">Eight columns offset by four</div>
+                </div>
+                <div class="row">
+                    <div class="ten columns offset-by-two">Ten columns offset by two</div>
+                </div>
             </div>
-            <div class="row">
-                <div class="ten columns offset-by-two">Ten columns offset by two</div>
-            </div>
-        </div>
-        <pre class="u-full-width">
+            <pre class="u-full-width">
 &lt;div class="container"&gt;
 
 &lt;div class="row"&gt;
@@ -172,11 +173,12 @@
 
 &lt;/div&gt;</pre>
 
-    </div>
+        </div>
 
-    <div class="three columns">
-        {{ render_scrollspy() }}
-    </div>
+        <div class="three columns">
+            {{ render_scrollspy() }}
+        </div>
 
+    </div>
 </div>
 {% endblock %}
