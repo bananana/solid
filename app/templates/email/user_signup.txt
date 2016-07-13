@@ -1,9 +1,13 @@
-Hi {{ user.initials }}!
+Dear {{ user.initials }},
 
-Thanks for signing up at BSolid.
+Welcome to the BSolid community!
 
-You can now log in at {{ url_for('users.login', _external=True) }}.
+BSolid allows you to call out injustice - and take a series of actions until you
+win.
 
-Solidarity,
+Create and discover causes to fight for and connect with the community at
+{{ url_for('users.login', _external=True) }}
 
-The BSolid team
+In solidarity,
+
+The BSolid Team
