@@ -2,7 +2,7 @@ from datetime import datetime
 from functools import wraps
 
 from flask import Blueprint, render_template, url_for, redirect, session,  \
-                  request, g, flash, abort
+                  request, g, flash, abort, Markup
 from flask.ext.login import login_user, logout_user, current_user, login_required
 
 from app import app, db
@@ -138,7 +138,7 @@ def cause_support(slug):
                 [s.email for s in cause.creators.all()],
                    {'user': current_user, 'cause': cause},
                    'email/cause_support_creators.txt')
-        flash('Thanks for supporting this cause!')
+        flash(Markup('Thanks for supporting this cause! <a href="#actions">Take action</a> to see it succeed.'), 'success')
 
     return redirect(url_for('.cause_detail', slug=slug))
 
