@@ -238,11 +238,9 @@ a:hover {
     border-radius: 4px;
     border-color: #3299bb;
     background-color: #fbfaf9;
-    margin-top: 1em;
     padding: 0.5em 1em;
     color: #552453;
     text-decoration: none;
-
 }
 .support-action:hover {
     border-color: #1eaeda;
@@ -250,11 +248,16 @@ a:hover {
     background-color: #fff;
     cursor: pointer;
 }
-h2 span {
+h2 span,
+h3 span{
     font-size: 50%;
 }
 .support-action p {
     font-size: 12px;
+}
+.post {
+    border-left: 1px solid #ff9900;
+    padding-left: 1em;
 }
 .post article h1, .comment article h1, 
 .post article h2, .comment article h2,
@@ -699,6 +702,9 @@ input[type="submit"]:disabled:focus {
 }
 .u-remove-margin-bottom {
     margin-bottom: 0;
+}
+.u-remove-margin-top {
+    margin-top: 0;
 }
 .u-to-upper {
     text-transform: uppercase;

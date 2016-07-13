@@ -18,6 +18,7 @@ $('#stand-with-us').click(function() {
 {% block content %}
 {% from "helpers/modals.html" import render_modal %}
 {% from "helpers/users.html" import render_avatar %}
+{% from "helpers/posts.html" import render_post_list %}
 <div class="masthead"
      {% if cause.image %}
      style="background-image: url({{ url_for('static', filename=cause.image) }});"
@@ -43,40 +44,53 @@ $('#stand-with-us').click(function() {
 <div class="full-width-container u-add-margin-top">
     <div class="row">
         <div class="nine columns">
-            <h2>
+            <h3>{{ cause.story_heading }}</h3>
+            {{ cause.story_content }}
+        </div>
+        <div class="three columns">
+            <a class="button u-full-width u-add-margin-top">Share</a>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="nine columns">
+            <h3>
                 Take action to win
                 <span>({{ cause.actions.count() }} current)</span>
-            </h2>
-            {% for action in cause.actions.all() %}
-            <a class="four columns support-action" 
-               data-target="modal-action-{{ action.id }}">
-                <h4>{{ action.title }}</h4>
-                <strong>{{ action.heading }}</strong>
-                <p>{{ action.description }}</p>
-                <h6 class="u-remove-margin-bottom">Supporters: {{ action.supporters.count() }}</h6>
-                {% if action.expiration %}
-                    <h6>Expires: {{ action.expiration.strftime('%b. %d, %Y') }}</h6>
-                {% endif %}
-            </a>
-            <div id="modal-action-{{ action.id }}" class="modal">
-                <div>
-                    <h3 class="u-pull-left">Take action!</h3>
-                    <a href="#" class="button-modal-close u-pull-right">
-                        <img src="/static/open-iconic/png/x.png" alt="X" />
-                    </a>
-                    <p class="u-cf">
-                        {{ action.description }}
-                    </p>
-                    <p>
-                        <a href="{{ url_for('causes.action_support', slug=cause.slug,
-                            pk=action.id) }}">Support!</a>
-                    </p>
+            </h3>
+            <div class="row">
+                {% for action in cause.actions.all() %}
+                <a class="four columns support-action" 
+                   data-target="modal-action-{{ action.id }}">
+                    <h4>{{ action.title }}</h4>
+                    <strong>{{ action.heading }}</strong>
+                    <p>{{ action.description }}</p>
+                    <h6 class="u-remove-margin-bottom">
+                        Supporters: {{ action.supporters.count() }}
+                    </h6>
+                    {% if action.expiration %}
+                        <h6>Expires: {{ action.expiration.strftime('%b. %d, %Y') }}</h6>
+                    {% endif %}
+                </a>
+                <div id="modal-action-{{ action.id }}" class="modal">
+                    <div>
+                        <h3 class="u-pull-left">Take action!</h3>
+                        <a href="#" class="button-modal-close u-pull-right">
+                            <img src="/static/open-iconic/png/x.png" alt="X" />
+                        </a>
+                        <p class="u-cf">
+                            {{ action.description }}
+                        </p>
+                        <p>
+                            <a href="{{ url_for('causes.action_support', slug=cause.slug,
+                                pk=action.id) }}">Support!</a>
+                        </p>
+                    </div>
                 </div>
             </div>
             {% endfor %}
         </div>
         <div class="three columns">
-            <a class="button u-full-width">Share</a>
             <h4>Creators:</h4>
             {% for u in cause.creators.all() %}
                 {{ render_avatar(u) }}
@@ -88,17 +102,19 @@ $('#stand-with-us').click(function() {
         </div>
     </div>
     <hr>
-    <div class="row" >
+    <div class="row">
         <div class="nine columns">
-            <h3>{{ cause.story_heading }}</h3>
-            <p class="twelve columns">
-                {{ cause.story_content }}
-            </p>
+            <h3>Conversation</h3>
         </div>
         <div class="three columns">
-            <h4>Conversation</h4>
-            {% from "helpers/posts.html" import render_post_list %}
-            {{ render_post_list(cause) }}
+            <a class="button u-full-width" href="/cause/{{ cause.slug }}/posts/add">Add new post</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="twelve columns">
+            <div class="row">
+                {{ render_post_list(cause) }}
+            </div>
         </div>
     </div>
 </div>

@@ -5,8 +5,8 @@ section (app/templates/styleguide/templating#discussion-helpers)
 
 {% macro render_post_list(cause) %}
 {% for post in cause.posts.all() %}
-<div class="post eight columns offset-by-two">
-    <img class="icon-comment u-pull-left" src="{{ url_for('static', filename='open-iconic/svg/pulse.svg') }}"> 
+<div class="post four columns">
+    <img class="icon-comment u-pull-left" src="{{ url_for('static', filename='open-iconic/png/pulse-2x.png') }}"> 
     <h4>
         <a href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
             {{ post.title }}
@@ -25,14 +25,13 @@ section (app/templates/styleguide/templating#discussion-helpers)
         <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
     </p>
     <p>
-        <img class="icon" src="{{ url_for('static', filename='open-iconic/svg/comment-square.svg') }}"> 
+        <img class="icon" src="{{ url_for('static', filename='open-iconic/png/comment-square-2x.png') }}"> 
         {{ post.comments.count() }}
         comments. 
         <a href="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}">
             Reply
         </a>
     </p>
-    <hr>
 </div>
 {% endfor %}
 {% endmacro %}

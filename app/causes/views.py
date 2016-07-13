@@ -209,6 +209,6 @@ def action_support(slug, pk):
     if action.supporters.filter_by(id=current_user.id).count() == 0:
         action.supporters.append(current_user)
         db.session.commit()
-        flash('Thanks for supporting this action!')
+        flash('Thanks for supporting this action!', 'success')
 
     return redirect(url_for('.cause_detail', slug=slug))
