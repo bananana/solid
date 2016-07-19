@@ -24,7 +24,6 @@ from terminaltables import AsciiTable
 
 from app import app, db
 from app.users.models import User
-from app.causes.models import Cause
 from app.causes.models import Cause, Action
 
 class bcolors:
@@ -818,6 +817,56 @@ class AppManager(object):
         else:
             parser.print_help()
             exit(0)
+
+    def support(self):
+        '''Make user support a cause
+        '''
+        parser=argparse.ArgumentParser(
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            description=dedent('''\
+                description:
+                  make user support a cause'''),
+            usage='''./app.py support -u USER -c CAUSE''')
+        parser.add_argument('-u',
+                            '--user',
+                            action='store',
+                            required=True,
+                            help='user to support a cause') 
+        parser.add_argument('-c',
+                            '--cause',
+                            action='store',
+                            required=True,
+                            help='cause to be supported')
+        args = parser.parse_args(argv[2:])
+
+        # Process subcommands for cause support
+        user = User.query.filter_by(slug=args.user).first()
+        user.support(args.cause)
+
+    def unsupport(self):
+        '''Make user unsupport a cause
+        '''
+        parser=argparse.ArgumentParser(
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            description=dedent('''\
+                description:
+                  make user unsupport a cause'''),
+            usage='''./app.py unsupport -u USER -c CAUSE''')
+        parser.add_argument('-u',
+                            '--user',
+                            action='store',
+                            required=True,
+                            help='user to support a cause') 
+        parser.add_argument('-c',
+                            '--cause',
+                            action='store',
+                            required=True,
+                            help='cause to be supported')
+        args = parser.parse_args(argv[2:])
+
+        # Process subcommands for cause support
+        user = User.query.filter_by(slug=args.user).first()
+        user.unsupport(args.cause)
 
     def clean(self):
         '''Clean python and vim temporary files.

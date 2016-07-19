@@ -89,10 +89,6 @@ class User(UserMixin, CRUDMixin, db.Model):
         if self.is_supporting(cause):
             self.supports.remove(cause)
             self.save()
-    ''' 
-    def generate_feed(self):
-        for cause in self.supports:
-    '''       
 
     def __repr__(self):
         return '<User %r>' % (self.nickname) 
