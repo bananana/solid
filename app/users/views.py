@@ -141,8 +141,9 @@ def authorize_twitter():
     resp = twitter.get('account/settings.json')
     assert resp.ok
     #return str(resp.json())
-    social_id = str(resp.json()['woeid'])
+    #social_id = str(resp.json()['woeid'])
     nickname = str(resp.json()['screen_name'])
+    social_id = nickname
 
     # Twitter does not allow to get user email, unless we request
     # elevated permissions:
