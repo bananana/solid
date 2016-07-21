@@ -137,10 +137,10 @@ def authorize_twitter():
     if not twitter.authorized:
         return redirect(url_for('twitter.login'))
 
-    # Get the response from github and get the necessary user info
+    # Get the response from twitter and get the necessary user info
     resp = twitter.get('account/settings.json')
     assert resp.ok
-    return str(resp.json())
+    #return str(resp.json())
     social_id = str(resp.json()['woeid'])
     nickname = str(resp.json()['screen_name'])
 
