@@ -218,7 +218,7 @@ class AppManager(object):
             description=dedent('''\
                 description:
                   create, delete, modify or list users'''),
-            usage='''./app.py create [-c] [-d USER] [-l] [-m USER] [-s USER]''')
+            usage='''./app.py user [-c] [-d USER] [-l] [-m USER] [-s USER]''')
         parser.add_argument('-c',
                             '--create',
                             action='store_true',
@@ -437,7 +437,7 @@ class AppManager(object):
             description=dedent('''\
                 description:
                   create, delete, modify or list causes'''),
-            usage='''./app.py create [-c] [-d CAUSE] [-l] [-m CAUSE] [-s CAUSE]''')
+            usage='''./app.py cause [-c] [-d CAUSE] [-l] [-m CAUSE] [-s CAUSE]''')
         parser.add_argument('-c',
                             '--create',
                             action='store_true',
