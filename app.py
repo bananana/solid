@@ -840,8 +840,16 @@ class AppManager(object):
         args = parser.parse_args(argv[2:])
 
         # Process subcommands for cause support
-        user = User.query.filter_by(slug=args.user).first()
-        user.support(args.cause)
+        try:
+            user = User.query.filter_by(nickname=args.user).first()
+            cause = Cause.query.filter_by(slug=args.cause).first()
+            user.support(cause)
+            print(bcolors.OKGREEN + 'User ' + args.user + \
+                  ' is now supporting ' + args.cause + bcolors.ENDC)
+            exit(0)
+        except Exception as e:
+            print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+            exit(1)
 
     def unsupport(self):
         '''Make user unsupport a cause
@@ -865,8 +873,15 @@ class AppManager(object):
         args = parser.parse_args(argv[2:])
 
         # Process subcommands for cause support
-        user = User.query.filter_by(slug=args.user).first()
-        user.unsupport(args.cause)
+        try:
+            user = User.query.filter_by(nickname=args.user).first()
+            cause = Cause.query.filter_by(slug=args.cause).first()
+            user.unsupport(cause)
+            print(bcolors.OKGREEN + 'User ' + args.user + \
+                  ' no longer supports ' + args.cause + bcolors.ENDC)
+        except Exception as e:
+            print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
+            exit(1)
 
     def clean(self):
         '''Clean python and vim temporary files.
