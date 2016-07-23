@@ -1,9 +1,11 @@
 Hi {{ user.initials }}!
 
-Thanks for supporting "{{ cause.title }}".
+Thank you for standing with  "{{ cause.title }}". Bsolid is about challenging
+injustice and taking a series of actions to win.
 
-FIXME add content
+Take supporting actions, connect with others in the struggle, and get the latest
+on the cause at: {{ url_for('causes.cause_detail', slug=cause.slug, _external=True) }}
 
-Solidarity,
+In Solidarity,
 
-The BSolid team
+The Bsolid team
