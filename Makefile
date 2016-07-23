@@ -9,7 +9,7 @@ SSH_OPTS := -q
 
 RELEASE != echo "$(NAME)-`git describe --always`"
 
-deploy: /tmp/$(RELEASE) upload extract clean pip migrate link
+deploy: /tmp/$(RELEASE) upload extract clean pip migrate link restart
 
 /tmp/$(RELEASE):
 	@ tput setaf 5; tput bold; echo "Generating '$(RELEASE).tar.gz'"; tput sgr0
