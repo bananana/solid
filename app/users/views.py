@@ -122,6 +122,7 @@ def authorize_google():
             'email'     : email
         })
         new_user.generate_initials()
+        new_user.generate_color()
         login_user(new_user)
         return redirect(request.args.get('next') or url_for('index'))
     else:
@@ -160,6 +161,8 @@ def authorize_twitter():
             'nickname'  : nickname,
             #'email'     : email
         })
+        new_user.generate_initials()
+        new_user.generate_color()
         login_user(new_user)
         return redirect(request.args.get('next') or url_for('index'))
     else:
@@ -188,6 +191,7 @@ def authorize_facebook():
 
         })
         new_user.generate_initials()
+        new_user.generate_color()
         login_user(new_user)
         return redirect(request.args.get('next') or url_for('index'))
     else:
