@@ -18,9 +18,9 @@
                 <a href="{{ url_for('users.edit', nickname=user.nickname) }}" class="button u-pull-right u-remove-margin-top">Edit</a>
             {% endif %}
             <h5 class="u-remove-margin-bottom">{{ user.full_name }}</h5>
-            <div>{{ user.email }}</div>
-            <div>{{ user.phone }}</div>
-            <div>{{ user.zip }}</div>
+            {% if user.email %}<div>{{ user.email }}</div>{% endif %}
+            {% if user.phone %}<div>{{ user.phone }}</div>{% endif %}
+            {% if user.zip %}<div>{{ user.zip }}</div>{% endif %}
             <hr>
             <h5>Supporting {{ user.supports.count() }} causes</h5>
             <ul>
