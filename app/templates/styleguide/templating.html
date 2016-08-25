@@ -22,7 +22,7 @@
         <div class="nine columns">
 
             <h2>Templating</h2>
-            <p>We're using <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a> templating engine which comes with Flask by default. All documentation can be found <a href="http://jinja.pocoo.org/docs/dev/" target="_blank">here</a>. All the template can be found in <code>app/templates</code>, broken up into sub-directories by their respective modules. There's a special directory called <code>app/templates/helpers</code>, which contains helper macros that are recycled multiple times in other templates.</p>
+            <p>We're using <a href="http://jinja.pocoo.org/">Jinja2</a> templating engine which comes with Flask by default. All documentation can be found <a href="http://jinja.pocoo.org/docs/dev/">here</a>. All the template can be found in <code>app/templates</code>, broken up into sub-directories by their respective modules. There's a special directory called <code>app/templates/helpers</code>, which contains helper macros that are recycled multiple times in other templates.</p>
             <p>Remember that all macros have to be imported inside <code>&#123;&#37; block content &#37;&#125;</code>. For example, here's how you import the modals macro:</p>
             <pre>
 &#123;&#37; from "helpers/modals.html" import render_modal &#37;&#125;</pre>
@@ -74,14 +74,14 @@
                 <dt><code><strong>render_scrollspy()</strong></code></dt>
                 <dd>
                     <strong>Description:</strong><br>
-                    This menu is populated automatically by <a href="{{ url_for('static', filename='js/scroll-spy.js') }}" target="_blank"><code>app/static/js/scroll-spy.js</code></a> script. If you are going to use this navigation macro, don't forget to include it in <code>{&#37; block scripts &#37;}</code> like so: <pre>&lt;script type="text/javascript" src="{&#123; url_for('static', filename='js/scroll-spy.js') &#125;}"&gt;&lt;/script&gt;</pre>
+                    This menu is populated automatically by <a href="{{ url_for('static', filename='js/scroll-spy.js') }}"><code>app/static/js/scroll-spy.js</code></a> script. If you are going to use this navigation macro, don't forget to include it in <code>{&#37; block scripts &#37;}</code> like so: <pre>&lt;script type="text/javascript" src="{&#123; url_for('static', filename='js/scroll-spy.js') &#125;}"&gt;&lt;/script&gt;</pre>
                     Each section of a page that needs to appear in this menu needs to have the following markup: <pre>&lt;h3 class="scrollspy-section"&gt;&lt;a id="some-section-id"&gt;&lt;/a&gt;Some Section&lt;/h3&gt;</pre>
                 </dd>
             </dl>
             <hr>
 
             <h3 class="scrollspy-section"><a id="form-helpers"></a>Form Helpers</h3>
-            <p>Form helpers are located in <code>app/templates/helpers/forms.html</code> file. We're using <a href="https://flask-wtf.readthedocs.org/en/latest/" target="_blank">Flask-WTF</a> extention for form processing. You should declare your forms in the <code>app/module_name/forms.py</code>, then import it in <code>app/module_name/views.py</code> file and then pass the form as avariable to <code>render_template()</code> method in the view.</p>
+            <p>Form helpers are located in <code>app/templates/helpers/forms.html</code> file. We're using <a href="https://flask-wtf.readthedocs.org/en/latest/">Flask-WTF</a> extention for form processing. You should declare your forms in the <code>app/module_name/forms.py</code>, then import it in <code>app/module_name/views.py</code> file and then pass the form as avariable to <code>render_template()</code> method in the view.</p>
             <p><code>forms.py</code> should look something like this:</p>
             <pre>
     from flask_wtf import Form 
@@ -131,7 +131,7 @@
                     <br><br>
                     <strong>Arguments:</strong>
                     <ul>
-                        <li><code><strong>bool</strong></code> : takes a WTForms <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.BooleanField" target="_blank"><code>BooleanField()</code></a>, which is usually defined in the <code>forms.py</code> file of a module.</li>
+                        <li><code><strong>bool</strong></code> : takes a WTForms <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.BooleanField"><code>BooleanField()</code></a>, which is usually defined in the <code>forms.py</code> file of a module.</li>
                     </ul>
                 </dd>
                 <dt><code><strong>render_radio(radio)</strong></code></dt>
@@ -141,17 +141,17 @@
                     <br><br>
                     <strong>Arguments:</strong>
                     <ul>
-                        <li><code><strong>radio</strong></code> : takes a WTForms <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.RadioField" target="_blank"><code>RadioField()</code></a>, which is usually defined in the <code>forms.py</code> file of a module.</li>
+                        <li><code><strong>radio</strong></code> : takes a WTForms <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.RadioField"><code>RadioField()</code></a>, which is usually defined in the <code>forms.py</code> file of a module.</li>
                     </ul>
                 </dd>
                 <dt><code><strong>render_field(field, label, flags)</strong></code></dt>
                 <dd>
                     <strong>Description:</strong><br>
-                    Renders most other fields like <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.StringField" target="_blank"><code>StringField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.PasswordField"><code>PasswordField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.HiddenField"><code>HiddenField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.TextAreaField"><code>TextAreaField()</code></a>, etc. A full list of possible fields can be found <a href="http://wtforms.readthedocs.org/en/latest/fields.html" target="_blank">here</a>.
+                    Renders most other fields like <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.StringField"><code>StringField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.PasswordField"><code>PasswordField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.HiddenField"><code>HiddenField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.TextAreaField"><code>TextAreaField()</code></a>, etc. A full list of possible fields can be found <a href="http://wtforms.readthedocs.org/en/latest/fields.html">here</a>.
                     <br><br>
                     <strong>Arguments:</strong>
                     <ul>
-                        <li><code><strong>field</strong></code> : any of the fields availabe <a href="http://wtforms.readthedocs.org/en/latest/fields.html" taget="_blank">here</a>, except the <code>RadioField()</code>, for which you should use the <code>render_radio()</code> macro.</li>
+                        <li><code><strong>field</strong></code> : any of the fields availabe <a href="http://wtforms.readthedocs.org/en/latest/fields.html">here</a>, except the <code>RadioField()</code>, for which you should use the <code>render_radio()</code> macro.</li>
                         <li><code><strong>label</strong></code> : pass the form label to this, usually it would look something like <code>form.field_name.label</code>.</li>
                         <li><code><strong>flags</strong></code> : pass all the form flags to this, usually it would look something like <code>form.field_name.flags</code>. If there's a <em>required</em> flag set, the label will automatically get an asterisk next to it.</li>
                     </ul>
@@ -163,7 +163,7 @@
                     <br><br>
                     <strong>Arguments:</strong>
                     <ul>
-                        <li><code><strong>field</strong></code> : any of the fields availabe <a href="http://wtforms.readthedocs.org/en/latest/fields.html" taget="_blank">here</a>, except the <code>RadioField()</code>, for which you should use the <code>render_radio()</code> macro.</li>
+                        <li><code><strong>field</strong></code> : any of the fields availabe <a href="http://wtforms.readthedocs.org/en/latest/fields.html">here</a>, except the <code>RadioField()</code>, for which you should use the <code>render_radio()</code> macro.</li>
                         <li><code><strong>class</strong></code> : CSS class to apply to the form field</li>
                     </ul>
                 </dd>
