@@ -3,9 +3,13 @@ from flask.ext.login import current_user, login_user, logout_user
 from app.tests_base import BaseTestCase
 from app.users.models import User
 from app.causes.models import Cause
+from app import app
 
 class UserViewsTests(BaseTestCase):
-    
+
+    #: Enable testing mode
+    app.config['TESTING'] = True
+
     #: Do not render templates, we're only testing logic here.
     render_templates = False
 
