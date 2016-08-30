@@ -31,7 +31,6 @@
     </script>
 </head>
 <body>
-
     <div class="header">
         <div class="full-width-container">
             <div class="row">
@@ -83,31 +82,12 @@
     <div class="footer">
         <div class="container">
             <div class="row">
-                <div class="three columns">
-                    <h4>Causes</h4>
+                <div class="three columns offset-by-six">
+                    <h4>About</h4>
                     <ul>
-                        <li><a href="#">Create a cause</a></li>
-                        <li><a href="#">Popular</a></li>
-                        <li><a href="#">Neglected</a></li>
-                        <li><a href="#">Success Stories</a></li>
-                    </ul>
-                </div>
-                <div class="three columns">
-                    <h4>About Us</h4>
-                    <ul>
+                        <li><a href="#">Contact</a></li>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">How it works</a></li>
-                        <li><a href="#">Jobs</a></li>
-                        <li><a href="#">Press</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="three columns">
-                    <h4>Help</h4>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="{{ url_for('styleguide.styleguide') }}">Styleguide</a></li>
-                        <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="three columns">
@@ -120,14 +100,11 @@
             <hr>
             <div class="row">
                 <div class="twelve columns u-text-center">
-                    <a href="#"><small>Terms of Service</small></a> | 
-                    <a href="#"><small>Privacy Policy</small></a> | 
-                    <a href="#"><small>License</small></a> | 
-                    <a href="#"><small>Source Code</small></a>
+                    <small>&copy; 2016 BSolid authors</small> |
+                    <a href="{{ url_for('terms_of_service') }}"><small>Terms of Service</small></a>
                 </div>
             </div>
         </div>
     </div>
-    
 </body>
 </html>
