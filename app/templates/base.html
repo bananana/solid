@@ -35,12 +35,11 @@
     <div class="header">
         <div class="full-width-container">
             <div class="row">
-                <div class="eight columns">
+                <div class="twelve columns">
                     <a class="u-link-color-override" href="{{ url_for('index') }}">
                         <!--<img class="logo img-circle u-pull-left" src="{{ url_for('static', filename='images/logo_128x128.png') }}">-->
                         <h4 class="title u-pull-left"><strong>SOLID</strong></h4>
                     </a>
-                </div>
                     {% if active_page != "login" %}
                         {% if current_user.is_authenticated %} 
                         <div class="four columns">

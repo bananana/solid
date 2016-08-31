@@ -174,8 +174,14 @@ a:hover {
     border-bottom: 1px solid #ff9900;
 }
 .full-width-container {
-    padding: 0 9rem;
+    padding: 0 2rem;
 }
+@media (min-width: 750px) {
+    .full-width-container {
+        padding: 0 9rem;
+    }
+}
+
 .progress {
     display: block;
     height: 6.5rem;
