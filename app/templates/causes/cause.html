@@ -24,10 +24,10 @@ $('#stand-with-us').click(function() {
      style="background-image: url({{ url_for('static', filename=cause.image) }});"
      {% endif %}>
     <div class="row masthead-title" >
-        <div class="nine columns">
+        <div class="eight columns">
             <h1>{{ cause.title }}</h1>
         </div>
-        <div class="three columns">
+        <div class="four columns">
             {% if supporter %}
                 <h5 class="u-text-right">&#10004;&nbsp;Supporting</h5>
             {% else %}
