@@ -42,17 +42,20 @@
                     </a>
                     {% if active_page != "login" %}
                         {% if current_user.is_authenticated %} 
-                        <div class="four columns">
-                            <a href="{{ url_for('users.logout') }}" title="Log Out" class="button u-pull-right"><!--<img src="{# url_for('static', filename='open-iconic/svg/account-logout.svg') #}">-->Log Out</a>
+                            <a href="{{ url_for('users.logout') }}" title="Log Out" class="button u-pull-right">
+                                <img src="{{ url_for('static', filename='open-iconic/png/account-logout-2x.png') }}">
+                            </a>
                             <span class="user">
-                                Logged in as <a href="{{ url_for('users.user', nickname=current_user.nickname) }}">
+                                Logged&nbsp;in&nbsp;as&nbsp;
+                                <a href="{{ url_for('users.user', nickname=current_user.nickname) }}">
                                     {{ current_user.nickname }}
                                 </a>
                             </span>
-                        </div>
                         {% else %}
+                            <a href="{{ url_for('users.login') }}" title="Log In" class="button u-add-margin-left u-pull-right">
+                                <img src="{{ url_for('static', filename='open-iconic/png/account-login-2x.png') }}">
+                            </a>
                             <a href="{{ url_for('users.signup') }}" title="Sign Up" class="button button-primary u-pull-right">Sign Up</a>
-                            <a href="{{ url_for('users.login') }}" title="Log In" class="button u-add-margin-right u-pull-right">Log In</a>
                         {% endif %}
                     {% else %}
                             <a href="{{ url_for('users.signup') }}" title="Sign Up" class="button u-pull-right">Sign Up</a>

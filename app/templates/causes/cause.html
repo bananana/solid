@@ -19,6 +19,26 @@ $('#stand-with-us').click(function() {
 {% from "helpers/modals.html" import render_modal %}
 {% from "helpers/users.html" import render_avatar %}
 {% from "helpers/posts.html" import render_post_list %}
+<div class="section hero"
+     {% if cause.image %}
+     style="background-image: url({{ url_for('static', filename=cause.image) }});"
+     {% endif %}>
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns">
+                <h4 class="hero-heading">
+                    {{ cause.title }}
+                </h4>
+                {% if supporter %}
+                    <h5>&#10004;&nbsp;You are supporting this cause</h5>
+                {% else %}
+                    <a id="stand-with-us" class="button button-primary hero-button" href="{{ url_for('causes.cause_support', slug=cause.slug) }}">Stand with us!</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!--
 <div class="masthead"
      {% if cause.image %}
      style="background-image: url({{ url_for('static', filename=cause.image) }});"
@@ -41,6 +61,7 @@ $('#stand-with-us').click(function() {
         </div>
     </div>
 </div>
+-->
 <div class="full-width-container u-add-margin-top">
     <div class="row">
         <div class="nine columns">
