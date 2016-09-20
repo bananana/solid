@@ -1,6 +1,6 @@
 from os import environ
 
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, redirect, url_for
 
 app = Flask(__name__)
 
@@ -84,6 +84,32 @@ def index():
 @app.route('/terms-of-service')
 def terms_of_service():
     return render_template('terms_of_service.html')
+
+
+from app.contact.forms import ContactForm
+from app.email import send_email
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        recipients = [app.config['CONTACT_EMAIL'],]
+
+        if form.send_to_self.data:
+            recipients += [form.email.data,]
+
+        send_email(
+            'Solid inquiry via website',
+            recipients,
+            {'name': form.name.data, 'body': form.message.data, 
+             'email': form.email.data},
+            'email/contact.txt'
+        )
+
+        flash('Your message has been sent!.', 'success')
+        return redirect(url_for('.contact'))
+
+    return render_template('contact.html', form=form)
 
 
 # Logging 

@@ -1,0 +1,11 @@
+Hi!
+
+You've received the below enquiry from '{{ name }} <{{ email }}>' via Bsolid.
+
+Solidarity,
+
+The Bsolid Team
+
+---
+
+{{ body }}

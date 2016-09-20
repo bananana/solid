@@ -6,8 +6,9 @@ basedir = os.path.abspath(
 	d(d(d(__file__)))
 )
 
-#SECRET_KEY = os.urandom(24)
 SECRET_KEY = 'replace-with-truly-random-string-for-production'
+
+CONTACT_EMAIL = 'info@bsolid.org'
 
 DEBUG = False
 TESTING = False

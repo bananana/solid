@@ -5,9 +5,11 @@ from flask.ext.mail import Message
 
 from app import app, mail
 
+
 def _send_async_email(app, msg):
     with app.app_context():
         mail.send(msg)
+
 
 def send_email(subject, recipients, context, template_text, template_html=None, sender=None):
     """ sends an email using Flask-Mail (in the background using threads) """
