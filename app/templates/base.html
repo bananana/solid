@@ -90,6 +90,14 @@
                         <li><a href="#">How it works</a></li>
                     </ul>
                 </div>
+                {% if debug %}
+                <div class="three columns">
+                    <h4>Developers</h4>
+                    <ul>
+                        <li><a href="{{ url_for('styleguide.styleguide') }}">Styleguide</a></li>
+                    </ul>
+                </div>
+                {% endif %}
                 <div class="three columns">
                     <h4>Follow Us</h4>
                     <a href="#"><img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}"></a>

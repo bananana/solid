@@ -60,6 +60,11 @@ facebook_blueprint = make_facebook_blueprint(
 app.register_blueprint(facebook_blueprint, url_prefix='/login')
 
 
+@app.context_processor
+def debug_status():
+    return dict(debug=app.debug)
+
+
 # HTTP errors
 @app.errorhandler(404)
 def not_found_error(error):
