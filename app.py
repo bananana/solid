@@ -53,6 +53,8 @@ class AppManager(object):
               cause       manipulate causes
               action      manipulate actions
               user        manipulate users
+              support     make a user support a cause
+              unsupport   remove a user from a cause's supporters
               clean       clean temporary and/or compiled files
               mod         create new module scaffolding 
               run         run the Flask app
