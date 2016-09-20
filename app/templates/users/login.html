@@ -42,6 +42,7 @@ $(document).ready(function() {
                         form.password.flags
                        ) 
                     }}
+                    {{ render_boolean(form.remember) }}
                 </div>
             </fieldset>
         </div>
@@ -49,9 +50,6 @@ $(document).ready(function() {
             <fieldset>
                 <div class="three columns offset-by-three">
                     <input id="login" class="button button-primary u-mobile-fixed-bottom" type="submit" value="Log In">
-                </div>
-                <div class="three columns">
-                    {{ render_boolean(form.remember) }}
                 </div>
             </fieldset>
             <p class="one-third column offset-by-three">
