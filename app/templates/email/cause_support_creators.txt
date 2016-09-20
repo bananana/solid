@@ -7,4 +7,4 @@ There's a new supporter for "{{ cause.title }}":
 
 Solidarity,
 
-The BSolid team
+The {{ site_name }} team

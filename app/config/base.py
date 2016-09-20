@@ -8,6 +8,8 @@ basedir = os.path.abspath(
 
 SECRET_KEY = 'replace-with-truly-random-string-for-production'
 
+SITE_NAME = 'Solid'
+
 CONTACT_EMAIL = 'info@bsolid.org'
 
 DEBUG = False

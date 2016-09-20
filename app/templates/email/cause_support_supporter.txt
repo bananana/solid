@@ -8,4 +8,4 @@ on the cause at: {{ url_for('causes.cause_detail', slug=cause.slug, _external=Tr
 
 In Solidarity,
 
-The Bsolid team
+The {{ site_name }} team

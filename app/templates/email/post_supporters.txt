@@ -8,4 +8,4 @@ page.
 
 Solidarity,
 
-The BSolid team
+The {{ site_name }} team

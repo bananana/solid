@@ -1,10 +1,10 @@
 Hi!
 
-You've received the below enquiry from '{{ name }} <{{ email }}>' via Bsolid.
+You've received the below enquiry from '{{ name }} <{{ email }}>' via {{ site_name }}.
 
 Solidarity,
 
-The Bsolid Team
+The {{ site_name }} Team
 
 ---
 

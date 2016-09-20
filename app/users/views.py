@@ -58,7 +58,7 @@ def signup():
         new_user.generate_initials()
         new_user.generate_color()
         login_user(new_user)
-        send_email('Welcome to BSolid',
+        send_email('Welcome to {0}'.format(app.config['SITE_NAME']),
                    [new_user.email,],
                    {'user': new_user},
                    'email/user_signup.txt')

@@ -1,13 +1,12 @@
 Dear {{ user.initials }},
 
-Welcome to the BSolid community!
+Welcome to the {{ site_name }} community!
 
-BSolid allows you to call out injustice - and take a series of actions until you
-win.
+{{ site_name }} allows you to call out injustice - and take a series of actions until you win.
 
-Create and discover causes to fight for and connect with the community at
-{{ url_for('users.login', _external=True) }}
+Create and discover causes to fight for and connect with the community at:
+  {{ url_for('users.login', _external=True) }}
 
 In solidarity,
 
-The BSolid Team
+The {{ site_name }} Team
