@@ -71,7 +71,38 @@
             {{ cause.story_content }}
         </div>
         <div class="three columns">
-            <a class="button u-full-width u-add-margin-top">Share</a>
+            <a class="button button-modal u-full-width u-add-margin-top"
+                data-target="modal-share">
+                Share
+            </a>
+        </div>
+        <div id="modal-share" class="modal">
+            <div>
+                <h3 class="u-pull-left">Share this cause</h3>
+                 <a href="#" class="button-modal-close u-pull-right">
+                     <img src="/static/open-iconic/svg/x.svg" alt="X" />
+                 </a>
+                 <ul class="u-cf">
+                     <li>
+                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
+                              url_for('causes.cause_detail', slug=cause.slug,
+                                  _external=True) | urlencode
+                         }}">Share on Facebook</a>
+                     </li>
+                     <li>
+                         <a href="https://twitter.com/home?status={{
+                              url_for('causes.cause_detail', slug=cause.slug,
+                                  _external=True) | urlencode
+                         }}">Share on Twitter</a>
+                     </li>
+                     <li>
+                         <a href="https://plus.google.com/share?url={{
+                              url_for('causes.cause_detail', slug=cause.slug,
+                                  _external=True) | urlencode
+                         }}">Share on Google+</a>
+                     </li>
+                 </ul>
+            </div>
         </div>
     </div>
     <hr>
