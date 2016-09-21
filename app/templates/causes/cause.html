@@ -21,6 +21,7 @@
 {% from "helpers/modals.html" import render_modal %}
 {% from "helpers/users.html" import render_avatar %}
 {% from "helpers/posts.html" import render_post_list %}
+<!--
 <div class="section hero"
      {% if cause.image %}
      style="background-image: url({{ url_for('static', filename=cause.image) }});"
@@ -34,36 +35,38 @@
                 {% if supporter %}
                     <h5>&#10004;&nbsp;You are supporting this cause</h5>
                 {% else %}
-                    <a id="stand-with-us" class="button button-primary hero-button" href="{{ url_for('causes.cause_support', slug=cause.slug) }}">Stand with us!</a>
+                    <a id="stand-with-us" 
+                       class="button button-primary hero-button" 
+                       href="{{ url_for('causes.cause_support', slug=cause.slug) }}">Stand with us!</a>
                 {% endif %}
             </div>
         </div>
     </div>
 </div>
-<!--
-<div class="masthead"
+-->
+<div class="section hero"
      {% if cause.image %}
-     style="background-image: url({{ url_for('static', filename=cause.image) }});"
+     style="background: url({{ url_for('static', filename=cause.image) }}) no-repeat fixed 0% 65px;"
      {% endif %}>
-    <div class="row masthead-title" >
-        <div class="eight columns">
-            <h1>{{ cause.title }}</h1>
-        </div>
-        <div class="four columns">
-            {% if supporter %}
-                <h5 class="u-text-right">&#10004;&nbsp;Supporting</h5>
-            {% else %}
-                <a id="stand-with-us" class="button button-primary button-large u-full-width" href="{{ url_for('causes.cause_support', slug=cause.slug) }}">Stand with us!</a>
-                {# render_modal('modal-support',
-                                'Stand with us!',
-                                'Lorem Ipsum is simply dummy text of printing and typesetting',
-                                'Stand with us!',
-                                'button button-primary button-large u-full-width') #}
-            {% endif %}
+    <div class="full-width-container">
+        <div class="row">
+            <div class="twelve columns">
+                <div class="glass">
+                    <h4 class="hero-heading">
+                        {{ cause.title }}
+                    </h4>
+                    {% if supporter %}
+                        <h5>&#10004;&nbsp;You are supporting this cause</h5>
+                    {% else %}
+                        <a id="stand-with-us" 
+                           class="button button-primary hero-button" 
+                           href="{{ url_for('causes.cause_support', slug=cause.slug) }}">Stand with us!</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
--->
 <div class="full-width-container u-add-margin-top">
     <div class="row">
         <div class="nine columns">
