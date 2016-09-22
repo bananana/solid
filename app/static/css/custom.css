@@ -227,7 +227,6 @@ a:hover {
     background-size: cover;
 }
 .hero-heading {
-    font-family: "Raleway-SemiBold", Helvetica, Arial, sans-serif;
     margin: 1rem 2rem 2rem 2rem;
 }
 .hero-button {
@@ -250,7 +249,6 @@ a:hover {
     display: inline-block;
     position: absolute;
     content: ' ';
-    background: url(/static/images/header-amysbread.png) no-repeat fixed 0% 65px;
     -webkit-filter: url('#blur');
     -webkit-filter: blur(5px);
     filter: url('#blur');
@@ -258,9 +256,6 @@ a:hover {
     opacity: 0.5;
 }
 @media (min-width: 550px) {
-    .section {
-        padding: 12rem 0 11rem;
-    }
     .hero {
         padding-bottom: 12rem;
         text-align: left;
@@ -276,7 +271,6 @@ a:hover {
 @media (min-width: 750px) {
     .hero {
         height: 190px;
-        padding: 16rem 0 14rem;
     }
     .hero-heading {
         font-size: 6.0rem;
@@ -286,21 +280,10 @@ a:hover {
         line-height: 4.7rem;
         height: 5rem;
     }
-    .section {
-        padding: 14rem 0 15rem;
-    }
     .section-description {
         max-width: 60%;
         margin-left: auto;
         margin-right: auto;
-    }
-}
-@media (min-width: 1000px) {
-    .section {
-        padding: 20rem 0 19rem;
-    }
-    .hero {
-        padding: 22rem 0;
     }
 }
 .support-action {

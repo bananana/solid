@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 {% set active_page = "dashboard" %}
 
+{% block styles %}
+<style>
+.hero,
+.glass::before {
+    {% if cause.image %}
+    background: url({{ url_for('static', filename=cause.image) }}) no-repeat fixed center 65px;
+    {% endif %}
+}
+</style>
+{% endblock %}
+
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 <script>
@@ -21,33 +32,7 @@
 {% from "helpers/modals.html" import render_modal %}
 {% from "helpers/users.html" import render_avatar %}
 {% from "helpers/posts.html" import render_post_list %}
-<!--
-<div class="section hero"
-     {% if cause.image %}
-     style="background-image: url({{ url_for('static', filename=cause.image) }});"
-     {% endif %}>
-    <div class="container">
-        <div class="row">
-            <div class="twelve columns">
-                <h4 class="hero-heading">
-                    {{ cause.title }}
-                </h4>
-                {% if supporter %}
-                    <h5>&#10004;&nbsp;You are supporting this cause</h5>
-                {% else %}
-                    <a id="stand-with-us" 
-                       class="button button-primary hero-button" 
-                       href="{{ url_for('causes.cause_support', slug=cause.slug) }}">Stand with us!</a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</div>
--->
-<div class="section hero"
-     {% if cause.image %}
-     style="background: url({{ url_for('static', filename=cause.image) }}) no-repeat fixed 0% 65px;"
-     {% endif %}>
+<div class="section hero">
     <div class="full-width-container">
         <div class="row">
             <div class="twelve columns">
