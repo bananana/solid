@@ -39,6 +39,12 @@ app.register_blueprint(styleguideModule)
 from app.posts.views import mod as postsModule
 app.register_blueprint(postsModule)
 
+from app.pages.views import mod as pagesModule
+app.register_blueprint(pagesModule)
+
+from app.admin.views import mod as adminModule
+app.register_blueprint(adminModule)
+
 from flask_dance.contrib.twitter import make_twitter_blueprint
 twitter_blueprint = make_twitter_blueprint(
     redirect_to   = 'users.authorize_twitter' 
@@ -72,8 +78,18 @@ def config_vars():
 
 
 # HTTP errors
+
+from flask import request
+from app.pages.models import Page
+
 @app.errorhandler(404)
 def not_found_error(error):
+    # Look for a Page with this URL
+    page = Page.query.filter_by(url=request.path).first()
+
+    if page:
+        return render_template('pages/page.html', page=page)
+
     return render_template('404.html'), 404
 
 
@@ -83,7 +99,8 @@ def internal_error(error):
     return render_template('500.html'), 500
 
 
-# Default app view, same for all modules
+# views
+
 from app.causes.views import cause_required, multi_cause
 @app.route('/')
 @cause_required
@@ -91,11 +108,6 @@ from app.causes.views import cause_required, multi_cause
 def index():
     '''Home page of the app. Nothing much here.'''
     return render_template('index.html')
-
-
-@app.route('/terms-of-service')
-def terms_of_service():
-    return render_template('terms_of_service.html')
 
 
 from app.contact.forms import ContactForm
@@ -123,8 +135,8 @@ def contact():
 
     return render_template('contact.html', form=form)
 
+# logging 
 
-# Logging 
 if not app.debug:
     import logging
     from logging.handlers import RotatingFileHandler

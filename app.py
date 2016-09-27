@@ -9,7 +9,7 @@
 
 import argparse
 from distutils.util import strtobool
-import fnmatch 
+import fnmatch
 import imp
 from os import path, walk, listdir, makedirs, remove
 from sys import argv
@@ -23,8 +23,9 @@ from textwrap import dedent
 from terminaltables import AsciiTable
 
 from app import app, db
-from app.users.models import User
 from app.causes.models import Cause, Action
+from app.users.models import User
+
 
 class bcolors:
     '''Unicode color codes. Borrowed from Blender build scripts.
@@ -40,7 +41,7 @@ class bcolors:
 
 
 class AppManager(object):
-    '''Handle command line input using argparse. All other methods are called 
+    '''Handle command line input using argparse. All other methods are called
     from here and all exception handling is happening here.
     '''
     def __init__(self):
@@ -56,7 +57,7 @@ class AppManager(object):
               support     make a user support a cause
               unsupport   remove a user from a cause's supporters
               clean       clean temporary and/or compiled files
-              mod         create new module scaffolding 
+              mod         create new module scaffolding
               run         run the Flask app
               test        run unit tests
             '''))
@@ -74,34 +75,34 @@ class AppManager(object):
         parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description=dedent('''\
-                description: 
+                description:
                   manipulates the databse'''),
             usage='''./app.py db [-h] [-v] [-c] [-d NUM] [-m] [-u NUM]''')
         parser.add_argument('-v',
                             '--version',
                             action='store_true',
                             help='display database version')
-        parser.add_argument('-c', 
-                            '--create', 
-                            action='store_true', 
+        parser.add_argument('-c',
+                            '--create',
+                            action='store_true',
                             help='create database with SQLAlchemy')
-        parser.add_argument('-d', 
+        parser.add_argument('-d',
                             '--downgrade',
                             type=int,
-                            action='store', 
+                            action='store',
                             help='downgrade database')
-        parser.add_argument('-m', 
-                            '--migrate', 
-                            action='store_true', 
+        parser.add_argument('-m',
+                            '--migrate',
+                            action='store_true',
                             help='migrate database')
-        parser.add_argument('-u', 
+        parser.add_argument('-u',
                             '--upgrade',
                             type=int,
-                            action='store', 
+                            action='store',
                             help='upgrade database')
         args = parser.parse_args(argv[2:])
 
-        # Process subcommands for db 
+        # Process subcommands for db
         with app.app_context():
             database = Database(
                 app.config['SQLALCHEMY_DATABASE_URI'],
@@ -175,20 +176,20 @@ class AppManager(object):
         parser=argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description=dedent('''\
-                description: 
+                description:
                   create new module'''),
             usage='''./app.py mod [-h] [-l] [-c NAME]''')
         parser.add_argument('-l',
                             '--list',
                             action='store_true',
                             help='list existing modules')
-        parser.add_argument('-n', 
+        parser.add_argument('-n',
                             '--name',
                             '-c',
                             '--create',
                             nargs='?',
                             const='new_module',
-                            action='store', 
+                            action='store',
                             help='create module')
         args = parser.parse_args(argv[2:])
 
@@ -200,7 +201,7 @@ class AppManager(object):
 
         elif args.name:
             try:
-                module.create(args.name) 
+                module.create(args.name)
                 print(bcolors.OKGREEN + 'Module ' + args.name + \
                       ' created successfully' + bcolors.ENDC)
                 exit(0)
@@ -213,7 +214,7 @@ class AppManager(object):
             exit(0)
 
     def user(self):
-        '''Create, delete, modify or list users. 
+        '''Create, delete, modify or list users.
         '''
         parser=argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -253,10 +254,10 @@ class AppManager(object):
                             help='search for user')
         args = parser.parse_args(argv[2:])
 
-        # Process subcommands for user 
+        # Process subcommands for user
         if args.create:
             u = User()
-            
+
             #: Inspect user model so we can get database column types later on
             insp = inspect(User)
 
@@ -264,7 +265,7 @@ class AppManager(object):
             #keys = sorted(u.__dict__.keys()[1:])
 
             #: Manually created list of keys in appropriate order
-            keys = ['nickname', 'email', 'full_name', 'private_full_name', 
+            keys = ['nickname', 'email', 'full_name', 'private_full_name',
                     'is_admin', 'password', 'social_id', 'phone', 'zip',
                     'employer', 'description']
 
@@ -288,8 +289,8 @@ class AppManager(object):
                     values.append(None if inpt == '' else strtobool(inpt))
                 else:
                     values.append(raw_input(k + ': '))
-            
-            #: Key-value pairs to be used in the create() method of mixins.py 
+
+            #: Key-value pairs to be used in the create() method of mixins.py
             kv = dict(zip(keys,values))
 
             #: Remove password from the above list because it has to be set with
@@ -328,7 +329,7 @@ class AppManager(object):
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
 
-            keys = ['id', 'nickname', 'email', 'full_name', 'private_full_name', 
+            keys = ['id', 'nickname', 'email', 'full_name', 'private_full_name',
                     'is_admin', 'phone', 'zip', 'employer']
             table_data = [keys]
             for u in users:
@@ -347,7 +348,7 @@ class AppManager(object):
             except Exception as e:
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
-            
+
             #: Inspect user model so we can get database column types later on
             insp = inspect(User)
 
@@ -355,7 +356,7 @@ class AppManager(object):
             #keys = sorted(u.__dict__.keys()[1:])
 
             #: Manually created list of keys in appropriate order
-            keys = ['nickname', 'email', 'full_name', 'private_full_name', 
+            keys = ['nickname', 'email', 'full_name', 'private_full_name',
                     'is_admin', 'password', 'social_id', 'phone', 'zip',
                     'employer', 'description']
 
@@ -383,8 +384,8 @@ class AppManager(object):
                     values.append(current_attr if inpt == '' else strtobool(inpt))
                 else:
                     values.append(raw_input(k + ' ['+ str(current_attr) + ']: '))
-            
-            #: Key-value pairs to be used in the create() method of mixins.py 
+
+            #: Key-value pairs to be used in the create() method of mixins.py
             kv = dict(zip(keys,values))
 
             #: Remove password from the above list because it has to be set with
@@ -403,7 +404,6 @@ class AppManager(object):
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
 
-
         elif args.search:
             try:
                 usr_sr = User.query.filter_by(nickname=args.search).all()
@@ -411,7 +411,7 @@ class AppManager(object):
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
 
-            keys = ['id', 'nickname', 'email', 'full_name', 'private_full_name', 
+            keys = ['id', 'nickname', 'email', 'full_name', 'private_full_name',
                     'is_admin', 'phone', 'zip', 'employer']
             table_data = [keys]
             for u in usr_sr:
@@ -432,7 +432,7 @@ class AppManager(object):
             exit(0)
 
     def cause(self):
-        '''Create, delete, modify or list causes. 
+        '''Create, delete, modify or list causes.
         '''
         parser=argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -468,10 +468,10 @@ class AppManager(object):
                             help='search for cause')
         args = parser.parse_args(argv[2:])
 
-        # Process subcommands for cause 
+        # Process subcommands for cause
         if args.create:
             c = Cause()
-            
+
             #: Inspect Cause model so we can get database column types later on
             insp = inspect(Cause)
 
@@ -502,11 +502,11 @@ class AppManager(object):
                     values.append(None if inpt == '' else strtobool(inpt))
                 else:
                     values.append(raw_input(k + ': '))
-            
-            #: Key-value pairs to be used in the create() method of mixins.py 
+
+            #: Key-value pairs to be used in the create() method of mixins.py
             kv = dict(zip(keys,values))
 
-            # Try to create the cause 
+            # Try to create the cause
             try:
                 c.create(**kv)
                 print(bcolors.OKGREEN + 'Cause ' + kv.get('title') + \
@@ -534,7 +534,7 @@ class AppManager(object):
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
 
-            keys = ['id', 'title', 'slug', 'boss', 'location', 
+            keys = ['id', 'title', 'slug', 'boss', 'location',
                     'video', 'image', 'story_heading', 'story_content']
             table_data = [keys]
             for c in causes:
@@ -559,7 +559,7 @@ class AppManager(object):
                     args.modify
                 ) + bcolors.ENDC)
                 exit(1)
-            
+
             #: Inspect user model so we can get database column types later on
             insp = inspect(Cause)
 
@@ -594,11 +594,11 @@ class AppManager(object):
                     values.append(current_attr if inpt == '' else strtobool(inpt))
                 else:
                     values.append(raw_input(k + ' ['+ str(current_attr) + ']: '))
-            
-            #: Key-value pairs to be used in the create() method of mixins.py 
+
+            #: Key-value pairs to be used in the create() method of mixins.py
             kv = dict(zip(keys,values))
 
-            # Try to update the cause 
+            # Try to update the cause
             try:
                 c.update(**kv)
                 print(bcolors.OKGREEN + 'Cause ' + kv.get('title') + \
@@ -616,7 +616,7 @@ class AppManager(object):
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
 
-            keys = ['id', 'title', 'slug', 'boss', 'location', 
+            keys = ['id', 'title', 'slug', 'boss', 'location',
                     'video', 'image', 'story_heading', 'story_content']
             table_data = [keys]
             for c in cause_sr:
@@ -633,7 +633,7 @@ class AppManager(object):
             exit(0)
 
     def action(self):
-        '''Create, delete, modify or list actions. 
+        '''Create, delete, modify or list actions.
         '''
         parser=argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -666,10 +666,10 @@ class AppManager(object):
                             help='search for cause')
         args = parser.parse_args(argv[2:])
 
-        # Process subcommands for action 
+        # Process subcommands for action
         if args.create:
             a = Action()
-            
+
             #: Inspect Cause model so we can get database column types later on
             insp = inspect(Action)
 
@@ -699,11 +699,11 @@ class AppManager(object):
                     values.append(None if inpt == '' else strtobool(inpt))
                 else:
                     values.append(raw_input(k + ': '))
-            
-            #: Key-value pairs to be used in the create() method of mixins.py 
+
+            #: Key-value pairs to be used in the create() method of mixins.py
             kv = dict(zip(keys,values))
 
-            # Try to create the cause 
+            # Try to create the cause
             try:
                 a.create(**kv)
                 print(bcolors.OKGREEN + 'Action ' + kv.get('title') + \
@@ -749,7 +749,7 @@ class AppManager(object):
             except Exception as e:
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
-            
+
             #: Inspect user model so we can get database column types later on
             insp = inspect(Action)
 
@@ -783,11 +783,11 @@ class AppManager(object):
                     values.append(current_attr if inpt == '' else strtobool(inpt))
                 else:
                     values.append(raw_input(k + ' ['+ str(current_attr) + ']: '))
-            
-            #: Key-value pairs to be used in the create() method of mixins.py 
+
+            #: Key-value pairs to be used in the create() method of mixins.py
             kv = dict(zip(keys,values))
 
-            # Try to update the cause 
+            # Try to update the cause
             try:
                 a.update(**kv)
                 print(bcolors.OKGREEN + 'Action ' + kv.get('title') + \
@@ -833,7 +833,7 @@ class AppManager(object):
                             '--user',
                             action='store',
                             required=True,
-                            help='user to support a cause') 
+                            help='user to support a cause')
         parser.add_argument('-c',
                             '--cause',
                             action='store',
@@ -866,7 +866,7 @@ class AppManager(object):
                             '--user',
                             action='store',
                             required=True,
-                            help='user to support a cause') 
+                            help='user to support a cause')
         parser.add_argument('-c',
                             '--cause',
                             action='store',
@@ -1020,7 +1020,7 @@ class AppManager(object):
         # it as 1, which is default.
         verbosity = args.verbose and 2 or 1
 
-        # Process subcommands for test 
+        # Process subcommands for test
         if args.all:
             try:
                 suite = unittest.TestLoader() \
@@ -1069,41 +1069,41 @@ class Database(object):
             api.create(self.migrate_repo, 'database repository')
             api.version_control(self.database_uri, self.migrate_repo)
         else:
-            api.version_control(self.database_uri, self.migrate_repo, 
+            api.version_control(self.database_uri, self.migrate_repo,
                                 api.version(self.migrate_repo))
 
     def downgrade(self, amount):
         '''Downgrades database given amount of versions.
         '''
-        v = self.get_version() 
+        v = self.get_version()
         api.downgrade(self.database_uri, self.migrate_repo, v - amount)
         print('Database downgraded by....: ' + str(amount))
         self.print_version()
 
     def migrate(self):
         '''Creates SQLAlchemy migration by comparing the structure of the database
-        (obtained from app.db) against the structure of the models (obtained from 
+        (obtained from app.db) against the structure of the models (obtained from
         models.py). The differences between the two are recorded as a migration
-        script inside the migration repository. The migration script knows how to 
+        script inside the migration repository. The migration script knows how to
         apply a migration or undo it, so it is always possible to upgrade or
         downgrade the database format.
         '''
-        v = self.get_version() 
+        v = self.get_version()
         migration = self.migrate_repo + ('/versions/%03d_migration.py' % (v + 1))
         tmp_module = imp.new_module('old_model')
         old_model = api.create_model(self.database_uri, self.migrate_repo)
         exec(old_model, tmp_module.__dict__)
-        script = api.make_update_script_for_model(self.database_uri, 
-                                                  self.migrate_repo, 
-                                                  tmp_module.meta, 
+        script = api.make_update_script_for_model(self.database_uri,
+                                                  self.migrate_repo,
+                                                  tmp_module.meta,
                                                   db.metadata)
         open(migration, 'wt').write(script)
         api.upgrade(self.database_uri, self.migrate_repo)
         print('New migration saved as ...: ' + path.relpath(migration))
-        self.print_version() 
+        self.print_version()
 
     def upgrade(self, amount):
-        ''' Upgrades the database to the latest version by applying the migration 
+        ''' Upgrades the database to the latest version by applying the migration
         scripts stored in database repository.
         '''
         v =  self.get_version()
@@ -1124,7 +1124,7 @@ class Module(object):
         # Remove static and template directories from the list
         mods.remove('static')
         mods.remove('templates')
-        return mods 
+        return mods
 
     def print_mods(self):
         print('Modules present...........: ' + ', '.join(self.get_mods()))
@@ -1133,7 +1133,7 @@ class Module(object):
     def create(name):
         '''Create the new module file structure and some initial files.
         '''
-        mod_path = 'app/' + name 
+        mod_path = 'app/' + name
         template_path = 'app/templates/' + name
 
         # Try to create a module and template paths. Throw exception if if any
@@ -1158,7 +1158,7 @@ class Module(object):
         views.write("mod = Blueprint(\'" + name + "\', __name__)\n\n")
         views.close()
 
-        # Create a template file and prefill with some basic, empty blocks 
+        # Create a template file and prefill with some basic, empty blocks
         template = open(template_path + '/index.html', 'w')
         template.write("{% extends \"base.html\" %}\n")
         template.write("{% set active_page = \"" + name + "\" %}\n\n")
@@ -1175,7 +1175,7 @@ class Module(object):
               "Don\'t forget to register your module blueprint in " + \
               bcolors.BOLD + "app/__init__.py " + bcolors.ENDC + \
               bcolors.WARNING + "like so:" + bcolors.ENDC)
-        print('  from app.' + name + '.views import mod as ' + name + 'Module')  
+        print('  from app.' + name + '.views import mod as ' + name + 'Module')
         print('  app.register_blueprint(' + name + 'Module)')
 
 
@@ -1185,7 +1185,7 @@ class DirtCleaner(object):
     def __init__(self, verbose, start_dir=None, dirt=None):
         self.verbose = verbose
         self.start_dir = '.'
-        self.dirt = [] 
+        self.dirt = []
 
     def find(self, file_types):
         for t in file_types:
@@ -1215,7 +1215,7 @@ class DirtCleaner(object):
                   str(len(self.dirt)) + ' files' + bcolors.ENDC)
         else:
             print('Nothing to remove')
-        
+
 
 if __name__ == '__main__':
-    AppManager() 
+    AppManager()
