@@ -62,7 +62,11 @@ hr {
     border-color: #ff9900;
 }
 small {
-    color: #e5e5e5;
+    color: #524535;
+}
+small.small-block {
+    display: block;
+    line-height: 1.4;
 }
 
 /* Links 
@@ -259,7 +263,7 @@ a:hover {
     .hero {
         padding-bottom: 12rem;
         text-align: left;
-        height: 165px;
+        height: 166px;
     }
     .hero-heading {
         font-size: 2.4rem;
