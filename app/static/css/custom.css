@@ -332,6 +332,9 @@ h3 span{
     background: #161310;
     color: #fff;
 }
+.footer small {
+    color: #fff;
+}
 .footer a {
     text-decoration: none;
 }
