@@ -160,6 +160,11 @@ def action_add(slug):
         form.populate_obj(action)
         action.cause = cause
         action.save()
+
+        send_email('New action available for "{0.title}"'.format(cause),
+                   [u.email for u in cause.supporters.all() if u.email != ''],
+                   {'cause': cause, 'action': action},
+                   'email/cause_action_supporter.txt')
         flash('Action added!', 'success')
         return redirect(url_for('.cause_detail', slug=slug))
 
@@ -188,7 +193,7 @@ def action_edit(slug, pk):
         form.populate_obj(action)
         action.update()
         flash('Action updated!', 'success')
-        return redirect(url_for('.action_detail', slug=slug))
+        return redirect(url_for('.cause_detail', slug=slug))
 
     context = {
         "cause": cause,

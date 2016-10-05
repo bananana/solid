@@ -68,7 +68,10 @@ class Action(CRUDMixin, db.Model):
 
     title         = db.Column(db.String(128))
 
+    summary       = db.Column(db.Text)
     description   = db.Column(db.Text)
+
+    link          = db.Column(db.String(500))
 
     supporters    = db.relationship('User', secondary=action_supporters,
                                     backref='actions_supported', lazy='dynamic')

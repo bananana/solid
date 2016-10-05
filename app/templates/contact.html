@@ -2,6 +2,11 @@
 
 {% block content %}
 <div class="container u-add-margin-top">
+    <div class="row">
+        <div class="six columns offset-by-three">
+            <h2>Contact</h2>
+        </div>
+    </div>
     {% from "helpers/forms.html" import render_field, render_boolean %}
     <form id="contact" name="contact" action="" method="post">
         {{ form.hidden_tag() }}

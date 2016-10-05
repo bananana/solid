@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container u-add-margin-top">
+    <div class="row">
+        <div class="six columns offset-by-three">
+            <h2>Manage pages</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>url</th>
+                        <th>edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for page in pages %}
+                    <tr>
+                        <td>{{ page.id }}</td>
+                        <td>{{ page.name }}</td>
+                        <td>{{ page.url }}</td>
+                        <td><a href="{{ url_for('.admin_page_edit', pk=page.id) }}">Edit</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <a href="{{ url_for('.admin_page_add') }}" class="button">Add page</a>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

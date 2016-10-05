@@ -17,6 +17,8 @@ CauseForm = model_form(Cause, base_class=Form, db_session=db.session, only=(
 
 ActionForm = model_form(Action, base_class=Form, db_session=db.session, only=(
 	'title',
+	'summary',
 	'description',
 	'expiration',
+	'link',
 ))

@@ -39,6 +39,9 @@
                         <!--<img class="logo img-circle u-pull-left" src="{{ url_for('static', filename='images/logo_128x128.png') }}">-->
                         <h4 class="title u-pull-left"><strong>SOLID</strong></h4>
                     </a>
+                    {% if current_user.is_admin %}
+                    <a href="{{ url_for('admin.admin') }}" title="Admin" class="button u-pull-right u-add-margin-left">Admin</a>
+                    {% endif %}
                     {% if active_page != "login" %}
                         {% if current_user.is_authenticated %} 
                             <a href="{{ url_for('users.logout') }}" title="Log Out" class="button u-pull-right">
@@ -82,12 +85,12 @@
     <div class="footer">
         <div class="container">
             <div class="row">
-                <div class="three columns offset-by-six">
-                    <h4>About</h4>
+                <div class="three columns offset-by-three">
+                    <h4>Information</h4>
                     <ul>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">How it works</a></li>
+                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/how_it_works">How it works</a></li>
                     </ul>
                 </div>
                 {% if debug %}
@@ -109,7 +112,7 @@
             <div class="row">
                 <div class="twelve columns u-text-center">
                     <small>&copy; 2016 {{ site_name }} authors</small> |
-                    <a href="{{ url_for('terms_of_service') }}"><small>Terms of Service</small></a>
+                    <a href="/terms_of_service"><small>Terms of Service</small></a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container u-add-margin-top">
+	<div class="row">
+		<div class="six columns offset-by-three">
+			<h2>Admin</h2>
+			<ul>
+				<li><a href="{{ url_for('.admin_user_list') }}">Manage users</a></li>
+				<li><a href="{{ url_for('.admin_page_list') }}">Manage pages</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}

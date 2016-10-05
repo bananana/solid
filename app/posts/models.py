@@ -30,7 +30,7 @@ class Post(CRUDMixin, db.Model):
         return super(Post, self).save(*args, **kwargs)
 
     def __repr__(self):
-       return '<Post %r>' % (self.title)
+       return '<Post "%r">' % (self.title)
 
 
 class Comment(CRUDMixin, db.Model):
@@ -58,4 +58,4 @@ class Comment(CRUDMixin, db.Model):
         return super(Comment, self).save(*args, **kwargs)
 
     def __repr__(self):
-        return '<Demand %r' % (self.title)
+        return '<Comment @{0.id} on "{0.post.title}">'.format(self)

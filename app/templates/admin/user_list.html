@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container u-add-margin-top">
+  <div class="row">
+    <div class="six columns offset-by-three">
+        <h2>Manage users</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>nickname</th>
+                    <th>e-mail</th>
+                    <th>edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.nickname }}</td>
+                    <td>{{ user.email|default('n/a') }}</td>
+                    <td>
+                      <a href="{{ url_for('users.edit', nickname=user.nickname) }}">
+                        edit
+                      </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

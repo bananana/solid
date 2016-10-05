@@ -13,6 +13,9 @@ def _send_async_email(app, msg):
 
 def send_email(subject, recipients, context, template_text, template_html=None, sender=None):
     """ sends an email using Flask-Mail (in the background using threads) """
+    # clear blank recipients
+    recipients = [r for r in recipients if r != '']
+
     msg = Message(subject, sender=sender, recipients=recipients)
 
     if sender is not None:

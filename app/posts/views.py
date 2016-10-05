@@ -117,6 +117,19 @@ def comment_add(slug, pk):
         comment.author = current_user
         comment.post = post
         comment.save()
+
+        recipients  = set([c.author.email for c in post.comments.all()])
+
+        if post.author is not None:
+            recipients.add(post.author.email)
+
+        print recipients
+
+        send_email('New comment on "{0.title}"'.format(post),
+                   list(recipients),
+                   {'post': post, 'comment': comment},
+                   'email/post_comment.txt')
+
         flash('Comment added!', 'success')
         return redirect(url_for('.post_detail', slug=cause.slug, pk=post.id))
 

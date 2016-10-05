@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row u-add-margin-top">
+    <div class="six columns offset-by-three">
+        <h2>{{ page.name }}</h2>
+        {{ page.content|markdown }}
+    </div>
+</div>
+{% endblock content %}

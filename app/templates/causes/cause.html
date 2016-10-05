@@ -24,6 +24,9 @@
                 eventLabel: 'Supported a cause'
             });
         });
+        $('.actions a[rel=external]').click(function(e) {
+            window.location.href = $(e.target).data('supportHref');
+        });
     });
 </script>
 {% endblock %}
@@ -75,19 +78,19 @@
                          <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
                               url_for('causes.cause_detail', slug=cause.slug,
                                   _external=True) | urlencode
-                         }}">Share on Facebook</a>
+                         }}" target="_blank">Share on Facebook</a>
                      </li>
                      <li>
                          <a href="https://twitter.com/home?status={{
                               url_for('causes.cause_detail', slug=cause.slug,
                                   _external=True) | urlencode
-                         }}">Share on Twitter</a>
+                         }}" target="_blank">Share on Twitter</a>
                      </li>
                      <li>
                          <a href="https://plus.google.com/share?url={{
                               url_for('causes.cause_detail', slug=cause.slug,
                                   _external=True) | urlencode
-                         }}">Share on Google+</a>
+                         }}" target="_blank">Share on Google+</a>
                      </li>
                  </ul>
             </div>
@@ -95,42 +98,56 @@
     </div>
     <hr>
     <div class="row">
-        <div class="nine columns">
+        <div class="nine columns actions">
             <h3 id="actions">
                 Take action to win
                 <span>({{ cause.actions.count() }} current)</span>
             </h3>
             <div class="row">
                 {% for action in cause.actions.all() %}
-                <a class="four columns support-action" 
-                   data-target="modal-action-{{ action.id }}">
-                    <h4>{{ action.title }}</h4>
-                    <strong>{{ action.heading }}</strong>
-                    <p>{{ action.description }}</p>
-                    <h6 class="u-remove-margin-bottom">
-                        Supporters: {{ action.supporters.count() }}
-                    </h6>
-                    {% if action.expiration %}
-                        <h6>Expires: {{ action.expiration.strftime('%b. %d, %Y') }}</h6>
-                    {% endif %}
-                </a>
-                <div id="modal-action-{{ action.id }}" class="modal">
-                    <div>
-                        <h3 class="u-pull-left">Take action!</h3>
-                        <a href="#" class="button-modal-close u-pull-right">
-                            <img src="/static/open-iconic/png/x.png" alt="X" />
-                        </a>
-                        <p class="u-cf">
-                            {{ action.description }}
-                        </p>
-                        <p>
-                            <a href="{{ url_for('causes.action_support', slug=cause.slug,
-                                pk=action.id) }}">Support!</a>
-                        </p>
+                    <a class="four columns support-action" 
+                       data-target="modal-action-{{ action.id }}">
+                        <h4>{{ action.title }}</h4>
+                        <p>{{ action.summary }}</p>
+                        <h6 class="u-remove-margin-bottom">
+                            Supporters: {{ action.supporters.count() }}
+                        </h6>
+                        {% if action.expiration %}
+                            <h6>Expires: {{ action.expiration.strftime('%b. %d, %Y') }}</h6>
+                        {% endif %}
+                    </a>
+                    <div id="modal-action-{{ action.id }}" class="modal">
+                        <div>
+                            <h3 class="u-pull-left">Take action!</h3>
+                            <a href="#" class="button-modal-close u-pull-right">
+                                <img src="/static/open-iconic/png/x.png" alt="X" />
+                            </a>
+                            <p class="u-cf">
+                                {{ action.description|markdown }}
+                            </p>
+                            {% if current_user not in action.supporters.all() %}
+                            <p>
+                                {% if action.link %}
+                                <a rel="external"  target="_blank"
+                                    data-support-href="{{ url_for('causes.action_support', slug=cause.slug,
+                                    pk=action.id) }}"
+                                    href="{{ action.link }}">Support!</a>
+                                {% else %}
+                                <a href="{{ url_for('causes.action_support', slug=cause.slug,
+                                    pk=action.id) }}">Support!</a>
+                                {% endif %}
+                            </p>
+                            {% endif %}
+                            {% if current_user in cause.creators.all() or current_user.is_admin%}
+                            <p>
+                                <a href="{{ url_for('causes.action_edit', slug=cause.slug,
+                                    pk=action.id) }}">Edit!</a>
+                            </p>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
         <div class="three columns">
             <h4>Creators:</h4>
