@@ -75,19 +75,19 @@
                          <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
                               url_for('causes.cause_detail', slug=cause.slug,
                                   _external=True) | urlencode
-                         }}">Share on Facebook</a>
+                         }}" target="_blank">Share on Facebook</a>
                      </li>
                      <li>
                          <a href="https://twitter.com/home?status={{
                               url_for('causes.cause_detail', slug=cause.slug,
                                   _external=True) | urlencode
-                         }}">Share on Twitter</a>
+                         }}" target="_blank">Share on Twitter</a>
                      </li>
                      <li>
                          <a href="https://plus.google.com/share?url={{
                               url_for('causes.cause_detail', slug=cause.slug,
                                   _external=True) | urlencode
-                         }}">Share on Google+</a>
+                         }}" target="_blank">Share on Google+</a>
                      </li>
                  </ul>
             </div>
