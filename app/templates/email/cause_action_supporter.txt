@@ -1,0 +1,10 @@
+Hi!
+
+FIXME add text
+
+{{ cause.title }}
+{{ action.title }}
+
+In Solidarity,
+
+The {{ site_name }} team
