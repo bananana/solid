@@ -40,7 +40,7 @@
                         <h4 class="title u-pull-left"><strong>SOLID</strong></h4>
                     </a>
                     {% if current_user.is_admin %}
-                        <a href="#" title="Admin" class="button u-pull-right u-add-margin-left">Admin</a>
+                    <a href="{{ url_for('admin.admin') }}" title="Admin" class="button u-pull-right u-add-margin-left">Admin</a>
                     {% endif %}
                     {% if active_page != "login" %}
                         {% if current_user.is_authenticated %} 

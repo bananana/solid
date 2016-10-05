@@ -11,6 +11,7 @@
                     <th>id</th>
                     <th>nickname</th>
                     <th>e-mail</th>
+                    <th>edit</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,11 @@
                     <td>{{ user.id }}</td>
                     <td>{{ user.nickname }}</td>
                     <td>{{ user.email|default('n/a') }}</td>
+                    <td>
+                      <a href="{{ url_for('users.edit', nickname=user.nickname) }}">
+                        edit
+                      </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
