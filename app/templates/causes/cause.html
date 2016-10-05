@@ -24,6 +24,9 @@
                 eventLabel: 'Supported a cause'
             });
         });
+        $('.actions a[rel=external]').click(function(e) {
+            window.location.href = $(e.target).data('supportHref');
+        });
     });
 </script>
 {% endblock %}
@@ -95,7 +98,7 @@
     </div>
     <hr>
     <div class="row">
-        <div class="nine columns">
+        <div class="nine columns actions">
             <h3 id="actions">
                 Take action to win
                 <span>({{ cause.actions.count() }} current)</span>
@@ -105,8 +108,7 @@
                     <a class="four columns support-action" 
                        data-target="modal-action-{{ action.id }}">
                         <h4>{{ action.title }}</h4>
-                        <strong>{{ action.heading }}</strong>
-                        <p>{{ action.description }}</p>
+                        <p>{{ action.summary }}</p>
                         <h6 class="u-remove-margin-bottom">
                             Supporters: {{ action.supporters.count() }}
                         </h6>
@@ -121,12 +123,27 @@
                                 <img src="/static/open-iconic/png/x.png" alt="X" />
                             </a>
                             <p class="u-cf">
-                                {{ action.description }}
+                                {{ action.description|markdown }}
                             </p>
+                            {% if current_user not in action.supporters.all() %}
                             <p>
+                                {% if action.link %}
+                                <a rel="external"  target="_blank"
+                                    data-support-href="{{ url_for('causes.action_support', slug=cause.slug,
+                                    pk=action.id) }}"
+                                    href="{{ action.link }}">Support!</a>
+                                {% else %}
                                 <a href="{{ url_for('causes.action_support', slug=cause.slug,
                                     pk=action.id) }}">Support!</a>
+                                {% endif %}
                             </p>
+                            {% endif %}
+                            {% if current_user in cause.creators.all() or current_user.is_admin%}
+                            <p>
+                                <a href="{{ url_for('causes.action_edit', slug=cause.slug,
+                                    pk=action.id) }}">Edit!</a>
+                            </p>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}

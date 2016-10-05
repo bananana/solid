@@ -193,7 +193,7 @@ def action_edit(slug, pk):
         form.populate_obj(action)
         action.update()
         flash('Action updated!', 'success')
-        return redirect(url_for('.action_detail', slug=slug))
+        return redirect(url_for('.cause_detail', slug=slug))
 
     context = {
         "cause": cause,
