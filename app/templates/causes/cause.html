@@ -44,7 +44,7 @@
                         {{ cause.title }}
                     </h4>
                     {% if supporter %}
-                        <h5>&#10004;&nbsp;You are supporting this cause</h5>
+                        <h5 class="u-add-margin-left">&#10004;&nbsp;You are supporting this cause</h5>
                     {% else %}
                         <a id="stand-with-us" 
                            class="button button-primary hero-button" 
@@ -108,7 +108,7 @@
                     <a class="four columns support-action" 
                        data-target="modal-action-{{ action.id }}">
                         <h4>{{ action.title }}</h4>
-                        <p>{{ action.summary }}</p>
+                        <p>{{ action.description }}</p>
                         <h6 class="u-remove-margin-bottom">
                             Supporters: {{ action.supporters.count() }}
                         </h6>
@@ -118,7 +118,7 @@
                     </a>
                     <div id="modal-action-{{ action.id }}" class="modal">
                         <div>
-                            <h3 class="u-pull-left">Take action!</h3>
+                            <h3 class="u-pull-left u-remove-margin-bottom">{{ action.title }}</h3>
                             <a href="#" class="button-modal-close u-pull-right">
                                 <img src="/static/open-iconic/png/x.png" alt="X" />
                             </a>
@@ -126,15 +126,18 @@
                                 {{ action.description|markdown }}
                             </p>
                             {% if current_user not in action.supporters.all() %}
-                            <p>
+                            <p class="u-remove-margin-bottom">
                                 {% if action.link %}
-                                <a rel="external"  target="_blank"
-                                    data-support-href="{{ url_for('causes.action_support', slug=cause.slug,
-                                    pk=action.id) }}"
-                                    href="{{ action.link }}">Support!</a>
+                                <a rel="external" 
+                                   class="button button-primary"
+                                   target="_blank"
+                                   data-support-href="{{ url_for('causes.action_support', slug=cause.slug,
+                                                      pk=action.id) }}"
+                                   href="{{ action.link }}">Support!</a>
                                 {% else %}
-                                <a href="{{ url_for('causes.action_support', slug=cause.slug,
-                                    pk=action.id) }}">Support!</a>
+                                <a class="button button-primary" 
+                                   href="{{ url_for('causes.action_support', slug=cause.slug,
+                                         pk=action.id) }}">Support!</a>
                                 {% endif %}
                             </p>
                             {% endif %}
@@ -142,6 +145,13 @@
                             <p>
                                 <a href="{{ url_for('causes.action_edit', slug=cause.slug,
                                     pk=action.id) }}">Edit!</a>
+                            </p>
+                            {% endif %}
+                            {% if action.supporters %}
+                            <p class="u-remove-margin-bottom">
+                                {% for supporter in action.supporters %}
+                                    {{ render_avatar(supporter) }}
+                                {% endfor %}
                             </p>
                             {% endif %}
                         </div>

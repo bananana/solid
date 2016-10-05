@@ -644,21 +644,21 @@ class AppManager(object):
         parser.add_argument('-c',
                             '--create',
                             action='store_true',
-                            help='create new cause')
+                            help='create new action')
         parser.add_argument('-d',
                             '--delete',
                             type=str,
                             action='store',
-                            help='delete cause')
+                            help='delete action')
         parser.add_argument('-l',
                             '--list',
                             action='store_true',
-                            help='list all causes')
+                            help='list all actions')
         parser.add_argument('-m',
                             '--modify',
                             type=str,
                             action='store',
-                            help='modify cause')
+                            help='modify action')
         parser.add_argument('-s',
                             '--search',
                             type=str,
@@ -677,7 +677,7 @@ class AppManager(object):
             #keys = sorted(a.__dict__.keys()[1:])
 
             #: Manually created list of keys in appropriate order
-            keys = ['cause_id', 'cause', 'title', 'description', 'expiration']
+            keys = ['title', 'description', 'expiration']
 
             #: Empty arrays to store user input
             values = []
