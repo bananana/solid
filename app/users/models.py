@@ -1,6 +1,6 @@
 from app import db, bcrypt
 from app.mixins import CRUDMixin 
-from app.causes.models import cause_supporters, cause_creators
+from app.causes.models import cause_supporters, cause_creators, action_supporters
 from flask.ext.login import UserMixin
 from random import randint
 
@@ -31,6 +31,11 @@ class User(UserMixin, CRUDMixin, db.Model):
     created     = db.relationship('Cause',
                                   secondary=cause_creators,
                                   backref='causes_created',
+                                  lazy='dynamic')
+
+    actions     = db.relationship('Action',
+                                  secondary=action_supporters,
+                                  backref='actions_supported',
                                   lazy='dynamic')
 
     def __init__(self, social_id=None, is_admin=False, nickname=None, 

@@ -21,21 +21,6 @@
             {% if user.email %}<div>{{ user.email }}</div>{% endif %}
             {% if user.phone %}<div>{{ user.phone }}</div>{% endif %}
             {% if user.zip %}<div>{{ user.zip }}</div>{% endif %}
-            <hr>
-            <h5>Supporting {{ user.supports.count() }} causes</h5>
-            <ul>
-            {% for cause in user.supports %}
-                <li><a href="/cause/{{ cause.slug }}">{{ cause.title }}</a></li>
-            {% endfor %}
-            </ul>
-            <hr>
-            <h5>Created {{ user.created.count() }} causes</h5>
-            <ul>
-            {% for cause in user.created %}
-                <li><a href="/cause/{{ cause.slug }}">{{ cause.title }}</a></li>
-            {% endfor %}
-            </ul>
-            <hr>
         </div>
         <div class="six columns">
             <ul>
@@ -51,8 +36,31 @@
             </ul>
         </div>
         <div class="three columns">
-            <h5>Suggested</h5>
-            <p><strong>FIXME add content or remove</strong></p>
+            <h5>Created {{ user.created.count() }} causes</h5>
+            <ul>
+            {% for cause in user.created %}
+                <li><a href="/cause/{{ cause.slug }}">{{ cause.title }}</a></li>
+            {% endfor %}
+            </ul>
+            <hr>
+            <h5>Supporting {{ user.supports.count() }} causes</h5>
+            <ul>
+            {% for cause in user.supports %}
+                <li><a href="/cause/{{ cause.slug }}">{{ cause.title }}</a></li>
+            {% endfor %}
+            </ul>
+            <hr>
+            <h5>{{ user.actions.count() }} Support actions</h5>
+            <ul>
+            {% for action in user.actions %}
+                <li>
+                    <strong>{{ action.title }}</strong> <em>{{ action.cause.title }}</em>
+                    <br>
+                    {{ action.description }}
+                </li>
+            {% endfor %}    
+            </ul>
+
         </div>
     </div>
 

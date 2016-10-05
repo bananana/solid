@@ -216,7 +216,7 @@ def user(nickname):
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
 
-    #: Causes supported by user being viewd
+    #: Causes supported by user being viewed
     supported_causes = user.supports.all()
 
     # Generate feed
