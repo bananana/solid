@@ -66,7 +66,9 @@ class Action(CRUDMixin, db.Model):
     id            = db.Column(db.Integer, primary_key=True)
 
     cause_id      = db.Column(db.Integer, db.ForeignKey('causes_cause.id'))
-    cause         = db.relationship('Cause', backref=db.backref('actions', lazy='dynamic'))
+    cause         = db.relationship('Cause', backref=db.backref(
+        'actions', lazy='dynamic', order_by='Action.id.desc()'
+    ))
 
     title         = db.Column(db.String(128))
 
