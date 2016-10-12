@@ -77,6 +77,14 @@
                 data-target="modal-share">
                 Share
             </a>
+            <h4 class="u-add-margin-top">Creators:</h4>
+            {% for u in cause.creators.all() %}
+                {{ render_avatar(u) }}
+            {% endfor %}
+            <h4 class="u-add-margin-top">{{ cause.supporters.count() }} supporters:</h4>
+            {% for u in cause.supporters.all() %}
+                {{ render_avatar(u) }}
+            {% endfor %}
         </div>
         <div id="modal-share" class="modal">
             <div>
@@ -167,16 +175,6 @@
                     </div>
                 {% endfor %}
             </div>
-        </div>
-        <div class="three columns">
-            <h4>Creators:</h4>
-            {% for u in cause.creators.all() %}
-                {{ render_avatar(u) }}
-            {% endfor %}
-            <h4>{{ cause.supporters.count() }} supporters:</h4>
-            {% for u in cause.supporters.all() %}
-                {{ render_avatar(u) }}
-            {% endfor %}
         </div>
     </div>
     <hr>
