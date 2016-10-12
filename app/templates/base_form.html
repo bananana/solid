@@ -8,10 +8,14 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/simplemde.10.0.1.min.js') }}"></script>
 <script>
 $(document).ready(function() {
-    var simplemde = new SimpleMDE({ 
-        toolbar: ["bold", "italic", "quote", "|", "link", "image", "|",
-                  "preview", "|", "guide"],
-        status: false
+    $('textarea').each(function(){
+        var simplemde = new SimpleMDE({ 
+            toolbar: ["bold", "italic", "quote", "|", "link", "image", "|",
+                      "preview", "|", "guide"],
+            element: this,
+            status: false
+        });
+        simplemde.render();
     });
 });
 </script>   
