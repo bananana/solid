@@ -28,6 +28,8 @@ class Cause(CRUDMixin, db.Model):
     created_on    = db.Column(db.DateTime)
     location      = db.Column(db.String(128))
 
+    intro         = db.Column(db.Text)
+
     creators      = db.relationship('User', secondary=cause_creators,
                                     backref='causes_created', lazy='dynamic')
     supporters    = db.relationship('User', secondary=cause_supporters,

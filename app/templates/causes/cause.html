@@ -51,6 +51,9 @@
                     <h4 class="hero-heading">
                         {{ cause.title }}
                     </h4>
+                    <p class="hero-content">
+                        {{ cause.intro }}
+                    </p>
                     {% if supporter %}
                         <h5 class="u-add-margin-left">&#10004;&nbsp;You are supporting this cause</h5>
                     {% else %}
@@ -112,11 +115,11 @@
                 <span>({{ cause.actions.count() }} current)</span>
             </h3>
             <div class="row">
-                {% for action in cause.actions.all() %}
+                {% for action in cause.actions.all()[0:4] %}
                     <a class="four columns support-action" 
                        data-target="modal-action-{{ action.id }}">
                         <h4>{{ action.title }}</h4>
-                        <p>{{ action.description }}</p>
+                        <p>{{ action.summary }}</p>
                         <h6 class="u-remove-margin-bottom">
                             Supporters: {{ action.supporters.count() }}
                         </h6>
@@ -148,7 +151,8 @@
                             {% endif %}
                             {% if current_user in cause.creators.all() or current_user.is_admin%}
                             <p>
-                                <a href="{{ url_for('causes.action_edit', slug=cause.slug,
+                                <a class="button button-primary" 
+                                    href="{{ url_for('causes.action_edit', slug=cause.slug,
                                     pk=action.id) }}">Edit!</a>
                             </p>
                             {% endif %}
