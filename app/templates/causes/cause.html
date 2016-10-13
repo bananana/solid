@@ -51,9 +51,11 @@
                     <h4 class="hero-heading">
                         {{ cause.title }}
                     </h4>
+                    {% if cause.intro %}
                     <p class="hero-content">
                         {{ cause.intro }}
                     </p>
+                    {% endif %}
                     {% if supporter %}
                         <h5 class="u-add-margin-left">&#10004;&nbsp;You are supporting this cause</h5>
                     {% else %}
