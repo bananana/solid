@@ -12,7 +12,9 @@ class Post(CRUDMixin, db.Model):
     id            = db.Column(db.Integer, primary_key=True)
 
     cause_id      = db.Column(db.Integer, db.ForeignKey('causes_cause.id'))
-    cause         = db.relationship('Cause', backref=db.backref('posts', lazy='dynamic'))
+    cause         = db.relationship('Cause', backref=db.backref(
+        'posts', lazy='dynamic', order_by="Post.created_on.desc()"
+    ))
 
     title         = db.Column(db.String(128))
     summary       = db.Column(db.Text)

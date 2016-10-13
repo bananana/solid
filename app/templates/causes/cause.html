@@ -21,10 +21,18 @@
                 hitType: 'event',
                 eventCategory: 'Causes',
                 eventAction: 'support',
-                eventLabel: 'Supported a cause'
+                eventLabel: 'cause'
             });
         });
-        $('.actions a[rel=external]').click(function(e) {
+        $('a.support').click(function() {
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'Causes',
+                eventAction: 'support',
+                eventLabel: 'action'
+            });
+        });
+        $('a.support[rel=external]').click(function(e) {
             window.location.href = $(e.target).data('supportHref');
         });
     });
@@ -43,6 +51,9 @@
                     <h4 class="hero-heading">
                         {{ cause.title }}
                     </h4>
+                    <p class="hero-content">
+                        {{ cause.intro }}
+                    </p>
                     {% if supporter %}
                         <h5 class="u-add-margin-left">&#10004;&nbsp;You are supporting this cause</h5>
                     {% else %}
@@ -66,6 +77,14 @@
                 data-target="modal-share">
                 Share
             </a>
+            <h4 class="u-add-margin-top">Creators:</h4>
+            {% for u in cause.creators.all() %}
+                {{ render_avatar(u) }}
+            {% endfor %}
+            <h4 class="u-add-margin-top">{{ cause.supporters.count() }} supporters:</h4>
+            {% for u in cause.supporters.all() %}
+                {{ render_avatar(u) }}
+            {% endfor %}
         </div>
         <div id="modal-share" class="modal">
             <div>
@@ -104,11 +123,11 @@
                 <span>({{ cause.actions.count() }} current)</span>
             </h3>
             <div class="row">
-                {% for action in cause.actions.all() %}
+                {% for action in cause.actions.all()[0:4] %}
                     <a class="four columns support-action" 
                        data-target="modal-action-{{ action.id }}">
                         <h4>{{ action.title }}</h4>
-                        <p>{{ action.description }}</p>
+                        <p>{{ action.summary }}</p>
                         <h6 class="u-remove-margin-bottom">
                             Supporters: {{ action.supporters.count() }}
                         </h6>
@@ -128,22 +147,20 @@
                             {% if current_user not in action.supporters.all() %}
                             <p class="u-remove-margin-bottom">
                                 {% if action.link %}
-                                <a rel="external" 
-                                   class="button button-primary"
-                                   target="_blank"
-                                   data-support-href="{{ url_for('causes.action_support', slug=cause.slug,
-                                                      pk=action.id) }}"
-                                   href="{{ action.link }}">Support!</a>
+                                <a class="button button-primary support" rel="external"  target="_blank"
+                                    data-support-href="{{ url_for('causes.action_support', slug=cause.slug,
+                                    pk=action.id) }}"
+                                    href="{{ action.link }}">Support!</a>
                                 {% else %}
-                                <a class="button button-primary" 
-                                   href="{{ url_for('causes.action_support', slug=cause.slug,
-                                         pk=action.id) }}">Support!</a>
+                                <a class="support button button-primary" ref="{{ url_for('causes.action_support', slug=cause.slug,
+                                    pk=action.id) }}">Support!</a>
                                 {% endif %}
                             </p>
                             {% endif %}
                             {% if current_user in cause.creators.all() or current_user.is_admin%}
                             <p>
-                                <a href="{{ url_for('causes.action_edit', slug=cause.slug,
+                                <a class="button button-primary" 
+                                    href="{{ url_for('causes.action_edit', slug=cause.slug,
                                     pk=action.id) }}">Edit!</a>
                             </p>
                             {% endif %}
@@ -158,16 +175,6 @@
                     </div>
                 {% endfor %}
             </div>
-        </div>
-        <div class="three columns">
-            <h4>Creators:</h4>
-            {% for u in cause.creators.all() %}
-                {{ render_avatar(u) }}
-            {% endfor %}
-            <h4>{{ cause.supporters.count() }} supporters:</h4>
-            {% for u in cause.supporters.all() %}
-                {{ render_avatar(u) }}
-            {% endfor %}
         </div>
     </div>
     <hr>

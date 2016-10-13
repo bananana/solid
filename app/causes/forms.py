@@ -8,6 +8,7 @@ from .models import Cause, Action
 
 CauseForm = model_form(Cause, base_class=Form, db_session=db.session, only=(
 	'title',
+	'intro',
 	'boss',
 	'location',
 	'image',

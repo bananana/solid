@@ -230,7 +230,8 @@ a:hover {
 .hero {
     background-size: cover;
 }
-.hero-heading {
+.hero-heading, 
+.hero-content {
     margin: 1rem 2rem 2rem 2rem;
 }
 .hero-button {
@@ -243,6 +244,7 @@ a:hover {
     overflow: hidden;
     display: inline-block;
     box-shadow: 0 0 10px #000;
+    max-width: 900px;
 }
 .glass::before {
     width: 100%;
@@ -268,6 +270,9 @@ a:hover {
     .hero-heading {
         font-size: 2.4rem;
     }
+    .hero-content {
+        font-size: 1.5rem;
+    }
     .glass::before {
         margin-left: 0;
     }
@@ -278,6 +283,9 @@ a:hover {
     }
     .hero-heading {
         font-size: 6.0rem;
+    }
+    .hero-content {
+        font-size: 2.0rem;
     }
     .hero-button {
         font-size: 2rem;
