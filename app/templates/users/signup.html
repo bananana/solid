@@ -15,6 +15,7 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content %}
+<div class="container u-add-margin-top">
     {% from "helpers/forms.html" import render_field, render_boolean %}
     <form id="signup" name="signup" action="" method="post">
         {{ form.hidden_tag() }}
@@ -75,4 +76,5 @@ $(document).ready(function() {
             </fieldset>
         </div>
     </form>
+</div>
 {% endblock %}
