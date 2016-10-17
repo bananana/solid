@@ -26,7 +26,8 @@ section (app/templates/styleguide/templating#form-helpers)
 {% macro render_field(field, label, flags) %}
     <label for="{{ label.field_id }}">
         {{ label.text }} {% if flags.required %}*{% endif %}
-        <span id="form-{{ label.field_id }}-error" class="u-pull-right"></span>
+        <span id="form-{{ label.field_id }}-error" class="u-pull-right">
+        </span>
     </label>
     {{ field }}
 {% endmacro %}
