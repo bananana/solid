@@ -23,6 +23,8 @@ class SignupForm(Form):
     nickname         = StringField('Nickname',
                                    validators=[DataRequired(),
                                                Regexp('[\w-]')])
+    full_name        = StringField('Full Name',
+                                   validators=[Optional()])
     password         = PasswordField('Password', 
                                      validators=[DataRequired(), 
                                                  EqualTo('verify_password')])

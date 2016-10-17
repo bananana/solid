@@ -10,6 +10,13 @@ $(document).ready(function() {
         form : '#signup',
         errorMessageClass : 'danger'
     });
+    $(document).ready(function() {
+        $('#email').change(function(e) {
+            if ($('#nickname').val() == '') {
+                $('#nickname').val($(e.target).val().split('@')[0]);
+            }
+        });
+    });
 });
 </script>   
 {% endblock %}
@@ -42,6 +49,14 @@ $(document).ready(function() {
                             'data-validation-error-msg':'Must be alphanumeric'}),
                         form.nickname.label,
                         form.nickname.flags
+                        )
+                    }}
+                    {{ render_field(
+                        form.full_name(**{
+                            'class':'u-full-width'
+                        }),
+                        form.full_name.label,
+                        form.full_name.flags
                         )
                     }}
                     {{ render_field(
