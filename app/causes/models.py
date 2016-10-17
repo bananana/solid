@@ -22,8 +22,8 @@ class Cause(CRUDMixin, db.Model):
     id            = db.Column(db.Integer, primary_key=True)
     demands       = db.relationship('Demand', backref='assigned_campaign', lazy='dynamic')
 
-    title         = db.Column(db.String(128))
-    slug          = db.Column(db.String(128))
+    title         = db.Column(db.String(128), nullable=False)
+    slug          = db.Column(db.String(128), nullable=False)
     boss          = db.Column(db.String(128))
     created_on    = db.Column(db.DateTime)
     location      = db.Column(db.String(128))
@@ -70,7 +70,7 @@ class Action(CRUDMixin, db.Model):
         'actions', lazy='dynamic', order_by='Action.id.desc()'
     ))
 
-    title         = db.Column(db.String(128))
+    title         = db.Column(db.String(128), nullable=False)
 
     summary       = db.Column(db.Text)
     description   = db.Column(db.Text)
