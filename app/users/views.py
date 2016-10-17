@@ -6,6 +6,7 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 from flask_dance.contrib.google import google 
 from flask_dance.contrib.twitter import twitter
 from flask_dance.contrib.facebook import facebook
+from flask_dance.consumer import oauth_authorized
 
 from slugify import slugify
 
@@ -39,6 +40,9 @@ def before_request():
         g.user.last_login = datetime.utcnow()
         g.user.save()
 
+@oauth_authorized.connect
+def logged_in(blueprint, token):
+    return redirect(request.args.get('next') or url_for('index'))
 
 @mod.route('/signup', methods=['GET', 'POST'])
 def signup():
