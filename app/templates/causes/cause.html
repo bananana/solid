@@ -154,7 +154,7 @@
                                     pk=action.id) }}"
                                     href="{{ action.link }}">Support!</a>
                                 {% else %}
-                                <a class="support button button-primary" ref="{{ url_for('causes.action_support', slug=cause.slug,
+                                <a class="button button-primary" href="{{ url_for('causes.action_support', slug=cause.slug,
                                     pk=action.id) }}">Support!</a>
                                 {% endif %}
                             </p>
