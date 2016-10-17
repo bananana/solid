@@ -161,7 +161,7 @@ def action_add(slug):
         action.cause = cause
         action.save()
 
-        send_email('New action available for "{0.title}"'.format(cause),
+        send_email('Cause Update: A New Action is Available for {0.title}"'.format(cause),
                    [u.email for u in cause.supporters.all() if u.email != ''],
                    {'cause': cause, 'action': action},
                    'email/cause_action_supporter.txt')
