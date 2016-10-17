@@ -18,9 +18,11 @@
                 <a href="{{ url_for('users.edit', nickname=user.nickname) }}" class="button u-pull-right u-remove-margin-top">Edit</a>
             {% endif %}
             <h5 class="u-remove-margin-bottom">{{ user.full_name }}</h5>
+            {% if current_user == user or current_user.is_admin %}
             {% if user.email %}<div>{{ user.email }}</div>{% endif %}
             {% if user.phone %}<div>{{ user.phone }}</div>{% endif %}
             {% if user.zip %}<div>{{ user.zip }}</div>{% endif %}
+            {% endif %}
         </div>
         <div class="six columns">
             <ul>
