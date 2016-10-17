@@ -224,11 +224,9 @@ def user(nickname):
     supported_causes = user.supports.all()
 
     # Generate feed
-    feed = []
-    for cause in supported_causes:
-       feed.append(Post.query.filter_by(cause_id=cause.id).all())
+    feed = Post.query.filter_by(author_id=user.id).all()
 
-    return render_template('users/index.html', user=user, feed=feed)
+    return render_template('users/index.html', user=user, feed=feed[::-1])
 
 
 @mod.route('/user/<nickname>/edit', methods=['GET', 'POST'])

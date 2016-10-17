@@ -24,7 +24,7 @@
         </div>
         <div class="six columns">
             <ul>
-            {% for post in feed[0] %}
+            {% for post in feed %}
                 <li><strong>{{ post.title }}</strong> by <em>{{ post.author.nickname }}</em><br>{{ post.body }}</li>
             {% else %}
                 <li>
