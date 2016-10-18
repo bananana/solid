@@ -6,9 +6,9 @@
 
 {% block content %}
 {% from "helpers/forms.html" import render_field, render_boolean %}
-
+<div class="full-width-container">
 <form id="edit" name="edit" action="" method="post">
-    <div class="row">
+    <div class="row u-add-margin-top">
         <div class="eight columns">
             <h1>{{ user.nickname }}</h1>
         </div>
@@ -61,6 +61,10 @@
                 {{ render_field(
                     form.zip(**{
                         'class':'u-full-width',
+                        'data-validation':'custom',
+                        'data-validation-regexp':'^[0-9]{5}$',
+                        'data-validation-error-msg-container':'#form-zip-container',
+                        'data-validation-error-msg':'Incorrect'
                     }),
                     form.zip.label,
                     form.zip.flags
@@ -120,4 +124,5 @@
         </div>
     </div>
 </form>
+</div>
 {% endblock %}
