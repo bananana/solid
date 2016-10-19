@@ -23,85 +23,26 @@
             <fieldset>
                 <legend><h3>Profile</h3></legend>
                 {{ form.hidden_tag() }}
-                {{ render_field(
-                    form.nickname(**{
-                        'class':'u-full-width',
-                    }),
-                    form.nickname.label,
-                    form.nickname.flags
-                   )
-                }}
-                {{ render_field(
-                    form.full_name(**{
-                        'class':'u-full-width',
-                    }),
-                    form.full_name.label,
-                    form.full_name.flags
-                   )
-                }}
-                {{ render_field(
-                    form.email(**{
-                        'class':'u-full-width',
-                        'data-validation':'email',
-                        'data-validation-error-msg-container':'#form-email-container',
-                        'data-validation-error-msg':'Incorrect'
-                    }),
-                    form.email.label,
-                    form.email.flags
-                   )
-                }}
-                {{ render_field(
-                    form.phone(**{
-                        'class':'u-full-width',
-                    }),
-                    form.phone.label,
-                    form.phone.flags
-                   )
-                }}
-                {{ render_field(
-                    form.zip(**{
-                        'class':'u-full-width',
-                    }),
-                    form.zip.label,
-                    form.zip.flags
-                   )
-                }}
-                {{ render_field(
-                    form.employer(**{
-                        'class':'u-full-width',
-                    }),
-                    form.employer.label,
-                    form.employer.flags
-                   )
-                }}
-                {{ render_field(
-                    form.description(**{
-                        'class':'u-full-width',
-                    }),
-                    form.description.label,
-                    form.description.flags
-                   )
-                }}
+                {{ render_field(form.nickname, class='u-full-width') }}
+                {{ render_field(form.full_name, class='u-full-width') }}
+                {{ render_field(form.email,
+                    class='u-full-width',
+                    data_validation='email',
+                    data_validation_error_msg_container='#form-email-container',
+                    data_validation_error_msg='Incorrect'
+                ) }}
+                {{ render_field(form.phone, class='u-full-width') }}
+                {{ render_field(form.zip, class='u-full-width') }}
+                {{ render_field(form.employer, class='u-full-width') }}
+                {{ render_field(form.description, class='u-full-width') }}
             </fieldset>
         </div>
         <div class="six columns">
             <fieldset>
                 <legend><h3>Password</h3></legend>
-                {{ render_field(form.current_password(**{
-                                    'class':'u-full-width'
-                                }), 
-                                form.current_password.label, 
-                                form.current_password.flags) }}
-                {{ render_field(form.new_password(**{
-                                    'class':'u-full-width'
-                                }), 
-                                form.new_password.label, 
-                                form.new_password.flags) }}
-                {{ render_field(form.verify_password(**{
-                                    'class':'u-full-width'
-                                }), 
-                                form.verify_password.label, 
-                                form.verify_password.flags) }}
+                {{ render_field(form.current_password, class='u-full-width') }}
+                {{ render_field(form.new_password, class='u-full-width') }}
+                {{ render_field(form.verify_password, class='u-full-width') }}
             </fieldset>
             <fieldset>
                 <legend><h3>Privacy</h3></legend>

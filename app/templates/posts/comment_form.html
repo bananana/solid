@@ -1,13 +1,13 @@
 {% extends "base_form.html" %}
 
 {% block content %}
-{% from "helpers/forms.html" import render_field, render_boolean, render_f %}
+{% from "helpers/forms.html" import render_field, render_boolean %}
 <form id="comment" name="comment" action="" method="post">
     {{ form.hidden_tag() }}
     <div class="row">
         <fieldset>
             <div class="six columns offset-by-three">
-                {{ render_f(form.body, "u-full-width")  }}
+                {{ render_field(form.body, class="u-full-width")  }}
             </div>
         </fieldset>
     </div>

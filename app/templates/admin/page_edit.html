@@ -1,7 +1,7 @@
 {% extends "base_form.html" %}
 
 {% block content %}
-    {% from "helpers/forms.html" import render_field, render_boolean, render_f %}
+    {% from "helpers/forms.html" import render_field, render_boolean %}
     <div class="row u-add-margin-top">
       <div class="six columns offset-by-three">
         <h2>Edit page</h2>
@@ -12,13 +12,13 @@
         <div class="row">
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_f(form.name, "u-full-width") }}
+                    {{ render_field(form.name, class="u-full-width") }}
                 </div>
                 <div class="six columns offset-by-three">
-                    {{ render_f(form.url, "u-full-width") }}
+                    {{ render_field(form.url, class="u-full-width") }}
                 </div>
                 <div class="six columns offset-by-three">
-                    {{ render_f(form.content, "u-full-width")  }}
+                    {{ render_field(form.content, class="u-full-width")  }}
                 </div>
             </fieldset>
         </div>

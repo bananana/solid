@@ -40,11 +40,11 @@
     </div>
     {% endfor %}
     <div class="six columns offset-by-three">
-        {% from "helpers/forms.html" import render_field, render_boolean, render_f %}
+        {% from "helpers/forms.html" import render_field, render_boolean %}
         <form id="cause" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
             {{ comment_form.hidden_tag() }}
             <fieldset class="no-label">
-                {{ render_f(comment_form.body, "u-full-width") }}
+                {{ render_field(comment_form.body, class="u-full-width") }}
             </fieldset>
             <input id="save" type="submit" value="Post"
                 class="button button-primary u-mobile-fixed-bottom">

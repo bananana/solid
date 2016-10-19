@@ -2,33 +2,33 @@
 {% set active_page = "cause" %}
 
 {% block content %}
-    {% from "helpers/forms.html" import render_field, render_boolean, render_f %}
+    {% from "helpers/forms.html" import render_field, render_boolean %}
     <form id="cause" name="cause" action="" method="post">
         {{ form.hidden_tag() }}
         <div class="row">
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_f(form.title, "u-full-width") }}
+                    {{ render_field(form.title, class="u-full-width") }}
                 </div>
             </fieldset>
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_f(form.summary, "u-full-width")  }}
+                    {{ render_field(form.summary, class="u-full-width")  }}
                 </div>
             </fieldset>
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_f(form.description, "u-full-width")  }}
+                    {{ render_field(form.description, class="u-full-width")  }}
                 </div>
             </fieldset>
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_f(form.expiration, "u-full-width") }}
+                    {{ render_field(form.expiration, class="u-full-width") }}
                 </div>
             </fieldset>
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_f(form.link, "u-full-width")  }}
+                    {{ render_field(form.link, class="u-full-width")  }}
                 </div>
             </fieldset>
         </div>

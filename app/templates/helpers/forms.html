@@ -23,15 +23,16 @@ section (app/templates/styleguide/templating#form-helpers)
     {% endfor %}
 {% endmacro %}
 
-{% macro render_field(field, label, flags) %}
-    <label for="{{ label.field_id }}">
-        {{ label.text }} {% if flags.required %}*{% endif %}
-        <span id="form-{{ label.field_id }}-error" class="u-pull-right">
+{% macro render_field(field) %}
+    <label for="{{ field.label.field_id }}">
+        {{ field.label.text }} {% if field.flags.required %}*{% endif %}
+        <span id="form-{{ field.label.field_id }}-error" class="u-pull-right">
         </span>
     </label>
-    {{ field }}
-{% endmacro %}
-
-{% macro render_f(f, class) %}
-    {{ render_field(f(**{'class': class}), f.label, f.flags) }}
+    {{ field(**kwargs)|safe }}
+    {% if field.errors %}
+        {% for error in field.errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
 {% endmacro %}

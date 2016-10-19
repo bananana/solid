@@ -114,9 +114,7 @@
         &#123;&#123; form.hidden_tag() &#125;&#125;
 
         &lt;!-- Render your field --&gt;
-        &#123;&#123; render_field(form.some_field(**&#123;&#125;), 
-                        form.some_field.label,
-                        form.some_field.flags) &#125;&#125;
+        &#123;&#123; render_field(form.some_field) &#125;&#125;
 
     &lt;/form&gt;
 
@@ -144,7 +142,7 @@
                         <li><code><strong>radio</strong></code> : takes a WTForms <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.RadioField"><code>RadioField()</code></a>, which is usually defined in the <code>forms.py</code> file of a module.</li>
                     </ul>
                 </dd>
-                <dt><code><strong>render_field(field, label, flags)</strong></code></dt>
+                <dt><code><strong>render_field(field, **kwargs)</strong></code></dt>
                 <dd>
                     <strong>Description:</strong><br>
                     Renders most other fields like <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.StringField"><code>StringField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.PasswordField"><code>PasswordField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.HiddenField"><code>HiddenField()</code></a>, <a href="http://wtforms.readthedocs.org/en/latest/fields.html#wtforms.fields.TextAreaField"><code>TextAreaField()</code></a>, etc. A full list of possible fields can be found <a href="http://wtforms.readthedocs.org/en/latest/fields.html">here</a>.
@@ -152,19 +150,7 @@
                     <strong>Arguments:</strong>
                     <ul>
                         <li><code><strong>field</strong></code> : any of the fields availabe <a href="http://wtforms.readthedocs.org/en/latest/fields.html">here</a>, except the <code>RadioField()</code>, for which you should use the <code>render_radio()</code> macro.</li>
-                        <li><code><strong>label</strong></code> : pass the form label to this, usually it would look something like <code>form.field_name.label</code>.</li>
-                        <li><code><strong>flags</strong></code> : pass all the form flags to this, usually it would look something like <code>form.field_name.flags</code>. If there's a <em>required</em> flag set, the label will automatically get an asterisk next to it.</li>
-                    </ul>
-                </dd>
-                <dt><code><strong>render_f(field, class)</strong></code></dt>
-                <dd>
-                    <strong>Description:</strong><br>
-                    Shortcut to <code>render_field</code>
-                    <br><br>
-                    <strong>Arguments:</strong>
-                    <ul>
-                        <li><code><strong>field</strong></code> : any of the fields availabe <a href="http://wtforms.readthedocs.org/en/latest/fields.html">here</a>, except the <code>RadioField()</code>, for which you should use the <code>render_radio()</code> macro.</li>
-                        <li><code><strong>class</strong></code> : CSS class to apply to the form field</li>
+                        <li><code><strong>**kwargs</strong></code> : keyword arguments to be passed to the <code>Widget()</code>. Names are converted, e.g. <code>data_validation_error_msg</code> becomes <code>data-validation_error_msg</code></li>
                     </ul>
                 </dd>
             </dl>
