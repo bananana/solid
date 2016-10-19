@@ -23,7 +23,11 @@
             </fieldset>
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_field(form.expiration, class="u-full-width") }}
+                    {{ render_field(
+                        form.expiration, 
+                        class="u-full-width",
+                        placeholder="2020-01-01 12:01:00"
+                    ) }}
                 </div>
             </fieldset>
             <fieldset>
