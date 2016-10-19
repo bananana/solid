@@ -141,13 +141,13 @@
                         <div>
                             <h3 class="u-pull-left u-remove-margin-bottom">{{ action.title }}</h3>
                             <a href="#" class="button-modal-close u-pull-right">
-                                <img src="/static/open-iconic/png/x.png" alt="X" />
+                                <img src="/static/open-iconic/png/x-2x.png" alt="X" />
                             </a>
                             <p class="u-cf">
                                 {{ action.description|markdown }}
                             </p>
                             {% if current_user not in action.supporters.all() %}
-                            <p class="u-remove-margin-bottom">
+                            <p class="u-remove-margin-bottom u-pull-right">
                                 {% if action.link %}
                                 <a class="button button-primary support" rel="external"  target="_blank"
                                     data-support-href="{{ url_for('causes.action_support', slug=cause.slug,
@@ -159,20 +159,21 @@
                                 {% endif %}
                             </p>
                             {% endif %}
-                            {% if current_user in cause.creators.all() or current_user.is_admin%}
+                            {% if current_user in cause.creators.all() or current_user.is_admin %}
                             <p>
-                                <a class="button button-primary" 
+                                <a class="button button-primary u-pull-right u-add-margin-right" 
                                     href="{{ url_for('causes.action_edit', slug=cause.slug,
                                     pk=action.id) }}">Edit!</a>
                             </p>
                             {% endif %}
                             {% if action.supporters %}
-                            <p class="u-remove-margin-bottom">
+                            <p class="u-remove-margin-bottom u-pull-left">
                                 {% for supporter in action.supporters %}
                                     {{ render_avatar(supporter) }}
                                 {% endfor %}
                             </p>
                             {% endif %}
+                            <br class="u-cf">
                         </div>
                     </div>
                 {% endfor %}
