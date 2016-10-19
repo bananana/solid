@@ -261,6 +261,11 @@ a:hover {
     filter: blur(5px);
     opacity: 0.5;
 }
+.glass span {
+    font-style: italic;
+    display: block;
+    margin: -1.5em 0 1em 0;
+}
 @media (min-width: 550px) {
     .hero {
         padding-bottom: 12rem;
@@ -275,6 +280,12 @@ a:hover {
     }
     .glass::before {
         margin-left: 0;
+    }
+    .glass span {
+        display: inline-block;
+        margin: 0;
+        max-width: 270px;
+        vertical-align: middle;
     }
 }
 @media (min-width: 750px) {
