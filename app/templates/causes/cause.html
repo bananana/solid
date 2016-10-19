@@ -89,31 +89,30 @@
             {% endfor %}
         </div>
         <div id="modal-share" class="modal">
-            <div>
+            <div style="width:300px;">
                 <h3 class="u-pull-left">Share this cause</h3>
-                 <a href="#" class="button-modal-close u-pull-right">
-                     <img src="/static/open-iconic/svg/x.svg" alt="X" />
-                 </a>
-                 <ul class="u-cf">
-                     <li>
-                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
-                              url_for('causes.cause_detail', slug=cause.slug,
-                                  _external=True) | urlencode
-                         }}" target="_blank">Share on Facebook</a>
-                     </li>
-                     <li>
-                         <a href="https://twitter.com/home?status={{
-                              url_for('causes.cause_detail', slug=cause.slug,
-                                  _external=True) | urlencode
-                         }}" target="_blank">Share on Twitter</a>
-                     </li>
-                     <li>
-                         <a href="https://plus.google.com/share?url={{
-                              url_for('causes.cause_detail', slug=cause.slug,
-                                  _external=True) | urlencode
-                         }}" target="_blank">Share on Google+</a>
-                     </li>
-                 </ul>
+                <a href="#" class="button-modal-close u-pull-right">
+                    <img src="/static/open-iconic/png/x-2x.png" alt="X" />
+                </a>
+                <p class="u-cf u-full-width u-text-center">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
+                             url_for('causes.cause_detail', slug=cause.slug,
+                                     _external=True) | urlencode
+                             }}" 
+                       target="_blank"
+                       class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}"></a>
+                    <a href="https://twitter.com/home?status={{
+                             url_for('causes.cause_detail', slug=cause.slug,
+                                     _external=True) | urlencode
+                             }}"
+                       target="_blank"
+                       class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}"></a>
+                    <a href="https://plus.google.com/share?url={{
+                             url_for('causes.cause_detail', slug=cause.slug,
+                                     _external=True) | urlencode
+                             }}" 
+                       target="_blank"><img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}"></a>
+                </p>
             </div>
         </div>
     </div>
@@ -161,7 +160,7 @@
                             {% endif %}
                             {% if current_user in cause.creators.all() or current_user.is_admin %}
                             <p>
-                                <a class="button button-primary u-pull-right u-add-margin-right" 
+                                <a class="button primary u-pull-right u-add-margin-right" 
                                     href="{{ url_for('causes.action_edit', slug=cause.slug,
                                     pk=action.id) }}">Edit!</a>
                             </p>

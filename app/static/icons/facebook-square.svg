@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generate more at customizr.net -->
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg id="facebook-square" class="custom-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" style="height:100px;width:100px;"><circle style="opacity: 1; fill: rgb(51, 195, 240);" class="outer-shape" cx="50" cy="50" r="48"></circle>
-	<path class="inner-shape" style="opacity:1;fill:#fff;" transform="translate(25,25) scale(0.5)" d="M82.667,1H17.335C8.351,1,1,8.351,1,17.336v65.329c0,8.99,7.351,16.335,16.334,16.335h65.332 C91.652,99.001,99,91.655,99,82.665V17.337C99,8.353,91.652,1.001,82.667,1L82.667,1z M84.318,50H68.375v42.875H50V50h-8.855V35.973 H50v-9.11c0-12.378,5.339-19.739,19.894-19.739h16.772V22.3H72.967c-4.066-0.007-4.57,2.12-4.57,6.078l-0.023,7.594H86.75 l-2.431,14.027V50z"></path>
+<svg version="1.1" id="facebook-square" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="612px" height="792px" viewBox="0 0 612 792" enable-background="new 0 0 612 792" xml:space="preserve">
+<circle fill="#3299BB" cx="306" cy="396" r="293.76"/>
+<path fill="#FFFFFF" d="M405.961,246.06H206.045c-27.491,0-49.985,22.494-49.985,49.988v199.907
+	c0,27.509,22.494,49.985,49.982,49.985h199.916c27.497,0.003,49.982-22.477,49.982-49.985V296.051
+	C455.94,268.56,433.455,246.063,405.961,246.06L405.961,246.06z M411.013,396h-48.785v131.197H306V396h-27.096v-42.923H306v-27.876
+	c0-37.876,16.337-60.401,60.876-60.401h51.322v46.438h-41.919c-12.442-0.021-13.984,6.487-13.984,18.599l-0.07,23.237h56.23
+	l-7.438,42.923V396H411.013z"/>
 </svg>
-
