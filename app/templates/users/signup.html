@@ -30,56 +30,36 @@ $(document).ready(function() {
             <fieldset>
                 <div class="six columns offset-by-three">
                     {{ render_field(
-                        form.email(**{
-                            'class':'u-full-width',
-                            'data-validation':'email', 
-                            'data-validation-error-msg-container':'#form-email-error',
-                            'data-validation-error-msg':'Not a valid email address'
-                        }), 
-                        form.email.label,
-                        form.email.flags
-                        ) 
-                    }}
+                        form.email,
+                        class='u-full-width',
+                        data_validation='email', 
+                        data_validation_error_msg_container='#form-email-error',
+                        data_validation_error_msg='Not a valid email address'
+                    ) }}
                     {{ render_field(
-                        form.nickname(**{
-                            'class':'u-full-width',
-                            'data-validation':'alphanumeric',
-                            'data-validation-allowing':'-_',
-                            'data-validation-error-msg-container':'#form-nickname-error',
-                            'data-validation-error-msg':'Must be alphanumeric'}),
-                        form.nickname.label,
-                        form.nickname.flags
-                        )
-                    }}
+                        form.nickname,
+                        class='u-full-width',
+                        data_validation='alphanumeric',
+                        data_validation_allowing='-_',
+                        data_validation_error_msg_container='#form-nickname-error',
+                        data_validation_error_msg='Must be alphanumeric'
+                    ) }}
+                    {{ render_field(form.full_name, class='u-full-width') }}
                     {{ render_field(
-                        form.full_name(**{
-                            'class':'u-full-width'
-                        }),
-                        form.full_name.label,
-                        form.full_name.flags
-                        )
-                    }}
+                        form.password,
+                        class='u-full-width',
+                        data_validation='required',
+                        data_validation_error_msg_container='#form-password-error',
+                        data_validation_error_msg='Required'
+                    ) }}
                     {{ render_field(
-                        form.password(**{
-                            'class':'u-full-width',
-                            'data-validation':'required',
-                            'data-validation-error-msg-container':'#form-password-error',
-                            'data-validation-error-msg':'Required'}),
-                        form.password.label,
-                        form.password.flags
-                        ) 
-                    }}
-                    {{ render_field(
-                        form.verify_password(**{
-                            'class':'u-full-width',
-                            'data-validation':'confirmation',
-                            'data-validation-confirm':'password',
-                            'data-validation-error-msg-container':'#form-verify_password-error',
-                            'data-validation-error-msg':'Must match the password field'}),
-                        form.verify_password.label,
-                        form.verify_password.flags
-                        )
-                    }}
+                        form.verify_password,
+                        class='u-full-width',
+                        data_validation='confirmation',
+                        data_validation_confirm='password',
+                        data_validation_error_msg_container='#form-verify_password-error',
+                        data_validation_error_msg='Must match the password field'
+                    ) }}
                 </div>
             </fieldset>
         </div>
