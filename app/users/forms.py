@@ -41,7 +41,7 @@ class EditForm(Form):
                                    validators=[Optional(), Email()])
     phone            = StringField('Phone',
                                    validators=[Optional()])
-    zip              = IntegerField('Zip',
+    zip              = StringField('Zip',
                                    validators=[Optional()])
     employer         = StringField('Employer', 
                                    validators=[Optional()])
