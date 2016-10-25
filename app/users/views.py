@@ -289,8 +289,8 @@ def edit(nickname):
 
         user.update(**form_data)
         user.generate_initials()
-        flash('Changes submitted successfully', 'success')
-        return redirect(url_for('.edit', nickname=nickname))
+        flash('User updated successfully', 'success')
+        return redirect(url_for('.user', nickname=nickname))
     else:
         # Create a list of field keys, remove password fields from it because the
         # password has to be processed separately.

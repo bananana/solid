@@ -49,7 +49,6 @@ def post_add(slug):
         flash('Post added!', 'success')
         return redirect(url_for('.post_list', slug=cause.slug))
 
-
     context = {
         "cause": cause,
         "form": form,

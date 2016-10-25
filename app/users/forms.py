@@ -54,4 +54,3 @@ class EditForm(Form):
                                                  EqualTo('verify_password')])
     verify_password  = PasswordField('Verify password', 
                                      validators=[Optional()])
-    private_full_name = BooleanField('Keep full name private', default=False)
