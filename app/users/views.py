@@ -40,9 +40,11 @@ def before_request():
         g.user.last_login = datetime.utcnow()
         g.user.save()
 
+
 @oauth_authorized.connect
 def logged_in(blueprint, token):
     return redirect(request.args.get('next') or url_for('index'))
+
 
 @mod.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -66,7 +68,11 @@ def signup():
                    [new_user.email,],
                    {'user': new_user},
                    'email/user_signup.txt')
-        return redirect(request.args.get('next') or url_for('index'))
+        return redirect(
+            request.args.get('next') 
+            or session.get('next', False)
+            or url_for('index')
+        )
 
     return render_template('users/signup.html', form=form)
 
@@ -79,6 +85,9 @@ def login():
     if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('.user', nickname=g.user.nickname))
 
+    if request.args.get('next'):
+        session['next'] = request.args.get('next')
+
     form = LoginForm()
     if form.validate_on_submit():
         email = form.email.data
@@ -90,7 +99,11 @@ def login():
         if user_query is not None and \
            user_query.is_valid_password(form.password.data):
             login_user(user_query, remember=remember)
-            return redirect(request.args.get('next') or url_for('index'))
+            return redirect(
+                request.args.get('next') 
+                or session.get('next', False)
+                or url_for('index')
+            )
         else:
             flash('Email or Password is invalid', 'error')
 
@@ -128,10 +141,14 @@ def authorize_google():
         new_user.generate_initials()
         new_user.generate_color()
         login_user(new_user)
-        return redirect(request.args.get('next') or url_for('index'))
     else:
         login_user(user_query)
-        return redirect(request.args.get('next') or url_for('index'))
+
+    return redirect(
+        request.args.get('next') 
+        or session.get('next', False)
+        or url_for('index')
+    )
 
 
 @mod.route('/authorize/twitter')
@@ -168,10 +185,13 @@ def authorize_twitter():
         new_user.generate_initials()
         new_user.generate_color()
         login_user(new_user)
-        return redirect(request.args.get('next') or url_for('index'))
     else:
         login_user(user_query)
-        return redirect(request.args.get('next') or url_for('index'))
+    return redirect(
+        request.args.get('next') 
+        or session.get('next', False)
+        or url_for('index')
+    )
 
 
 @mod.route('/authorize/facebook')
@@ -197,10 +217,13 @@ def authorize_facebook():
         new_user.generate_initials()
         new_user.generate_color()
         login_user(new_user)
-        return redirect(request.args.get('next') or url_for('index'))
     else:
         login_user(user_query)
-        return redirect(request.args.get('next') or url_for('index'))
+    return redirect(
+        request.args.get('next') 
+        or session.get('next', False)
+        or url_for('index')
+    )
 
 
 @mod.route('/logout')
@@ -283,6 +306,7 @@ def edit(nickname):
         form.process()
 
     return render_template('users/edit.html', user=user, form=form)
+
 
 @mod.route('/user/<nickname>/delete')
 @login_required

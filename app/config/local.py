@@ -16,7 +16,8 @@ TWITTER_OAUTH_API_SECRET = ''
 FACEBOOK_OAUTH_CLIENT_ID = '733401776796802'
 FACEBOOK_OAUTH_CLIENT_SECRET = '1a6d52a5e39ffb7e3e018a89543ae731'
 
-# Uncomment for testing purposes
+SECRET_KEY = 'veryverysecret'
+
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
