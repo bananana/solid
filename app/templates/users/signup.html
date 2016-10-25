@@ -42,7 +42,7 @@ $(document).ready(function() {
                         data_validation='alphanumeric',
                         data_validation_allowing='-_',
                         data_validation_error_msg_container='#form-nickname-error',
-                        data_validation_error_msg='Must be alphanumeric'
+                        data_validation_error_msg='Only A-Z, 0-9, - and _ allowed'
                     ) }}
                     {{ render_field(form.full_name, class='u-full-width') }}
                     {{ render_field(
@@ -58,7 +58,7 @@ $(document).ready(function() {
                         data_validation='confirmation',
                         data_validation_confirm='password',
                         data_validation_error_msg_container='#form-verify_password-error',
-                        data_validation_error_msg='Must match the password field'
+                        data_validation_error_msg='Doesn\'t match password'
                     ) }}
                 </div>
             </fieldset>
