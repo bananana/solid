@@ -332,6 +332,9 @@ h3 span{
 .support-action p {
     font-size: 12px;
 }
+.support-action h4 {
+ font-weight: bold;
+}
 .post {
     border-left: 1px solid #ff9900;
     padding-left: 1em;
