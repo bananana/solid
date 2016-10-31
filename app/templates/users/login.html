@@ -16,6 +16,12 @@ $(document).ready(function() {
 
 {% block content %}
 <div class="container u-add-margin-top">
+    <div class="row">
+        <div class="six columns offset-by-three help-block">
+            Don't have an account?
+            <a href="#" class="button button-primary u-add-margin-left">Sign up</a>
+        </div>
+    </div>
     {% from "helpers/forms.html" import render_field, render_boolean %}
     <form id="login" name="login" action="" method="post">
         {{ form.hidden_tag() }}
