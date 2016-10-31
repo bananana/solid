@@ -39,7 +39,7 @@ class User(UserMixin, CRUDMixin, db.Model):
                                   lazy='dynamic')
 
     def __init__(self, social_id=None, is_admin=False, nickname=None, 
-                 password=None, full_name='Anonymous', initials=None, 
+                 password=None, full_name=None, initials=None, 
                  color='#e5e5e5', email=None, phone=None, zip=None, employer=None, 
                  description=None, private_full_name=False):
         self.social_id = social_id
