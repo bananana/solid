@@ -19,7 +19,7 @@ $(document).ready(function() {
     <div class="row">
         <div class="six columns offset-by-three help-block">
             Don't have an account?
-            <a href="#" class="button button-primary u-add-margin-left">Sign up</a>
+            <a href="{{ url_for('users.signup') }}" class="button button-primary u-add-margin-left">Sign up</a>
         </div>
     </div>
     {% from "helpers/forms.html" import render_field, render_boolean %}
