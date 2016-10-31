@@ -1,7 +1,7 @@
 from app import db, bcrypt
 from app.mixins import CRUDMixin 
 from app.causes.models import cause_supporters, cause_creators, action_supporters
-from flask.ext.login import UserMixin
+from flask_login import UserMixin
 from random import randint
 
 

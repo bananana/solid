@@ -1,5 +1,6 @@
 from flask import url_for
-from flask.ext.login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user
+
 from app.tests_base import BaseTestCase
 from app.users.models import User
 from app.causes.models import Cause
@@ -115,7 +116,7 @@ class UserViewsTests(BaseTestCase):
         u = User.create(**self.test_user)
         with self.client: 
             login_user(u) 
-            return self.client.get(url_for('users.delete', nickname=current_user.nickname))
+            self.client.get(url_for('users.delete', nickname=current_user.nickname))
             q = User.query.filter_by(nickname='Tester').first()
             self.assertIsNone(q)
             self.assertFalse(current_user.is_authenticated)
@@ -126,7 +127,7 @@ class UserViewsTests(BaseTestCase):
         a = User.create(**self.test_admin)
         with self.client:
             login_user(a)
-            return self.client.get(url_for('users.delete', nickname=u.nickname))
+            self.client.get(url_for('users.delete', nickname=u.nickname))
             q = User.query.filter_by(nickname='Tester').first()
             self.assertIsNone(q)
             self.assertTrue(current_user.is_authenticated)
@@ -148,7 +149,8 @@ class UserViewsTests(BaseTestCase):
         u = User.create(**self.test_user)
         with self.client: 
             login_user(u) 
-            return self.client.post('/user/' + u.nickname + '/edit', data={
+            from pdb import set_trace; set_trace()
+            self.client.post('/user/' + u.nickname + '/edit', data={
                 'nickname'    : 'Tester2',
                 'full_name'   : 'Different Name',
                 'email'       : 'different.email@test.com',
@@ -170,7 +172,7 @@ class UserViewsTests(BaseTestCase):
         u2 = User.create(**self.test_user_2)
         with self.client: 
             login_user(u) 
-            return self.client.post('/user/' + u2.nickname + '/edit', data={
+            self.client.post('/user/' + u2.nickname + '/edit', data={
                 'nickname'    : 'Tester2',
                 'full_name'   : 'Different Name',
                 'email'       : 'different.email@test.com',
@@ -197,23 +199,9 @@ class UserViewsTests(BaseTestCase):
             u.set_password('test')
             self.assertFalse(u.is_valid_password('tset'))
 
-
     def test_user_initials_generation(self):
         u = User.create(**self.test_user)
         with self.client:
             login_user(u)
             current_user.generate_initials()
             self.assertTrue(current_user.initials, 'TT')
-
-    def test_user_cause_support(self):
-        u= User.create(**self.test_user)
-        c= Cause.create(**self.test_cause)
-        u.support(c)
-        self.assertTrue(u.is_supporting(c))
-
-    def test_user_cause_unsupport(self):
-        u = User.create(**self.test_user)
-        c = Cause.create(**self.test_cause)
-        u.support(c)
-        u.unsupport(c) 
-        self.assertFalse(u.is_supporting(c))

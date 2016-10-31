@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, redirect, request, flash
-from flask.ext.login import current_user, login_required
+from flask_login import current_user, login_required
 
 from app.causes.models import Cause
 from app.causes.views import cause_required

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, url_for, redirect, session, \
                   request, g, flash, abort
-from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask_login import login_user, logout_user, current_user, login_required
 
 from app.users.models import User
 from app.pages.models import Page

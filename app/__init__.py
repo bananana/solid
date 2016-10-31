@@ -9,20 +9,20 @@ if environ.get('FLASK_CONFIG', None) is None:
 
 app.config.from_envvar('FLASK_CONFIG')
 
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
-from flask.ext.login import LoginManager
+from flask_login import LoginManager
 lm = LoginManager()
 lm.init_app(app)
 
-from flask.ext.bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
-from flask.ext.misaka import Misaka
+from flask_misaka import Misaka
 mikasa = Misaka(app)
 
-from flask.ext.mail import Mail
+from flask_mail import Mail
 mail = Mail(app)
 
 # Register blueprints
