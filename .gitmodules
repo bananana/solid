@@ -10,3 +10,6 @@
 	path = app/static/jQuery-Form-Validator
     url = https://github.com/victorjonsson/jQuery-Form-Validator
     ignore = dirty
+[submodule "app/static/jquery.lazy"]
+	path = app/static/jquery.lazy
+	url = https://github.com/eisbehr-/jquery.lazy
