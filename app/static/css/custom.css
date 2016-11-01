@@ -18,7 +18,6 @@
 - Layout 
 - Navigation
 - Modals
-- Progress Bar
 - Input
 - Tables
 - Lists
@@ -486,6 +485,7 @@ h3 span{
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .modal {
     visibility: hidden;
+    overflow: scroll;
     position: fixed;
     left: 0px;
     top: 0px;
@@ -497,7 +497,7 @@ h3 span{
     background: url(../images/transparent-pixel.png);
 }
 .modal div {
-    width: 50%;
+    width: 90%;
     margin: 100px auto;
     padding: 15px;
     background-color: #fff;
@@ -505,70 +505,11 @@ h3 span{
     border: 3px solid #ff9900;
     text-align: left;
 }
-
-
-/* Progress Bar
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-/*
-.progressbar {
-    counter-reset: step;
+@media (min-width: 1000px) {
+    .modal div {
+        width: 50%;
+    }
 }
-.progressbar li {
-    list-style-type: none;
-    float: left;
-    width: 33.33%;
-    position: relative;
-    text-align: center;
-}
-.progressbar li:before {
-    content: counter(step);
-    counter-increment: step;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border: 1px solid #eee;
-    display: block;
-    text-align: center;
-    margin: 0 auto 10px auto;
-    border-radius: 50%;
-    background-color: white;
-}
-.progressbar li:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background-color: #eee;
-    top: 15px;
-    left: -50%;
-    z-index: -1;
-}
-.progressbar li:first-child:after {
-    content: none;
-}
-
-.progressbar li.active {
-    color: #1EAEDB;
-}
-.progressbar li.active:before {
-    border-color: #1EAEDB;
-}
-.progressbar li.active + li:after {
-    background-color: #1EAEDB;
-}
-#progressbar li:first-child:before {
-    content: "\f47d";
-}
-#progressbar li:nth-child(2):before {
-    content: "\f443";
-}
-#progressbar li:nth-child(3):before {
-    content: "\f47c";
-}
-#progressbar li:last-child:before {
-    content: "\f3a3";
-}
-*/
 
 
 /* Input 
