@@ -29,11 +29,11 @@ $(document).ready(function() {
             <fieldset>
                 <div class="six columns offset-by-three">
                     {{ render_field(
-                        form.email,
+                        form.login,
                         class='u-full-width',
-                        data_validation='email', 
-                        data_validation_error_msg_container='#form-email-error',
-                        data_validation_error_msg='Incorrect'
+                        data_validation='required', 
+                        data_validation_error_msg_container='#form-login-error',
+                        data_validation_error_msg='Required'
                     ) }}
                     {{ render_field(
                         form.password,

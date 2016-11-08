@@ -19,6 +19,8 @@ from .models import User
 
 from app.posts.models import Post
 
+import re
+
 #: Module blueprint
 mod = Blueprint('users', __name__)
 
@@ -90,11 +92,16 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
-        email = form.email.data
+        login = form.login.data
         remember = bool(form.remember.data)
 
         #: Query the database with the provided credentials 
-        user_query = User.query.filter_by(email=email).first()
+        email = re.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])+")
+        match = email.match(login)
+        if match:
+            user_query = User.query.filter_by(email=login).first()
+        else:
+            user_query = User.query.filter_by(nickname=login).first()
 
         if user_query is not None and \
            user_query.is_valid_password(form.password.data):

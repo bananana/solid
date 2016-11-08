@@ -9,8 +9,8 @@ from app.users.models import User
 
 class LoginForm(Form):
     '''Login form used by login() function in app/users/views.py'''
-    email    = StringField('Email', 
-                           validators=[DataRequired(), Email()])
+    login    = StringField('Email or Username', 
+                           validators=[DataRequired()])
     password = PasswordField('Password',
                              validators=[DataRequired(), Length(max=128)])
     remember = BooleanField('Remember me', default=False)
