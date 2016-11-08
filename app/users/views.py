@@ -267,15 +267,11 @@ def edit(nickname):
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
 
-    if current_user.id is user.id:
-        # Serve regular form when user edits their own profile
-        form = EditForm()
-    elif current_user.is_admin:
-        # Serve admin form when officer edits user
-        #form = AdminEditUserForm()
-        form = EditForm()
-    else:
+    if current_user.id is not user.id and not current_user.is_admin:
         abort(404)
+
+    # Serve regular form when user edits their own profile
+    form = EditForm()
 
     if form.validate_on_submit():
         #: A list of all the form data, including empty fields
