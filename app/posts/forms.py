@@ -1,6 +1,7 @@
 from app import db
 
 from flask_wtf import Form 
+from wtforms import BooleanField
 from wtforms.ext.sqlalchemy.orm import model_form
 
 from .models import Post, Comment
@@ -13,3 +14,7 @@ PostForm = model_form(Post, base_class=Form, db_session=db.session, only=(
 CommentForm = model_form(Comment, base_class=Form, db_session=db.session, only=(
     'body',
 ))
+
+
+class PostDeleteForm(Form):
+    confirm = BooleanField('Are you sure?', default=False)

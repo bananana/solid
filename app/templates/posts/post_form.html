@@ -25,6 +25,12 @@
                         class="button button-primary u-mobile-fixed-bottom">
                 </div>
                 <div class="three columns">
+                    {% if post %}
+                    <a href="{{ url_for('.post_delete', slug=cause.slug, pk=post.id) }}"
+                        id="delete" class="button error u-mobile-fixed-bottom">
+                        Delete
+                    </a>
+                    {% endif %}
                 </div>
             </fieldset>
         </div>

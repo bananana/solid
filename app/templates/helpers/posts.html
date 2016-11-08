@@ -33,5 +33,15 @@ section (app/templates/styleguide/templating#discussion-helpers)
         </a>
     </p>
 </div>
+{% else %}
+<div class="four columns offset-by-four">
+    <p>
+        <strong>No posts!</strong>
+        <a class="button u-add-margin-left"
+            href="{{ url_for('.post_add', slug=cause.slug) }}">
+            Start the conversation
+        </a>
+    </p>
+</div>
 {% endfor %}
 {% endmacro %}

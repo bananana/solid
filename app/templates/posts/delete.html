@@ -1,0 +1,38 @@
+{% extends "base_form.html" %}
+{% set active_page = "comments" %}
+
+{% block content %}
+<div class="container u-add-margin-top">
+    {% from "helpers/forms.html" import render_field, render_boolean %}
+    <form id="post" name="post" action="" method="post">
+        {{ form.hidden_tag() }}
+        <div class="row u-add-margin-top">
+            <div class="six columns offset-by-three">
+                <h3>Deleting post</h3>
+                <h4>"{{ post.title }}"</h4>
+                <p>
+                    {{ post.body }}
+                </p>
+                <p>
+                    <strong>{{ post.comments.count() }} comments</strong>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <fieldset>
+                <div class="six columns offset-by-three">
+                    {{ render_boolean(form.confirm, class="u-full-width") }}
+                </div>
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset>
+                <div class="three columns offset-by-three">
+                    <input id="save" type="submit" value="Delete"
+                        class="button error u-mobile-fixed-bottom">
+                </div>
+            </fieldset>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -3,13 +3,17 @@ dont' forget to add a description of your changes to the appropriate styleguide
 section (app/templates/styleguide/templating#form-helpers)
 -->
 
-{% macro render_boolean(bool) %}
+{% macro render_boolean(field) %}
     <div class="checkbox-container u-pull-left">
         <div class="checkbox">
-            {{ bool }}
+            {{ field(**kwargs) }}
             <div class="checkbox-replacement"></div>
         </div>
-        {{ bool.label }}
+        <label for="{{ field.label.field_id }}">
+            {{ field.label.text }} {% if field.flags.required %}*{% endif %}
+            <span id="form-{{ field.label.field_id }}-error" class="u-pull-right">
+            </span>
+        </label>
     </div>
 {% endmacro %}
 

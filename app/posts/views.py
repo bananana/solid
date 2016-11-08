@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, url_for, redirect, request, flash
+from flask import (Blueprint, render_template, url_for, redirect, request,
+                   flash, abort)
 from flask_login import current_user, login_required
 
 from app.causes.models import Cause
 from app.causes.views import cause_required
 
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, PostDeleteForm
 from .models import Post, Comment
 
 from ..email import send_email
@@ -93,9 +94,37 @@ def post_edit(slug, pk):
     context = {
         "cause": cause,
         "form": form,
+        "post": post,
     }
 
     return render_template('posts/post_form.html', **context)
+
+
+@mod.route('/cause/<slug>/posts/<pk>/delete', methods=('GET', 'POST'))
+@login_required
+@cause_required
+def post_delete(slug, pk):
+    cause = Cause.query.filter_by(slug=slug).first()
+    post = cause.posts.filter_by(id=pk).one()
+
+    if current_user.id is not post.author.id and not current_user.is_admin:
+        abort(403)
+
+    form = PostDeleteForm(request.form, post)
+
+    if form.validate_on_submit():
+        form.populate_obj(post)
+        post.delete()
+        flash('Post deleted!', 'success')
+        return redirect(url_for('.post_list', slug=cause.slug))
+
+    context = {
+        "cause": cause,
+        "form": form,
+        "post": post,
+    }
+
+    return render_template('posts/delete.html', **context)
 
 
 @mod.route('/cause/<slug>/posts/<pk>/comments/add', methods=('GET', 'POST'))

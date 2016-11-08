@@ -19,8 +19,9 @@
                 class="avatar-sm" 
                 title="{{ post.author.full_name  }}">{{ post.author.initials }}</a>
             <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
-            {% if post.author == current_user %}
-            <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
+            {% if post.author == current_user or current_user.is_admin %}
+            <a class="button u-add-margin-left"
+                href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
                 edit
             </a>
             {% endif %}
