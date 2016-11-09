@@ -18,7 +18,7 @@ $(document).ready(function() {
 <div class="container u-add-margin-top">
     <div class="row">
         <div class="six columns offset-by-three help-block">
-            Don't have an account?
+            {{ _('Don\'t have an account?') }}
             <a href="{{ url_for('users.signup') }}" class="button button-primary u-add-margin-left">Sign up</a>
         </div>
     </div>
@@ -49,12 +49,14 @@ $(document).ready(function() {
         <div class="row">
             <div class="three columns offset-by-three">
                 <fieldset>
-                    <input id="login" class="button button-primary u-mobile-fixed-bottom" type="submit" value="Log In">
+                    <input id="login" type="submit" value="{{ _('Log In') }}"
+                        class="button button-primary u-mobile-fixed-bottom" >
                 </fieldset>
             </div>
             <div class="three columns">
                 <small class="small-block">
-                    By accessing and using this service, you agree to the <a href="/terms_of_service">terms of service</a>.
+                    {{ _('By accessing and using this service, you agree to the') }}
+                    <a href="/terms_of_service">{{ _('terms of service') }}</a>.
                 </small>
             </div>
         </div>
@@ -62,14 +64,19 @@ $(document).ready(function() {
     <hr>
     <div class="row">
         <div class="one-third column">
-            <a href="{{ url_for('twitter.login') }}" class="button u-full-width">Log In with Twitter</a>
+            <a href="{{ url_for('twitter.login') }}" class="button u-full-width">
+                {{ _('Log In with Twitter') }}
+            </a>
         </div>
         <div class="one-third column">
-            <a href="{{ url_for('google.login') }}" class="button u-full-width">Log In with Google</a>
+            <a href="{{ url_for('google.login') }}" class="button u-full-width">
+                {{ _('Log In with Google') }}
+            </a>
         </div>
         <div class="one-third column">
-            <a href="{{ url_for('facebook.login') }}" class="button
-                u-full-width">Log In with Facebook</a>
+            <a href="{{ url_for('facebook.login') }}" class="button u-full-width">
+                {{ _('Log In with Facebook') }}
+            </a>
         </div>
     </div>
 </div>

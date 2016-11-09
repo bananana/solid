@@ -58,13 +58,15 @@
                     </p>
                     {% endif %}
                     {% if supporter %}
-                        <h5 class="u-add-margin-left">&#10004;&nbsp;You are supporting this cause</h5>
+                    <h5 class="u-add-margin-left">&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
                     {% else %}
                         <a id="stand-with-us" 
                            class="button button-primary hero-button" 
-                           href="{{ url_for('causes.cause_support', slug=cause.slug) }}">Stand with us!</a>
+                           href="{{ url_for('causes.cause_support', slug=cause.slug) }}">
+                           {{ _('Stand with us!') }}
+                       </a>
                        <span>
-                           Join this cause's community, and stay updated on actions
+                           {{ _("Join this cause's community, and stay updated on actions") }}
                        </span>
                     {% endif %}
                 </div>
@@ -81,20 +83,26 @@
         <div class="three columns">
             <a class="button button-modal u-full-width u-add-margin-top"
                 data-target="modal-share">
-                Share
+                {{ _('Share') }}
             </a>
-            <h4 class="u-add-margin-top">Creators:</h4>
+            <h4 class="u-add-margin-top">
+                {{ _('Creators') }}:
+            </h4>
             {% for u in cause.creators.all() %}
                 {{ render_avatar(u) }}
             {% endfor %}
-            <h4 class="u-add-margin-top">{{ cause.supporters.count() }} supporters:</h4>
+            <h4 class="u-add-margin-top">
+                {{ _('%(count)s supporters', count=cause.supporters.count()) }}:
+            </h4>
             {% for u in cause.supporters.all() %}
                 {{ render_avatar(u) }}
             {% endfor %}
         </div>
         <div id="modal-share" class="modal">
             <div style="width:300px;">
-                <h3 class="u-pull-left">Share this cause</h3>
+                <h3 class="u-pull-left">
+                    {{ _('Share this cause') }}
+                </h3>
                 <a href="#" class="button-modal-close u-pull-right">
                     <img src="/static/open-iconic/png/x-2x.png" alt="X" />
                 </a>
@@ -124,8 +132,8 @@
     <div class="row">
         <div class="nine columns actions">
             <h3 id="actions">
-                Take action to win
-                <span>({{ cause.actions.count() }} current)</span>
+                {{ _('Take action to win') }}
+                <span>{{ _('(%(count)s current)', count=cause.actions.count()) }}</span>
             </h3>
             <div class="row">
                 {% for action in cause.actions.all()[0:4] %}
@@ -134,7 +142,7 @@
                         <h4>{{ action.title }}</h4>
                         <p>{{ action.summary }}</p>
                         <h6 class="u-remove-margin-bottom">
-                            Supporters: {{ action.supporters.count() }}
+                            {{ _('Supporters: %(count)s', count=action.supporters.count()) }}
                         </h6>
                         {% if action.expiration %}
                             <h6>Expires: {{ action.expiration.strftime('%b. %d, %Y') }}</h6>
@@ -155,10 +163,10 @@
                                 <a class="button button-primary support" rel="external"  target="_blank"
                                     data-support-href="{{ url_for('causes.action_support', slug=cause.slug,
                                     pk=action.id) }}"
-                                    href="{{ action.link }}">Support!</a>
+                                    href="{{ action.link }}">{{ _('Support!') }}</a>
                                 {% else %}
                                 <a class="button button-primary" href="{{ url_for('causes.action_support', slug=cause.slug,
-                                    pk=action.id) }}">Support!</a>
+                                    pk=action.id) }}">{{ _('Support!') }}</a>
                                 {% endif %}
                             </p>
                             {% endif %}
@@ -186,10 +194,12 @@
     <hr>
     <div class="row">
         <div class="nine columns">
-            <h3>Conversation</h3>
+            <h3>{{ _('Conversation') }}</h3>
         </div>
         <div class="three columns">
-            <a class="button u-full-width" href="/cause/{{ cause.slug }}/posts/add">Add new post</a>
+            <a class="button u-full-width" href="/cause/{{ cause.slug }}/posts/add">
+                {{ _('Add new post') }}
+            </a>
         </div>
     </div>
     <div class="row">

@@ -13,7 +13,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
         </a>
         {% if post.author == current_user %}
         <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
-            (edit)
+            {{ _('(edit)') }}
         </a>
         {% endif %}
     </h4>
@@ -26,20 +26,21 @@ section (app/templates/styleguide/templating#discussion-helpers)
     </p>
     <p>
         <img class="icon" src="{{ url_for('static', filename='open-iconic/png/comment-square-2x.png') }}"> 
-        {{ post.comments.count() }}
-        comments. 
+        {{ _('%(count)s comments.', count=post.comments.count()) }}
         <a href="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}">
-            Reply
+            {{ _('Reply') }}
         </a>
     </p>
 </div>
 {% else %}
 <div class="four columns offset-by-four">
     <p>
-        <strong>No posts!</strong>
+        <strong>
+            {{ _('No posts!') }}
+        </strong>
         <a class="button u-add-margin-left"
             href="{{ url_for('.post_add', slug=cause.slug) }}">
-            Start the conversation
+            {{ _('Start the conversation') }}
         </a>
     </p>
 </div>

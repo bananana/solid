@@ -9,6 +9,19 @@ if environ.get('FLASK_CONFIG', None) is None:
 
 app.config.from_envvar('FLASK_CONFIG')
 
+
+from flask_babel import Babel
+
+babel = Babel(app)
+
+@babel.localeselector
+def get_locale():
+    """ Use the browser's language preferences to select available translation """
+    translations = [str(translation) for translation in
+                    babel.list_translations()]
+    return request.accept_languages.best_match(translations)
+
+
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 

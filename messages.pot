@@ -1,0 +1,281 @@
+# Translations template for PROJECT.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-11-09 21:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: app/causes/forms.py:19 app/causes/forms.py:35 app/posts/forms.py:14
+msgid "Title"
+msgstr ""
+
+#: app/causes/forms.py:20
+msgid "Intro"
+msgstr ""
+
+#: app/causes/forms.py:21
+msgid "Location"
+msgstr ""
+
+#: app/causes/forms.py:22
+msgid "Boss"
+msgstr ""
+
+#: app/causes/forms.py:23
+msgid "Image"
+msgstr ""
+
+#: app/causes/forms.py:24
+msgid "Heading"
+msgstr ""
+
+#: app/causes/forms.py:25 app/posts/forms.py:15 app/posts/forms.py:21
+msgid "Body"
+msgstr ""
+
+#: app/causes/forms.py:36
+msgid "Summary"
+msgstr ""
+
+#: app/causes/forms.py:37 app/users/forms.py:50
+msgid "Description"
+msgstr ""
+
+#: app/causes/forms.py:38
+msgid "Expiration"
+msgstr ""
+
+#: app/causes/forms.py:39
+msgid "Link"
+msgstr ""
+
+#: app/posts/forms.py:26
+msgid "Are you sure?"
+msgstr ""
+
+#: app/templates/admin/index.html:8 app/templates/base.html:48
+msgid "Admin"
+msgstr ""
+
+#: app/templates/base.html:54 app/templates/base.html:78
+#: app/templates/base.html:80
+msgid "Sign Up"
+msgstr ""
+
+#: app/templates/base.html:66
+msgid "Logged&nbsp;in&nbsp;as&nbsp;"
+msgstr ""
+
+#: app/templates/base.html:73 app/templates/users/login.html:52
+msgid "Log In"
+msgstr ""
+
+#: app/templates/base.html:108
+msgid "Information"
+msgstr ""
+
+#: app/templates/base.html:110
+msgid "Contact"
+msgstr ""
+
+#: app/templates/base.html:111
+msgid "About Us"
+msgstr ""
+
+#: app/templates/base.html:112
+msgid "How it works"
+msgstr ""
+
+#: app/templates/base.html:117
+msgid "Developers"
+msgstr ""
+
+#: app/templates/base.html:120
+msgid "Styleguide"
+msgstr ""
+
+#: app/templates/base.html:137
+msgid "Terms of Service"
+msgstr ""
+
+#: app/templates/admin/index.html:12
+msgid "Manage users"
+msgstr ""
+
+#: app/templates/admin/index.html:15
+msgid "Manage pages"
+msgstr ""
+
+#: app/templates/causes/action_form.html:42
+#: app/templates/posts/post_form.html:24
+msgid "Save"
+msgstr ""
+
+#: app/templates/causes/cause.html:61
+msgid "You are supporting this cause"
+msgstr ""
+
+#: app/templates/causes/cause.html:66
+msgid "Stand with us!"
+msgstr ""
+
+#: app/templates/causes/cause.html:69
+msgid "Join this cause's community, and stay updated on actions"
+msgstr ""
+
+#: app/templates/causes/cause.html:86
+msgid "Share"
+msgstr ""
+
+#: app/templates/causes/cause.html:89
+msgid "Creators"
+msgstr ""
+
+#: app/templates/causes/cause.html:95
+#, python-format
+msgid "%(count)s supporters"
+msgstr ""
+
+#: app/templates/causes/cause.html:104
+msgid "Share this cause"
+msgstr ""
+
+#: app/templates/causes/cause.html:135
+msgid "Take action to win"
+msgstr ""
+
+#: app/templates/causes/cause.html:136
+#, python-format
+msgid "(%(count)s current)"
+msgstr ""
+
+#: app/templates/causes/cause.html:145
+#, python-format
+msgid "Supporters: %(count)s"
+msgstr ""
+
+#: app/templates/causes/cause.html:166 app/templates/causes/cause.html:169
+msgid "Support!"
+msgstr ""
+
+#: app/templates/causes/cause.html:197
+msgid "Conversation"
+msgstr ""
+
+#: app/templates/causes/cause.html:201
+msgid "Add new post"
+msgstr ""
+
+#: app/templates/helpers/posts.html:16
+msgid "(edit)"
+msgstr ""
+
+#: app/templates/helpers/posts.html:29
+#, python-format
+msgid "%(count)s comments."
+msgstr ""
+
+#: app/templates/helpers/posts.html:31
+msgid "Reply"
+msgstr ""
+
+#: app/templates/helpers/posts.html:39
+msgid "No posts!"
+msgstr ""
+
+#: app/templates/helpers/posts.html:43
+msgid "Start the conversation"
+msgstr ""
+
+#: app/templates/posts/comment_form.html:17
+msgid "Post"
+msgstr ""
+
+#: app/templates/posts/post_form.html:31
+msgid "Delete"
+msgstr ""
+
+#: app/templates/users/login.html:21
+msgid "Don't have an account?"
+msgstr ""
+
+#: app/templates/users/login.html:58
+msgid "By accessing and using this service, you agree to the"
+msgstr ""
+
+#: app/templates/users/login.html:59
+msgid "terms of service"
+msgstr ""
+
+#: app/templates/users/login.html:68
+msgid "Log In with Twitter"
+msgstr ""
+
+#: app/templates/users/login.html:73
+msgid "Log In with Google"
+msgstr ""
+
+#: app/templates/users/login.html:78
+msgid "Log In with Facebook"
+msgstr ""
+
+#: app/users/forms.py:14
+msgid "Email or Username"
+msgstr ""
+
+#: app/users/forms.py:16 app/users/forms.py:30
+msgid "Password"
+msgstr ""
+
+#: app/users/forms.py:18
+msgid "Remember me"
+msgstr ""
+
+#: app/users/forms.py:23 app/users/forms.py:42
+msgid "Email"
+msgstr ""
+
+#: app/users/forms.py:25 app/users/forms.py:38
+msgid "Nickname"
+msgstr ""
+
+#: app/users/forms.py:28 app/users/forms.py:40
+msgid "Full Name"
+msgstr ""
+
+#: app/users/forms.py:33 app/users/forms.py:57
+msgid "Verify password"
+msgstr ""
+
+#: app/users/forms.py:44
+msgid "Phone"
+msgstr ""
+
+#: app/users/forms.py:46
+msgid "Zip"
+msgstr ""
+
+#: app/users/forms.py:48
+msgid "Employer"
+msgstr ""
+
+#: app/users/forms.py:52
+msgid "Current password"
+msgstr ""
+
+#: app/users/forms.py:54
+msgid "New password"
+msgstr ""
+

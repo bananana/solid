@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 
 d = os.path.dirname
@@ -20,3 +22,11 @@ WTF_CSRF_ENABLED = True
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+SUPPORTED_LANGUAGES = {
+    'en': 'English',
+    'es': 'Español'
+}
+
+BABEL_DEFAULT_LOCALE = 'en'
+BABEL_DEFAULT_TIMEZONE = 'EST'

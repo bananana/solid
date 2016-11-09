@@ -21,14 +21,14 @@
         <div class="row">
             <fieldset>
                 <div class="three columns offset-by-three">
-                    <input id="save" type="submit" value="Save"
+                    <input id="save" type="submit" value="{{ _('Save') }}"
                         class="button button-primary u-mobile-fixed-bottom">
                 </div>
                 <div class="three columns">
                     {% if post %}
                     <a href="{{ url_for('.post_delete', slug=cause.slug, pk=post.id) }}"
                         id="delete" class="button error u-mobile-fixed-bottom">
-                        Delete
+                        {{ _('Delete') }}
                     </a>
                     {% endif %}
                 </div>

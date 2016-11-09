@@ -42,11 +42,17 @@
                         <h4 class="title u-pull-left"><strong>SOLID</strong></h4>
                     </a>
                     {% if current_user.is_admin %}
-                    <a href="{{ url_for('admin.admin') }}" title="Admin" class="button u-pull-right u-add-margin-left">Admin</a>
+                    <a href="{{ url_for('admin.admin') }}" 
+                        title="Admin" 
+                        class="button u-pull-right u-add-margin-left">
+                        {{ _('Admin') }}
+                    </a>
                     {% endif %}
                     {% if active_page == "login" %}
                         <a href="{{ url_for('users.signup') }}" title="Sign Up"
-                            class="button u-pull-right">Sign Up</a>
+                            class="button u-pull-right">
+                            {{ _('Sign Up') }}
+                        </a>
                     {% elif active_page == "signup" %}
                         <a href="{{ url_for('users.login') }}" title="Log In" class="button u-pull-right">
                             <img src="{{ url_for('static', filename='open-iconic/png/account-login-2x.png') }}">
@@ -57,16 +63,22 @@
                                 <img src="{{ url_for('static', filename='open-iconic/png/account-logout-2x.png') }}">
                             </a>
                             <span class="user">
-                                Logged&nbsp;in&nbsp;as&nbsp;
+                                {{ _('Logged&nbsp;in&nbsp;as&nbsp;') }}
                                 <a href="{{ url_for('users.user', nickname=current_user.nickname) }}">
                                     {{ current_user.nickname }}
                                 </a>
                             </span>
                         {% else %}
-                            <a href="{{ url_for('users.login') }}" title="Log In" class="button u-add-margin-left u-pull-right">
+                            <a href="{{ url_for('users.login') }}" 
+                                title="{{ _('Log In') }}" 
+                                class="button u-add-margin-left u-pull-right">
                                 <img src="{{ url_for('static', filename='open-iconic/png/account-login-2x.png') }}">
                             </a>
-                            <a href="{{ url_for('users.signup') }}" title="Sign Up" class="button button-primary u-pull-right">Sign Up</a>
+                            <a href="{{ url_for('users.signup') }}" 
+                                title="{{ _('Sign Up') }}" 
+                                class="button button-primary u-pull-right">
+                                {{ _('Sign Up') }}
+                            </a>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -93,18 +105,20 @@
         <div class="container">
             <div class="row">
                 <div class="three columns offset-by-three">
-                    <h4>Information</h4>
+                    <h4>{{ _('Information') }}</h4>
                     <ul>
-                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/how_it_works">How it works</a></li>
+                        <li><a href="{{ url_for('contact') }}">{{ _('Contact') }}</a></li>
+                        <li><a href="/about">{{ _('About Us') }}</a></li>
+                        <li><a href="/how_it_works">{{ _('How it works') }}</a></li>
                     </ul>
                 </div>
                 {% if debug %}
                 <div class="three columns">
-                    <h4>Developers</h4>
+                    <h4>{{ _('Developers') }}</h4>
                     <ul>
-                        <li><a href="{{ url_for('styleguide.styleguide') }}">Styleguide</a></li>
+                        <li><a href="{{ url_for('styleguide.styleguide') }}">
+                            {{ _('Styleguide') }}
+                        </a></li>
                     </ul>
                 </div>
                 {% endif %}
@@ -119,7 +133,9 @@
             <div class="row">
                 <div class="twelve columns u-text-center">
                     <small>&copy; 2016 {{ site_name }} authors</small> |
-                    <a href="/terms_of_service"><small>Terms of Service</small></a>
+                    <a href="/terms_of_service"><small>
+                        {{ _('Terms of Service') }}
+                    </small></a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,281 @@
+# Spanish translations for PROJECT.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-11-09 21:04+0000\n"
+"PO-Revision-Date: 2016-11-09 11:00+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: app/causes/forms.py:19 app/causes/forms.py:35 app/posts/forms.py:14
+msgid "Title"
+msgstr "Ŧīŧŀḗ"
+
+#: app/causes/forms.py:20
+msgid "Intro"
+msgstr "Īƞŧřǿ"
+
+#: app/causes/forms.py:21
+msgid "Location"
+msgstr "Ŀǿƈȧŧīǿƞ"
+
+#: app/causes/forms.py:22
+msgid "Boss"
+msgstr "Ɓǿşş"
+
+#: app/causes/forms.py:23
+msgid "Image"
+msgstr "Īḿȧɠḗ"
+
+#: app/causes/forms.py:24
+msgid "Heading"
+msgstr "Ħḗȧḓīƞɠ"
+
+#: app/causes/forms.py:25 app/posts/forms.py:15 app/posts/forms.py:21
+msgid "Body"
+msgstr "Ɓǿḓẏ"
+
+#: app/causes/forms.py:36
+msgid "Summary"
+msgstr "Şŭḿḿȧřẏ"
+
+#: app/causes/forms.py:37 app/users/forms.py:50
+msgid "Description"
+msgstr "Ḓḗşƈřīƥŧīǿƞ"
+
+#: app/causes/forms.py:38
+msgid "Expiration"
+msgstr "Ḗẋƥīřȧŧīǿƞ"
+
+#: app/causes/forms.py:39
+msgid "Link"
+msgstr "Ŀīƞķ"
+
+#: app/posts/forms.py:26
+msgid "Are you sure?"
+msgstr "Ȧřḗ ẏǿŭ şŭřḗ?"
+
+#: app/templates/admin/index.html:8 app/templates/base.html:48
+msgid "Admin"
+msgstr "Ȧḓḿīƞ"
+
+#: app/templates/base.html:54 app/templates/base.html:78
+#: app/templates/base.html:80
+msgid "Sign Up"
+msgstr "Şīɠƞ Ŭƥ"
+
+#: app/templates/base.html:66
+msgid "Logged&nbsp;in&nbsp;as&nbsp;"
+msgstr "Ŀǿɠɠḗḓ&nbsp;īƞ&nbsp;ȧş&nbsp;"
+
+#: app/templates/base.html:73 app/templates/users/login.html:52
+msgid "Log In"
+msgstr "Ŀǿɠ Īƞ"
+
+#: app/templates/base.html:108
+msgid "Information"
+msgstr "Īƞƒǿřḿȧŧīǿƞ"
+
+#: app/templates/base.html:110
+msgid "Contact"
+msgstr "Ƈǿƞŧȧƈŧ"
+
+#: app/templates/base.html:111
+msgid "About Us"
+msgstr "Ȧƀǿŭŧ Ŭş"
+
+#: app/templates/base.html:112
+msgid "How it works"
+msgstr "Ħǿẇ īŧ ẇǿřķş"
+
+#: app/templates/base.html:117
+msgid "Developers"
+msgstr "Ḓḗṽḗŀǿƥḗřş"
+
+#: app/templates/base.html:120
+msgid "Styleguide"
+msgstr "Şŧẏŀḗɠŭīḓḗ"
+
+#: app/templates/base.html:137
+msgid "Terms of Service"
+msgstr "Ŧḗřḿş ǿƒ Şḗřṽīƈḗ"
+
+#: app/templates/admin/index.html:12
+msgid "Manage users"
+msgstr "Ḿȧƞȧɠḗ ŭşḗřş"
+
+#: app/templates/admin/index.html:15
+msgid "Manage pages"
+msgstr "Ḿȧƞȧɠḗ ƥȧɠḗş"
+
+#: app/templates/causes/action_form.html:42
+#: app/templates/posts/post_form.html:24
+msgid "Save"
+msgstr "Şȧṽḗ"
+
+#: app/templates/causes/cause.html:61
+msgid "You are supporting this cause"
+msgstr "Ẏǿŭ ȧřḗ şŭƥƥǿřŧīƞɠ ŧħīş ƈȧŭşḗ"
+
+#: app/templates/causes/cause.html:66
+msgid "Stand with us!"
+msgstr "Şŧȧƞḓ ẇīŧħ ŭş!"
+
+#: app/templates/causes/cause.html:69
+msgid "Join this cause's community, and stay updated on actions"
+msgstr "Ĵǿīƞ ŧħīş ƈȧŭşḗ'ş ƈǿḿḿŭƞīŧẏ, ȧƞḓ şŧȧẏ ŭƥḓȧŧḗḓ ǿƞ ȧƈŧīǿƞş"
+
+#: app/templates/causes/cause.html:86
+msgid "Share"
+msgstr "Şħȧřḗ"
+
+#: app/templates/causes/cause.html:89
+msgid "Creators"
+msgstr "Ƈřḗȧŧǿřş"
+
+#: app/templates/causes/cause.html:95
+#, python-format
+msgid "%(count)s supporters"
+msgstr "%(count)s şŭƥƥǿřŧḗřş"
+
+#: app/templates/causes/cause.html:104
+msgid "Share this cause"
+msgstr "Şħȧřḗ ŧħīş ƈȧŭşḗ"
+
+#: app/templates/causes/cause.html:135
+msgid "Take action to win"
+msgstr "Ŧȧķḗ ȧƈŧīǿƞ ŧǿ ẇīƞ"
+
+#: app/templates/causes/cause.html:136
+#, python-format
+msgid "(%(count)s current)"
+msgstr "(%(count)s ƈŭřřḗƞŧ)"
+
+#: app/templates/causes/cause.html:145
+#, python-format
+msgid "Supporters: %(count)s"
+msgstr "Şŭƥƥǿřŧḗřş: %(count)s"
+
+#: app/templates/causes/cause.html:166 app/templates/causes/cause.html:169
+msgid "Support!"
+msgstr "Şŭƥƥǿřŧ!"
+
+#: app/templates/causes/cause.html:197
+msgid "Conversation"
+msgstr "Ƈǿƞṽḗřşȧŧīǿƞ"
+
+#: app/templates/causes/cause.html:201
+msgid "Add new post"
+msgstr "Ȧḓḓ ƞḗẇ ƥǿşŧ"
+
+#: app/templates/helpers/posts.html:16
+msgid "(edit)"
+msgstr "(ḗḓīŧ)"
+
+#: app/templates/helpers/posts.html:29
+#, python-format
+msgid "%(count)s comments."
+msgstr "%(count)s ƈǿḿḿḗƞŧş."
+
+#: app/templates/helpers/posts.html:31
+msgid "Reply"
+msgstr "Řḗƥŀẏ"
+
+#: app/templates/helpers/posts.html:39
+msgid "No posts!"
+msgstr "Ƞǿ ƥǿşŧş!"
+
+#: app/templates/helpers/posts.html:43
+msgid "Start the conversation"
+msgstr "Şŧȧřŧ ŧħḗ ƈǿƞṽḗřşȧŧīǿƞ"
+
+#: app/templates/posts/comment_form.html:17
+msgid "Post"
+msgstr "Ƥǿşŧ"
+
+#: app/templates/posts/post_form.html:31
+msgid "Delete"
+msgstr "Ḓḗŀḗŧḗ"
+
+#: app/templates/users/login.html:21
+msgid "Don't have an account?"
+msgstr "Ḓǿƞ'ŧ ħȧṽḗ ȧƞ ȧƈƈǿŭƞŧ?"
+
+#: app/templates/users/login.html:58
+msgid "By accessing and using this service, you agree to the"
+msgstr "Ɓẏ ȧƈƈḗşşīƞɠ ȧƞḓ ŭşīƞɠ ŧħīş şḗřṽīƈḗ, ẏǿŭ ȧɠřḗḗ ŧǿ ŧħḗ"
+
+#: app/templates/users/login.html:59
+msgid "terms of service"
+msgstr "ŧḗřḿş ǿƒ şḗřṽīƈḗ"
+
+#: app/templates/users/login.html:68
+msgid "Log In with Twitter"
+msgstr "Ŀǿɠ Īƞ ẇīŧħ Ŧẇīŧŧḗř"
+
+#: app/templates/users/login.html:73
+msgid "Log In with Google"
+msgstr "Ŀǿɠ Īƞ ẇīŧħ Ɠǿǿɠŀḗ"
+
+#: app/templates/users/login.html:78
+msgid "Log In with Facebook"
+msgstr "Ŀǿɠ Īƞ ẇīŧħ Ƒȧƈḗƀǿǿķ"
+
+#: app/users/forms.py:14
+msgid "Email or Username"
+msgstr "Ḗḿȧīŀ ǿř Ŭşḗřƞȧḿḗ"
+
+#: app/users/forms.py:16 app/users/forms.py:30
+msgid "Password"
+msgstr "Ƥȧşşẇǿřḓ"
+
+#: app/users/forms.py:18
+msgid "Remember me"
+msgstr "Řḗḿḗḿƀḗř ḿḗ"
+
+#: app/users/forms.py:23 app/users/forms.py:42
+msgid "Email"
+msgstr "Ḗḿȧīŀ"
+
+#: app/users/forms.py:25 app/users/forms.py:38
+msgid "Nickname"
+msgstr "Ƞīƈķƞȧḿḗ"
+
+#: app/users/forms.py:28 app/users/forms.py:40
+msgid "Full Name"
+msgstr "Ƒŭŀŀ Ƞȧḿḗ"
+
+#: app/users/forms.py:33 app/users/forms.py:57
+msgid "Verify password"
+msgstr "Ṽḗřīƒẏ ƥȧşşẇǿřḓ"
+
+#: app/users/forms.py:44
+msgid "Phone"
+msgstr "Ƥħǿƞḗ"
+
+#: app/users/forms.py:46
+msgid "Zip"
+msgstr "Ẑīƥ"
+
+#: app/users/forms.py:48
+msgid "Employer"
+msgstr "Ḗḿƥŀǿẏḗř"
+
+#: app/users/forms.py:52
+msgid "Current password"
+msgstr "Ƈŭřřḗƞŧ ƥȧşşẇǿřḓ"
+
+#: app/users/forms.py:54
+msgid "New password"
+msgstr "Ƞḗẇ ƥȧşşẇǿřḓ"
