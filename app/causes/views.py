@@ -3,6 +3,7 @@ from functools import wraps
 
 from flask import Blueprint, render_template, url_for, redirect, session,  \
                   request, g, flash, abort, Markup
+from flask_babel import lazy_gettext as _
 from flask_login import login_user, logout_user, current_user, login_required
 
 from app import app, db
@@ -24,7 +25,7 @@ def cause_required(f):
         causes = Cause.query.all()
 
         if len(causes) == 0:
-            flash('No causes found', 'error')
+            flash(_('No causes found'), 'error')
             return redirect(url_for('causes.cause_add'))
 
         return f(*args, **kwargs)
@@ -95,7 +96,7 @@ def cause_add():
         form.populate_obj(cause)
         cause.creators.append(current_user)
         cause.save()
-        flash('Cause created!', 'success')
+        flash(_('Cause created!'), 'success')
         LogEvent._log('cause_add', cause, user=current_user)
         return redirect(url_for('.cause_detail', slug=cause.slug))
 
@@ -120,7 +121,7 @@ def cause_edit(slug):
     if form.validate_on_submit():
         form.populate_obj(cause)
         cause.update()
-        flash('Cause updated!', 'success')
+        flash(_('Cause updated!'), 'success')
         LogEvent._log('cause_edit', cause, user=current_user)
         return redirect(url_for('.cause_detail', slug=slug))
 
@@ -141,15 +142,15 @@ def cause_support(slug):
     if current_user not in cause.supporters.all():
         cause.supporters.append(current_user)
         db.session.commit()
-        send_email('Thanks for supporting "{0.title}"'.format(cause),
+        send_email(_('Thanks for supporting "%(title))"', title=cause.title),
                    [current_user.email,],
                    {'user': current_user, 'cause': cause},
                    'email/cause_support_supporter.txt')
-        send_email('New supporter for "{0.title}"'.format(cause),
+        send_email(_('New supporter for "{0.title}")'.format(cause),
                    [s.email for s in cause.creators.all()],
                    {'user': current_user, 'cause': cause},
                    'email/cause_support_creators.txt')
-        flash(Markup('Thanks for supporting this cause! <a href="#actions">Take action</a> to see it succeed.'), 'success')
+        flash(Markup(_('Thanks for supporting this cause! <a href="#actions">Take action</a> to see it succeed.')), 'success')
         LogEvent._log('cause_support', cause, user=current_user)
         session['cause_support'] = cause.slug
     else:
@@ -221,11 +222,12 @@ def action_add(slug):
         action.cause = cause
         action.save()
 
-        send_email('Cause Update: A New Action is Available for {0.title}"'.format(cause),
+        send_email(_('Cause Update: A New Action is Available for %(title)',
+                     title=cause.title),
                    [u.email for u in cause.supporters.all() if u.email != ''],
                    {'cause': cause, 'action': action},
                    'email/cause_action_supporter.txt')
-        flash('Action added!', 'success')
+        flash(_('Action added!'), 'success')
         LogEvent._log('action_add', action, user=current_user)
         return redirect(url_for('.cause_detail', slug=slug))
 
@@ -253,7 +255,7 @@ def action_edit(slug, pk):
     if form.validate_on_submit():
         form.populate_obj(action)
         action.update()
-        flash('Action updated!', 'success')
+        flash(_('Action updated!'), 'success')
         return redirect(url_for('.cause_detail', slug=slug))
 
     context = {
@@ -283,7 +285,7 @@ def action_support(slug, pk):
         LogEvent._log('action_support', action, user=current_user)
         #flash('Thanks for taking action!', 'success')
     else:
-        flash('You already took this action')
+        flash(_('Thanks for supporting this action!'), 'success')
         return redirect(url_for('.cause_detail', slug=slug))
 
     return redirect(url_for('.action_thanks', slug=slug, pk=pk))

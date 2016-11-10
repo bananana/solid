@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-09 21:04+0000\n"
+"POT-Creation-Date: 2016-11-09 23:52+0000\n"
 "PO-Revision-Date: 2016-11-09 11:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+
+#: app/__init__.py:35
+msgid "Please log in to access this page."
+msgstr "Ƥŀḗȧşḗ ŀǿɠ īƞ ŧǿ ȧƈƈḗşş ŧħīş ƥȧɠḗ."
 
 #: app/causes/forms.py:19 app/causes/forms.py:35 app/posts/forms.py:14
 msgid "Title"
@@ -61,6 +65,51 @@ msgstr "Ḗẋƥīřȧŧīǿƞ"
 #: app/causes/forms.py:39
 msgid "Link"
 msgstr "Ŀīƞķ"
+
+#: app/causes/views.py:27
+msgid "No causes found"
+msgstr "Ƞǿ ƈȧŭşḗş ƒǿŭƞḓ"
+
+#: app/causes/views.py:90
+msgid "Cause created!"
+msgstr "Ƈȧŭşḗ ƈřḗȧŧḗḓ!"
+
+#: app/causes/views.py:114
+msgid "Cause updated!"
+msgstr "Ƈȧŭşḗ ŭƥḓȧŧḗḓ!"
+
+#: app/causes/views.py:134
+msgid "Thanks for supporting \"%(title))\""
+msgstr "Ŧħȧƞķş ƒǿř şŭƥƥǿřŧīƞɠ \"%(ŧīŧŀḗ))\""
+
+#: app/causes/views.py:138
+#, python-format
+msgid "New supporter for \"%(title)s\""
+msgstr "Ƞḗẇ şŭƥƥǿřŧḗř ƒǿř \"%(title)s\""
+
+#: app/causes/views.py:142
+msgid ""
+"Thanks for supporting this cause! <a href=\"#actions\">Take action</a> to"
+" see it succeed."
+msgstr ""
+"Ŧħȧƞķş ƒǿř şŭƥƥǿřŧīƞɠ ŧħīş ƈȧŭşḗ! <a href=\"#actions\">Ŧȧķḗ ȧƈŧīǿƞ</a> ŧǿ şḗḗ "
+"īŧ şŭƈƈḗḗḓ."
+
+#: app/causes/views.py:165
+msgid "Cause Update: A New Action is Available for %(title)"
+msgstr "Ƈȧŭşḗ Ŭƥḓȧŧḗ: Ȧ Ƞḗẇ Ȧƈŧīǿƞ īş Ȧṽȧīŀȧƀŀḗ ƒǿř %(ŧīŧŀḗ)"
+
+#: app/causes/views.py:170
+msgid "Action added!"
+msgstr "Ȧƈŧīǿƞ ȧḓḓḗḓ!"
+
+#: app/causes/views.py:197
+msgid "Action updated!"
+msgstr "Ȧƈŧīǿƞ ŭƥḓȧŧḗḓ!"
+
+#: app/causes/views.py:219
+msgid "Thanks for supporting this action!"
+msgstr "Ŧħȧƞķş ƒǿř şŭƥƥǿřŧīƞɠ ŧħīş ȧƈŧīǿƞ!"
 
 #: app/posts/forms.py:26
 msgid "Are you sure?"

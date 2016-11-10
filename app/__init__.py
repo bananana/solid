@@ -13,9 +13,14 @@ babel = Babel(app)
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
+from sqlalchemy_i18n import make_translatable
+make_translatable(db.Mapper)
+
 from flask_login import LoginManager
 lm = LoginManager()
 lm.init_app(app)
+from flask_babel import lazy_gettext as _
+lm.login_message = _('Please log in to access this page.')
 
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
