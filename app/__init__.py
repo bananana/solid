@@ -13,6 +13,9 @@ babel = Babel(app)
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
+from flask_migrate import Migrate
+migrate = Migrate(app, db)
+
 from sqlalchemy_i18n import make_translatable
 make_translatable(db.Mapper)
 
