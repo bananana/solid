@@ -38,9 +38,26 @@
         <div class="full-width-container">
             <div class="row">
                 <div class="twelve columns">
+
+                    <!-- Logo -->
                     <a class="u-link-color-override" href="{{ url_for('index') }}">
                         <h4 class="title u-pull-left"><strong>SOLID</strong></h4>
                     </a>
+                    
+                    <!-- Language picker -->
+                    <div class="dropdown u-pull-right">
+                        <button class="button dropdown-button u-add-margin-left">
+                            <span class="button-text-with-img">En&nbsp;</span>
+                            <img src="{{ url_for('static', filename='open-iconic/png/globe-2x.png') }}">&nbsp;
+                            <img src="{{ url_for('static', filename='open-iconic/png/caret-bottom-2x.png') }}">
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#">English</a>
+                            <a href="#">Espa&ntilde;ol</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin tools -->
                     {% if current_user.is_admin %}
                     <a href="{{ url_for('admin.admin') }}" 
                         title="Admin" 
@@ -48,16 +65,22 @@
                         {{ _('Admin') }}
                     </a>
                     {% endif %}
+                    
+                    <!-- Login, Signup, Logout and Prifile buttons -->
                     {% if active_page == "login" %}
+                        <!-- If on login page, show only signup button -->
                         <a href="{{ url_for('users.signup') }}" title="Sign Up"
                             class="button u-pull-right">
                             {{ _('Sign Up') }}
                         </a>
                     {% elif active_page == "signup" %}
+                        <!-- If on signupd page, show login button only -->
                         <a href="{{ url_for('users.login') }}" title="Log In" class="button u-pull-right">
+                            <span class="button-text-with-img">Logout</span>
                             <img src="{{ url_for('static', filename='open-iconic/png/account-login-2x.png') }}">
                         </a>
                     {% else %}
+                        <!-- If authenticated, show logout button -->
                         {% if current_user.is_authenticated %} 
                             <a href="{{ url_for('users.logout') }}" title="Log Out" class="button u-pull-right">
                                 <img src="{{ url_for('static', filename='open-iconic/png/account-logout-2x.png') }}">
@@ -68,10 +91,12 @@
                                     {{ current_user.nickname }}
                                 </a>
                             </span>
+                        <!-- Otherwise show both Login and Signup buttons at the same time -->
                         {% else %}
                             <a href="{{ url_for('users.login') }}" 
                                 title="{{ _('Log In') }}" 
                                 class="button u-add-margin-left u-pull-right">
+                                <span class="button-text-with-img">Login&nbsp;</span>
                                 <img src="{{ url_for('static', filename='open-iconic/png/account-login-2x.png') }}">
                             </a>
                             <a href="{{ url_for('users.signup') }}" 
@@ -81,6 +106,7 @@
                             </a>
                         {% endif %}
                     {% endif %}
+
                 </div>
             </div>
         </div>

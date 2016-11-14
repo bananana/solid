@@ -19,7 +19,8 @@
 - Navigation
 - Modals
 - Input
-- Tables
+- Dropdown
+- Utilities
 - Lists
 - Blockquotes
 - Code
@@ -625,6 +626,16 @@ input[type="submit"]:disabled:focus {
 .button img {
     margin-top: 1em;
 }
+.button .button-text-with-img {
+    display: none;
+}
+@media (min-width: 550px) {
+    .button .button-text-with-img {
+        display: inline;
+        position: relative;
+        bottom: 4px;
+    }
+}
 .selected {
     color: #1EAEDB;
     border-color: #1EAEDB;
@@ -700,6 +711,50 @@ input[type="submit"]:disabled:focus {
 }
 
 
+/* Dropdown 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 99px;
+    margin-left: 11px;
+    margin-top: -10px;
+    border-left: 1px solid #1eaeda;
+    border-bottom: 1px solid #1eaeda;
+    border-right: 1px solid #1eaeda;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding-bottom: 4px;
+}
+@media (min-width: 550px) {
+    .dropdown-content {
+        min-width: 124px;
+    }
+}
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #FBFAF9;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropdown-button {
+    background-color: #fff;
+    border-bottom: none;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+
 /* Utilities
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .u-link-color-override,
@@ -765,84 +820,6 @@ input[type="submit"]:disabled:focus {
     }
 }
 
-
-/* Tables 
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-/*
-table a {
-    text-decoration: none;
-}
-caption {
-    text-align: left;
-    border-bottom: 1px solid #222;
-    font-size: 1.5em;
-    padding: 12px 0;
-}
-.arrow {
-    display: inline-block;
-    width: 0;
-}
-th[data-sort] {
-    cursor: pointer;
-}
-tbody tr:hover {
-    background-color: #F8F8F8;
-}
-td code {
-    line-height: 1.5;
-}
-@media only screen and (max-width: 750px),
-(min-device-width: 750px) and (max-device-width: 1024px) {
-    table.responsive, 
-    table.responsive thead, 
-    table.responsive tbody, 
-    table.responsive th, 
-    table.responsive td, 
-    table.responsive tr {
-        display: block;
-    }
-    table.responsive thead tr {
-        display: none;
-    }
-    table.responsive tr {
-        margin-bottom: 2em; 
-    }
-    table.responsive tbody tr:hover {
-        background-color: initial;
-    }
-    table.responsive td {
-        border: none;
-        border-bottom: 1px solid #eee;
-        position: relative;
-        padding-left: 50%;
-    }
-    table.responsive td:before {
-        position: absolute;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-    }
-    table.responsive td:nth-of-type(1) {
-        padding-left: initial;
-        border-bottom: 1px solid #222;
-    }
-    table.responsive td:nth-of-type(1) a {
-        font-size: 1.8rem;
-        line-height: 1.5;
-        letter-spacing: -0.05rem;
-        margin-left: 5px;
-        margin-top: 0px;
-        margin-bottom: 2rem;
-        font-weight: 300;
-    }
-    table.responsive td:nth-of-type(2):before { content: "Standing"; }
-    table.responsive td:nth-of-type(3):before { content: "Dues Plan"; }
-    table.responsive td:nth-of-type(4):before { content: "IU"; }
-    table.responsive td:nth-of-type(5):before { content: "Employer"; }
-    table.responsive td:nth-of-type(6):before { content: "Zip"; }
-}
-*/
 
 /* Lists 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
