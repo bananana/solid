@@ -212,6 +212,7 @@ def action_support(slug, pk):
     action = cause.actions.filter_by(id=pk).first()
 
     if action.supporters.filter_by(id=current_user.id).count() == 0:
+        cause.supporters.append(current_user)
         action.supporters.append(current_user)
         db.session.commit()
         flash('Thanks for supporting this action!', 'success')
