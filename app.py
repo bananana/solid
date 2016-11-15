@@ -365,8 +365,8 @@ class AppManager(object):
             #keys = sorted(u.__dict__.keys()[1:])
 
             #: Manually created list of keys in appropriate order
-            keys = ['nickname', 'email', 'full_name', 'private_full_name',
-                    'is_admin', 'password', 'social_id', 'phone', 'zip',
+            keys = ['nickname', 'email', 'full_name', 'is_admin', 
+                    'password', 'social_id', 'phone', 'zip',
                     'employer', 'description']
 
             #: Empty arrays to store user input
