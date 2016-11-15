@@ -39,7 +39,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
             {{ _('No posts!') }}
         </strong>
         <a class="button u-add-margin-left"
-            href="{{ url_for('.post_add', slug=cause.slug) }}">
+            href="{{ url_for('posts.post_add', slug=cause.slug) }}">
             {{ _('Start the conversation') }}
         </a>
     </p>
