@@ -826,9 +826,11 @@ input[type="submit"]:disabled:focus {
     position: relative;
     display: inline-block;
 }
+
 .dropdown-content {
     display: none;
     position: absolute;
+    text-align: center;
     background-color: #fff;
     min-width: 99px;
     margin-left: 11px;

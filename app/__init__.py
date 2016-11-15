@@ -1,6 +1,6 @@
 from os import environ
 
-from flask import Flask, render_template, flash, redirect, url_for
+from flask import Flask, render_template, flash, redirect, url_for, g
 
 app = Flask(__name__)
 
@@ -16,13 +16,14 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    """ Use the browser's language preferences to select available translation """
-    '''
-    translations = [str(translation) for translation in
-                    babel.list_translations()]
-    return request.accept_languages.best_match(translations)
-    '''
-    return 'en'
+    if g.user.is_authenticated:
+        # If user is authenticated, use their preferred language setting
+        return g.user.locale
+    else:
+        # Use the browser's language preferences to select available translation
+        translations = [str(translation) for translation in
+                        babel.list_translations()]
+        return request.accept_languages.best_match(translations)
 
 
 from flask_sqlalchemy import SQLAlchemy

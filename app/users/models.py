@@ -21,6 +21,7 @@ class User(UserMixin, CRUDMixin, db.Model):
     zip         = db.Column(db.String(5), index=True)
     employer    = db.Column(db.String(64), index=True)
     description = db.Column(db.Text)
+    locale      = db.Column(db.String(2))
 
     supports    = db.relationship('Cause', 
                                   secondary=cause_supporters,
@@ -40,7 +41,7 @@ class User(UserMixin, CRUDMixin, db.Model):
     def __init__(self, social_id=None, is_admin=False, nickname=None, 
                  password=None, full_name=None, initials=None, 
                  color='#e5e5e5', email=None, phone=None, zip=None, employer=None, 
-                 description=None):
+                 description=None, locale=None):
         self.social_id = social_id
         self.is_admin = is_admin
         self.nickname = nickname
@@ -53,6 +54,7 @@ class User(UserMixin, CRUDMixin, db.Model):
         self.zip = zip
         self.employer = employer
         self.description = description
+        self.locale = locale
 
     def set_password(self,  password):
         '''Hash the provided password with bcrypt and push it to the database.
@@ -81,6 +83,9 @@ class User(UserMixin, CRUDMixin, db.Model):
     def generate_color(self):
         rand_color = '#%06x' % randint(0, 0xFFFFFF)
         self.update(**{'color': rand_color})
+
+    def set_locale(self, loc):
+        self.update(**{'locale': loc})
 
     def is_supporting(self, cause):
         return self.supports.filter(cause_supporters.c.cause_id == cause.id).count() > 0

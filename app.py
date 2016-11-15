@@ -269,9 +269,9 @@ class AppManager(object):
             #keys = sorted(u.__dict__.keys()[1:])
 
             #: Manually created list of keys in appropriate order
-            keys = ['nickname', 'email', 'full_name',
-                    'is_admin', 'password', 'social_id', 'phone', 'zip',
-                    'employer', 'description']
+            keys = ['nickname', 'email', 'full_name', 'is_admin', 
+                    'password', 'social_id', 'phone', 'zip',
+                    'employer', 'description', 'locale']
 
             #: Empty arrays to store user input
             values = []
@@ -333,10 +333,9 @@ class AppManager(object):
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
 
-
             if args.verbose:
                 keys = ['id', 'nickname', 'email', 'full_name', 'is_admin', 
-                        'phone', 'zip', 'employer']
+                        'phone', 'zip', 'employer', 'locale']
             else:
                 keys = ['id', 'nickname', 'email', 'full_name', 'is_admin'] 
 
@@ -365,9 +364,9 @@ class AppManager(object):
             #keys = sorted(u.__dict__.keys()[1:])
 
             #: Manually created list of keys in appropriate order
-            keys = ['nickname', 'email', 'full_name', 'is_admin', 
-                    'password', 'social_id', 'phone', 'zip',
-                    'employer', 'description']
+            keys = ['nickname', 'email', 'full_name',
+                    'is_admin', 'password', 'social_id', 'phone', 'zip',
+                    'employer', 'description', 'locale']
 
             #: Empty arrays to store user input
             values = []

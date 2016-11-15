@@ -7,7 +7,7 @@ from wtforms.validators import DataRequired, Regexp, Length, Optional, EqualTo, 
                                Email
 from app.users import constants as USER
 from app.users.models import User
-
+from app.config.base import SUPPORTED_LANGUAGES
 
 class LoginForm(Form):
     '''Login form used by login() function in app/users/views.py'''
@@ -49,6 +49,8 @@ class EditForm(Form):
                                    validators=[Optional()])
     description      = TextAreaField(_('Description'),
                                      validators=[Optional()])
+    locale           = SelectField(_('Default Language'), 
+                                   choices=list(SUPPORTED_LANGUAGES.items()))
     current_password = PasswordField(_('Current password'),
                                      validators=[Optional()])
     new_password     = PasswordField(_('New password'),

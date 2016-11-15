@@ -53,13 +53,13 @@
                     <!-- Language picker -->
                     <!--<div id="lang-dropdown" class="dropdown u-pull-right">
                         <button class="button dropdown-button u-add-margin-left">
-                            <span class="button-text-with-img">En&nbsp;</span>
+                            <span class="button-text-with-img">{{ user.locale }}&nbsp;</span>
                             <img src="{{ url_for('static', filename='open-iconic/png/globe-2x.png') }}">&nbsp;
                             <img src="{{ url_for('static', filename='open-iconic/png/caret-bottom-2x.png') }}">
                         </button>
                         <div class="dropdown-content">
-                            <a href="#">English</a>
-                            <a href="#">Espa&ntilde;ol</a>
+                            {% if user.locale != 'en' %}<a href="#">English</a>{% endif %}
+                            {% if user.locale != 'es' %}<a href="#">Espa&ntilde;ol</a>{% endif %}
                         </div>
                     </div>-->
                     

@@ -24,8 +24,8 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 SUPPORTED_LANGUAGES = {
-    'en': 'English',
-    'es': 'Español'
+    'en': u'English',
+    'es': u'Español'
 }
 
 BABEL_DEFAULT_LOCALE = 'en'
