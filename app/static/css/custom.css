@@ -744,10 +744,12 @@ input[type="submit"]:disabled:focus {
 .dropdown-content a:hover {
     background-color: #FBFAF9;
 }
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content,
+.dropdown-content-click {
     display: block;
 }
-.dropdown:hover .dropdown-button {
+.dropdown:hover .dropdown-button,
+.dropdown-button-click {
     background-color: #fff;
     border-bottom: none;
     border-bottom-right-radius: 0;

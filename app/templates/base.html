@@ -18,6 +18,7 @@
     {% block styles %}{% endblock %}
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
     {% block scripts %}{% endblock %}
     
     <!-- Analytics -->
@@ -45,7 +46,7 @@
                     </a>
                     
                     <!-- Language picker -->
-                    <div class="dropdown u-pull-right">
+                    <div id="lang-dropdown" class="dropdown u-pull-right">
                         <button class="button dropdown-button u-add-margin-left">
                             <span class="button-text-with-img">En&nbsp;</span>
                             <img src="{{ url_for('static', filename='open-iconic/png/globe-2x.png') }}">&nbsp;
@@ -80,8 +81,8 @@
                             <img src="{{ url_for('static', filename='open-iconic/png/account-login-2x.png') }}">
                         </a>
                     {% else %}
-                        <!-- If authenticated, show logout button -->
                         {% if current_user.is_authenticated %} 
+                            <!-- If authenticated, show logout button -->
                             <a href="{{ url_for('users.logout') }}" title="Log Out" class="button u-pull-right">
                                 <img src="{{ url_for('static', filename='open-iconic/png/account-logout-2x.png') }}">
                             </a>
@@ -91,8 +92,8 @@
                                     {{ current_user.nickname }}
                                 </a>
                             </span>
-                        <!-- Otherwise show both Login and Signup buttons at the same time -->
                         {% else %}
+                            <!-- Otherwise show both Login and Signup buttons at the same time -->
                             <a href="{{ url_for('users.login') }}" 
                                 title="{{ _('Log In') }}" 
                                 class="button u-add-margin-left u-pull-right">
