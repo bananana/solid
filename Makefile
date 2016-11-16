@@ -9,20 +9,6 @@ SSH_OPTS := -q
 
 RELEASE != echo "$(NAME)-`git describe --always`"
 
-i18n_extract:
-	pybabel extract -F babel.cfg -o messages.pot app
-
-i18n_update:
-	pybabel update -i messages.pot -d app/translations/
-
-i18n_munge:
-	podebug --rewrite unicode app/translations/es/LC_MESSAGES/messages.po app/translations/es/LC_MESSAGES/messages.po
-
-i18n_compile:
-	pybabel compile -d app/translations/
-
-i18n_test: i18n_extract i18n_update i18n_munge i18n_compile
-
 deploy: /tmp/$(RELEASE) upload extract clean pip migrate link restart
 
 /tmp/$(RELEASE):
@@ -57,4 +43,18 @@ restart:
 	@ tput setaf 5; tput bold; echo "Restarting gunicorn server"; tput sgr0
 	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo systemctl restart bsolid.service"
 
-.PHONY : deploy archive upload clean extract pip migrate link restart
+.PHONY : deploy archive upload clean extract pip migrate link restart i18n_test i18n_extract i18n_update i18n_munge i18n_compile
+
+i18n_test: i18n_extract i18n_update i18n_munge i18n_compile
+
+i18n_extract:
+	pybabel extract -F babel.cfg -o messages.pot app
+
+i18n_update:
+	pybabel update -i messages.pot -d app/translations/
+
+i18n_munge:
+	podebug --rewrite unicode app/translations/es/LC_MESSAGES/messages.po app/translations/es/LC_MESSAGES/messages.po
+
+i18n_compile:
+	pybabel compile -d app/translations/
