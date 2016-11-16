@@ -826,7 +826,14 @@ input[type="submit"]:disabled:focus {
     position: relative;
     display: inline-block;
 }
-
+.dropdown-button {
+    min-width: 97px;
+}
+@media (min-width: 550px) {
+    .dropdown-button {
+        min-width: 130px;
+    }
+}
 .dropdown-content {
     display: none;
     position: absolute;
@@ -844,7 +851,7 @@ input[type="submit"]:disabled:focus {
 }
 @media (min-width: 550px) {
     .dropdown-content {
-        min-width: 124px;
+        min-width: 128px;
     }
 }
 .dropdown-content a {
