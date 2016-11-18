@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 
 from flask import (Blueprint, render_template, url_for, redirect, session,
@@ -7,10 +8,11 @@ from flask_dance.contrib.google import google
 from flask_dance.contrib.twitter import twitter
 from flask_dance.contrib.facebook import facebook
 from flask_dance.consumer import oauth_authorized
+from flask_babel import refresh, get_locale
 
 from slugify import slugify
 
-from app import app, db, lm
+from app import app, db, lm, babel
 from app.email import send_email
 
 from . import constants as USER
@@ -19,7 +21,6 @@ from .models import User
 
 from app.posts.models import Post
 
-import re
 
 #: Module blueprint
 mod = Blueprint('users', __name__)
@@ -48,6 +49,16 @@ def logged_in(blueprint, token):
     return redirect(request.args.get('next') or url_for('index'))
 
 
+@babel.localeselector
+def get_locale():
+    if session.get('lang_code') is None:
+        # Use the browser's language preferences to select available translation
+        session['lang_code'] = request.accept_languages.best_match(app.config['SUPPORTED_LANGUAGES'].keys())
+    if current_user.is_authenticated:
+        # If user is logged in use their language preferences
+        session['lang_code'] = current_user.locale
+    return session['lang_code']
+
 @mod.route('/signup', methods=['GET', 'POST'])
 def signup():
     '''Get basic user info and sign them up.
@@ -69,7 +80,7 @@ def signup():
             new_user.set_password(form.password.data)
             new_user.generate_initials()
             new_user.generate_color()
-            new_user.set_locale(app.config['BABEL_DEFAULT_LOCALE'])
+        new_user.set_locale(session['lang_code'])
             login_user(new_user)
             send_email('Welcome to {0}'.format(app.config['SITE_NAME']),
                        [new_user.email,],
@@ -113,6 +124,7 @@ def login():
         if user_query is not None and \
            user_query.is_valid_password(form.password.data):
             login_user(user_query, remember=remember)
+            session['lang_code'] = user_query.locale
             return redirect(
                 request.args.get('next') 
                 or session.pop('next', False)
@@ -154,6 +166,7 @@ def authorize_google():
         })
         new_user.generate_initials()
         new_user.generate_color()
+        new_user.set_locale(session['lang_code'])
         login_user(new_user)
     else:
         login_user(user_query)
@@ -198,6 +211,7 @@ def authorize_twitter():
         })
         new_user.generate_initials()
         new_user.generate_color()
+        new_user.set_locale(session['lang_code'])
         login_user(new_user)
     else:
         login_user(user_query)
@@ -230,6 +244,7 @@ def authorize_facebook():
         })
         new_user.generate_initials()
         new_user.generate_color()
+        new_user.set_locale(session['lang_code'])
         login_user(new_user)
     else:
         login_user(user_query)
@@ -334,3 +349,12 @@ def delete(nickname):
         abort(404)
 
     return redirect(url_for('index')) 
+
+
+@mod.route('/translate', methods=['POST'])
+def translate():
+    if request.method == 'POST' \
+    and request.form['lang_code'] in tuple(app.config['SUPPORTED_LANGUAGES'].keys()):
+        session['lang_code'] = request.form['lang_code'] 
+        refresh()
+    return redirect(url_for('index'))

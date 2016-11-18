@@ -24,6 +24,7 @@
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/translate.js') }}"></script>
     {% block scripts %}{% endblock %}
     
     <!-- Analytics -->
@@ -38,6 +39,7 @@
         {% endif %}
         ga('send', 'pageview');
     </script>
+
 </head>
 <body>
     <div class="header">
@@ -53,13 +55,26 @@
                     <!-- Language picker -->
                     <!--<div id="lang-dropdown" class="dropdown u-pull-right">
                         <button class="button dropdown-button u-add-margin-left">
-                            <span class="button-text-with-img">{{ user.locale }}&nbsp;</span>
+                            <span class="button-text-with-img">
+                                {% if session['lang_code'] == 'en' %}
+                                    en
+                                {% elif session['lang_code'] == 'es' %}
+                                    es
+                                {% else %}
+                                    ??
+                                {% endif %}
+                                &nbsp;
+                            </span>
                             <img src="{{ url_for('static', filename='open-iconic/png/globe-2x.png') }}">&nbsp;
                             <img src="{{ url_for('static', filename='open-iconic/png/caret-bottom-2x.png') }}">
                         </button>
                         <div class="dropdown-content">
-                            {% if user.locale != 'en' %}<a href="#">English</a>{% endif %}
-                            {% if user.locale != 'es' %}<a href="#">Espa&ntilde;ol</a>{% endif %}
+                            {% if session['lang_code'] != 'en' %}
+                                <a href="javascript:translate('en')">English</a>
+                            {% endif %}
+                            {% if session['lang_code'] != 'es' %}
+                                <a href="javascript:translate('es');">Espa&ntilde;ol</a>
+                            {% endif %}
                         </div>
                     </div>-->
                     
