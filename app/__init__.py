@@ -17,9 +17,12 @@ babel = Babel(app)
 @babel.localeselector
 def get_locale():
     """ Use the browser's language preferences to select available translation """
+    '''
     translations = [str(translation) for translation in
                     babel.list_translations()]
     return request.accept_languages.best_match(translations)
+    '''
+    return 'en'
 
 
 from flask_sqlalchemy import SQLAlchemy
