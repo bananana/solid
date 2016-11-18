@@ -217,7 +217,7 @@ a:hover {
     text-decoration: none;
 }
 .content {
-    /*margin-top: 9rem;*/
+    min-height: 65%;
 }
 .section {
     padding: 8rem 0 7rem;
