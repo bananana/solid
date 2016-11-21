@@ -1,6 +1,6 @@
 from os import environ
 
-from flask import Flask, render_template, flash, redirect, url_for, g
+from flask import Flask, render_template, flash, redirect, url_for, g, session
 app = Flask(__name__)
 
 if environ.get('FLASK_CONFIG', None) is None:
@@ -111,7 +111,10 @@ from app.causes.views import cause_required, multi_cause
 @cause_required
 @multi_cause
 def index():
-    '''Home page of the app. Nothing much here.'''
+    '''Home page of the app.'''
+    #: For some reson lang_code is not set for index page when app first loads.
+    #: Set it the hard way.
+    session['lang_code'] = request.accept_languages.best_match(app.config['SUPPORTED_LANGUAGES'].keys())
     return render_template('index.html')
 
 
