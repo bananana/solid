@@ -114,7 +114,8 @@ def index():
     '''Home page of the app.'''
     #: For some reson lang_code is not set for index page when app first loads.
     #: Set it the hard way.
-    session['lang_code'] = request.accept_languages.best_match(app.config['SUPPORTED_LANGUAGES'].keys())
+    if session.get('lang_code') is None:
+        session['lang_code'] = request.accept_languages.best_match(app.config['SUPPORTED_LANGUAGES'].keys())
     return render_template('index.html')
 
 
