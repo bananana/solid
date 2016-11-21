@@ -840,7 +840,6 @@ input[type="submit"]:disabled:focus {
     text-align: center;
     background-color: #fff;
     min-width: 99px;
-    margin-left: 11px;
     margin-top: -10px;
     border-left: 1px solid #1eaeda;
     border-bottom: 1px solid #1eaeda;

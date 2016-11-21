@@ -73,6 +73,49 @@ $(document).ready(function() {
 &lt;button class="button-primary" disabled&gt;Button Element&lt;/button&gt;
 &lt;input type="button" class="button button-primary" value="Input Button" disabled&gt;
 &lt;input type="submit" class="button button-primary" value="Submit Button" disabled&gt;</pre>
+            <h5>Iconography in buttons</h5>
+            <p>You can add icons to buttons. To align them properly, wrap the button text with <code>&lt;span class="button-text-with-img"&gt;</code> and add the icon as an <code>&lt;img&gt;</code> after it.</p>
+            <button class="button">
+                <span class="button-text-with-img">
+                    Button
+                </span>
+                &nbsp;
+                <img src="{{ url_for('static', filename='open-iconic/png/globe-2x.png') }}">
+            </button>
+            <pre>
+&lt;button class="button"&gt;
+    &lt;span class="button-text-with-img"&gt;
+        Button
+    &lt;/span&gt;
+    &lt;img src="&#123;&#123; url_for('static', filename='open-iconic/png/globe-2x.png') &#125;&#125;"&gt;
+&lt;/button&gt;</pre>
+            <h5>Dropdowns</h5>
+            <p>Dropdown buttons can be created by wrapping a button with a <code>dorpdown</code> class div, like so:</p>
+            <div class="dropdown">
+                <button class="button dropdown-button">
+                    <span class="button-text-with-img">
+                        menu    
+                    </span>
+                    <img src="{{ url_for('static', filename='open-iconic/png/caret-bottom-2x.png') }}">
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Option 1</a>
+                    <a href="#">Option 2</a>
+                </div>
+            </div>
+            <pre>
+&lt;div class="dropdown"&gt;
+    &lt;button class="button dropdown-button"&gt;
+        &lt;span class="button-text-with-img"&gt;
+            menu    
+        &lt;/span&gt;
+        &lt;img src="&#123;&#123; url_for('static', filename='open-iconic/png/caret-bottom-2x.png') &#125;&#125;"&gt;
+    &lt;/button&gt;
+    &lt;div class="dropdown-content"&gt;
+        &lt;a href="#"&gt;Option 1&lt;/a&gt;
+        &lt;a href="#"&gt;Option 2&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
             <hr>
 
             <h3 class="scrollspy-section"><a id="text-input"></a>Text Input</h3>
