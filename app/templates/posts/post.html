@@ -2,54 +2,63 @@
 {% set active_page = "discussion" %}
 
 {% block content %}
-<div class="row">
-    <div class="eight columns">
-        <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+{% from "helpers/users.html" import render_avatar %}
+<div class="full-width-container">
+
+    <div class="row u-add-margin-top">
+        <div class="twelve columns">
+            <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+        </div>
     </div>
-    <div class="four columns">
-        <h1 class="u-remove-margin-bottom u-text-right"><small>vs. {{ cause.boss }}</small></h1>
-    </div>
-</div>
-<hr class="u-remove-margin-bottom">
-<div class="row u-add-margin-top">
-    <div class="eight columns post offset-by-two">
-        <h2>{{ post.title }}</h2>
-        <p>
-            <a href="{{ url_for('users.user', nickname=post.author.nickname) }}" 
-                class="avatar-sm" 
-                title="{{ post.author.full_name  }}">{{ post.author.initials }}</a>
-            <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
+    <hr>
+
+    <div class="row u-add-margin-top">
+        <div class="post eight columns offset-by-two">
+            <h2 class="u-pull-left">{{ post.title }}</h2>
+            <article class="u-cf">{{ post.body|markdown }}</article>
+            <div class="u-pull-left u-remove-margin-bottom">
+                {{ render_avatar(post.author) }}
+                <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
+            </div>
             {% if post.author == current_user or current_user.is_admin %}
-            <a class="button u-add-margin-left"
-                href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
-                edit
-            </a>
+                <a class="button u-pull-right u-remove-margin-bottom"
+                    href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
+                    edit
+                </a>
             {% endif %}
-        </p>
-        <article>{{ post.body|markdown }}</article>
+        </div>
     </div>
-    <h3 class="six columns offset-by-three">Comments</h3>
-    {% for comment in post.comments.all() %}
-    <div class="six columns comment offset-by-three">
-        {{ comment.body|markdown }}
-        <p class="u-pull-right">
-            <a href="{{ url_for('users.user', nickname=comment.author.nickname) }}" 
-                class="avatar-sm" 
-                title="{{ comment.author.full_name  }}">{{ comment.author.initials }}</a>
-            <em>{% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}</em>
-        </p>
+    <div class="row u-add-margin-top">
+        <div class="eight columns offset-by-two">
+            <h4 class="u-remove-margin-bottom">{{ _('%(count)s comments', count=post.comments.count()) }}</h4>
+        </div>
     </div>
-    {% endfor %}
-    <div class="six columns offset-by-three">
-        {% from "helpers/forms.html" import render_field, render_boolean %}
-        <form id="cause" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
-            {{ comment_form.hidden_tag() }}
-            <fieldset class="no-label">
-                {{ render_field(comment_form.body, class="u-full-width") }}
-            </fieldset>
-            <input id="save" type="submit" value="Post"
-                class="button button-primary u-mobile-fixed-bottom">
-        </form>
+    <div class="row u-add-margin-top">
+        <div class="post eight columns comment offset-by-two">
+            {% for comment in post.comments.all() %}
+                {{ comment.body|markdown }}
+                <p class="u-pull-left u-remove-margin-bottom">
+                    {{ render_avatar(comment.author) }}
+                    <em>{% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}</em>
+                </p>
+            {% endfor %}
+        </div>
     </div>
+    <div class="row">
+        <div class="eight columns offset-by-two u-add-margin-top">
+            {% if current_user.is_authenticated %}
+            {% from "helpers/forms.html" import render_field, render_boolean %}
+            <form id="cause" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
+                {{ comment_form.hidden_tag() }}
+                <fieldset class="no-label">
+                    {{ render_field(comment_form.body, class="u-full-width") }}
+                </fieldset>
+                <input id="save" type="submit" value="Post"
+                    class="button button-primary u-mobile-fixed-bottom">
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
 </div>
 {% endblock %}

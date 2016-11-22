@@ -336,8 +336,11 @@ h3 span{
  font-weight: bold;
 }
 .post {
-    border-left: 1px solid #ff9900;
-    padding-left: 1em;
+    /*border-left: 1px solid #ff9900;*/
+    -moz-box-shadow: 0 0 10px #e5e5e5;
+    -webkit-box-shadow: 0 0 10px #e5e5e5;
+    box-shadow: 0 0 10px #e5e5e5;
+    padding: 1em;
 }
 .post article h1, .comment article h1, 
 .post article h2, .comment article h2,

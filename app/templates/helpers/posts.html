@@ -3,6 +3,8 @@ dont' forget to add a description of your changes to the appropriate styleguide
 section (app/templates/styleguide/templating#discussion-helpers)
 -->
 
+{% from "helpers/users.html" import render_avatar %}
+
 {% macro render_post_list(cause) %}
 {% for post in cause.posts.all() %}
 <div class="post four columns">
@@ -18,19 +20,17 @@ section (app/templates/styleguide/templating#discussion-helpers)
         {% endif %}
     </h4>
     <article>{{ post.body|markdown }}</article>
-    <p class="u-pull-right">
-        <a href="{{ url_for('users.user', nickname=post.author.nickname) }}" 
-            class="avatar-sm" 
-            title="{{ post.author.full_name }}">{{ post.author.initials }}</a>
+    <p>
+        {{ render_avatar(post.author) }}
         <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
     </p>
-    <p>
+    <div>
         <img class="icon" src="{{ url_for('static', filename='open-iconic/png/comment-square-2x.png') }}"> 
-        {{ _('%(count)s comments.', count=post.comments.count()) }}
-        <a href="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}">
+        {{ _('%(count)s comments', count=post.comments.count()) }}
+        <a class="u-pull-right" href="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}">
             {{ _('Reply') }}
         </a>
-    </p>
+    </div>
 </div>
 {% else %}
 <div class="four columns offset-by-four">

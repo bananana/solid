@@ -59,7 +59,7 @@ def post_add(slug):
 
 
 @mod.route('/cause/<slug>/posts/<pk>')
-@login_required
+#@login_required
 @cause_required
 def post_detail(slug, pk):
     cause = Cause.query.filter_by(slug=slug).first()
