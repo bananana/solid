@@ -51,13 +51,23 @@ def logged_in(blueprint, token):
 
 @babel.localeselector
 def get_locale():
+    '''This method has to return a language code that determines the app's 
+    display language. lang_code session variable is used to store such a code.
+    If user is unauthenticated it is set to whatever their browser locale is.
+    It can be changed with the language select widget which uses the 
+    translate() method implemented in this file. Alternatively, if a user is 
+    authenticated, they can set their language preferences in their profile 
+    settings.
+    '''
     if session.get('lang_code') is None:
         # Use the browser's language preferences to select available translation
-        session['lang_code'] = request.accept_languages.best_match(app.config['SUPPORTED_LANGUAGES'].keys())
+        session['lang_code'] = request.accept_languages.best_match(
+                                app.config['SUPPORTED_LANGUAGES'].keys())
     if current_user.is_authenticated:
         # If user is logged in use their language preferences
         session['lang_code'] = current_user.locale
     return session['lang_code']
+
 
 @mod.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -353,6 +363,9 @@ def delete(nickname):
 
 @mod.route('/translate', methods=['POST'])
 def translate():
+    '''Change app's display language using the language select widget.
+    The widget's logic is located in /app/static/js/translate.js
+    '''
     if request.method == 'POST' \
     and request.form['lang_code'] in tuple(app.config['SUPPORTED_LANGUAGES'].keys()):
         session['lang_code'] = request.form['lang_code'] 

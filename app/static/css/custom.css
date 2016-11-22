@@ -872,6 +872,13 @@ input[type="submit"]:disabled:focus {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
+#lang-dropdown {
+    /* The standard u-add-margin-left utility
+     * adds 5 extra pixels for some reason, so
+     * left margin for the language picker widget
+     * needs to be set the hard way here. */
+    margin-left: 0.7em;
+}
 
 
 /* Utilities
