@@ -60,7 +60,7 @@
                     </p>
                     {% endif %}
                     {% if supporter %}
-                    <h5 class="u-add-margin-left">&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
+                    <h5 class="u-add-margin-left u-add-margin-right">&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
                     {% else %}
                         <a id="stand-with-us" 
                            class="button button-primary hero-button" 
@@ -204,12 +204,6 @@
             </a>
         </div>
     </div>
-    <div class="row">
-        <div class="twelve columns">
-            <div class="row">
-                {{ render_post_list(cause) }}
-            </div>
-        </div>
-    </div>
+    {{ render_post_list(cause) }}
 </div>
 {% endblock %}

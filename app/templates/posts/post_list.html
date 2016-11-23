@@ -3,17 +3,20 @@
 
 {% block content %}
 {% from "helpers/posts.html" import render_post_list %}
-<div class="row">
-    <div class="eight columns">
-        <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+<div class="full-width-container">
+    <div class="row u-add-margin-top">
+        <div class="nine columns">
+            <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">
+                <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+            </a>
+        </div>
+        <div class="three columns">
+            <a class="button u-full-width u-add-margin-top" href="/cause/{{ cause.slug }}/posts/add">
+                {{ _('Add new post') }}
+            </a>
+        </div>
     </div>
-    <div class="four columns">
-        <h1 class="u-remove-margin-bottom u-text-right"><small>vs. {{ cause.boss }}</small></h1>
-    </div>
-</div>
-<hr class="u-remove-margin-bottom">
-
-<div class="row u-add-margin-top">
+    <hr class="u-remove-margin-bottom">
     {{ render_post_list(cause) }}
 </div>
 {% endblock %}

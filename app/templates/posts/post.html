@@ -15,7 +15,7 @@
     <hr>
 
     <div class="row u-add-margin-top">
-        <div class="post eight columns offset-by-two">
+        <div class="post one-half column">
             <h2 class="u-pull-left">{{ post.title }}</h2>
             <article class="u-cf">{{ post.body|markdown }}</article>
             <div class="u-pull-left u-remove-margin-bottom">
@@ -29,9 +29,23 @@
                 </a>
             {% endif %}
         </div>
+        <div class="one-half column">
+            <br>
+            {% if current_user.is_authenticated %}
+            {% from "helpers/forms.html" import render_field, render_boolean %}
+            <form id="cause" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
+                {{ comment_form.hidden_tag() }}
+                <fieldset class="no-label">
+                    {{ render_field(comment_form.body, class="u-full-width") }}
+                </fieldset>
+                <input id="save" type="submit" value="Post"
+                    class="button button-primary">
+            </form>
+            {% endif %}
+        </div>
     </div>
     <div class="row u-add-margin-top">
-        <div class="eight columns offset-by-two">
+        <div class="one-half column">
             <h4 class="u-remove-margin-bottom">{{ _('%(count)s comments', count=post.comments.count()) }}</h4>
         </div>
     </div>
@@ -44,21 +58,6 @@
                     <em>{% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}</em>
                 </p>
             {% endfor %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="eight columns offset-by-two u-add-margin-top">
-            {% if current_user.is_authenticated %}
-            {% from "helpers/forms.html" import render_field, render_boolean %}
-            <form id="cause" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
-                {{ comment_form.hidden_tag() }}
-                <fieldset class="no-label">
-                    {{ render_field(comment_form.body, class="u-full-width") }}
-                </fieldset>
-                <input id="save" type="submit" value="Post"
-                    class="button button-primary u-mobile-fixed-bottom">
-            </form>
-            {% endif %}
         </div>
     </div>
 

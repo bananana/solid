@@ -7,42 +7,46 @@ section (app/templates/styleguide/templating#discussion-helpers)
 
 {% macro render_post_list(cause) %}
 {% for post in cause.posts.all() %}
-<div class="post four columns">
-    <img class="icon-comment u-pull-left" src="{{ url_for('static', filename='open-iconic/png/pulse-2x.png') }}"> 
-    <h4>
-        <a href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
-            {{ post.title }}
-        </a>
-        {% if post.author == current_user %}
-        <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
-            {{ _('(edit)') }}
-        </a>
-        {% endif %}
-    </h4>
-    <article>{{ post.body|markdown }}</article>
-    <p>
-        {{ render_avatar(post.author) }}
-        <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
-    </p>
-    <div>
-        <img class="icon" src="{{ url_for('static', filename='open-iconic/png/comment-square-2x.png') }}"> 
-        {{ _('%(count)s comments', count=post.comments.count()) }}
-        <a class="u-pull-right" href="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}">
-            {{ _('Reply') }}
-        </a>
+    {% if loop.index is divisibleby(4) %}</div><div class="row">{% endif %}
+    {% if loop.index == 1  %}<div class="row">{% endif %}
+    <div class="post four columns">
+        <h4>
+            <a href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
+                {{ post.title }}
+            </a>
+            {% if post.author == current_user %}
+            <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
+                {{ _('(edit)') }}
+            </a>
+            {% endif %}
+        </h4>
+        <article>
+            {{ post.body | truncate(120) | markdown }}
+            <div class="fade"></div>
+        </article>
+        <p>
+            {{ render_avatar(post.author) }}
+            <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
+        </p>
+        <div>
+            <img class="icon" src="{{ url_for('static', filename='open-iconic/png/comment-square-2x.png') }}"> 
+            {{ _('%(count)s comments', count=post.comments.count()) }}
+            <a class="u-pull-right" href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
+                {{ _('Reply') }}
+            </a>
+        </div>
     </div>
-</div>
-{% else %}
-<div class="four columns offset-by-four">
-    <p>
-        <strong>
-            {{ _('No posts!') }}
-        </strong>
-        <a class="button u-add-margin-left"
-            href="{{ url_for('posts.post_add', slug=cause.slug) }}">
-            {{ _('Start the conversation') }}
-        </a>
-    </p>
-</div>
+    {% else %}
+    <div class="four columns offset-by-four">
+        <p>
+            <strong>
+                {{ _('No posts!') }}
+            </strong>
+            <a class="button u-add-margin-left"
+                href="{{ url_for('posts.post_add', slug=cause.slug) }}">
+                {{ _('Start the conversation') }}
+            </a>
+        </p>
+    </div>
 {% endfor %}
 {% endmacro %}
