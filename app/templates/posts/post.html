@@ -7,7 +7,9 @@
 
     <div class="row u-add-margin-top">
         <div class="twelve columns">
-            <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+            <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">
+                <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+            </a>
         </div>
     </div>
     <hr>

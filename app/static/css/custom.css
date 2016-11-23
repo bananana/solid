@@ -73,9 +73,11 @@ small.small-block {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
     color: #3299bb;
+    text-decoration: none;
 }
 a:hover {
     color: #1eaeda;
+    text-decoration: underline;
 }
 
 /* Alerts 
