@@ -72,7 +72,7 @@ def signup():
                    'email/user_signup.txt')
         return redirect(
             request.args.get('next') 
-            or session.get('next', False)
+            or session.pop('next', False)
             or url_for('index')
         )
 
@@ -108,7 +108,7 @@ def login():
             login_user(user_query, remember=remember)
             return redirect(
                 request.args.get('next') 
-                or session.get('next', False)
+                or session.pop('next', False)
                 or url_for('index')
             )
         else:
