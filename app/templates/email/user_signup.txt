@@ -1,4 +1,4 @@
-Dear {{ user.initials }},
+Hi {{ user.nickname }},
 
 Welcome to the {{ site_name }} community!
 
