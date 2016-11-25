@@ -22,21 +22,40 @@
         $('#stand-with-us').click(function() {
             ga('send', {
                 hitType: 'event',
-                eventCategory: 'Causes',
-                eventAction: 'support',
-                eventLabel: 'cause'
+                eventCategory: 'cause',
+                eventAction: 'support',  // FIXME only fire on success
+                eventLabel: '{{ cause.slug }}'
             });
         });
-        $('a.support').click(function() {
+        $('a.support-action').click(function(e) {
+            var action_name = $(e.target).parents('.support-action').find('h4').text();
             ga('send', {
                 hitType: 'event',
-                eventCategory: 'Causes',
-                eventAction: 'support',
-                eventLabel: 'action'
+                eventCategory: 'action',
+                eventAction: 'popup',
+                eventLabel: action_name
             });
         });
         $('a.support[rel=external]').click(function(e) {
             window.location.href = $(e.target).data('supportHref');
+        });
+        $('.button-modal-close').click(function(e) {
+            var action_name = $(e.target).parents('.modal').find('h3').text();
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'action',
+                eventAction: 'popup close',
+                eventLabel: action_name
+            });
+        });
+        $('a.support').click(function(e) {
+            var action_name = $(e.target).parents('.modal').find('h3').text();
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'action',
+                eventAction: 'support',
+                eventLabel: action_name
+            });
         });
     });
 </script>
@@ -167,7 +186,7 @@
                                     pk=action.id) }}"
                                     href="{{ action.link }}">{{ _('Support!') }}</a>
                                 {% else %}
-                                <a class="button button-primary" href="{{ url_for('causes.action_support', slug=cause.slug,
+                                <a class="button button-primary support" href="{{ url_for('causes.action_support', slug=cause.slug,
                                     pk=action.id) }}">{{ _('Support!') }}</a>
                                 {% endif %}
                             </p>
