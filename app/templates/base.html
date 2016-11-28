@@ -4,8 +4,26 @@
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta name="description" content="">
+    <meta name="keywords" content="">
     <meta name="author" content="">
+    <meta name="copyright" content="GPLv3">
+    <meta name="application-name" content="Solid">
+   
+    {% if active_page == "dashboard" -%}
+    <meta property="og:title" content="Solid">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="">
+    <meta property="og:description" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    {% if cause.image -%}
+    <meta property="og:image" content="{{ url_for('static', filename=cause.image) }}">
+    <meta name="twitter:image" content="{{ url_for('static', filename=cause.image) }}">
+    {% endif -%}    
+    {% endif -%}
 
     <title>{% block title %}Solid{% endblock %}</title>
 

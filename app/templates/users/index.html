@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% set active_page = "user" %}
 
+{% block title %}{{ user.nickname }} - {{ super() }}{% endblock %}
+
 {% block scripts %}
 {% endblock %}
 
