@@ -48,7 +48,7 @@
     </div>
     <div class="row">
         <div class="eight columns offset-by-two u-add-margin-top">
-            {% if current_user.is_authenticated %}
+            {% if current_user.is_authenticated and current_user.is_supporting(cause) %}
             {% from "helpers/forms.html" import render_field, render_boolean %}
             <form id="cause" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
                 {{ comment_form.hidden_tag() }}
