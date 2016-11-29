@@ -61,6 +61,7 @@ def signup():
         new_user = User.create(**{
             'email'    : form.email.data,
             'nickname' : form.nickname.data,
+            'full_name': form.full_name.data
         })
         new_user.set_password(form.password.data)
         new_user.generate_initials()
@@ -285,7 +286,6 @@ def edit(nickname):
 
         # Remove empty fields from list
         form_data = {k:v for k,v in complete_form_data.iteritems() if not v == ''}
-
         # Set the password if it was submitted
         if form.new_password.data:
             user.set_password(form.new_password.data)

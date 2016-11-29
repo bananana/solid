@@ -44,7 +44,11 @@ $(document).ready(function() {
                         data_validation_error_msg_container='#form-nickname-error',
                         data_validation_error_msg='Only A-Z, 0-9, - and _ allowed'
                     ) }}
-                    {{ render_field(form.full_name, class='u-full-width') }}
+                    {{ render_field(
+                        form.full_name, 
+                        class='u-full-width',
+                        data_validation_optional='true'
+                    ) }}
                     {{ render_field(
                         form.password,
                         class='u-full-width',
