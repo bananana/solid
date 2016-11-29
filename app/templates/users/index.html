@@ -36,18 +36,16 @@
             {% for post in feed %}
                 <li><strong>{{ post.title }}</strong> by <em>{{ post.author.nickname }}</em><br>{{ post.body }}</li>
             {% else %}
-                <li>
-                    <em>
-                        There's nothing to show here yet.<br>
-                        {% if current_user == user %}
-                            Start a discussion on one of the causes you're
-                            supporting so that others can see it here.
-                        {% else %}
-                            When this user participates in a discussion, you'll
-                            see it here!
-                        {% endif %}
-                    </em>
-                </li>
+                <small>
+                    <strong>There's nothing to show here yet.</strong><br>
+                    {% if current_user == user %}
+                        Start a discussion on one of the causes you're
+                        supporting so that others can see it here.
+                    {% else %}
+                        When this user participates in a discussion, you'll
+                        see it here!
+                    {% endif %}
+                </small>
             {% endfor %}
             </ul>
         </div>
