@@ -74,7 +74,6 @@ class User(UserMixin, CRUDMixin, db.Model):
             initials = ''.join([n[0] for n in self.full_name.split()])
         else:
             initials = self.nickname[:1].capitalize()
-            print(initials)
         self.update(**{'initials': initials})
 
     def generate_color(self):
