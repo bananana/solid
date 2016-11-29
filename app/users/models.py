@@ -70,10 +70,12 @@ class User(UserMixin, CRUDMixin, db.Model):
             return False
 
     def generate_initials(self):
-        if self.full_name is not None:
+        if self.full_name:
             initials = ''.join([n[0] for n in self.full_name.split()])
-        else:
+        elif self.nickname:
             initials = self.nickname[:1].capitalize()
+        else:
+            initials = '??'
         self.update(**{'initials': initials})
 
     def generate_color(self):
