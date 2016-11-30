@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, url_for, redirect, session, \
                   request, g, flash, abort
 from flask_login import login_user, logout_user, current_user, login_required
 
+from app import db
+
 from app.users.models import User
 from app.pages.models import Page
 from app.pages.forms import PageForm
@@ -29,6 +31,8 @@ def admin_user_list():
 def admin_page_list():
     if not current_user.is_admin:
          return redirect('/')
+    #with db.session.no_autoflush:
+    #    return render_template('admin/page_list.html', pages=Page.query.all())
     return render_template('admin/page_list.html', pages=Page.query.all())
 
 
