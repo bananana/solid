@@ -7,15 +7,15 @@
 {{ super() }}
 <meta property="og:title" content="{{ cause.title }} - Solid">
 <meta property="og:type" content="article">
-<meta property="og:url" content="">
-<meta property="og:description" content="">
+<meta property="og:url" content="{{ url_for('.cause_detail', slug=cause.slug, _external=True) }}">
+<meta property="og:description" content="{{ cause.intro }}">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ cause.title }} - Solid">
-<meta name="twitter:description" content="">
+<meta name="twitter:text:description" content="{{ cause.intro }}">
 
 {% if cause.image -%}
-<meta property="og:image" content="{{ url_for('static', filename=cause.image) }}">
-<meta name="twitter:image" content="{{ url_for('static', filename=cause.image) }}">
+<meta property="og:image" content="{{ url_for('static', filename=cause.image, _external=True) }}">
+<meta name="twitter:image" content="{{ url_for('static', filename=cause.image, _external=True) }}">
 {% endif -%}    
 {% endblock meta %}
 
