@@ -323,45 +323,6 @@ def user(create, delete, modify, regenerate_colors, list_):
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
 
-        elif args.delete:
-            try:
-                to_del = User.query.filter_by(nickname=args.delete).first()
-                to_del.delete()
-                print(bcolors.OKGREEN + 'User ' + args.delete + \
-                      ' deleted successfully' + bcolors.ENDC)
-                exit(0)
-            except Exception as e:
-                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
-                exit(1)
-
-        elif args.list:
-            try:
-                users = User.query.all()
-            except Exception as e:
-                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
-                exit(1)
-
-            if args.verbose:
-                keys = ['id', 'nickname', 'email', 'full_name', 'is_admin', 
-                        'phone', 'zip', 'employer', 'locale']
-            else:
-                keys = ['id', 'nickname', 'email', 'full_name', 'is_admin'] 
-
-            table_data = [keys]
-            for u in users:
-                usr = []
-                for k in keys:
-                    attr = getattr(u, k)
-                    usr.append(('None' if attr is None else str(attr)))
-                table_data.append(usr)
-            table = AsciiTable(table_data)
-            print(table.table)
-                attr = getattr(u, k)
-                usr.append(('None' if attr is None else str(attr)))
-            table_data.append(usr)
-        table = AsciiTable(table_data)
-        print(table.table)
-
     elif regenerate_colors:
         for user in User.query.all():
             user.generate_color()
