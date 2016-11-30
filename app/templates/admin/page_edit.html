@@ -1,5 +1,7 @@
 {% extends "base_form.html" %}
 
+{% block title %}Edit page - {{ super() }}{% endblock title %}
+
 {% block content %}
     {% from "helpers/forms.html" import render_field, render_boolean %}
     <div class="row u-add-margin-top">

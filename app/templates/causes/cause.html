@@ -3,6 +3,22 @@
 
 {% block title %}{{ cause.title }} - {{ super() }}{% endblock %}
 
+{% block meta %}
+{{ super() }}
+<meta property="og:title" content="{{ cause.title }} - Solid">
+<meta property="og:type" content="article">
+<meta property="og:url" content="">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ cause.title }} - Solid">
+<meta name="twitter:description" content="">
+
+{% if cause.image -%}
+<meta property="og:image" content="{{ url_for('static', filename=cause.image) }}">
+<meta name="twitter:image" content="{{ url_for('static', filename=cause.image) }}">
+{% endif -%}    
+{% endblock meta %}
+
 {% block styles %}
 <style>
 .hero,
