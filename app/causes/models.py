@@ -61,6 +61,15 @@ class Cause(CRUDMixin, db.Model):
             )
         )
 
+    @property
+    def count_action_supports(self):
+        from app.users.models import User
+        query = action_supporters.count(
+            whereclause=User.id.in_(a.id for a in self.actions.all())
+        )
+        result = db.engine.execute(query)
+        return result.fetchone()[0]
+
     def __repr__(self):
         return '<Cause %r>' % (self.title)    
 
