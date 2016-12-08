@@ -320,6 +320,7 @@ a:hover {
     padding: 0.5em 1em;
     color: #552453;
     text-decoration: none;
+    margin-top: 1em;
 }
 .support-action:hover {
     border-color: #1eaeda;
