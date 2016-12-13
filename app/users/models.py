@@ -95,5 +95,8 @@ class User(UserMixin, CRUDMixin, db.Model):
             self.supports.remove(cause)
             self.save()
 
+    def actions_per_cause(self, cause):
+        return cause.action_supporters.filter_by(id=self.id)
+
     def __repr__(self):
         return '<User %r>' % (self.nickname) 

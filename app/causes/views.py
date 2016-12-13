@@ -215,6 +215,10 @@ def action_support(slug, pk):
         cause.supporters.append(current_user)
         action.supporters.append(current_user)
         db.session.commit()
-        flash('Thanks for supporting this action!', 'success')
+        send_email('Thanks for taking action!',
+                   [current_user.email,],
+                   {'user': current_user, 'cause': cause, 'action': action},
+                   'email/action_support_supporter.txt')
+        flash('Thanks for taking action!', 'success')
 
     return redirect(url_for('.cause_detail', slug=slug))
