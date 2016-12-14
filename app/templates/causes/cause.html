@@ -39,7 +39,7 @@
             ga('send', {
                 hitType: 'event',
                 eventCategory: 'cause',
-                eventAction: 'support',  // FIXME only fire on success
+                eventAction: 'click support',
                 eventLabel: '{{ cause.slug }}'
             });
         });
@@ -73,6 +73,14 @@
                 eventLabel: action_name
             });
         });
+        {% if cause_support %}
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'cause',
+                eventAction: 'commit support',
+                eventLabel: '{{ cause_support }}'
+            });
+        {% endif %}
     });
 </script>
 {% endblock %}

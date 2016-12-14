@@ -72,6 +72,8 @@ def cause_detail(slug):
     except AttributeError:
         context["supporter"] = False
 
+    context["cause_support"] = session.pop("cause_support", None)
+
     return render_template('causes/cause.html', **context)
 
 
@@ -139,6 +141,7 @@ def cause_support(slug):
                    {'user': current_user, 'cause': cause},
                    'email/cause_support_creators.txt')
         flash(Markup('Thanks for supporting this cause! <a href="#actions">Take action</a> to see it succeed.'), 'success')
+        session['cause_support'] = cause.slug
 
     return redirect(url_for('.cause_detail', slug=slug))
 
