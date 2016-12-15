@@ -5,10 +5,10 @@ Thank you for taking the "{{ action.title }}" for the {{ cause.title }} on {{ si
 By letting your friends know you proudly took action, you'll help get this victory to the finish line.
 
 	Share on Facebook:
-		https://www.facebook.com/sharer/sharer.php?u={{ url_for('causes.cause_detail', slug=cause.slug, _external=True) | urlencode }} 
+		https://www.facebook.com/sharer/sharer.php?u={{ url_for('causes.cause_detail', slug=cause.slug, _external=True) | urlencode }}#modal-action-{{ action.id }}
 
 	Share on Twitter:
-		https://twitter.com/home?status={{ url_for('causes.cause_detail', slug=cause.slug, _external=True) | urlencode }} 
+		https://twitter.com/home?status={{ url_for('causes.cause_detail', slug=cause.slug, _external=True) | urlencode }}#modal-action-{{ action.id }}
 
 - - -
 
