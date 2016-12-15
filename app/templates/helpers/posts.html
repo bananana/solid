@@ -17,13 +17,12 @@ section (app/templates/styleguide/templating#discussion-helpers)
         </a>
         {% endif %}
     </h4>
-    <article>
-        {{ post.body | truncate(120) | markdown }}
-        <div class="fade"></div>
+    <article id="post-body-{{ post.id }}">
+        {{ post.body |  markdown }}
     </article>
-    <p>
+    <p class="u-add-margin-top">
         {{ render_avatar(post.author) }}
-        <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
+        <small>{{ post.created_on.strftime('%b. %d, %Y') }}</small>
     </p>
     <div>
         <img class="icon" src="{{ url_for('static', filename='open-iconic/png/comment-square-2x.png') }}"> 

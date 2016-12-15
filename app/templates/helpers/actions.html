@@ -4,6 +4,7 @@ section (app/templates/styleguide/templating#)
 -->
 
 {% macro render_action(cause, action) %}
+{% from "helpers/users.html" import render_avatar %}
 <a class="three columns support-action" 
    data-target="modal-action-{{ action.id }}">
     <h4>{{ action.title }}</h4>

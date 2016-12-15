@@ -346,9 +346,15 @@ h3 span{
     margin-top: 2em;
 }
 .post article {
-    height: 85px;
+    /* Height is set dynamically in app/static/js/conversation.js 
+     * height: 85px; */
     overflow: hidden;
     position: relative;
+    -moz-transition: height 0.5s;
+    -ms-transition: height 0.5s;
+    -o-transition: height 0.5s;
+    -webkit-transition: height 0.5s;
+    transition: height 0.5s;
 }
 .post article .fade {
     position: absolute; 
@@ -376,6 +382,21 @@ h3 span{
         rgba(255, 255, 255, 1) 100%
     );
 } 
+.post article .fade small {
+    float: right;
+    margin-top: 68px;
+}
+.post article .fade small a {
+    cursor: pointer;
+}
+/*
+.post article:hover {
+    max-height: 500px;
+}
+.post article:hover .fade {
+    display: none;
+}
+*/
 .post article h1, .comment article h1, 
 .post article h2, .comment article h2,
 .post article h3, .comment article h3,
