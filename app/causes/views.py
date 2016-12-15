@@ -222,6 +222,21 @@ def action_support(slug, pk):
                    [current_user.email,],
                    {'user': current_user, 'cause': cause, 'action': action},
                    'email/action_support_supporter.txt')
-        flash('Thanks for taking action!', 'success')
+        #flash('Thanks for taking action!', 'success')
 
-    return redirect(url_for('.cause_detail', slug=slug))
+    return redirect(url_for('.action_thanks', slug=slug, pk=pk))
+
+
+@mod.route('/cause/<slug>/actions/<pk>/thanks')
+@cause_required
+def action_thanks(slug, pk):
+    cause = Cause.query.filter_by(slug=slug).first()
+    action = cause.actions.filter_by(id=pk).first()
+
+    context = {
+        "user": current_user,
+        "cause": cause,
+        "action": action,
+    }
+
+    return render_template('causes/action_thanks.html', **context)

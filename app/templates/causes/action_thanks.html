@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% set active_page = "cause" %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="full-width-container">
+    <div class="row u-add-margin-top">
+        <div class="twelve columns u-text-center">
+            <h3>Thank you for taking <strong>{{ action.title }}</strong> action for <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">{{ cause.title }}</a> on Solid!</h3>
+            <p>By letting your friends know you proudly took action, you'll help get this victory to the finish line.</p>
+            <a class="button button-modal u-add-margin-top"
+                data-target="modal-share">
+                {{ _('Share your action') }}
+            </a>
+            <p><small>Sharing could inspire 3 or more actions for {{ cause.title }}!</small></p>
+            <div id="modal-share" class="modal">
+                <div style="width:300px;">
+                    <h3 class="u-pull-left">
+                        {{ _('Share your action') }}
+                    </h3>
+                    <a href="#" class="button-modal-close u-pull-right">
+                        <img src="/static/open-iconic/png/x-2x.png" alt="X" />
+                    </a>
+                    <p class="u-cf u-full-width u-text-center">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
+                                 url_for('causes.cause_detail', slug=cause.slug,
+                                         _external=True) | urlencode
+                                 }}" 
+                           target="_blank"
+                           class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}"></a>
+                        <a href="https://twitter.com/home?status={{
+                                 url_for('causes.cause_detail', slug=cause.slug,
+                                         _external=True) | urlencode
+                                 }}"
+                           target="_blank"
+                           class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}"></a>
+                        <a href="https://plus.google.com/share?url={{
+                                 url_for('causes.cause_detail', slug=cause.slug,
+                                         _external=True) | urlencode
+                                 }}" 
+                           target="_blank"><img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}"></a>
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <p>You've now taken {{ user.actions_per_cause(cause).count() }} action on behalf of <a href="{{ url_for('causes.cause_detail', slug=cause.slug)}}">{{ cause.title }}</a>. Share your experience in the <a href="{{ url_for('posts.post_list', slug=cause.slug) }}">Conversation section</a> or check out {{ cause.actions.count() }} other actions that are available.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
