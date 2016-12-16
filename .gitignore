@@ -13,3 +13,6 @@ app.db
 test.db
 envvars_dev.sh
 db_repository/
+
+# Misc.
+.DS_Store

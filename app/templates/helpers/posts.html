@@ -24,13 +24,13 @@ section (app/templates/styleguide/templating#discussion-helpers)
         {{ render_avatar(post.author) }}
         <small>{{ post.created_on.strftime('%b. %d, %Y') }}</small>
     </p>
-    <div>
+    <small>
         <img class="icon" src="{{ url_for('static', filename='open-iconic/png/comment-square-2x.png') }}"> 
         {{ _('%(count)s comments', count=post.comments.count()) }}
         <a class="u-pull-right" href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
             {{ _('Reply') }}
         </a>
-    </div>
+    </small>
 </div>
 {% endmacro %}
 

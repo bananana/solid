@@ -311,6 +311,9 @@ a:hover {
         margin-right: auto;
     }
 }
+a.support-action {
+    text-decoration: none;
+}
 .support-action {
     display: block;
     border: 1px solid #bbb;
@@ -318,25 +321,23 @@ a:hover {
     border-color: #3299bb;
     background-color: #fbfaf9;
     padding: 0.5em 1em;
-    color: #552453;
-    text-decoration: none;
     margin-top: 1em;
 }
 .support-action:hover {
     border-color: #1eaeda;
-    color: #552453;
     background-color: #fff;
     cursor: pointer;
+}
+.support-action:hover h5 {
+    text-decoration: underline;
+}
+.support-action article,
+.support-action .action-support-counter {
+    color: #161310;
 }
 h2 span,
 h3 span{
     font-size: 50%;
-}
-.support-action p {
-    font-size: 12px;
-}
-.support-action h4 {
- font-weight: bold;
 }
 .post {
     -moz-box-shadow: 0 0 10px #e5e5e5;
@@ -554,6 +555,9 @@ h3 span{
     text-align: center;
     background-color: #000;
     background: url(../images/transparent-pixel.png);
+}
+.modal h3 {
+    width: 95%;
 }
 .modal div {
     width: 90%;
@@ -826,6 +830,9 @@ input[type="submit"]:disabled:focus {
 }
 .u-add-margin-top {
     margin-top: 1em !important;
+}
+.u-add-margin-bottom {
+    margin-bottom: 1em;
 }
 .u-add-margin-left {
     margin-left: 1em;
