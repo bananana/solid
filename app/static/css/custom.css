@@ -239,6 +239,10 @@ a:hover {
 .hero-button {
     margin: 0 2rem 4rem 2rem;
 }
+.hero-aside {
+    margin-top: -5px;
+    line-height: 1.4em;
+}
 .glass {
     position: relative;
     background-color: #fff;
@@ -332,9 +336,17 @@ a.support-action {
     text-decoration: underline;
 }
 .support-action article,
-.support-action .action-support-counter {
+.support-action-counter {
     color: #161310;
 }
+.support-action-details-btn {
+    color: #3399bb;
+}
+.support-action-details-btn:hover {
+    color: #1eaeda;
+    text-decoration: underline;
+}
+
 h2 span,
 h3 span{
     font-size: 50%;
@@ -390,14 +402,6 @@ h3 span{
 .post article .fade small a {
     cursor: pointer;
 }
-/*
-.post article:hover {
-    max-height: 500px;
-}
-.post article:hover .fade {
-    display: none;
-}
-*/
 .post article h1, .comment article h1, 
 .post article h2, .comment article h2,
 .post article h3, .comment article h3,
@@ -405,6 +409,13 @@ h3 span{
     font-weight: bold;
     font-size: larger;
 }
+@media (min-width: 550px) {
+    .post-full-view {
+        display: block;
+        min-height: 299px;
+    }
+}
+
 .footer {
     display: block;
     width: 100%;

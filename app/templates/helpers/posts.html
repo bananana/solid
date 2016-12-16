@@ -21,8 +21,8 @@ section (app/templates/styleguide/templating#discussion-helpers)
         {{ post.body |  markdown }}
     </article>
     <p class="u-add-margin-top">
-        {{ render_avatar(post.author) }}
-        <small>{{ post.created_on.strftime('%b. %d, %Y') }}</small>
+        {{ render_avatar(post.author) }}&nbsp;
+        {{ post.created_on.strftime('%b. %d, %Y') }}
     </p>
     <small>
         <img class="icon" src="{{ url_for('static', filename='open-iconic/png/comment-square-2x.png') }}"> 

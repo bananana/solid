@@ -15,13 +15,13 @@
     <hr>
 
     <div class="row u-add-margin-top">
-        <div class="post one-half column">
+        <div class="post one-half column u-add-margin-top">
             <h2 class="u-pull-left">{{ post.title }}</h2>
-            <article class="u-cf">{{ post.body|markdown }}</article>
-            <div class="u-pull-left u-remove-margin-bottom">
-                {{ render_avatar(post.author) }}
-                <em>{{ post.created_on.strftime('%b. %d, %Y') }}</em>
-            </div>
+            <article class="post-full-view u-cf">{{ post.body|markdown }}</article>
+            <p class="u-pull-left u-remove-margin-bottom">
+                {{ render_avatar(post.author) }}&nbsp;
+                {{ post.created_on.strftime('%b. %d, %Y') }}
+            </p>
             {% if post.author == current_user or current_user.is_admin %}
                 <a class="button u-pull-right u-remove-margin-bottom"
                     href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
@@ -30,10 +30,9 @@
             {% endif %}
         </div>
         <div class="one-half column">
-            <br>
             {% if current_user.is_authenticated %}
             {% from "helpers/forms.html" import render_field, render_boolean %}
-            <form id="cause" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
+            <form id="cause" class="u-add-margin-top" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
                 {{ comment_form.hidden_tag() }}
                 <fieldset class="no-label">
                     {{ render_field(comment_form.body, class="u-full-width") }}
@@ -49,17 +48,17 @@
             <h4 class="u-remove-margin-bottom">{{ _('%(count)s comments', count=post.comments.count()) }}</h4>
         </div>
     </div>
-    <div class="row u-add-margin-top">
-        <div class="post eight columns comment offset-by-two">
-            {% for comment in post.comments.all() %}
+    {% for comment in post.comments.all() %}
+        <div class="row u-add-margin-top">
+            <div class="post one-half column comment">
                 {{ comment.body|markdown }}
                 <p class="u-pull-left u-remove-margin-bottom">
                     {{ render_avatar(comment.author) }}
                     <em>{% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}</em>
                 </p>
-            {% endfor %}
+            </div>
         </div>
-    </div>
+    {% endfor %}
 
 </div>
 {% endblock %}

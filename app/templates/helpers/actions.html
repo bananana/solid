@@ -9,11 +9,11 @@ section (app/templates/styleguide/templating#)
    data-target="modal-action-{{ action.id }}">
     <h5>{{ action.title }}</h5>
     <article class="u-add-margin-bottom">{{ action.summary }}</article>
-    <small class="action-support-counter u-pull-left">
+    <small class="support-action-counter u-pull-left">
         <img class="icon" src="{{ url_for('static', filename='open-iconic/png/bullhorn-2x.png') }}"> 
         {{ _('%(count)s supporters', count=action.supporters.count()) }}
     </small>
-    <small class="u-pull-right">
+    <small class="support-action-details-btn u-pull-right">
         {{ _('Details') }}
     </small>
     {% if action.expiration %}
