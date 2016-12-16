@@ -141,12 +141,12 @@
             {% for u in cause.supporters.all() %}
                 {{ render_avatar(u) }}
             {% endfor %}
-            <h5 class="u-add-margin-top">
-                <span class="u-add-margin-right">{{ _('Creators') }}:</span>
-                {% for u in cause.creators.all() %}
-                    {{ render_avatar(u) }}
-                {% endfor %}
-            </h5>
+            <h4 class="u-add-margin-top">
+                {{ _('Creators') }}:
+            </h4>
+            {% for u in cause.creators.all() %}
+                {{ render_avatar(u) }}
+            {% endfor %}
         </div>
         <div id="modal-share" class="modal">
             <div style="width:300px;">
