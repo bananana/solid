@@ -1,6 +1,8 @@
 {% extends "base_form.html" %}
 {% set active_page = "discussion" %}
 
+{% block title %}{{ post.title }} - {{ super() }}{% endblock title %}
+
 {% block content %}
 {% from "helpers/users.html" import render_avatar %}
 <div class="full-width-container">
@@ -30,7 +32,7 @@
             {% endif %}
         </div>
         <div class="one-half column">
-            {% if current_user.is_authenticated %}
+            {% if current_user.is_authenticated and current_user.is_supporting(cause) %}
             {% from "helpers/forms.html" import render_field, render_boolean %}
             <form id="cause" class="u-add-margin-top" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
                 {{ comment_form.hidden_tag() }}

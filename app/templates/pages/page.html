@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}{{ page.name }} - {{ super() }}{% endblock title %}
+
 {% block content %}
 <div class="row u-add-margin-top">
     <div class="six columns offset-by-three">

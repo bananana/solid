@@ -89,7 +89,8 @@ def config_vars():
     return dict(
         debug=app.debug, 
         site_name=app.config['SITE_NAME'],
-        server_name=app.config['SERVER_NAME']
+        server_name=app.config['SERVER_NAME'],
+        fb_app_id=app.config['FACEBOOK_OAUTH_CLIENT_ID']
     )
 
 

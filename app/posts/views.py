@@ -41,7 +41,7 @@ def post_add(slug):
         post.cause = cause
         post.save()
 
-        if current_user in cause.creators.all():
+        if current_user in cause.creators.all() or current_user.is_admin:
             send_email('"{0.title}" - "{1.title}"'.format(post, cause),
                     [s.email for s in cause.supporters.all() if s.id != current_user.id],
                        {'cause': cause, 'post': post},

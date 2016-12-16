@@ -3,6 +3,22 @@
 
 {% block title %}{{ cause.title }} - {{ super() }}{% endblock %}
 
+{% block meta %}
+{{ super() }}
+<meta property="og:title" content="{{ cause.title }} - Solid">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ url_for('.cause_detail', slug=cause.slug, _external=True) }}">
+<meta property="og:description" content="{{ cause.intro }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ cause.title }} - Solid">
+<meta name="twitter:text:description" content="{{ cause.intro }}">
+
+{% if cause.image -%}
+<meta property="og:image" content="{{ url_for('static', filename=cause.image, _external=True) }}">
+<meta name="twitter:image" content="{{ url_for('static', filename=cause.image, _external=True) }}">
+{% endif -%}    
+{% endblock meta %}
+
 {% block styles %}
 <style>
 .hero,
@@ -23,22 +39,49 @@
         $('#stand-with-us').click(function() {
             ga('send', {
                 hitType: 'event',
-                eventCategory: 'Causes',
-                eventAction: 'support',
-                eventLabel: 'cause'
+                eventCategory: 'cause',
+                eventAction: 'click support',
+                eventLabel: '{{ cause.slug }}'
             });
         });
-        $('a.support').click(function() {
+        $('a.support-action').click(function(e) {
+            var action_name = $(e.target).parents('.support-action').find('h4').text();
             ga('send', {
                 hitType: 'event',
-                eventCategory: 'Causes',
-                eventAction: 'support',
-                eventLabel: 'action'
+                eventCategory: 'action',
+                eventAction: 'popup',
+                eventLabel: action_name
             });
         });
         $('a.support[rel=external]').click(function(e) {
             window.location.href = $(e.target).data('supportHref');
         });
+        $('.button-modal-close').click(function(e) {
+            var action_name = $(e.target).parents('.modal').find('h3').text();
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'action',
+                eventAction: 'popup close',
+                eventLabel: action_name
+            });
+        });
+        $('a.support').click(function(e) {
+            var action_name = $(e.target).parents('.modal').find('h3').text();
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'action',
+                eventAction: 'support',
+                eventLabel: action_name
+            });
+        });
+        {% if cause_support %}
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'cause',
+                eventAction: 'commit support',
+                eventLabel: '{{ cause_support }}'
+            });
+        {% endif %}
     });
 </script>
 {% endblock %}
@@ -90,17 +133,20 @@
                 {{ _('Share') }}
             </a>
             <h4 class="u-add-margin-top">
-                {{ _('Creators') }}:
+                {{ _('%(count)s actions taken', count=cause.count_action_supports) }}
             </h4>
-            {% for u in cause.creators.all() %}
-                {{ render_avatar(u) }}
-            {% endfor %}
             <h4 class="u-add-margin-top">
                 {{ _('%(count)s supporters', count=cause.supporters.count()) }}:
             </h4>
             {% for u in cause.supporters.all() %}
                 {{ render_avatar(u) }}
             {% endfor %}
+            <h5 class="u-add-margin-top">
+                <span class="u-add-margin-right">{{ _('Creators') }}:</span>
+                {% for u in cause.creators.all() %}
+                    {{ render_avatar(u) }}
+                {% endfor %}
+            </h5>
         </div>
         <div id="modal-share" class="modal">
             <div style="width:300px;">
@@ -140,7 +186,6 @@
                 {{ _('Take action to win') }}
                 <span>{{ _('(%(count)s current)', count=cause.actions.count()) }}</span>
             </h3>
-        </div>
     </div>
     {{ render_action_list(cause) }}
     <hr>

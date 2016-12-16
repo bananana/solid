@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% set active_page = "user" %}
 
+{% block title %}{{ user.nickname }} - {{ super() }}{% endblock %}
+
 {% block scripts %}
 {% endblock %}
 
@@ -14,17 +16,19 @@
                 <strong>{{ user.nickname }}</strong> 
                 {% if user.is_admin %} | <small>Admin</small>{% endif %}
             </span>
-            {% if current_user == user or current_user.is_admin %}
-                <a href="{{ url_for('users.edit', nickname=user.nickname) }}" class="button u-pull-right u-remove-margin-top">Edit</a>
-            {% endif %}
             {% if user.full_name %}
                 <h5 class="u-remove-margin-bottom">{{ user.full_name }}</h5>
             {% endif %}
             {% if current_user == user or current_user.is_admin %}
-                <em>(Other users won't see these details)</em>
+                <div class="u-add-margin-top">
+                    <small>Other users won't see these details</small>
+                </div>
                 {% if user.email %}<div>{{ user.email }}</div>{% endif %}
                 {% if user.phone %}<div>{{ user.phone }}</div>{% endif %}
                 {% if user.zip %}<div>{{ user.zip }}</div>{% endif %}
+            {% endif %}
+            {% if current_user == user or current_user.is_admin %}
+                <a href="{{ url_for('users.edit', nickname=user.nickname) }}" class="button u-full-width u-add-margin-top">Edit</a>
             {% endif %}
         </div>
         <div class="six columns">
@@ -32,18 +36,16 @@
             {% for post in feed %}
                 <li><strong>{{ post.title }}</strong> by <em>{{ post.author.nickname }}</em><br>{{ post.body }}</li>
             {% else %}
-                <li>
-                    <em>
-                        There's nothing to show here yet.<br>
-                        {% if current_user == user %}
-                            Start a discussion on one of the causes you're
-                            supporting so that others can see it here.
-                        {% else %}
-                            When this user participates in a discussion, you'll
-                            see it here!
-                        {% endif %}
-                    </em>
-                </li>
+                <small>
+                    <strong>There's nothing to show here yet.</strong><br>
+                    {% if current_user == user %}
+                        Start a discussion on one of the causes you're
+                        supporting so that others can see it here.
+                    {% else %}
+                        When this user participates in a discussion, you'll
+                        see it here!
+                    {% endif %}
+                </small>
             {% endfor %}
             </ul>
         </div>

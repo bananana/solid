@@ -1,9 +1,9 @@
 import datetime
 
+from slugify import slugify
+
 from app import db
 from app.mixins import CRUDMixin 
-
-from slugify import slugify
 
 
 cause_creators = db.Table('causes_cause_creators',
@@ -50,6 +50,27 @@ class Cause(CRUDMixin, db.Model):
             self.created_on = datetime.datetime.utcnow()
 
         return super(Cause, self).save(*args, **kwargs)
+
+    @property
+    def action_supporters(self):
+        # set of users supporting actions on this cause
+        from app.users.models import User
+        return User.query.filter(
+            User.actions_supported.any(
+                Action.id.in_(a.id for a in self.actions.all())
+            )
+        )
+
+    @property
+    def count_action_supports(self):
+        from app.users.models import User
+        query = action_supporters.count(
+            whereclause=action_supporters.c.action_id.in_(
+                a.id for a in self.actions.all()
+            )
+        )
+        result = db.engine.execute(query)
+        return result.fetchone()[0]
 
     def __repr__(self):
         return '<Cause %r>' % (self.title)    

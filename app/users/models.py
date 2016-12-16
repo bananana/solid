@@ -16,7 +16,7 @@ class User(UserMixin, CRUDMixin, db.Model):
     full_name   = db.Column(db.String(64))
     initials    = db.Column(db.String(8))
     color       = db.Column(db.String(7))
-    email       = db.Column(db.String(128), index=True)
+    email       = db.Column(db.String(128), index=True, unique=True)
     phone       = db.Column(db.Integer, index=True)
     zip         = db.Column(db.String(5), index=True)
     employer    = db.Column(db.String(64), index=True)
@@ -70,10 +70,12 @@ class User(UserMixin, CRUDMixin, db.Model):
             return False
 
     def generate_initials(self):
-        if self.full_name is not None:
+        if self.full_name:
             initials = ''.join([n[0] for n in self.full_name.split()])
-        else:
+        elif self.nickname:
             initials = self.nickname[:1].capitalize()
+        else:
+            initials = '??'
         self.update(**{'initials': initials})
 
     def generate_color(self):
@@ -92,6 +94,9 @@ class User(UserMixin, CRUDMixin, db.Model):
         if self.is_supporting(cause):
             self.supports.remove(cause)
             self.save()
+
+    def actions_per_cause(self, cause):
+        return cause.action_supporters.filter_by(id=self.id)
 
     def __repr__(self):
         return '<User %r>' % (self.nickname) 

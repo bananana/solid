@@ -58,23 +58,29 @@ def signup():
 
     form = SignupForm()
     if form.validate_on_submit():
-        new_user = User.create(**{
-            'email'    : form.email.data,
-            'nickname' : form.nickname.data,
-        })
-        new_user.set_password(form.password.data)
-        new_user.generate_initials()
-        new_user.generate_color()
-        login_user(new_user)
-        send_email('Welcome to {0}'.format(app.config['SITE_NAME']),
-                   [new_user.email,],
-                   {'user': new_user},
-                   'email/user_signup.txt')
-        return redirect(
-            request.args.get('next') 
-            or session.get('next', False)
-            or url_for('index')
-        )
+        #: Check if nickname already exists
+        nickname = User.query.filter_by(nickname=form.nickname.data).first()
+        if nickname is None:
+            new_user = User.create(**{
+                'email'    : form.email.data,
+                'nickname' : form.nickname.data,
+                'full_name': form.full_name.data
+            })
+            new_user.set_password(form.password.data)
+            new_user.generate_initials()
+            new_user.generate_color()
+            login_user(new_user)
+            send_email('Welcome to {0}'.format(app.config['SITE_NAME']),
+                       [new_user.email,],
+                       {'user': new_user},
+                       'email/user_signup.txt')
+            return redirect(
+                request.args.get('next') 
+                or session.pop('next', False)
+                or url_for('index')
+            )
+        else:
+            flash('Nickname already exists, please pick a different one.', 'error')
 
     return render_template('users/signup.html', form=form)
 
@@ -108,7 +114,7 @@ def login():
             login_user(user_query, remember=remember)
             return redirect(
                 request.args.get('next') 
-                or session.get('next', False)
+                or session.pop('next', False)
                 or url_for('index')
             )
         else:
@@ -285,7 +291,6 @@ def edit(nickname):
 
         # Remove empty fields from list
         form_data = {k:v for k,v in complete_form_data.iteritems() if not v == ''}
-
         # Set the password if it was submitted
         if form.new_password.data:
             user.set_password(form.new_password.data)

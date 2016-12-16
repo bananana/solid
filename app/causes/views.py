@@ -72,6 +72,8 @@ def cause_detail(slug):
     except AttributeError:
         context["supporter"] = False
 
+    context["cause_support"] = session.pop("cause_support", None)
+
     return render_template('causes/cause.html', **context)
 
 
@@ -139,6 +141,7 @@ def cause_support(slug):
                    {'user': current_user, 'cause': cause},
                    'email/cause_support_creators.txt')
         flash(Markup('Thanks for supporting this cause! <a href="#actions">Take action</a> to see it succeed.'), 'success')
+        session['cause_support'] = cause.slug
 
     return redirect(url_for('.cause_detail', slug=slug))
 
@@ -215,6 +218,25 @@ def action_support(slug, pk):
         cause.supporters.append(current_user)
         action.supporters.append(current_user)
         db.session.commit()
-        flash('Thanks for supporting this action!', 'success')
+        send_email('Thanks for taking action!',
+                   [current_user.email,],
+                   {'user': current_user, 'cause': cause, 'action': action},
+                   'email/action_support_supporter.txt')
+        #flash('Thanks for taking action!', 'success')
 
-    return redirect(url_for('.cause_detail', slug=slug))
+    return redirect(url_for('.action_thanks', slug=slug, pk=pk))
+
+
+@mod.route('/cause/<slug>/actions/<pk>/thanks')
+@cause_required
+def action_thanks(slug, pk):
+    cause = Cause.query.filter_by(slug=slug).first()
+    action = cause.actions.filter_by(id=pk).first()
+
+    context = {
+        "user": current_user,
+        "cause": cause,
+        "action": action,
+    }
+
+    return render_template('causes/action_thanks.html', **context)

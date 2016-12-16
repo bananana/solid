@@ -146,6 +146,7 @@ a:hover {
     text-align: center;
     line-height: 2.1em;
     text-decoration: none;
+    font-size: 1.6rem;
 }
 .icon {
     width: 1em;
@@ -633,6 +634,12 @@ input[type="button"]:focus {
     color: #1eaeda;
     border-color: #1eaeda;
     background-color: #fff;
+    text-decoration: none;
+}
+.button.success {
+    color: #fff;
+    background-color: #274D28;
+    border-color: #274D28;
 }
 .button.success:hover,
 button.success:hover,
@@ -643,6 +650,11 @@ input[type="button"].success:hover {
     color: #fff;
     border-color: #326334;
 }
+.warning {
+    color: #fff;
+    background-color: #604b29;
+    border-color: #604b29;   
+}
 .button.warning:hover,
 button.warning:hover,
 input[type="submit"].warning:hover,
@@ -652,11 +664,16 @@ input[type="button"].warning:hover {
     color: #fff;
     border-color: #775d33;
 }
-.button.error:hover,
-button.error:hover,
-input[type="submit"].error:hover,
-input[type="reset"].error:hover,
-input[type="button"].error:hover {
+.button.danger {
+    color: #fff;
+    background-color: #652A28;
+    border-color: #652A28;
+}
+.button.danger:hover,
+button.danger:hover,
+input[type="submit"].danger:hover,
+input[type="reset"].danger:hover,
+input[type="button"].danger:hover {
     background-color: #7d3432;
     color: #fff;
     border-color: #7d3432;

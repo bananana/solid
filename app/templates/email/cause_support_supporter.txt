@@ -1,11 +1,21 @@
-Hi {{ user.initials }}!
+Hi {{ user.nickname }},
 
-Thank you for standing with  "{{ cause.title }}". Bsolid is about challenging
-injustice and taking a series of actions to win.
+Thank you for standing with the "{{ cause.title }}" Cause on {{ site_name }}.
 
-Take supporting actions, connect with others in the struggle, and get the latest
-on the cause at: {{ url_for('causes.cause_detail', slug=cause.slug, _external=True) }}
+Help this Cause win by sharing it with your friends:
 
-In Solidarity,
+	Share on Facebook:
+		https://www.facebook.com/sharer/sharer.php?u={{ url_for('causes.cause_detail', slug=cause.slug, _external=True) | urlencode }} 
 
-The {{ site_name }} team
+	Share on Twitter:
+		https://twitter.com/home?status={{ url_for('causes.cause_detail', slug=cause.slug, _external=True) | urlencode }} 
+
+{{ cause.action_supporters.count() }} people have taken {{ cause.actions.count() }} Actions on {{ site_name }} for this Cause so far.
+
+Do one of the {{ cause.actions.count() }} Actions that are currently live; get updates and share what
+you're up to; and connect with others advancing this Cause at
+{{ url_for('causes.cause_detail', slug=cause.slug, _external=True) }}.
+
+In solidarity,
+
+The {{ site_name }} Team

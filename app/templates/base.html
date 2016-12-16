@@ -4,8 +4,13 @@
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+
+    {% block meta %}
+    <meta name="copyright" content="GPLv3">
+    <meta name="application-name" content="Solid">
+
+    <meta property="fb:app_id" content="{{ fb_app_id }}"/>
+    {% endblock meta %}
 
     <title>{% block title %}Solid{% endblock %}</title>
 
