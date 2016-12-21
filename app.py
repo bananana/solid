@@ -439,7 +439,7 @@ class AppManager(object):
             description=dedent('''\
                 description:
                   create, delete, modify or list causes'''),
-            usage='''./app.py cause [-c] [-d CAUSE] [-l] [-m CAUSE] [-s CAUSE]''')
+            usage='''./app.py cause [-c] [-d CAUSE] [-l] [-m CAUSE] [-s CAUSE] [-v]''')
         parser.add_argument('-c',
                             '--create',
                             action='store_true',
@@ -466,6 +466,10 @@ class AppManager(object):
                             action='store',
                             metavar='SLUG',
                             help='search for cause')
+        parser.add_argument('-v',
+                            '--verbose',
+                            action='store_true',
+                            help='increase output verbosity')
         args = parser.parse_args(argv[2:])
 
         # Process subcommands for cause
@@ -533,9 +537,14 @@ class AppManager(object):
             except Exception as e:
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
+            
+            if args.verbose:
+                keys = ['id', 'title', 'slug', 'boss', 'location', 
+                        'intro', 'video', 'image', 'story_heading', 
+                        'story_content']
+            else:
+                keys = ['id', 'title', 'slug', 'image', 'story_heading']
 
-            keys = ['id', 'title', 'slug', 'boss', 'location',
-                    'video', 'image', 'story_heading', 'story_content']
             table_data = [keys]
             for c in causes:
                 cause = []
