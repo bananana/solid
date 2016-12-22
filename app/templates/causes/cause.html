@@ -136,12 +136,14 @@
                 {{ _('%(count)s actions taken', count=cause.count_action_supports) }}
             </h4>
             <h4 class="u-add-margin-top">
-                {{ _('%(count)s supporters', count=cause.supporters.count()) }}:
+                {{ _('%(count)s supporters', count=cause.supporters.all() | length) }}:
             </h4>
             {% for u in cause.supporters.all()[-10:] | reverse %}
                 {{ render_avatar(u) }}
+                {% if loop.last %}
+                    <small class="see-all"><a href="#">See&nbsp;all&nbsp;{{ cause.supporters.all() | length }}</a></small>
+                {% endif %}
             {% endfor %}
-            <!--<small><a href="#">See all {{ cause.supporters.count() }}</a></small>-->
             <h4 class="u-add-margin-top">
                 {{ _('Creators') }}:
             </h4>

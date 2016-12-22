@@ -158,6 +158,10 @@ a:hover {
     color: #fff;
     border-radius: 0;
 }
+.see-all {
+    display: block;
+    text-align: right;
+}
 .icon {
     width: 1em;
     height: 1em;
