@@ -221,7 +221,7 @@ class AppManager(object):
             description=dedent('''\
                 description:
                   create, delete, modify or list users'''),
-            usage='''./app.py user [-c] [-d USER] [-l] [-m USER] [-s USER]''')
+            usage='''./app.py user [-c] [-d USER] [-l] [-m USER] [-s USER] [-v]''')
         parser.add_argument('-c',
                             '--create',
                             action='store_true',
@@ -252,6 +252,10 @@ class AppManager(object):
                             action='store',
                             metavar='USERNAME',
                             help='search for user')
+        parser.add_argument('-v',
+                            '--verbose',
+                            action='store_true',
+                            help='increase output verbosity')
         args = parser.parse_args(argv[2:])
 
         # Process subcommands for user
@@ -329,8 +333,13 @@ class AppManager(object):
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
 
-            keys = ['id', 'nickname', 'email', 'full_name', 'private_full_name',
-                    'is_admin', 'phone', 'zip', 'employer']
+
+            if args.verbose:
+                keys = ['id', 'nickname', 'email', 'full_name', 'is_admin', 
+                        'phone', 'zip', 'employer']
+            else:
+                keys = ['id', 'nickname', 'email', 'full_name', 'is_admin'] 
+
             table_data = [keys]
             for u in users:
                 usr = []
