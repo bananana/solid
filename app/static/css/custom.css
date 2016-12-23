@@ -147,7 +147,7 @@ a:hover {
     line-height: 2.1em;
     text-decoration: none;
     font-size: 1.6rem;
-    margin-bottom: 0.3em;
+    margin-bottom: 0.creators;
     transition-duration: 0.1s;
     transition-property: border-radius;
     -webkit-transition-duration: 0.1s;
@@ -583,7 +583,7 @@ h3 span{
     background: url(../images/transparent-pixel.png);
 }
 .modal h3 {
-    width: 95%;
+    width: 94%;
 }
 .modal div {
     width: 90%;
