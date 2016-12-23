@@ -140,8 +140,8 @@
             </h4>
             {% for u in cause.supporters.all()[-10:] | reverse %}
                 {{ render_avatar(u) }}
-                {% if loop.last %}
-                    <small class="see-all"><a href="#">See&nbsp;all&nbsp;{{ cause.supporters.all() | length }}</a></small>
+                {% if loop.last and loop.index == 10 %}
+                    <small class="see-all"><a href="{{ url_for('causes.view_cause_supporters', slug=cause.slug) }}">See&nbsp;all&nbsp;{{ cause.supporters.all() | length }}</a></small>
                 {% endif %}
             {% endfor %}
             <h4 class="u-add-margin-top">

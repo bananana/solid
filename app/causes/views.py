@@ -129,6 +129,7 @@ def cause_edit(slug):
 def cause_support(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
+    #FIXME need an else statment to handle if user already supports cause
     if cause.supporters.filter_by(id=current_user.id).count() == 0:
         cause.supporters.append(current_user)
         db.session.commit()
@@ -144,6 +145,23 @@ def cause_support(slug):
         session['cause_support'] = cause.slug
 
     return redirect(url_for('.cause_detail', slug=slug))
+
+
+@mod.route('/cause/<slug>/supporters')
+@login_required
+@cause_required
+def view_cause_supporters(slug):
+    cause = Cause.query.filter_by(slug=slug).first()
+
+    context = {
+        "cause": cause,
+        "user": current_user,
+    }
+
+    if current_user in cause.supporters.all():
+        return render_template('causes/supporters.html', **context)
+    else:
+        abort(404)
 
 
 @mod.route('/cause/<slug>/actions/add', methods=('GET', 'POST'))
