@@ -136,7 +136,7 @@
                 {{ _('%(count)s actions taken', count=cause.count_action_supports) }}
             </h4>
             <h4 class="u-add-margin-top">
-                {{ _('%(count)s supporters', count=cause.supporters.all() | length) }}:
+                {{ _('%(count)s supporters', count=cause.supporters.all() | length) }}
             </h4>
             {% for u in cause.supporters.all()[-10:] | reverse %}
                 {{ render_avatar(u) }}
@@ -145,10 +145,13 @@
                 {% endif %}
             {% endfor %}
             <h4 class="u-add-margin-top">
-                {{ _('Creators') }}:
+                {{ _('Creators') }}
             </h4>
-            {% for u in cause.creators.all() %}
+            {% for u in cause.creators.all()[-10:] | reverse %}
                 {{ render_avatar(u) }}
+                {% if loop.last and loop.index == 10 %}
+                    <small class="see-all"><a href="{{ url_for('causes.view_cause_creators', slug=cause.slug) }}">See&nbsp;all&nbsp;{{ cause.creators.all() | length }}</a></small>
+                {% endif %}
             {% endfor %}
         </div>
         <div id="modal-share" class="modal">

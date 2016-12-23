@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% set active_page = "cause" %}
+
+{% block content %}
+{% from "helpers/users.html" import render_avatar %}
+<div class="full-width-container">
+
+    <div class="row u-add-margin-top">
+        <div class="twelve columns">
+            <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">
+                <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+            </a>
+        </div>
+    </div>
+    <hr>
+
+    <div>
+        <div class="twelve columns">
+        {% for u in cause.creators.all() | reverse %}
+            {{ render_avatar(u) }}
+        {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

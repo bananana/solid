@@ -147,6 +147,23 @@ def cause_support(slug):
     return redirect(url_for('.cause_detail', slug=slug))
 
 
+@mod.route('/cause/<slug>/creators')
+@login_required
+@cause_required
+def view_cause_creators(slug):
+    cause = Cause.query.filter_by(slug=slug).first()
+
+    context = {
+        "cause": cause,
+        "user": current_user,
+    }
+
+    if current_user in cause.supporters.all():
+        return render_template('causes/creators.html', **context)
+    else:
+        abort(404)
+
+
 @mod.route('/cause/<slug>/supporters')
 @login_required
 @cause_required
