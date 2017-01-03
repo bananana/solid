@@ -129,8 +129,7 @@ def cause_edit(slug):
 def cause_support(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
-    #FIXME need an else statment to handle if user already supports cause
-    if cause.supporters.filter_by(id=current_user.id).count() == 0:
+    if current_user not in cause.supporters:
         cause.supporters.append(current_user)
         db.session.commit()
         send_email('Thanks for supporting "{0.title}"'.format(cause),
@@ -138,11 +137,13 @@ def cause_support(slug):
                    {'user': current_user, 'cause': cause},
                    'email/cause_support_supporter.txt')
         send_email('New supporter for "{0.title}"'.format(cause),
-                [s.email for s in cause.creators.all()],
+                   [s.email for s in cause.creators.all()],
                    {'user': current_user, 'cause': cause},
                    'email/cause_support_creators.txt')
         flash(Markup('Thanks for supporting this cause! <a href="#actions">Take action</a> to see it succeed.'), 'success')
         session['cause_support'] = cause.slug
+    else:
+        flash('You are alrady supporting this cause.', 'error')
 
     return redirect(url_for('.cause_detail', slug=slug))
 
