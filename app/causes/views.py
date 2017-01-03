@@ -129,7 +129,7 @@ def cause_edit(slug):
 def cause_support(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
-    if current_user not in cause.supporters:
+    if current_user not in cause.supporters.all():
         cause.supporters.append(current_user)
         db.session.commit()
         send_email('Thanks for supporting "{0.title}"'.format(cause),
@@ -250,7 +250,7 @@ def action_support(slug, pk):
 
     action = cause.actions.filter_by(id=pk).first()
 
-    if action.supporters.filter_by(id=current_user.id).count() == 0:
+    if current_user not in action.supporters.all():
         cause.supporters.append(current_user)
         action.supporters.append(current_user)
         db.session.commit()
@@ -259,6 +259,9 @@ def action_support(slug, pk):
                    {'user': current_user, 'cause': cause, 'action': action},
                    'email/action_support_supporter.txt')
         #flash('Thanks for taking action!', 'success')
+    else:
+        flash('You already took this action')
+        return redirect(url_for('.cause_detail', slug=slug))
 
     return redirect(url_for('.action_thanks', slug=slug, pk=pk))
 
