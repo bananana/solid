@@ -1,6 +1,6 @@
 Hi {{ user.nickname }},
 
-Thank you for taking the "{{ action.title }}" for the {{ cause.title }} on {{ site_name}}!
+Thank you for taking "{{ action.title }}" action for the {{ cause.title }} cause on {{ site_name }}!
 
 By letting your friends know you proudly took action, you'll help get this victory to the finish line.
 
