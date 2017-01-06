@@ -1,4 +1,4 @@
-Hi {{ user.nickname }},
+Hi {% if user.full_name %}{{ user.full_name }}{% else %}{{ user.nickname }}{% endif %},
 
 Thank you for taking "{{ action.title }}" action for the {{ cause.title }} cause on {{ site_name }}!
 
@@ -12,4 +12,4 @@ By letting your friends know you proudly took action, you'll help get this victo
 
 - - -
 
-You've taken {{ user.actions_per_cause(cause).count() }} actions on behalf of {{ cause.title }}. Discuss your experience, see what's new, and which of your friends have come on board at <a href="https://bsolid.org">bsolid.org</a>
+You've taken {{ user.actions_per_cause(cause).count() }} actions on behalf of {{ cause.title }}. Discuss your experience, see what's new, and which of your friends have come on board at https://bsolid.org
