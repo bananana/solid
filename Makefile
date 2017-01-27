@@ -11,6 +11,9 @@ RELEASE != echo "$(NAME)-`git describe --always`"
 
 deploy: /tmp/$(RELEASE) upload extract clean pip migrate link restart
 
+virtualenv:
+	@ ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo -u bsolid virtualenv $(ROOT)/venv"
+
 /tmp/$(RELEASE):
 	@ tput setaf 5; tput bold; echo "Generating '$(RELEASE).tar.gz'"; tput sgr0
 	git-archive-all /tmp/$(RELEASE).tar.gz
@@ -31,9 +34,9 @@ pip:
 	@ tput setaf 5; tput bold; echo "Installing pip requirements"; tput sgr0
 	@ ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo -u bsolid $(ROOT)/venv/bin/pip install -r $(ROOT)/$(RELEASE)/requirements.txt"
 
-migrate:
-	@ tput setaf 5; tput bold; echo "Migrating database"; tput sgr0
-	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo -u bsolid FLASK_CONFIG='../../config_staging.py' $(ROOT)/venv/bin/python $(ROOT)/$(RELEASE)/app.py db -m"
+#migrate:
+#	@ tput setaf 5; tput bold; echo "Migrating database"; tput sgr0
+#	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo -u bsolid FLASK_CONFIG='../../config_staging.py' $(ROOT)/venv/bin/python $(ROOT)/$(RELEASE)/app.py db -m"
 
 link:
 	@ tput setaf 5; tput bold; echo "Updating release symlink"; tput sgr0
