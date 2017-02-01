@@ -449,7 +449,7 @@ def cause(create, delete, modify, list_):
             c.update(**kv)
             print(bcolors.OKGREEN + 'Cause ' + kv.get('title') + \
                   ' updated successfully' + bcolors.ENDC)
->>>>>>> Convert app.py to flask-script
+
             exit(0)
         except Exception as e:
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)

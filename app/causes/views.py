@@ -149,7 +149,7 @@ def cause_support(slug):
         send_email(_('New supporter for "{0.title}")'.format(cause),
                    [s.email for s in cause.creators.all()],
                    {'user': current_user, 'cause': cause},
-                   'email/cause_support_creators.txt')
+                   'email/cause_support_creators.txt'))
         flash(Markup(_('Thanks for supporting this cause! <a href="#actions">Take action</a> to see it succeed.')), 'success')
         LogEvent._log('cause_support', cause, user=current_user)
         session['cause_support'] = cause.slug
@@ -278,12 +278,12 @@ def action_support(slug, pk):
         cause.supporters.append(current_user)
         action.supporters.append(current_user)
         db.session.commit()
-        send_email('Thanks for taking action!',
+        send_email(_('Thanks for taking action!'),
                    [current_user.email,],
                    {'user': current_user, 'cause': cause, 'action': action},
                    'email/action_support_supporter.txt')
         LogEvent._log('action_support', action, user=current_user)
-        #flash('Thanks for taking action!', 'success')
+        flash(_('Thanks for taking action!'), 'success')
     else:
         flash(_('Thanks for supporting this action!'), 'success')
         return redirect(url_for('.cause_detail', slug=slug))
