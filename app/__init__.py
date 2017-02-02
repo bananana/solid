@@ -61,6 +61,9 @@ app.register_blueprint(pagesModule)
 from app.admin.views import mod as adminModule
 app.register_blueprint(adminModule)
 
+from app.log.views import mod as logModule
+app.register_blueprint(logModule)
+
 from flask_dance.contrib.twitter import make_twitter_blueprint
 twitter_blueprint = make_twitter_blueprint(
     redirect_to   = 'users.authorize_twitter' 
