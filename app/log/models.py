@@ -50,30 +50,7 @@ class LogEvent(db.Model):
     logged_at = db.Column(db.DateTime(), default=datetime.utcnow)
 
     @staticmethod
-    def _log(type_id, item, user=None):
-        event = LogEvent(type_id=type_id, user=user, item=item)
+    def _log(name, item, user=None):
+        event = LogEvent(event_type_id=LogEventType.EVENT_TYPES[name], user=user, item=item)
         db.session.add(event)
         db.session.commit()
-
-    #@staticmethod
-    #def log_in(user):
-    #    LogEvent._log(LogEventType.EVENT_TYPES['log_in'], user)
-
-    #@staticmethod
-    #def log_out(user):
-    #    LogEvent._log(LogEventType.EVENT_TYPES['log_out'], user)
-
-    #@staticmethod
-    #def register_account(user):
-    #    LogEvent._log(LogEventType.EVENT_TYPES['register_account'], user)
-
-    #@staticmethod
-    #def confirm_account(user):
-    #    LogEvent._log(LogEventType.EVENT_TYPES['confirm_account'], user)
-
-    #@staticmethod
-    #def reauthenticate(user):
-    #    LogEvent._log(LogEventType.EVENT_TYPES['reauthenticate'], user)
-
-    #def __repr__(self):
-    #    return '<LogEvent %r>' % self.type.name

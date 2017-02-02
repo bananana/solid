@@ -7,6 +7,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 
 from app import app, db
 from app.users.models import User
+from app.log.models import LogEvent, LogEventType
 
 from .models import Cause, Action
 from .forms import CauseForm, ActionForm
@@ -89,6 +90,7 @@ def cause_add():
         cause.creators.append(current_user)
         cause.save()
         flash('Cause created!', 'success')
+        LogEvent._log('cause_add', cause, user=current_user)
         return redirect(url_for('.cause_detail', slug=cause.slug))
 
     context = {
@@ -113,6 +115,7 @@ def cause_edit(slug):
         form.populate_obj(cause)
         cause.update()
         flash('Cause updated!', 'success')
+        LogEvent._log('cause_edit', cause, user=current_user)
         return redirect(url_for('.cause_detail', slug=slug))
 
     context = {
@@ -141,6 +144,7 @@ def cause_support(slug):
                    {'user': current_user, 'cause': cause},
                    'email/cause_support_creators.txt')
         flash(Markup('Thanks for supporting this cause! <a href="#actions">Take action</a> to see it succeed.'), 'success')
+        LogEvent._log('cause_support', cause, user=current_user)
         session['cause_support'] = cause.slug
     else:
         flash('You are alrady supporting this cause.', 'error')
@@ -205,6 +209,7 @@ def action_add(slug):
                    {'cause': cause, 'action': action},
                    'email/cause_action_supporter.txt')
         flash('Action added!', 'success')
+        LogEvent._log('action_add', action, user=current_user)
         return redirect(url_for('.cause_detail', slug=slug))
 
     context = {
@@ -258,6 +263,7 @@ def action_support(slug, pk):
                    [current_user.email,],
                    {'user': current_user, 'cause': cause, 'action': action},
                    'email/action_support_supporter.txt')
+        LogEvent._log('action_support', action, user=current_user)
         #flash('Thanks for taking action!', 'success')
     else:
         flash('You already took this action')

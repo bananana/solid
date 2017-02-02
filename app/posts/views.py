@@ -4,6 +4,7 @@ from flask_login import current_user, login_required
 
 from app.causes.models import Cause
 from app.causes.views import cause_required
+from app.log.models import LogEvent, LogEventType
 
 from .forms import PostForm, CommentForm, PostDeleteForm
 from .models import Post, Comment
@@ -48,6 +49,7 @@ def post_add(slug):
                        'email/post_supporters.txt')
 
         flash('Post added!', 'success')
+        LogEvent._log('post_add', post, user=current_user)
         return redirect(url_for('.post_list', slug=cause.slug))
 
     context = {
@@ -59,7 +61,6 @@ def post_add(slug):
 
 
 @mod.route('/cause/<slug>/posts/<pk>')
-#@login_required
 @cause_required
 def post_detail(slug, pk):
     cause = Cause.query.filter_by(slug=slug).first()
@@ -155,14 +156,13 @@ def comment_add(slug, pk):
         if post.author is not None:
             recipients.add(post.author.email)
 
-        print recipients
-
         send_email('New comment on "{0.title}"'.format(post),
                    list(recipients),
                    {'post': post, 'comment': comment},
                    'email/post_comment.txt')
 
         flash('Comment added!', 'success')
+        LogEvent._log('post_reply', post, user=current_user)
         return redirect(url_for('.post_detail', slug=cause.slug, pk=post.id))
 
     context = {
