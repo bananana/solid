@@ -54,3 +54,6 @@ class LogEvent(db.Model):
         event = LogEvent(event_type_id=LogEventType.EVENT_TYPES[name], user=user, item=item)
         db.session.add(event)
         db.session.commit()
+
+    def __repr__(self):
+        return '<LogEvent %r on %r>' % (self.event_type.name, self.logged_at)
