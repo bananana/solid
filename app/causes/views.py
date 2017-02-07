@@ -179,13 +179,24 @@ def view_cause_supporters(slug):
 
     context = {
         "cause": cause,
-        "user": current_user,
     }
 
     if current_user in cause.supporters.all():
         return render_template('causes/supporters.html', **context)
     else:
         abort(404)
+
+
+@mod.route('/cause/<slug>/actions')
+@cause_required
+def view_cause_actions(slug):
+    cause = Cause.query.filter_by(slug=slug).first()
+
+    context = {
+        "cause": cause,
+    }
+    
+    return render_template('causes/actions.html', **context)
 
 
 @mod.route('/cause/<slug>/actions/add', methods=('GET', 'POST'))

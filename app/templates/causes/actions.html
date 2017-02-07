@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('a.support-action').click(function(e) {
+            var action_name = $(e.target).parents('.support-action').find('h4').text();
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'action',
+                eventAction: 'popup',
+                eventLabel: action_name
+            });
+        });
+        $('.button-modal-close').click(function(e) {
+            var action_name = $(e.target).parents('.modal').find('h3').text();
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'action',
+                eventAction: 'popup close',
+                eventLabel: action_name
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+
+{% block content %}
+{% from "helpers/actions.html" import render_action_list with context %}
+<div class="full-width-container">
+    <div class="row u-add-margin-top">
+        <div class="nine columns">
+            <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">
+                <h1 class="u-remove-margin-bottom">{{ cause.title }}</h1>
+            </a>
+        </div>
+        <div class="three columns">
+        </div>
+    </div>
+    <hr class="u-remove-margin-bottom">
+    {{ render_action_list(cause) }}
+</div>
+{% endblock %}
