@@ -55,12 +55,14 @@ def index():
 @cause_required
 def cause_detail(slug):
     cause = Cause.query.filter_by(slug=slug).first()
+    log = LogEvent.query.all()
 
     if cause is None:
         abort(404)
 
     context = {
         "cause": cause,
+        "log": log,
     }
 
     try:

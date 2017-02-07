@@ -3,9 +3,35 @@ dont' forget to add a description of your changes to the appropriate styleguide
 section (app/templates/styleguide/templating#cause-helpers)
 -->
 
+{% from "helpers/users.html" import render_avatar %}
+
 {% macro render_cause_info(caption, info) %}
 <p class="u-cf u-remove-margin-bottom">
     <strong>{{ caption }}</strong>
 </p>
 <h2>{{ info }}</h2>
+{% endmacro %}
+
+{% macro render_log(log) %}
+{% set captions={
+    1: 'Added a cause',
+    2: 'Edited a cause',
+    3: 'Suppored a cause',
+    4: 'Reached cause milestone',
+    5: 'Added and action',
+    6: 'Supported an action',
+    7: 'Commented on action',
+    8: 'Added a post',
+    9: 'Posted a reply'
+    }
+%}
+{% for event in log %}
+<div class="feed-item">
+    <small>{{ event.logged_at.strftime('%b %m, %Y @ %H:%M') }}</small>
+    <p>
+        {{ render_avatar(event.user) }} 
+        {{ captions[event.item_id] }} 
+    </p>
+</div>
+{% endfor %}
 {% endmacro %}

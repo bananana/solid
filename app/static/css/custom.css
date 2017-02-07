@@ -330,6 +330,11 @@ a:hover {
         margin-right: auto;
     }
 }
+
+
+.feed .feed-item {
+    display: block;
+}
 a.support-action {
     text-decoration: none;
 }
