@@ -1,3 +1,4 @@
+from pytz import timezone
 from datetime import datetime
 
 from sqlalchemy_utils import generic_relationship
@@ -47,7 +48,7 @@ class LogEvent(db.Model):
     item_id = db.Column(db.Integer)
     item = generic_relationship(item_type, item_id)
 
-    logged_at = db.Column(db.DateTime(), default=datetime.utcnow)
+    logged_at = db.Column(db.DateTime(), default=datetime.now(timezone('UTC')))
 
     @staticmethod
     def _log(name, item, user=None):
@@ -56,4 +57,4 @@ class LogEvent(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return '<LogEvent %r on %r>' % (self.event_type.name, self.logged_at)
+        return '<LogEvent %r on %r>' % (self.item_type, self.logged_at)
