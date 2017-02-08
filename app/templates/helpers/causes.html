@@ -30,7 +30,7 @@ section (app/templates/styleguide/templating#cause-helpers)
     <small>{{ event.logged_at.strftime('%b %m, %Y @ %H:%M') }}</small>
     <p>
         {{ render_avatar(event.user) }} 
-        {{ captions[event.item_id] }} 
+        {{ captions[event.event_type_id] }} 
     </p>
 </div>
 {% endfor %}
