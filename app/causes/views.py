@@ -63,6 +63,10 @@ def cause_detail(slug):
     context = {
         "cause": cause,
         "log": log,
+        "actions": cause.actions.filter(
+            (Action.expiration >= datetime.now()) |
+            (Action.expiration == None)
+        )
     }
 
     try:

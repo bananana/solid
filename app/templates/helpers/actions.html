@@ -60,9 +60,9 @@ section (app/templates/styleguide/templating#)
 </div>
 {% endmacro %}
 
-{% macro render_action_list_new(cause) %}
-{% for action in cause.actions.all() %}
-    {{ render_action(cause, action) }}
+{% macro render_action_list_new(actions) %}
+{% for action in actions %}
+    {{ render_action_new(cause, action) }}
 {% endfor %}
 {% endmacro %}
 
@@ -124,8 +124,8 @@ section (app/templates/styleguide/templating#)
 </div>
 {% endmacro %}
 
-{% macro render_action_list(cause) %}
-{% for action in cause.actions.all() %}
+{% macro render_action_list(actions) %}
+{% for action in actions %}
     {% if loop.first %}<div class="row">{% endif %}
     {{ render_action(cause, action) }}
     {% if loop.index is divisibleby(4) and not loop.last %}</div><div class="row">{% endif %}

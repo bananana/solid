@@ -189,22 +189,21 @@
             </div>
             <hr>
             <div class="row">
-
                 <div class="twelve columns">
                     <h3 id="actions">
                         {{ _('Take action to win') }}
                         <span>
-                            {{ _('%(count)s available | ', count=cause.actions.count()) }}
+                            {{ _('%(count)s available | ', count=actions.count()) }}
                             {{ _('%(count)s users took action', count=cause.count_action_supports) }}
                         </span>
                     </h3>
                 </div>
-
             </div>
-                               {{ render_action_list(cause) }}
-                       <hr>
-            <div class="row">
 
+            {{ render_action_list(actions.all()) }}
+
+            <hr>
+            <div class="row">
                 <div class="nine columns">
                     <h3>{{ _('Conversation') }}</h3>
                 </div>
@@ -213,7 +212,6 @@
                         {{ _('Add new post') }}
                     </a>
                 </div>
-
             </div>
             {{ render_post_list(cause) }}
         </div>
