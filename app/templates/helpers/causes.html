@@ -18,16 +18,16 @@ section (app/templates/styleguide/templating#cause-helpers)
     2: 'Edited a cause',
     3: 'Suppored a cause',
     4: 'Reached cause milestone',
-    5: 'Added and action',
+    5: 'Added an action',
     6: 'Supported an action',
     7: 'Commented on action',
     8: 'Added a post',
     9: 'Posted a reply'
     }
 %}
-{% for event in log %}
+{% for event in log|reverse %}
 <div class="feed-item">
-    <small>{{ event.logged_at.strftime('%b %m, %Y @ %H:%M') }}</small>
+    <small>{{ event.logged_at.strftime('%b %d, %Y @ %H:%M') }}</small>
     <p>
         {{ render_avatar(event.user) }} 
         {{ captions[event.event_type_id] }} 
