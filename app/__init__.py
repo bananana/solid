@@ -11,7 +11,7 @@ from flask_babel import Babel
 babel = Babel(app)
 
 from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy(app, session_options={"autoflush": False})
+db = SQLAlchemy(app)
 
 from flask_migrate import Migrate
 migrate = Migrate(app, db)
