@@ -4,7 +4,7 @@ A cause that you have backed, "{{ cause.title }}", has a new action available to
 take now: "{{ action.title }}"
 
 Go to the action for details:
-	{{ url_for('causes.cause_detail', slug=cause.slug, _external=True) }}
+	{{ url_for('causes.cause_detail', slug=cause.slug, _external=True) }}#modal-action-{{ action.id }}
 
 Solid is a community of people like you taking action together until a cause is
 won. Please help make justice today.

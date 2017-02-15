@@ -16,7 +16,7 @@ $(document).ready(function () {
             $target.find('div').append($_a);
         }
 
-        return false;
+        window.location.hash = '' + $a.data('target');
     }
 
     // Close 

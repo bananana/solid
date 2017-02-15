@@ -64,6 +64,8 @@
                 eventAction: 'popup close',
                 eventLabel: action_name
             });
+            e.preventDefault();
+            history.pushState("", document.title, window.location.pathname);
         });
         $('a.support').click(function(e) {
             var action_name = $(e.target).parents('.modal').find('h3').text();
