@@ -222,7 +222,7 @@ def action_add(slug):
         action.save()
 
         send_email('Cause Update: A New Action is Available for {0.title}"'.format(cause),
-                   [u.email for u in cause.supporters.all() if u.email != ''],
+                   [u.email for u in cause.supporters.all()],
                    {'cause': cause, 'action': action},
                    'email/cause_action_supporter.txt')
         flash('Action added!', 'success')

@@ -13,6 +13,7 @@ SECRET_KEY = 'replace-with-truly-random-string-for-production'
 SITE_NAME = 'Solid'
 
 CONTACT_EMAIL = 'solid@brandworkers.org'
+DEFAULT_EMAIL_SENDER = 'noreply@bsolid.org'
 
 DEBUG = False
 TESTING = False
