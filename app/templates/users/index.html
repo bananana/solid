@@ -34,7 +34,13 @@
         <div class="six columns">
             <ul>
             {% for post in feed %}
-                <li><strong>{{ post.title }}</strong> by <em>{{ post.author.nickname }}</em><br>{{ post.body }}</li>
+                <li>
+                    <strong><a href="{{ url_for('posts.post_detail', slug=post.cause.slug, pk=post.pk) }} ">
+                        {{ post.title }}
+                    </a></strong><br>
+                    by <em>{{ post.author.nickname }}</em>, 
+                    {{ post.created_on.strftime('%b. %d, %Y') }}
+                </li>
             {% else %}
                 <small>
                     <strong>There's nothing to show here yet.</strong><br>
@@ -57,14 +63,14 @@
             {% endfor %}
             </ul>
             <hr>
-            <h5>Supporting {{ user.supports.count() }} causes</h5>
+            <h5>Supporting {{ user.supports.distinct().count() }} causes</h5>
             <ul>
             {% for cause in user.supports %}
                 <li><a href="/cause/{{ cause.slug }}">{{ cause.title }}</a></li>
             {% endfor %}
             </ul>
             <hr>
-            <h5>{{ user.actions.count() }} Support actions</h5>
+            <h5>Took {{ user.actions.count() }} actions</h5>
             <ul>
             {% for action in user.actions %}
                 <li>
@@ -74,9 +80,7 @@
                 </li>
             {% endfor %}    
             </ul>
-
         </div>
     </div>
-
 </div>
 {% endblock %}
