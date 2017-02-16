@@ -30,7 +30,9 @@ section (app/templates/styleguide/templating#cause-helpers)
     <p>
         {{ render_avatar(event.user) }}&nbsp;
         {{ captions[event.event_type_id] }}:
-        {# url_for(event.item, slug=event.item.cause.slug) #}{{ event.item.title }}
+        <a href="{{ url_for('posts.post_detail', slug=event.item.cause.slug, pk=event.item.id) }}">
+            {{ event.item.title }}
+        </a>
     </p>
 </div>
 {% endfor %}
