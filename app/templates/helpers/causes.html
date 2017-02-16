@@ -29,10 +29,17 @@ section (app/templates/styleguide/templating#cause-helpers)
     <small>{{ event.logged_at.strftime('%b %d, %Y @ %H:%M') }}</small>
     <p>
         {{ render_avatar(event.user) }}&nbsp;
-        {{ captions[event.event_type_id] }}:
-        <a href="{{ url_for('posts.post_detail', slug=event.item.cause.slug, pk=event.item.id) }}">
+        {{ captions[event.event_type_id] }}:<br>
+        {% if event.event_type_id in [1,2,3,4] %}
+        <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.cause.slug) }}">
+        {% elif event.event_type_id in [5,6,7] %}
+        <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.cause.slug) }}#modal-action-{{ event.item.id }}">
+        {% elif event.event_type_id in [8,9] %}
+        <a class="feed-link" href="{{ url_for('posts.post_detail', slug=event.item.cause.slug, pk=event.item.id) }}">
+        {% endif %}
             {{ event.item.title }}
         </a>
+
     </p>
 </div>
 {% endfor %}

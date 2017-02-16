@@ -79,6 +79,10 @@ a:hover {
     color: #1eaeda;
     text-decoration: underline;
 }
+a.feed-link {
+    margin-left: 2.7em;
+    display: block;
+}
 
 /* Alerts 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
