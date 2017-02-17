@@ -32,13 +32,17 @@ section (app/templates/styleguide/templating#cause-helpers)
         {{ captions[event.event_type_id] }}:<br>
         {% if event.event_type_id in [1,2,3,4] %}
         <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.cause.slug) }}">
-        {% elif event.event_type_id in [5,6,7] %}
-        <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.cause.slug) }}#modal-action-{{ event.item.id }}">
-        {% elif event.event_type_id in [8,9] %}
-        <a class="feed-link" href="{{ url_for('posts.post_detail', slug=event.item.cause.slug, pk=event.item.id) }}">
-        {% endif %}
             {{ event.item.title }}
         </a>
+        {% elif event.event_type_id in [5,6,7] %}
+        <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.cause.slug) }}#modal-action-{{ event.item.id }}">
+            {{ event.item.title }}
+        </a>
+        {% elif event.event_type_id in [8,9] %}
+        <a class="feed-link" href="{{ url_for('posts.post_detail', slug=event.item.cause.slug, pk=event.item.id) }}">
+            {{ event.item.title }}
+        </a>
+        {% endif %}
 
     </p>
 </div>
