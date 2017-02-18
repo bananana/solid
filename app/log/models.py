@@ -48,8 +48,7 @@ class LogEvent(db.Model):
     item_id = db.Column(db.Integer)
     item = generic_relationship(item_type, item_id)
     
-    default_time = datetime.now(timezone('UTC'))
-    logged_at = db.Column(db.DateTime(), default=default_time)
+    logged_at = db.Column(db.DateTime(), default=datetime.now(timezone('UTC')))
 
     @staticmethod
     def _log(name, item, user=None):
