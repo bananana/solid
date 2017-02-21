@@ -198,6 +198,7 @@ def view_cause_actions(slug):
 
     context = {
         "cause": cause,
+        "actions": cause.actions
     }
     
     return render_template('causes/actions.html', **context)

@@ -191,7 +191,7 @@
             </div>
             <hr>
             <div class="row">
-                <div class="twelve columns">
+                <div class="nine columns">
                     <h3 id="actions">
                         {{ _('Take action to win') }}
                         <span>
@@ -200,9 +200,14 @@
                         </span>
                     </h3>
                 </div>
+                <div class="three columns">
+                    <a class="button u-full-width" href="{{ url_for('causes.view_cause_actions', slug=cause.slug) }}">
+                        {{ _('See all actions') }}
+                    </a>
+                </div>
             </div>
 
-            {{ render_action_list(actions.all()) }}
+            {{ render_action_list(actions.all()[0:4]) }}
 
             <hr>
             <div class="row">
