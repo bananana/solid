@@ -191,7 +191,7 @@
             </div>
             <hr>
             <div class="row">
-                <div class="twelve columns">
+                <div class="nine columns">
                     <h3 id="actions">
                         {{ _('Take action to win') }}
                         <span>
@@ -200,6 +200,13 @@
                         </span>
                     </h3>
                 </div>
+                {% if current_user in cause.creators.all() or current_user.is_admin %}
+                <div class="three columns">
+                    <a class="button u-full-width" href="{{ url_for('.action_add', slug=cause.slug) }}">
+                        {{ _('Add new action') }}
+                    </a>
+                </div>
+                {% endif %}
             </div>
 
             {{ render_action_list(actions.all()) }}
@@ -210,7 +217,7 @@
                     <h3>{{ _('Conversation') }}</h3>
                 </div>
                 <div class="three columns">
-                    <a class="button u-full-width" href="/cause/{{ cause.slug }}/posts/add">
+                    <a class="button u-full-width" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
                         {{ _('Add new post') }}
                     </a>
                 </div>

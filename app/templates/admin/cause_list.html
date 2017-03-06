@@ -20,7 +20,7 @@
                 {% for cause in causes %}
                 <tr>
                     <td>{{ cause.id }}</td>
-                    <td>{{ cause.title }}</td>
+                    <td><a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">{{ cause.title }}</a></td>
                     <td>{{ cause.slug }}</td>
                     <td>
                       <a href="{{ url_for('causes.cause_edit', slug=cause.slug) }}">
