@@ -34,8 +34,11 @@ def cause_required(f):
 @mod.route('/cause/')
 @cause_required
 def index():
-    causes = Cause.query.all()
-    return redirect(url_for('causes.cause_detail', slug=causes[0].slug))
+    if session.get('last_cause', None) is not None:
+        cause = Cause.query.get(session['last_cause'])
+    else:
+        cause = Cause.query.all()[0]
+    return redirect(url_for('causes.cause_detail', slug=cause.slug))
 
 
 @mod.route('/cause/<slug>')
@@ -43,6 +46,9 @@ def index():
 @cause_required
 def cause_detail(slug):
     cause = Cause.query.filter_by(slug=slug).first()
+
+    session["last_cause"] = cause.id
+
     log = LogEvent.query.filter(
         (LogEvent.item == cause) | (
             (LogEvent.item_type == 'Action')
