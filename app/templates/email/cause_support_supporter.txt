@@ -1,4 +1,4 @@
-Hi {{ user.nickname }},
+Hi {{ user.full_name|default(user.nickname) }},
 
 Thank you for standing with the "{{ cause.title }}" Cause on {{ site_name }}.
 
