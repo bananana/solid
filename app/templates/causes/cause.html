@@ -94,7 +94,7 @@
 {% from "helpers/users.html" import render_avatar %}
 {% from "helpers/actions.html" import render_action_list with context %}
 {% from "helpers/posts.html" import render_post_list %}
-<div class="section hero lazy" data-src="{{ url_for('static', filename=cause.image) }}">
+<div class="section hero lazy" {% if cause.image %}data-src="{{ url_for('static', filename=cause.image) }}"{% endif %}>
     <div class="full-width-container">
         <div class="row">
             <div class="twelve columns">
