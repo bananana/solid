@@ -31,11 +31,7 @@ $(document).ready(function () {
     // Open modals with URL hash
     var hash = window.location.hash.substring(1);
     if(hash) {
-        open($('[data-target="' + hash + '"]').click())
-    }
-    window.onhashchange = function() {
-        var hash = window.location.hash.substring(1);
-        open($('[data-target="' + hash + '"]').click())
+        $('[data-target="' + hash + '"]').click();
     }
 });
 

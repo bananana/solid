@@ -31,23 +31,14 @@ def cause_required(f):
     return decorated_function
 
 
-def multi_cause(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        causes = Cause.query.all()
-
-        if len(causes) < 2:
-            return redirect(url_for('causes.cause_detail', slug=causes[0].slug))
-
-        return f(*args, **kwargs)
-    return decorated_function
-
-
 @mod.route('/cause/')
 @cause_required
-@multi_cause
 def index():
-    return render_template('causes/list.html', causes=causes)
+    if session.get('last_cause', None) is not None:
+        cause = Cause.query.get(session['last_cause'])
+    else:
+        cause = Cause.query.all()[0]
+    return redirect(url_for('causes.cause_detail', slug=cause.slug))
 
 
 @mod.route('/cause/<slug>')
@@ -55,7 +46,15 @@ def index():
 @cause_required
 def cause_detail(slug):
     cause = Cause.query.filter_by(slug=slug).first()
-    log = LogEvent.query.all()
+
+    session["last_cause"] = cause.id
+
+    log = LogEvent.query.filter(
+        (LogEvent.item == cause) | (
+            (LogEvent.item_type == 'Action')
+            & (LogEvent.item_id.in_([a.id for a in cause.actions.all()]))
+        )
+    )
 
     if cause is None:
         abort(404)

@@ -121,13 +121,12 @@ def internal_error(error):
 
 # views
 
-from app.causes.views import cause_required, multi_cause
+from app.causes.views import cause_required
 @app.route('/')
 @cause_required
-@multi_cause
 def index():
     '''Home page of the app. Nothing much here.'''
-    return render_template('index.html')
+    return redirect(url_for('causes.index'))
 
 
 from app.contact.forms import ContactForm

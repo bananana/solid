@@ -94,7 +94,7 @@
 {% from "helpers/users.html" import render_avatar %}
 {% from "helpers/actions.html" import render_action_list with context %}
 {% from "helpers/posts.html" import render_post_list %}
-<div class="section hero lazy" data-src="{{ url_for('static', filename=cause.image) }}">
+<div class="section hero lazy" {% if cause.image %}data-src="{{ url_for('static', filename=cause.image) }}"{% endif %}>
     <div class="full-width-container">
         <div class="row">
             <div class="twelve columns">
@@ -200,11 +200,13 @@
                         </span>
                     </h3>
                 </div>
+                {% if current_user in cause.creators.all() or current_user.is_admin %}
                 <div class="three columns">
-                    <a class="button u-full-width" href="{{ url_for('causes.view_cause_actions', slug=cause.slug) }}">
-                        {{ _('See all actions') }}
+                    <a class="button u-full-width" href="{{ url_for('.action_add', slug=cause.slug) }}">
+                        {{ _('Add new action') }}
                     </a>
                 </div>
+                {% endif %}
             </div>
 
             {{ render_action_list(actions.all()[0:4]) }}
@@ -215,7 +217,7 @@
                     <h3>{{ _('Conversation') }}</h3>
                 </div>
                 <div class="three columns">
-                    <a class="button u-full-width" href="/cause/{{ cause.slug }}/posts/add">
+                    <a class="button u-full-width" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
                         {{ _('Add new post') }}
                     </a>
                 </div>

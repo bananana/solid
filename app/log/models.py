@@ -5,6 +5,7 @@ from sqlalchemy_utils import generic_relationship
 
 from app import db
 
+
 class LogEventType(db.Model):
     __tablename__ = 'log_event_types'
 

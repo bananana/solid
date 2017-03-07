@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, url_for, redirect, session, \
                   request, g, flash, abort
 from flask_login import login_user, logout_user, current_user, login_required
 
+from app.causes.models import Cause
 from app.users.models import User
 from app.pages.models import Page
 from app.pages.forms import PageForm
@@ -15,6 +16,13 @@ def admin():
     if not current_user.is_admin:
          return redirect('/')
     return render_template('admin/index.html')
+
+@mod.route('/admin/causes')
+@login_required
+def admin_cause_list():
+    if not current_user.is_admin:
+         return redirect('/')
+    return render_template('admin/cause_list.html', causes=Cause.query.all())
 
 @mod.route('/admin/users')
 @login_required

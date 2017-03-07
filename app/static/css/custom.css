@@ -186,18 +186,13 @@ a.feed-link {
 }
 
     
-/* Layout 
+/* General Layout 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.header {
-    display: block;
-    position: fixed;
-    top: 0px;
-    z-index: 100;
-    width: 100%;
-    height: 6.5rem;
-    background: #fbfaf9;
-    border-bottom: 1px solid #ff9900;
+h2 span,
+h3 span{
+    font-size: 50%;
 }
+
 .full-width-container {
     padding: 0 2rem;
 }
@@ -212,6 +207,30 @@ a.feed-link {
     height: 6.5rem;
     border-bottom: 2px solid #33C3F0;
     transition: width 0.5s ease-out;
+}
+.content {
+    min-height: 65%;
+}
+.section {
+    padding: 8rem 0 7rem;
+    text-align: center;
+}
+.section-heading,
+.section-description {
+    margin-bottom: 1.2rem;
+}
+
+/* Header 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.header {
+    display: block;
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+    width: 100%;
+    height: 6.5rem;
+    background: #fbfaf9;
+    border-bottom: 1px solid #ff9900;
 }
 .header .logo {
     width: 5rem;
@@ -237,22 +256,15 @@ a.feed-link {
     font-weight: bold;
     text-decoration: none;
 }
-.content {
-    min-height: 65%;
-}
-.section {
-    padding: 8rem 0 7rem;
-    text-align: center;
-}
-.section-heading,
-.section-description {
-    margin-bottom: 1.2rem;
-}
+
+/* Hero Section 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .hero {
     background-size: cover;
 }
 .hero-heading, 
 .hero-content {
+    font-weight: 600;
     margin: 1rem 2rem 2rem 2rem;
 }
 .hero-button {
@@ -318,7 +330,8 @@ a.feed-link {
         height: 190px;
     }
     .hero-heading {
-        font-size: 6.0rem;
+        font-weight: 300;
+        font-size: 4.0rem;
     }
     .hero-content {
         font-size: 2.0rem;
@@ -334,11 +347,20 @@ a.feed-link {
         margin-right: auto;
     }
 }
+@media (min-width: 1200px) {
+    .hero-heading {
+        font-size: 5.0rem;
+    }
+}
 
-
+/* Feed 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .feed .feed-item {
     display: block;
 }
+
+/* Support Actions 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 a.support-action {
     text-decoration: none;
 }
@@ -371,10 +393,8 @@ a.support-action {
     text-decoration: underline;
 }
 
-h2 span,
-h3 span{
-    font-size: 50%;
-}
+/* Posts 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .post {
     -moz-box-shadow: 0 0 10px #e5e5e5;
     -webkit-box-shadow: 0 0 10px #e5e5e5;
@@ -440,6 +460,8 @@ h3 span{
     }
 }
 
+/* Footer 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .footer {
     display: block;
     width: 100%;
