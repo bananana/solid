@@ -264,8 +264,13 @@ h3 span{
 }
 .hero-heading, 
 .hero-content {
-    font-weight: 600;
     margin: 1rem 2rem 2rem 2rem;
+}
+.hero-heading {
+    font-weight: 600;
+}
+.hero-content {
+    font-weight: 400;
 }
 .hero-button {
     margin: 0 2rem 4rem 2rem;
@@ -292,11 +297,15 @@ h3 span{
     display: inline-block;
     position: absolute;
     content: ' ';
+    /* Disabled until blur works in Firefox */
+    /*
     -webkit-filter: url('#blur');
     -webkit-filter: blur(5px);
     filter: url('#blur');
     filter: blur(5px);
     opacity: 0.5;
+    */
+    opacity: 0.2;
 }
 .glass span {
     font-style: italic;
