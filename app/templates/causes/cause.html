@@ -100,11 +100,11 @@
             <div class="twelve columns">
                 <div class="glass">
                     <h4 class="hero-heading">
-                        {{ cause.title }}
+                        {{ cause.title|truncate(40) }}
                     </h4>
                     {% if cause.intro %}
                     <p class="hero-content">
-                        {{ cause.intro }}
+                        {{ cause.intro|truncate(180) }}
                     </p>
                     {% endif %}
                     {% if supporter %}

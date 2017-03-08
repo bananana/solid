@@ -492,7 +492,7 @@ class AppManager(object):
             #keys = sorted(c.__dict__.keys()[1:])
 
             #: Manually created list of keys in appropriate order
-            keys = ['title', 'boss', 'location', 'video', 'image',
+            keys = ['title', 'intro', 'boss', 'location', 'video', 'image',
                     'story_heading', 'story_content']
 
             #: Empty arrays to store user input
@@ -585,7 +585,7 @@ class AppManager(object):
             #keys = sorted(c.__dict__.keys()[1:])
 
             #: Manually created list of keys in appropriate order
-            keys = ['title', 'boss', 'location', 'video', 'image',
+            keys = ['title', 'intro', 'boss', 'location', 'video', 'image',
                     'story_heading', 'story_content']
 
             #: Empty arrays to store user input

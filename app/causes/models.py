@@ -22,13 +22,13 @@ class Cause(CRUDMixin, db.Model):
     id            = db.Column(db.Integer, primary_key=True)
     demands       = db.relationship('Demand', backref='assigned_campaign', lazy='dynamic')
 
-    title         = db.Column(db.String(128), nullable=False)
+    title         = db.Column(db.String(40), nullable=False)
     slug          = db.Column(db.String(128), nullable=False)
     boss          = db.Column(db.String(128))
     created_on    = db.Column(db.DateTime)
     location      = db.Column(db.String(128))
 
-    intro         = db.Column(db.Text)
+    intro         = db.Column(db.Text(180))
 
     creators      = db.relationship('User', secondary=cause_creators,
                                     backref='causes_created', lazy='dynamic')

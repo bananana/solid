@@ -2,6 +2,7 @@
 {% set active_page = "cause" %}
 
 {% block content %}
+<div class="container u-add-margin-top">
     {% from "helpers/forms.html" import render_field, render_boolean %}
     <form id="cause" name="cause" action="" method="post">
         {{ form.hidden_tag() }}
@@ -37,4 +38,5 @@
             </fieldset>
         </div>
     </form>
+</div>
 {% endblock %}
