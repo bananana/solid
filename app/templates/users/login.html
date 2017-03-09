@@ -17,6 +17,14 @@ $(document).ready(function() {
 {% block content %}
 <div class="container u-add-margin-top">
     <div class="row">
+        <div class="six columns offset-by-three flash warning">
+            <strong>Beta software &ndash; beware!</strong> We're still busy
+            testing and securing Solid. To be safe, consider 
+            <a href="{{ url_for('users.signup') }}">signing up by e-mail</a> 
+            (and using a pseudonym) instead of with social media.
+        </div>
+    </div>
+    <div class="row">
         <div class="six columns offset-by-three help-block">
             {{ _('Don\'t have an account?') }}
             <a href="{{ url_for('users.signup') }}" class="button button-primary u-add-margin-left">Sign up</a>
