@@ -5,7 +5,7 @@ section (app/templates/styleguide/templating#)
 
 {% macro render_action(cause, action) %}
 {% from "helpers/users.html" import render_avatar %}
-<a class="three columns support-action" 
+<a class="support-action u-pull-left" 
    data-target="modal-action-{{ action.id }}">
     <h5>{{ action.title }}</h5>
     <article class="u-add-margin-bottom">{{ action.description|truncate(36, True) }}</article>
@@ -62,6 +62,17 @@ section (app/templates/styleguide/templating#)
 {% endmacro %}
 
 {% macro render_action_list(actions) %}
+<div class="action-list-left"></div>
+<div class="action-list-wrapper">
+    <div class="action-list-container">
+    {% for action in actions %}
+        {{ render_action(cause, action) }}
+    {% endfor %}
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_action_list_old(actions) %}
 {% for action in actions %}
     {% if loop.first %}<div class="row">{% endif %}
     {{ render_action(cause, action) }}

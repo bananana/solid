@@ -370,17 +370,31 @@ h3 span{
 
 /* Support Actions 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.action-list-wrapper {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100%;
+}
+.action-list-wrapper .action-list-container {
+    width: 6000px;
+}
+.action-list-wrapper .action-list-container .support-action {
+    width: 249px;
+    height: 120px;
+    display: block;
+    border: 1px solid #bbb;
+    /*border-radius: 4px;*/
+    border-color: #3299bb;
+    /*background-color: #fbfaf9;*/
+    box-shadow: 0 0 10px #e5e5e5;
+    padding: 0.5em 1em;
+    margin-top: 1em;
+    margin-right: 2em;
+}
 a.support-action {
     text-decoration: none;
 }
 .support-action {
-    display: block;
-    border: 1px solid #bbb;
-    border-radius: 4px;
-    border-color: #3299bb;
-    background-color: #fbfaf9;
-    padding: 0.5em 1em;
-    margin-top: 1em;
 }
 .support-action:hover {
     border-color: #1eaeda;
@@ -630,7 +644,7 @@ a.support-action {
     margin: 100px auto;
     padding: 15px;
     background-color: #fff;
-    border-radius: 4px;
+    /*border-radius: 4px;*/
     border: 3px solid #ff9900;
     text-align: left;
 }
