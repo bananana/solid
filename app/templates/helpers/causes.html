@@ -24,7 +24,7 @@ section (app/templates/styleguide/templating#cause-helpers)
     9: 'Posted a reply'
     }
 %}
-{% for event in log|reverse %}
+{% for event in log|reverse|rejectattr('event_type_id', 'equalto', 2) %}
 <div class="feed-item">
     <small>{{ event.logged_at.strftime('%b %d, %Y @ %H:%M') }}</small>
     <p>
