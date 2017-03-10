@@ -41,6 +41,9 @@ mikasa = Misaka(app)
 from flask_mail import Mail
 mail = Mail(app)
 
+from flask_moment import Moment
+moment = Moment(app)
+
 # Register blueprints
 from app.users.views import mod as usersModule
 app.register_blueprint(usersModule)
@@ -93,7 +96,8 @@ def config_vars():
         debug=app.debug, 
         site_name=app.config['SITE_NAME'],
         server_name=app.config['SERVER_NAME'],
-        fb_app_id=app.config['FACEBOOK_OAUTH_CLIENT_ID']
+        fb_app_id=app.config['FACEBOOK_OAUTH_CLIENT_ID'],
+        contact_email=app.config['CONTACT_EMAIL']
     )
 
 

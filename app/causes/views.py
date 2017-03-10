@@ -47,6 +47,9 @@ def index():
 def cause_detail(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
+    if cause is None:
+        abort(404)
+
     session["last_cause"] = cause.id
 
     log = LogEvent.query.filter(
@@ -55,9 +58,6 @@ def cause_detail(slug):
             & (LogEvent.item_id.in_([a.id for a in cause.actions.all()]))
         )
     )
-
-    if cause is None:
-        abort(404)
 
     context = {
         "cause": cause,
@@ -152,7 +152,7 @@ def cause_support(slug):
         LogEvent._log('cause_support', cause, user=current_user)
         session['cause_support'] = cause.slug
     else:
-        flash('You are alrady supporting this cause.', 'error')
+        flash('You are already supporting this cause.', 'error')
 
     return redirect(url_for('.cause_detail', slug=slug))
 

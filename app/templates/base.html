@@ -24,6 +24,8 @@
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
+    {{ moment.include_moment(local_js=url_for('static', filename='moment/min/moment.min.js')) }}
+    <script type="text/javascript" src="{{ url_for('static', filename='moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js') }}"></script>
     {% block scripts %}{% endblock %}
     
     <!-- Analytics -->
