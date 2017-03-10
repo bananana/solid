@@ -26,7 +26,7 @@ section (app/templates/styleguide/templating#cause-helpers)
 %}
 {% for event in log|reverse|rejectattr('event_type_id', 'equalto', 2) %}
 <div class="feed-item">
-    <small>{{ event.logged_at.strftime('%b %d, %Y @ %H:%M') }}</small>
+    <small>{{ moment(event.logged_at).format('MMM Do, YYYY @ HH:mm') }}</small>
     <p>
         {{ render_avatar(event.user) }}&nbsp;
         {{ captions[event.event_type_id] }}:<br>

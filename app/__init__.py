@@ -41,6 +41,9 @@ mikasa = Misaka(app)
 from flask_mail import Mail
 mail = Mail(app)
 
+from flask_moment import Moment
+moment = Moment(app)
+
 # Register blueprints
 from app.users.views import mod as usersModule
 app.register_blueprint(usersModule)
