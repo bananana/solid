@@ -137,6 +137,9 @@ def cause_edit(slug):
 def cause_support(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
+    if cause is None:
+        abort(404)
+
     if current_user not in cause.supporters.all():
         cause.supporters.append(current_user)
         db.session.commit()
@@ -180,6 +183,9 @@ def view_cause_creators(slug):
 def view_cause_supporters(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
+    if cause is None:
+        abort(404)
+
     context = {
         "cause": cause,
     }
@@ -194,6 +200,9 @@ def view_cause_supporters(slug):
 @cause_required
 def view_cause_actions(slug):
     cause = Cause.query.filter_by(slug=slug).first()
+
+    if cause is None:
+        abort(404)
 
     context = {
         "cause": cause,
@@ -270,7 +279,13 @@ def action_edit(slug, pk):
 def action_support(slug, pk):
     cause = Cause.query.filter_by(slug=slug).first()
 
+    if cause is None:
+        abort(404)
+
     action = cause.actions.filter_by(id=pk).first()
+
+    if action is None:
+        abort(404)
 
     if current_user not in action.supporters.all():
         cause.supporters.append(current_user)
@@ -281,7 +296,6 @@ def action_support(slug, pk):
                    {'user': current_user, 'cause': cause, 'action': action},
                    'email/action_support_supporter.txt')
         LogEvent._log('action_support', action, user=current_user)
-        #flash('Thanks for taking action!', 'success')
     else:
         flash('You already took this action')
         return redirect(url_for('.cause_detail', slug=slug))
@@ -293,7 +307,14 @@ def action_support(slug, pk):
 @cause_required
 def action_thanks(slug, pk):
     cause = Cause.query.filter_by(slug=slug).first()
+
+    if cause is None:
+        abort(404)
+
     action = cause.actions.filter_by(id=pk).first()
+
+    if action is None:
+        abort(404)
 
     context = {
         "user": current_user,

@@ -81,7 +81,7 @@ def admin_page_add():
         form.populate_obj(page)
         page.save()
         flash('Page added!', 'success')
-        return redirect(url_for('.admin_page_list', pk=page.pk))
+        return redirect(url_for('.admin_page_list', pk=page.id))
 
     context = {
          "page": page,
