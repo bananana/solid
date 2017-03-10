@@ -255,6 +255,9 @@ def user(nickname):
     '''
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
+    
+    if user is None:
+        abort(404)
 
     #: Causes supported by user being viewed
     supported_causes = user.supports.all()
@@ -273,8 +276,11 @@ def edit(nickname):
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
 
-    if current_user.id is not user.id and not current_user.is_admin:
+    if user is None:
         abort(404)
+
+    if current_user.id is not user.id and not current_user.is_admin:
+        abort(403)
 
     # Serve regular form when user edits their own profile
     form = EditForm()
@@ -323,13 +329,17 @@ def delete(nickname):
     '''
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
+
+    if user is None:
+        abort(404)
+
+    if current_user.id is not user.id and not current_user.is_admin:
+        abort(403)
     
-    if user is not None and current_user.id is user.id:
+    if current_user.id is user.id:
         logout_user()
         user.delete()
-    elif user is not None and current_user.is_admin:
+    elif current_user.is_admin:
         user.delete()
-    else:
-        abort(404)
 
     return redirect(url_for('index')) 
