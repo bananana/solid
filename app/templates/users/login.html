@@ -18,10 +18,9 @@ $(document).ready(function() {
 <div class="container u-add-margin-top">
     <div class="row">
         <div class="six columns offset-by-three flash warning">
-            <strong>Beta software &ndash; beware!</strong> We're still busy
-            testing and securing Solid. To be safe, consider 
-            <a href="{{ url_for('users.signup') }}">signing up by e-mail</a> 
-            (and using a pseudonym) instead of with social media.
+            <strong>Pssssst..</strong> we try to keep your data private; if
+            you're particularly worried, have a look at our
+            <a href="/security">security tips</a>.
         </div>
     </div>
     <div class="row">
@@ -55,6 +54,12 @@ $(document).ready(function() {
             </fieldset>
         </div>
         <div class="row">
+            <div class="six columns offset-by-three flash">
+                <strong>Forgot your password?</strong> E-mail us for assistance,
+                <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+            </div>
+        </div>
+        <div class="row">
             <div class="three columns offset-by-three">
                 <fieldset>
                     <input id="login" type="submit" value="{{ _('Log In') }}"
@@ -66,12 +71,6 @@ $(document).ready(function() {
                     {{ _('By accessing and using this service, you agree to the') }}
                     <a href="/terms_of_service">{{ _('terms of service') }}</a>.
                 </small>
-            </div>
-        </div>
-        <div class="row">
-            <div class="six columns offset-by-three flash">
-                <strong>Forgot your password?</strong> E-mail us for assistance,
-                <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
             </div>
         </div>
     </form>
