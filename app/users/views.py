@@ -53,7 +53,7 @@ def signup():
     '''Get basic user info and sign them up.
     '''
     # If user is already logged in, redirect them to their profile
-    if g.user is not None and g.user.is_authenticated:
+    if current_user is not None and current_user.is_authenticated:
         return redirect(url_for('.user', nickname=g.user.nickname))
 
     form = SignupForm()
@@ -90,8 +90,8 @@ def login():
     '''Login user after checking credentials, which are their email and password.
     '''
     # If user is already logged in, redirect them to their profile
-    if g.user is not None and g.user.is_authenticated:
-        return redirect(url_for('.user', nickname=g.user.nickname))
+    if current_user is not None and current_user.is_authenticated:
+        return redirect(url_for('index'))
 
     if request.args.get('next'):
         session['next'] = request.args.get('next')
@@ -338,8 +338,7 @@ def delete(nickname):
     
     if current_user.id is user.id:
         logout_user()
-        user.delete()
-    elif current_user.is_admin:
-        user.delete()
+
+    user.delete()
 
     return redirect(url_for('index')) 
