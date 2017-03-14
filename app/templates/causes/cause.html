@@ -20,6 +20,7 @@
 {% endblock meta %}
 
 {% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bxslider-4/dist/jquery.bxslider.min.css') }}">
 <style>
 .hero,
 .glass::before {
@@ -34,8 +35,15 @@
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 <script src="{{ url_for('static', filename='jquery.lazy/jquery.lazy.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/conversation.js') }}"></script>
+<script src="{{ url_for('static', filename='bxslider-4/dist/jquery.bxslider.min.js') }}"></script>
 <script>
     $(document).ready(function() {
+        $('.actions-slider').bxSlider({
+            slideWidth: 390,
+            minSlides: 1,
+            maxSlides: 3,
+            slideMargin: 36
+        });
         $('#stand-with-us').click(function() {
             ga('send', {
                 hitType: 'event',

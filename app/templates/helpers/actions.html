@@ -2,23 +2,27 @@
 dont' forget to add a description of your changes to the appropriate styleguide
 section (app/templates/styleguide/templating#)
 -->
-{% macro render_action(cause, action) %}
-{% from "helpers/users.html" import render_avatar %}
+{% macro render_action_box(cause, action) %}
 <a class="support-action u-pull-left" 
    data-target="modal-action-{{ action.id }}">
-    <h5>{{ action.title }}</h5>
-    <article class="u-add-margin-bottom">{{ action.description|truncate(36, True) }}</article>
+    <div class="support-action-modal-description">
+        <h5 class="u-remove-margin-bottom">{{ action.title }}</h5>
+        <article class="u-add-margin-bottom">{{ action.description|truncate(90, True) }}</article>
+    </div>
     <small class="support-action-counter u-pull-left">
         <img class="icon" src="{{ url_for('static', filename='open-iconic/png/bullhorn-2x.png') }}"> 
         {{ _('%(count)s supporters', count=action.supporters.count()) }}
     </small>
-    <small class="support-action-details-btn u-pull-right">
-        {{ _('Details') }}
-    </small>
     {% if action.expiration %}
-        <h6>Expires: {{ action.expiration.strftime('%b. %d, %Y') }}</h6>
+    <small class="support-action-expiration u-pull-right">
+        Expires: {{ action.expiration.strftime('%b. %d, %Y') }}
+    </small>
     {% endif %}
-</a>
+    </a>
+{% endmacro %}
+
+{% macro render_action_modal(cause, action) %}
+{% from "helpers/users.html" import render_avatar %}
 <div id="modal-action-{{ action.id }}" class="modal">
     <div>
         <h3 class="u-pull-left u-remove-margin-bottom">{{ action.title }}</h3>
@@ -66,13 +70,14 @@ section (app/templates/styleguide/templating#)
 {% endmacro %}
 
 {% macro render_action_list(actions) %}
-<div class="action-list-wrapper">
-    <div class="action-list-container">
-    {% for action in actions %}
-        {{ render_action(cause, action) }}
-    {% endfor %}
-    </div>
-</div>
+<ul class="actions-slider">
+{% for action in actions %}
+    <li>{{ render_action_box(cause, action) }}</li>
+{% endfor %}
+</ul>
+{% for action in actions %}
+    {{ render_action_modal(cause, action) }}
+{% endfor %}
 {% endmacro %}
 
 {% macro render_action_list_old(actions) %}

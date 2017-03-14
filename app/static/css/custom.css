@@ -371,17 +371,31 @@ h3 span{
 
 /* Support Actions 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.action-list-wrapper {
-    overflow-y: hidden;
-    overflow-x: hidden;
-    width: 100%;
+.bx-wrapper {
+    max-width: initial !important;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    background: none;
 }
-.action-list-wrapper .action-list-container {
-    width: 6000px;
+.bx-wrapper img {
+    max-width: initial;
+    display: inline;
 }
-.action-list-wrapper .action-list-container .support-action {
-    width: 249px;
-    height: 120px;
+.bx-wrapper .bx-controls-direction a {
+    top: 54%; 
+    z-index: 999;
+}
+.bx-wrapper .bx-prev {
+    left: 0;
+}
+.bx-wrapper .bx-next {
+    right: 0;
+}
+.support-action {
+    width: 356px;
+    height: 200px;
     display: block;
     border: 1px solid #bbb;
     /*border-radius: 4px;*/
@@ -390,12 +404,9 @@ h3 span{
     box-shadow: 0 0 10px #e5e5e5;
     padding: 0.5em 1em;
     margin-top: 1em;
-    margin-right: 2em;
 }
 a.support-action {
     text-decoration: none;
-}
-.support-action {
 }
 .support-action:hover {
     border-color: #1eaeda;
@@ -409,13 +420,13 @@ a.support-action {
 .support-action-counter {
     color: #161310;
 }
-.support-action-details-btn {
-    color: #3399bb;
+.support-action-expiration {
+    color: #652a28;
 }
-.support-action-details-btn:hover {
-    color: #1eaeda;
-    text-decoration: underline;
+.support-action-modal-description {
+    min-height: 180px;
 }
+
 
 /* Posts 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
