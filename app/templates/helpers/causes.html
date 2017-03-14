@@ -35,7 +35,7 @@ section (app/templates/styleguide/templating#cause-helpers)
             {{ event.item.title }}
         </a>
         {% elif event.event_type_id in [5,6,7] %}
-        <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.cause.slug) }}#modal-action-{{ event.item.id }}">
+        <a class="feed-link"  data-target="modal-action-{{ event.item.id }}">
             {{ event.item.title }}
         </a>
         {% elif event.event_type_id in [8,9] %}

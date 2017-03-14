@@ -82,6 +82,7 @@ a:hover {
 a.feed-link {
     margin-left: 2.7em;
     display: block;
+    cursor: pointer;
 }
 
 /* Alerts 
