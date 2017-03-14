@@ -1,4 +1,5 @@
 argparse
+coverage==4.3.4
 Flask-Babel==0.11.1
 Flask-Bcrypt>=0.7.1
 Flask-Dance>=0.8.2

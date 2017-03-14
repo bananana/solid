@@ -15,6 +15,11 @@ from os import path, walk, listdir, makedirs, remove
 from sys import argv
 import unittest
 
+if __name__ == '__main__' and argv[1] == 'test':
+    from coverage import coverage
+    cov = coverage(branch=True, include=['app/*'])
+    cov.start()
+
 
 from sqlalchemy import inspect
 from migrate.exceptions import DatabaseAlreadyControlledError
@@ -1032,6 +1037,10 @@ class AppManager(object):
                             '--verbose',
                             action='store_true',
                             help='verbose')
+        parser.add_argument('-f',
+                            '--failfast',
+                            action='store_true',
+                            help='stop on first failure')
         args = parser.parse_args(argv[2:])
 
         # If verbose flag is set, increase verbosity level to 2, otherwise leave
@@ -1043,8 +1052,7 @@ class AppManager(object):
             try:
                 suite = unittest.TestLoader() \
                                 .discover(start_dir='.', pattern='test*.py')
-                unittest.TextTestRunner(verbosity=verbosity).run(suite)
-                exit(0)
+                unittest.TextTestRunner(verbosity=verbosity, failfast=args.failfast).run(suite)
             except Exception as e:
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
@@ -1053,8 +1061,7 @@ class AppManager(object):
             try:
                 suite = unittest.TestLoader() \
                                 .loadTestsFromName('app.' + args.module + '.tests')
-                unittest.TextTestRunner(verbosity=verbosity).run(suite)
-                exit(0)
+                unittest.TextTestRunner(verbosity=verbosity, failfast=args.failfast).run(suite)
             except Exception as e:
                 print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
                 exit(1)
@@ -1062,6 +1069,14 @@ class AppManager(object):
         else:
             parser.print_help()
             exit(0)
+
+        cov.stop()
+        cov.save()
+        print("\n\nCoverage Report:\n")
+        cov.report()
+        cov.html_report(directory='coverage')
+        cov.erase()
+        exit(0)
 
 
 class Database(object):
