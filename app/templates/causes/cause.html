@@ -39,10 +39,11 @@
 <script>
     $(document).ready(function() {
         $('.actions-slider').bxSlider({
-            slideWidth: 390,
+            responsive: true,
+            slideWidth: 345,
             minSlides: 1,
             maxSlides: 3,
-            slideMargin: 36
+            slideMargin: 32,
         });
         $('#stand-with-us').click(function() {
             ga('send', {
