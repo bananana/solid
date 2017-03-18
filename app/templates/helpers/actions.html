@@ -49,6 +49,17 @@ section (app/templates/styleguide/templating#)
                 pk=action.id) }}">{{ _('Support!') }}</a>
             {% endif %}
         </p>
+        {% else %}
+        <p class="u-cf u-full-width">
+            <small class="u-pull-right">{{ _('You have already taken this action!') }}</small> 
+        </p>
+        <p class="u-remove-margin-bottom u-pull-right">
+            {% if action.link %}
+                <a class="button button-primary support" rel="external" target="_blank"
+                   data-support-href="{{ url_for('causes.action_support', slug=cause.slug, pk=action.id) }}"
+                   href="{{ action.link }}">{{ _('Go to 3rd party site') }}</a>
+            {% endif %}
+        </p>
         {% endif %}
         {% if current_user in cause.creators.all() or current_user.is_admin %}
         <p>
