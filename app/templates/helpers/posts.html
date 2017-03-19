@@ -18,7 +18,10 @@ section (app/templates/styleguide/templating#discussion-helpers)
         {% endif %}
     </h4>
     <article id="post-body-{{ post.id }}">
-        {{ post.body |  markdown }}
+        {{ post.body | markdown | striptags | truncate(90, True) }} 
+        <small><a href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
+            (read more)
+        </small></a>
     </article>
     <p class="u-add-margin-top">
         {{ render_avatar(post.author) }}&nbsp;
