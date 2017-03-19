@@ -153,15 +153,14 @@ a.feed-link {
     text-decoration: none;
     font-size: 1.6rem;
     margin-bottom: 0.3em;
-    transition-duration: 0.1s;
-    transition-property: border-radius;
+    opacity: 1;
+    overflow: hidden;
     -webkit-transition-duration: 0.1s;
-    -webkit-transition-property: border-radius;
+    -webkit-transition-property: opacity;
 }
 .avatar-sm:hover {
     text-decoration: none;
-    color: #fff;
-    border-radius: 0;
+    opacity: 0.9;
 }
 .see-all {
     display: block;
@@ -192,6 +191,10 @@ a.feed-link {
 h2 span,
 h3 span{
     font-size: 50%;
+}
+
+p {
+ margin: 1.25rem 0 1.25rem 0;
 }
 
 .full-width-container {

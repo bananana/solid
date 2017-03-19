@@ -7,7 +7,7 @@ section (app/templates/styleguide/templating#)
    data-target="modal-action-{{ action.id }}">
     <div class="support-action-modal-description">
         <h5 class="u-remove-margin-bottom">{{ action.title }}</h5>
-        <article class="u-add-margin-bottom">{{ action.description|truncate(90, True) }}</article>
+        <article class="u-add-margin-top">{{ action.description|truncate(90, True) }}</article>
     </div>
     <small class="support-action-counter u-pull-left">
         <img class="icon" src="{{ url_for('static', filename='open-iconic/png/bullhorn-2x.png') }}"> 
