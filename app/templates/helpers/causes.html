@@ -13,18 +13,18 @@ section (app/templates/styleguide/templating#cause-helpers)
 {% macro render_log(log) %}
 {% from "helpers/users.html" import render_avatar %}
 {% set captions={
-    1: 'Added a cause',
-    2: 'Edited a cause',
-    3: 'Supported a cause',
-    4: 'Reached cause milestone',
-    5: 'Added an action',
-    6: 'Supported an action',
-    7: 'Commented on action',
-    8: 'Added a post',
-    9: 'Posted a reply'
+    1: 'added a cause',
+    2: 'edited a cause',
+    3: 'supported a cause',
+    4: 'reached cause milestone',
+    5: 'added an action',
+    6: 'supported an action',
+    7: 'commented on action',
+    8: 'added a post',
+    9: 'posted a reply'
     }
 %}
-{% for event in log|reverse|rejectattr('event_type_id', 'equalto', 2) %}
+{% for event in log|reverse %}
 <div class="feed-item">
     <small>{{ moment(event.logged_at).format('MMM Do, YYYY @ HH:mm') }}</small>
     <p>
