@@ -17,13 +17,17 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content %}
-<div class="container u-add-margin-top">
-    <div class="row">
-        <div class="six columns offset-by-three flash warning">
+<div class="row">
+    <div class="twelve columns">
+        <div class="flash warning u-remove-margin-top u-cf" role="alert">
             <strong>Need to protect your privacy?</strong> Use a pseudonym when you
             <a href="{{ url_for('.signup') }}">sign up</a>, and don't log
             in with a social media account linked to your real identity.
         </div>
+    </div>
+</div>
+<div class="container u-add-margin-top">
+    <div class="row">
     </div>
     <div class="row">
         <div class="six columns offset-by-three help-block">

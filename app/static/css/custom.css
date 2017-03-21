@@ -88,8 +88,8 @@ a.feed-link {
 /* Alerts 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .flash {
-    border: 1px solid;
-    /* border-radius: 4px; */
+    border-bottom: 1px solid;
+    text-align: center;
     display: block;
     padding: 15px;
     margin-bottom: 20px;
@@ -110,27 +110,28 @@ a.feed-link {
     border-radius: 0.25em;
 }
 .primary {
-    background-color: #3299bb;
-    border-color: #3299bb;
+    color: #524535;
+    background-color: #d7ecfa;
+    border-color: #A4B3BE;
 }
 .success,
 .good {
-    color: #fff;
-    background-color: #274D28;
-    border-color: #274D28;
+    color: #524535;
+    background-color: #e1faea;
+    border-color: #ABBEB2;
 }
 .warning,
 .unknown {
-    color: #fff;
-    background-color: #604b29;
-    border-color: #604b29;   
+    color: #524535;
+    background-color: #fff3d9;
+    border-color: #c2b9a5;   
 }
 .danger,
 .bad,
 .error {
-    color: #fff;
-    background-color: #652A28;
-    border-color: #652A28;
+    color: #524535;
+    background-color: #f7e4e1;
+    border-color: #BCADAB;
 }
 
 
@@ -764,11 +765,6 @@ input[type="button"].success:hover {
     background-color: #326334;
     color: #fff;
     border-color: #326334;
-}
-.warning {
-    color: #fff;
-    background-color: #604b29;
-    border-color: #604b29;   
 }
 .button.warning:hover,
 button.warning:hover,
