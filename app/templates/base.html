@@ -78,9 +78,10 @@
                     {% if active_page == "login" %}
                         <!-- If on login page, show only signup button -->
                         <a href="{{ url_for('users.signup') }}" title="Sign Up"
-                            class="button u-pull-right">
+                            class="button button-primary u-pull-right">
                             {{ _('Sign Up') }}
                         </a>
+                        <small class="u-pull-right" style="margin-top:1.8em; margin-right:1em;">{{ _('Don\'t have an account?') }}</small>
                     {% elif active_page == "signup" %}
                         <!-- If on signupd page, show login button only -->
                         <a href="{{ url_for('users.login') }}" title="Log In" class="button u-pull-right">
