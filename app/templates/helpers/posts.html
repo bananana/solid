@@ -19,9 +19,6 @@ section (app/templates/styleguide/templating#discussion-helpers)
     </h4>
     <article id="post-body-{{ post.id }}">
         {{ post.body | markdown | striptags | truncate(90, True) }} 
-        <small><a href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
-            (read more)
-        </small></a>
     </article>
     <p class="u-add-margin-top">
         {{ render_avatar(post.author) }}&nbsp;
@@ -31,7 +28,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
         <img class="icon" src="{{ url_for('static', filename='open-iconic/png/comment-square-2x.png') }}"> 
         {{ _('%(count)s comments', count=post.comments.count()) }}
         <a class="u-pull-right" href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
-            {{ _('Reply') }}
+            {{ _('Read More') }}
         </a>
     </small>
 </div>
