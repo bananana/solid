@@ -1,5 +1,5 @@
 /*
- * v0.2.0
+ * v0.2.1
  * Copyright 2016, Pavel Mamontov 
  * pavelmamontov.com
  * Free to use under the MIT license.
@@ -15,7 +15,13 @@
 - Links
 - Alerts 
 - Images
-- Layout 
+- General Layout 
+- Header
+- Hero Section
+- Feed
+- Support Actions
+- Posts
+- Footer
 - Navigation
 - Modals
 - Input
@@ -30,20 +36,28 @@
 /* Color Scheme 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /*
- * Base.........: #ff9900
- * Accent.......: #3299bb
- * Accent2......: #1eaeda
- * Black........: #161310
- * Dark Gray....: #524535
- * Light Gray...: #fbfaf9
- * Neutral Gray.: #e5e5e5
- * White........: #ffffff
- * Success FG...: #274d28
- * Success BG...: #326334
- * Warning FG...: #604b29
- * Warning BG...: #775d33
- * Error FG.....: #653a28
- * Error BG.....: #7d3432
+ * Base............: #ff9900
+ * Accent Dark.....: #3299bb
+ * Accent Light....: #1eaeda
+ *
+ * Gray Light......: #fbfaf9
+ * Gray Neutral....: #e5e5e5
+ * Gray Dark.......: #524535
+ *
+ * White...........: #ffffff
+ * Black...........: #161310
+ *
+ * Success Light...: #e1faea
+ * Success Neutral.: #326334
+ * Success Dark....: #17A74B
+ *
+ * Warning Light...: #604b29
+ * Warning Neutral.: #775d33
+ * Warning Dark....: #A77A17
+ *
+ * Error Light.....: #653a28
+ * Error Neutral...: #7d3432
+ * Error Dark......: #A72b17
  */
 
 
@@ -752,43 +766,6 @@ input[type="button"]:focus {
     background-color: #fff;
     text-decoration: none;
 }
-.button.success {
-    color: #fff;
-    background-color: #274D28;
-    border-color: #274D28;
-}
-.button.success:hover,
-button.success:hover,
-input[type="submit"].success:hover,
-input[type="reset"].success:hover,
-input[type="button"].success:hover {
-    background-color: #326334;
-    color: #fff;
-    border-color: #326334;
-}
-.button.warning:hover,
-button.warning:hover,
-input[type="submit"].warning:hover,
-input[type="reset"].warning:hover,
-input[type="button"].warning:hover {
-    background-color: #775d33;
-    color: #fff;
-    border-color: #775d33;
-}
-.button.danger {
-    color: #fff;
-    background-color: #652A28;
-    border-color: #652A28;
-}
-.button.danger:hover,
-button.danger:hover,
-input[type="submit"].danger:hover,
-input[type="reset"].danger:hover,
-input[type="button"].danger:hover {
-    background-color: #7d3432;
-    color: #fff;
-    border-color: #7d3432;
-}
 .button.button-primary,
 button.button-primary, 
 input.button-primary[type="submit"],
@@ -797,11 +774,56 @@ input.button-primary[type="button"] {
     background-color: #3299bb;
     border-color: #3299bb;
 }
+.button.success,
+button.success {
+    color: #fff;
+    background-color: #326334;
+    border-color: #326334;
+}
+.button.success:hover,
+button.success:hover,
+input[type="submit"].success:hover,
+input[type="reset"].success:hover,
+input[type="button"].success:hover {
+    color: #fff;
+    background-color: #17a74b;
+    border-color: #326334;
+}
+.button.warning,
+button.warning {
+    color: #fff;
+    background-color: #775d33;
+    border-color: #775d33;
+}
+.button.warning:hover,
+button.warning:hover,
+input[type="submit"].warning:hover,
+input[type="reset"].warning:hover,
+input[type="button"].warning:hover {
+    color: #fff;
+    background-color: #a77a17;
+    border-color: #775d33;
+}
+.button.danger,
+button.danger {
+    color: #fff;
+    background-color: #7d3432;
+    border-color: #7d3432;
+}
+.button.danger:hover,
+button.danger:hover,
+input[type="submit"].danger:hover,
+input[type="reset"].danger:hover,
+input[type="button"].danger:hover {
+    color: #fff;
+    background-color: #A72b17;
+    border-color: #7d3432;
+}
 .button-disabled,
 button:disabled,
 input[type="button"]:disabled,
 input[type="submit"]:disabled {
-    color: #161310;
+    color: #524535;
     background-color: #e5e5e5;
     border-color: #e5e5e5;
     text-decoration: line-through;
@@ -818,7 +840,7 @@ input[type="button"]:disabled:focus,
 input[type="submit"]:disabled:hover,
 input[type="submit"]:disabled:active,
 input[type="submit"]:disabled:focus {
-    color: #161310;
+    color: #524535;
     background-color: #e5e5e5;
     border-color: #e5e5e5;
     cursor: not-allowed;
