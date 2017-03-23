@@ -17,34 +17,22 @@
     <hr>
 
     <div class="row u-add-margin-top">
-        <div class="post one-half column u-add-margin-top">
-            <h2 class="u-pull-left">{{ post.title }}</h2>
-            <article class="post-full-view u-cf">{{ post.body|markdown }}</article>
-            <p class="u-pull-left u-remove-margin-bottom">
-                {{ render_avatar(post.author) }}&nbsp;
-                {{ post.created_on.strftime('%b. %d, %Y') }}
-            </p>
-            {% if post.author == current_user or current_user.is_admin %}
-                <a class="button u-pull-right u-remove-margin-bottom"
-                    href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
-                    edit
-                </a>
-            {% endif %}
-        </div>
         <div class="one-half column">
-            <h4 class="u-remove-margin-bottom">{{ _('%(count)s comments', count=post.comments.count()) }}</h4>
-            {% for comment in post.comments.all() %}
-                <div class="row u-add-margin-top">
-                    <div class="post column comment">
-                        {{ comment.body|markdown }}
-                        <p class="u-pull-right u-remove-margin-bottom">
-                            {{ render_avatar(comment.author) }}
-                            <em>{% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}</em>
-                        </p>
-                    </div>
-                </div>
-            {% endfor %}
-            <h5 class="u-add-margin-top">Leave a comment</h5>
+            <div class="post u-remove-margin-top u-add-margin-bottom">
+                <h2 class="u-pull-left">{{ post.title }}</h2>
+                <article class="u-cf">{{ post.body|markdown }}</article>
+                <p class="u-remove-margin-bottom">
+                    {{ render_avatar(post.author) }}&nbsp;
+                    {{ post.created_on.strftime('%b. %d, %Y') }}
+                    {% if post.author == current_user or current_user.is_admin %}
+                        <a class="button u-pull-right u-remove-margin-bottom"
+                            href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
+                            edit
+                        </a>
+                    {% endif %}
+                </p>
+            </div>
+            <h5 class="u-remove-margin-bottom">{{ _('%(count)s comments for this post. Leave yours:', count=post.comments.count()) }}</h5>
             {% if current_user.is_authenticated and current_user.is_supporting(cause) %}
             {% from "helpers/forms.html" import render_field, render_boolean %}
             <form id="cause" class="u-add-margin-top" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
@@ -52,7 +40,7 @@
                 <fieldset class="no-label">
                     {{ render_field(comment_form.body, class="u-full-width") }}
                 </fieldset>
-                <input id="save" type="submit" value="Post"
+                <input id="save" type="submit" value="Leave a Comment"
                     class="button button-primary">
             </form>
             {% elif not current_user.is_authenticated %}
@@ -70,6 +58,25 @@
                 {{ _('to post.') }}
             </strong></p>
             {% endif %}
+        </div>
+        <div class="one-half column">
+            {% for comment in post.comments.all() %}
+                <div class="row">
+                    <div class="post u-remove-margin-top u-add-margin-bottom column comment">
+                        {{ comment.body|markdown }}
+                        <p class="u-pull-left u-full-width u-remove-margin-bottom">
+                            {{ render_avatar(comment.author) }}&nbsp;
+                            {% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}
+                            {% if comment.author == current_user or current_user.is_admin %}
+                                <a class="button u-pull-right u-remove-margin-bottom"
+                                    href="{{ url_for('posts.post_edit', slug=cause.slug, pk=comment.id) }}">
+                                    edit
+                                </a>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
