@@ -204,7 +204,7 @@
             </div>
             <hr>
             <div class="row">
-                <div class="nine columns">
+                <div class="eight columns">
                     <h3 id="actions">
                         {{ _('Take action to win') }}
                         <span>
@@ -215,9 +215,10 @@
                     </h3>
                 </div>
                 {% if current_user in cause.creators.all() or current_user.is_admin %}
-                <div class="three columns">
+                <div class="four columns">
                     <a class="button u-full-width" href="{{ url_for('.action_add', slug=cause.slug) }}">
-                        {{ _('Add new action') }}
+                        <span class="oi" data-glyph="plus" title="Add new action" aria-hidden="true"></span>
+                        <span>&nbsp;{{ _('new action') }}</span>
                     </a>
                 </div>
                 {% endif %}
@@ -227,16 +228,17 @@
 
             <hr>
             <div class="row">
-                <div class="nine columns">
+                <div class="eight columns">
                     <h3>{{ _('Conversation') }}</h3>
                 </div>
-                <div class="three columns">
-                    {% if current_user in cause.supporters.all() or current_user.is_admin %}
+                {% if current_user in cause.supporters.all() or current_user.is_admin %}
+                <div class="four columns">
                     <a class="button u-full-width" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
-                        {{ _('Add new post') }}
+                        <span class="oi" data-glyph="plus" title="Add new post" aria-hidden="true"></span>
+                        <span>&nbsp;{{ _('new post') }}</span>
                     </a>
-                    {% endif %}
                 </div>
+                {% endif %}
             </div>
             {{ render_post_list(cause) }}
         </div>

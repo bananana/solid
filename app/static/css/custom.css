@@ -808,6 +808,9 @@ input[type="submit"]:disabled:focus {
     cursor: not-allowed;
     text-decoration: line-through;
 }
+.button .oi {
+    font-size: 10px;
+}
 .button img {
     margin-top: 1em;
 }

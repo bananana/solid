@@ -86,8 +86,8 @@
                     {% elif active_page == "signup" %}
                         <!-- If on signup page, show login button only -->
                         <a href="{{ url_for('users.login') }}" title="Log In" class="button u-pull-right">
-                            <span class="u-hide-on-mobile">Login&nbsp;</span>
                             <span class="oi" data-glyph="account-login" title="Login" aria-hidden="true"></span>
+                            <span class="u-hide-on-mobile">&nbsp;{{ _('Login') }}</span>
                         </a>
                     {% else %}
                         {% if current_user.is_authenticated %} 
@@ -95,8 +95,8 @@
                             <a href="{{ url_for('users.logout') }}" 
                                title="Log Out"
                                class="button u-pull-right">
-                                <span class="u-hide-on-mobile">Logout&nbsp;</span>
                                 <span class="oi" data-glyph="account-logout" title="Logout" aria-hidden="true"></span>
+                                <span class="u-hide-on-mobile">&nbsp;{{ _('Logout') }}</span>
                             </a>
                             <span class="user">
                                 {{ _('Logged&nbsp;in&nbsp;as&nbsp;') }}
@@ -109,8 +109,8 @@
                             <a href="{{ url_for('users.login') }}" 
                                title="{{ _('Log In') }}" 
                                class="button u-add-margin-left u-pull-right">
-                                <span class="u-hide-on-mobile">Login&nbsp;</span>
                                 <span class="oi" data-glyph="account-login" title="Login" aria-hidden="true"></span>
+                                <span class="u-hide-on-mobile">&nbsp;{{ _('Login') }}</span>
                             </a>
                             <a href="{{ url_for('users.signup') }}" 
                                title="{{ _('Sign Up') }}" 
