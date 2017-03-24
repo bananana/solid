@@ -62,8 +62,8 @@ section (app/templates/styleguide/templating#)
         </p>
         {% endif %}
         {% if current_user in cause.creators.all() or current_user.is_admin %}
-        <p>
-            <a class="button primary u-pull-right u-add-margin-right" 
+        <p class="u-remove-margin-bottom u-pull-right">
+            <a class="button primary u-add-margin-right" 
                 href="{{ url_for('causes.action_edit', slug=cause.slug,
                 pk=action.id) }}">Edit!</a>
         </p>
