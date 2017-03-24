@@ -155,7 +155,7 @@ a.feed-link {
     border-radius: 50%; 
 } 
 .avatar-sm {
-    border-radius: 33%;
+    border-radius: 50%;
     display:inline-block;
     vertical-align: middle;
     width:32px; 
@@ -174,6 +174,7 @@ a.feed-link {
     -webkit-transition-property: opacity;
 }
 .avatar-sm:hover {
+    color: #fff;
     text-decoration: none;
     opacity: 0.9;
 }
