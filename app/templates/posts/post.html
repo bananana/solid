@@ -60,7 +60,7 @@
             {% endif %}
         </div>
         <div class="one-half column">
-            {% for comment in post.comments.all() %}
+            {% for comment in post.comments.all() | reverse %}
                 <div class="row">
                     <div class="post u-remove-margin-top u-add-margin-bottom column comment">
                         {{ comment.body|markdown }}
