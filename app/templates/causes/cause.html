@@ -231,9 +231,11 @@
                     <h3>{{ _('Conversation') }}</h3>
                 </div>
                 <div class="three columns">
+                    {% if current_user in cause.supporters.all() or current_user.is_admin %}
                     <a class="button u-full-width" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
                         {{ _('Add new post') }}
                     </a>
+                    {% endif %}
                 </div>
             </div>
             {{ render_post_list(cause) }}
