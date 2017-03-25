@@ -1020,13 +1020,29 @@ ul {
     list-style: circle outside;
     margin-left: 1em;
 }
+ol, li {
+    margin: 0;
+    padding: 0;
+}
 ol {
     counter-reset: section;
-    list-style-type: none;
+    display: table;
 }
-ol li::before {
+ol > li {
+    list-style: none;
     counter-increment: section;
-    content: counters(section,".") ". ";
+    display: table-row;
+}
+ol > li::before {
+    content: counter(section) ".";
+    display: table-cell;
+    text-align: right;
+    padding-right: .3em;
+}
+ol li::after {
+    content: " ";
+    display: block;
+    margin-bottom: 1rem;
 }
 ul ul,
 ul ol,
