@@ -9,7 +9,7 @@
 <script>
 $(document).ready(function() {
     $.validate({
-        form : '#login',
+        form : '#login-form',
         errorMessageClass : 'danger'
     });
 });
@@ -30,7 +30,7 @@ $(document).ready(function() {
     <div class="row">
     </div>
     {% from "helpers/forms.html" import render_field, render_boolean %}
-    <form id="login" name="login" action="" method="post">
+    <form id="login-form" name="login-form" action="" method="post">
         {{ form.hidden_tag() }}
         <div class="row">
             <fieldset>
