@@ -36,7 +36,7 @@
                 <li><code><strong>content</strong></code> holds flashed messages, as well as main page content. So messages are displayed right below <code>header</code> but above <code>content</code>.</li>
                 <li><code><strong>footer</strong></code> contains the static footer with some quick links to important information and social media links.</li>
             </ul>
-            <p>There are 2 template blocks called <code>{&#37; block scripts &#37;}</code> and <code>{&#37; block content &#37;}</code>, which correspond to blocks declared in each individual page template. Details are  described below in the <a href="#basic-template">Basic Template</a> section.</p>
+            <p>There are 5 template blocks called <code>{&#37; block title &#37;}</code>, <code>{&#37; block meta &#37;}</code>, <code>{&#37; block styles &#37;}</code>, <code>{&#37; block scripts &#37;}</code> and <code>{&#37; block content &#37;}</code>, which correspond to blocks declared in each individual page template. Details are  described below in the <a href="#basic-template">Basic Template</a> section.</p>
             <hr>
            
             <h3 class="scrollspy-section"><a id="basic-template"></a>Basic Template</h3>
@@ -44,18 +44,51 @@
             <pre>
 {&#37; extends "base.html" &#37;}
 {&#37; set active_page = "page_name" &#37;}
+
+{&#37; block title &#37;}
+{&#37; endblock &#37;}
         
+{&#37; block meta &#37;}
+{&#37; endblock &#37;}
+
+{&#37; block styles &#37;}
+{&#37; endblock &#37;}
+
 {&#37; block scripts &#37;}
 {&#37; endblock &#37;}
         
 {&#37; block content &#37;}
 {&#37; endblock &#37;}</pre>
-            <p>Basically, it extends the <code>base.html</code> template and inserts anything from <code>{&#37; block scripts &#37;}</code> and <code>{&#37; block content &#37;}</code> into corresponding blocks in <code>base.html</code>.</p>
-            <ul>
-                <li><code><strong>{&#37; set active_page = "page_name" &#37;}</strong></code> is usually used to tell <a href="#navigation-helpers">Navigation Helpers</a> which page is currently active.</li>
-                <li><code><strong>{&#37; block scripts &#37;}</strong></code> should contain short scripts that are unique to this particular page, such as form validation.</li>
-                <li><code><strong>{&#37; block content &#37;}</strong></code> should contain the main page content.</li>
-            </ul>
+            <p>Basically, it extends the <code>base.html</code> template and inserts anything from  the <code>{&#37; block &#37;}</code> elements into corresponding blocks in <code>base.html</code>.</p>
+            <p><code><strong>{&#37; set active_page = "page_name" &#37;}</strong></code> is usually used to tell <a href="#navigation-helpers">Navigation Helpers</a> which page is currently active.</p>
+            <table class="u-full-width">
+                <tbody>
+                    <tr>
+                        <th><code>{&#37; block ____ &#37;}</code></th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>title</code></td>
+                        <td>Text that will appear in the <code>&lt;title&gt;</code> element.</td>
+                    </tr>
+                    <tr>
+                        <td><code>meta</code></td>
+                        <td><code>&lt;meta&gt;</code> elements that appear inside the <code>&lt;head&gt;</code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>styles</code></td>
+                        <td>Styles that are unique to this particular page.</td>
+                    </tr>
+                    <tr>
+                        <td><code>scripts</code></td>
+                        <td>Scripts that are unique to this particular page.</td>
+                    </tr>
+                    <tr>
+                        <td><code>content</code></td>
+                        <td>Page content.</td>
+                    </tr>
+                </tbody>
+            </table>
             <hr>
 
             <h3 class="scrollspy-section"><a id="navigation-helpers"></a>Navigation Helpers</h3>
