@@ -23,14 +23,21 @@
             <h2>Utilities</h2>
             <p>In addition to Skeleton's helper utilites we've added several others to help with layout creation. Below is a full list of these classes, the details of their implementation can be found in <a href="{{ url_for('static', filename='css/custom.css') }}"><code>app/static/css/custom.css</code></a> under "Utilities" section.</p>
 
+            <h3>Default Skelton Utilities</h3>
             <table>
                 <thead>
-                    <tr>
-                        <th>Class</th>
-                        <th>Explanation</th>
-                    </tr>
+                    <th>Class</th>
+                    <th>Explanation</th>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td><code>u-full-width</code></td>
+                        <td>Set element width to 100%, making it take up the entire width of parent element</td>
+                    </tr>
+                    <tr>
+                        <td><code>u-max-full-width</code></td>
+                        <td>Same as <code>u-full-width</code>, only using the max-width property</td>
+                    </tr>
                     <tr>
                         <td><code>u-pull-right</code></td>
                         <td>Float right</td>
@@ -43,21 +50,45 @@
                         <td><code>u-cf</code></td>
                         <td>Clear all floats</td>
                     </tr>
+                </tbody>
+            </table>
+
+            <h3>Custom Utilities</h3>
+            <table>
+                <thead>
                     <tr>
-                        <td><code>u-full-width</code></td>
-                        <td>Set element width to 100%, making it take up the entire width of parent element</td>
+                        <th>Class</th>
+                        <th>Explanation</th>
                     </tr>
+                </thead>
+                <tbody>
                     <tr>
-                        <td><code>u-max-full-width</code></td>
-                        <td>Same as <code>u-full-width</code>, only using the max-width property</td>
+                        <td><code>u-link-color-override</code></td>
+                        <td>Remove all hover, active and focus effects from a link (makes it look like normal text</td>
                     </tr>
                     <tr>
                         <td><code>u-add-margin-top</code></td>
                         <td>Add a 1em top margin</td>
                     </tr>
                     <tr>
+                        <td><code>u-add-margin-bottom</code></td>
+                        <td>Add a 1em bottom margin</td>
+                    </tr>
+                    <tr>
+                        <td><code>u-add-margin-left</code></td>
+                        <td>Add a 1em left margin</td>
+                    </tr>
+                    <tr>
+                        <td><code>u-add-margin-right</code></td>
+                        <td>Add a 1em right margin</td>
+                    </tr>
+                    <tr>
                         <td><code>u-remove-margin-bottom</code></td>
                         <td>Remove bottom margin by setting that property to 0</td>
+                    </tr>
+                    <tr>
+                        <td><code>u-remove-margin-top</code></td>
+                        <td>Remove top margin by setting that property to 0</td>
                     </tr>
                     <tr>
                         <td><code>u-to-upper</code></td>
