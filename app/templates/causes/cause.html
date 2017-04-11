@@ -25,7 +25,7 @@
 .hero,
 .glass::before {
     {% if cause.image %}
-    background: url({{ url_for('static', filename=cause.image) }}) no-repeat fixed center 65px;
+    background: url({{ url_for('static', filename=cause.image) }}) no-repeat fixed 0 65px;
     {% endif %}
 }
 </style>
