@@ -158,10 +158,6 @@ def contact():
 
     return render_template('contact.html', form=form)
 
-@app.route('/terms_of_service')
-def terms_of_service():
-    return render_template('terms_of_service.html')
-
 # logging 
 
 if not app.debug:
