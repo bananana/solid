@@ -57,9 +57,12 @@ def cause_detail(slug):
             (LogEvent.item == cause) | (
                 (LogEvent.item_type == 'Action')
                 & (LogEvent.item_id.in_([a.id for a in cause.actions.all()]))
-            ) 
+            ) | (
+                (LogEvent.item_type == 'Post')
+                & (LogEvent.item_id.in_([p.id for p in cause.posts.all()]))
+            )
         ) & (LogEvent.item_id != LogEventType.EVENT_TYPES['cause_edit'])
-    ).limit(12)
+    ).order_by(LogEvent.logged_at.desc()).limit(12)
 
     context = {
         "cause": cause,

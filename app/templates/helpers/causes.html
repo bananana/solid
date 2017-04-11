@@ -24,7 +24,7 @@ section (app/templates/styleguide/templating#cause-helpers)
     9: 'posted a reply'
     }
 %}
-{% for event in log|reverse %}
+{% for event in log %}
 <div class="feed-item">
     <small>{{ moment(event.logged_at).format('MMM Do, YYYY @ HH:mm') }}</small>
     <p>
