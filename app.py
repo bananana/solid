@@ -15,7 +15,7 @@ from os import path, walk, listdir, makedirs, remove
 from sys import argv
 import unittest
 
-if __name__ == '__main__' and argv[1] == 'test':
+if __name__ == '__main__' and len(argv) > 1 and argv[1] == 'test':
     from coverage import coverage
     cov = coverage(branch=True, include=['app/*'])
     cov.start()
