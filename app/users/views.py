@@ -377,5 +377,8 @@ def translate():
     if request.method == 'POST' \
     and request.form['lang_code'] in tuple(app.config['SUPPORTED_LANGUAGES'].keys()):
         session['lang_code'] = request.form['lang_code'] 
+        if current_user.is_authenticated:
+            current_user.locale = session['lang_code']
+            current_user.update()
         refresh()
     return redirect(url_for('index'))

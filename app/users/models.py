@@ -22,6 +22,8 @@ class User(UserMixin, CRUDMixin, db.Model):
     employer    = db.Column(db.String(64), index=True)
     description = db.Column(db.Text)
 
+    locale      = db.Column(db.String(2))
+
     supports    = db.relationship('Cause', 
                                   secondary=cause_supporters,
                                   backref='causes_supported', 

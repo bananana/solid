@@ -36,7 +36,7 @@ pip:
 
 migrate:
 	@ tput setaf 5; tput bold; echo "Migrating database"; tput sgr0
-	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo -u bsolid FLASK_CONFIG='../../config_staging.py' $(ROOT)/venv/bin/python $(ROOT)/$(RELEASE)/app.py db upgrade"
+	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo -u bsolid FLASK_CONFIG='../../config.py' $(ROOT)/venv/bin/python $(ROOT)/$(RELEASE)/app.py db upgrade"
 
 link:
 	@ tput setaf 5; tput bold; echo "Updating release symlink"; tput sgr0
