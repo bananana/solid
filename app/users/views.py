@@ -7,10 +7,11 @@ from flask_dance.contrib.google import google
 from flask_dance.contrib.twitter import twitter
 from flask_dance.contrib.facebook import facebook
 from flask_dance.consumer import oauth_authorized
+from flask_babel import refresh, get_locale
 
 from slugify import slugify
 
-from app import app, db, lm
+from app import app, db, lm, babel
 from app.email import send_email
 
 from . import constants as USER
@@ -46,6 +47,29 @@ def before_request():
 @oauth_authorized.connect
 def logged_in(blueprint, token):
     return redirect(request.args.get('next') or url_for('index'))
+
+
+@babel.localeselector
+def get_locale():
+    '''This method has to return a language code that determines the app's 
+    display language. lang_code session variable is used to store such a code.
+    If user is unauthenticated it is set to whatever their browser locale is.
+    It can be changed with the language select widget which uses the 
+    translate() method implemented in this file. Alternatively, if a user is 
+    authenticated, they can set their language preferences in their profile 
+    settings.
+    '''
+
+    if session.get('lang_code') is None:
+        if current_user.is_authenticated and current_user.locale is not None:
+            # If user is logged in use their language preferences
+            session['lang_code'] = current_user.locale
+        else:
+            # Use the browser's language preferences to select available translation
+            session['lang_code'] = request.accept_languages.best_match(
+                app.config['SUPPORTED_LANGUAGES'].keys()
+            )
+    return session['lang_code']
 
 
 @mod.route('/signup', methods=['GET', 'POST'])
@@ -343,3 +367,15 @@ def delete(nickname):
     user.delete()
 
     return redirect(url_for('index')) 
+
+
+@mod.route('/translate', methods=['POST'])
+def translate():
+    '''Change app's display language using the language select widget.
+    The widget's logic is located in /app/static/js/translate.js
+    '''
+    if request.method == 'POST' \
+    and request.form['lang_code'] in tuple(app.config['SUPPORTED_LANGUAGES'].keys()):
+        session['lang_code'] = request.form['lang_code'] 
+        refresh()
+    return redirect(url_for('index'))

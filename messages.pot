@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2016 ORGANIZATION
+# Copyright (C) 2017 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-09 21:04+0000\n"
+"POT-Creation-Date: 2017-04-17 22:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+
+#: app/__init__.py:26
+msgid "Please log in to access this page."
+msgstr ""
 
 #: app/causes/forms.py:19 app/causes/forms.py:35 app/posts/forms.py:14
 msgid "Title"
@@ -65,117 +69,154 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: app/templates/admin/index.html:8 app/templates/base.html:48
+#: app/templates/admin/index.html:10 app/templates/base.html:74
 msgid "Admin"
 msgstr ""
 
-#: app/templates/base.html:54 app/templates/base.html:78
-#: app/templates/base.html:80
+#: app/templates/base.html:83 app/templates/base.html:116
+#: app/templates/base.html:118
 msgid "Sign Up"
 msgstr ""
 
-#: app/templates/base.html:66
+#: app/templates/base.html:85
+msgid "Don't have an account?"
+msgstr ""
+
+#: app/templates/base.html:90 app/templates/base.html:113
+msgid "Login"
+msgstr ""
+
+#: app/templates/base.html:99
+msgid "Logout"
+msgstr ""
+
+#: app/templates/base.html:102
 msgid "Logged&nbsp;in&nbsp;as&nbsp;"
 msgstr ""
 
-#: app/templates/base.html:73 app/templates/users/login.html:52
+#: app/templates/base.html:110 app/templates/users/login.html:59
 msgid "Log In"
 msgstr ""
 
-#: app/templates/base.html:108
+#: app/templates/base.html:147
 msgid "Information"
 msgstr ""
 
-#: app/templates/base.html:110
+#: app/templates/base.html:149
 msgid "Contact"
 msgstr ""
 
-#: app/templates/base.html:111
+#: app/templates/base.html:150
 msgid "About Us"
 msgstr ""
 
-#: app/templates/base.html:112
+#: app/templates/base.html:151
 msgid "How it works"
 msgstr ""
 
-#: app/templates/base.html:117
+#: app/templates/base.html:152
+msgid "Terms of service"
+msgstr ""
+
+#: app/templates/base.html:157
 msgid "Developers"
 msgstr ""
 
-#: app/templates/base.html:120
+#: app/templates/base.html:159
 msgid "Styleguide"
 msgstr ""
 
-#: app/templates/base.html:137
+#: app/templates/base.html:176
 msgid "Terms of Service"
 msgstr ""
 
-#: app/templates/admin/index.html:12
+#: app/templates/admin/index.html:14
+msgid "Manage causes"
+msgstr ""
+
+#: app/templates/admin/index.html:17
 msgid "Manage users"
 msgstr ""
 
-#: app/templates/admin/index.html:15
+#: app/templates/admin/index.html:20
 msgid "Manage pages"
 msgstr ""
 
-#: app/templates/causes/action_form.html:42
+#: app/templates/causes/action_form.html:45
 #: app/templates/posts/post_form.html:24
 msgid "Save"
 msgstr ""
 
-#: app/templates/causes/cause.html:61
+#: app/templates/causes/cause.html:119
 msgid "You are supporting this cause"
 msgstr ""
 
-#: app/templates/causes/cause.html:66
+#: app/templates/causes/cause.html:124
 msgid "Stand with us!"
 msgstr ""
 
-#: app/templates/causes/cause.html:69
+#: app/templates/causes/cause.html:127
 msgid "Join this cause's community, and stay updated on actions"
 msgstr ""
 
-#: app/templates/causes/cause.html:86
+#: app/templates/causes/cause.html:143
 msgid "Share"
 msgstr ""
 
-#: app/templates/causes/cause.html:89
+#: app/templates/causes/cause.html:146
 msgid "Creators"
 msgstr ""
 
-#: app/templates/causes/cause.html:95
+#: app/templates/causes/cause.html:155 app/templates/helpers/actions.html:14
 #, python-format
 msgid "%(count)s supporters"
 msgstr ""
 
-#: app/templates/causes/cause.html:104
+#: app/templates/causes/cause.html:164
+msgid "Actions taken"
+msgstr ""
+
+#: app/templates/causes/cause.html:171
 msgid "Share this cause"
 msgstr ""
 
-#: app/templates/causes/cause.html:135
+#: app/templates/causes/cause.html:208
 msgid "Take action to win"
 msgstr ""
 
-#: app/templates/causes/cause.html:136
+#: app/templates/causes/cause.html:210
 #, python-format
-msgid "(%(count)s current)"
+msgid "%(count)s available"
 msgstr ""
 
-#: app/templates/causes/cause.html:145
+#: app/templates/causes/cause.html:212
 #, python-format
-msgid "Supporters: %(count)s"
+msgid "%(count)s taken"
 msgstr ""
 
-#: app/templates/causes/cause.html:166 app/templates/causes/cause.html:169
-msgid "Support!"
+#: app/templates/causes/cause.html:220
+msgid "new action"
 msgstr ""
 
-#: app/templates/causes/cause.html:197
+#: app/templates/causes/cause.html:231
 msgid "Conversation"
 msgstr ""
 
-#: app/templates/causes/cause.html:201
-msgid "Add new post"
+#: app/templates/causes/cause.html:237
+msgid "new post"
+msgstr ""
+
+#: app/templates/helpers/actions.html:42 app/templates/helpers/actions.html:45
+#: app/templates/helpers/actions.html:49
+msgid "Support!"
+msgstr ""
+
+#: app/templates/helpers/actions.html:54
+msgid "You have already taken this action!"
+msgstr ""
+
+#: app/templates/helpers/actions.html:60
+msgid "Go to 3rd party site"
 msgstr ""
 
 #: app/templates/helpers/posts.html:16
@@ -184,50 +225,67 @@ msgstr ""
 
 #: app/templates/helpers/posts.html:29
 #, python-format
-msgid "%(count)s comments."
+msgid "%(count)s comments"
 msgstr ""
 
 #: app/templates/helpers/posts.html:31
-msgid "Reply"
+msgid "Read More"
 msgstr ""
 
-#: app/templates/helpers/posts.html:39
+#: app/templates/helpers/posts.html:49
 msgid "No posts!"
 msgstr ""
 
-#: app/templates/helpers/posts.html:43
+#: app/templates/helpers/posts.html:53
 msgid "Start the conversation"
 msgstr ""
 
-#: app/templates/posts/comment_form.html:17
+#: app/templates/posts/comment_form.html:18
 msgid "Post"
+msgstr ""
+
+#: app/templates/posts/post.html:35
+#, python-format
+msgid "%(count)s comments for this post. Leave yours:"
+msgstr ""
+
+#: app/templates/posts/post.html:49
+msgid "Log in"
+msgstr ""
+
+#: app/templates/posts/post.html:51 app/templates/posts/post.html:58
+msgid "to post."
+msgstr ""
+
+#: app/templates/posts/post.html:56
+msgid "Support this cause"
 msgstr ""
 
 #: app/templates/posts/post_form.html:31
 msgid "Delete"
 msgstr ""
 
-#: app/templates/users/login.html:21
-msgid "Don't have an account?"
+#: app/templates/posts/post_list.html:15
+msgid "Add new post"
 msgstr ""
 
-#: app/templates/users/login.html:58
+#: app/templates/users/login.html:65
 msgid "By accessing and using this service, you agree to the"
 msgstr ""
 
-#: app/templates/users/login.html:59
+#: app/templates/users/login.html:66
 msgid "terms of service"
 msgstr ""
 
-#: app/templates/users/login.html:68
+#: app/templates/users/login.html:81
 msgid "Log In with Twitter"
 msgstr ""
 
-#: app/templates/users/login.html:73
+#: app/templates/users/login.html:86
 msgid "Log In with Google"
 msgstr ""
 
-#: app/templates/users/login.html:78
+#: app/templates/users/login.html:91
 msgid "Log In with Facebook"
 msgstr ""
 
