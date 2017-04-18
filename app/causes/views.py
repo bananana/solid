@@ -4,6 +4,7 @@ from functools import wraps
 from flask import (Blueprint, render_template, url_for, redirect, session,
                    request, g, flash, abort, Markup)
 from flask_login import login_user, logout_user, current_user, login_required
+from flask_babel import gettext as _
 
 from app import app, db
 from app.users.models import User
@@ -100,7 +101,7 @@ def cause_add():
         form.populate_obj(cause)
         cause.creators.append(current_user)
         cause.save()
-        flash('Cause created!', 'success')
+        flash(_('Cause created!'), 'success')
         LogEvent._log('cause_add', cause, user=current_user)
         return redirect(url_for('.cause_detail', slug=cause.slug))
 

@@ -7,7 +7,7 @@ from flask_dance.contrib.google import google
 from flask_dance.contrib.twitter import twitter
 from flask_dance.contrib.facebook import facebook
 from flask_dance.consumer import oauth_authorized
-from flask_babel import refresh, get_locale
+from flask_babel import refresh, get_locale, gettext as _
 
 from slugify import slugify
 
@@ -105,7 +105,7 @@ def signup():
                 or url_for('index')
             )
         else:
-            flash('Nickname already exists, please pick a different one.', 'error')
+            flash(_('Nickname already exists, please pick a different one.'), 'error')
 
     return render_template('users/signup.html', form=form)
 
@@ -143,7 +143,7 @@ def login():
                 or url_for('index')
             )
         else:
-            flash('Email or Password is invalid', 'error')
+            flash(_('Email or Password is invalid'), 'error')
 
     return render_template('users/login.html', form=form)
 
@@ -269,7 +269,7 @@ def logout():
     '''Simply logout the user and go back to index page.
     '''
     logout_user()
-    flash('You have been logged out successfully', 'success')
+    flash(_('You have been logged out successfully'), 'success')
     return redirect(url_for('index'))
 
 
@@ -380,5 +380,4 @@ def translate():
         if current_user.is_authenticated:
             current_user.locale = session['lang_code']
             current_user.update()
-        refresh()
-    return redirect(url_for('index'))
+    return ('', 204)

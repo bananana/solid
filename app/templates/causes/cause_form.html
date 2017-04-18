@@ -1,6 +1,8 @@
 {% extends "base_form.html" %}
 {% set active_page = "cause" %}
 
+{% block title %}Edit Cause - {{ super() }}{% endblock %}
+
 {% block content %}
 <div class="container u-add-margin-top">
     {% from "helpers/forms.html" import render_field, render_boolean %}
