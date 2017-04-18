@@ -11,19 +11,7 @@ app.config.from_envvar('FLASK_CONFIG')
 
 
 from flask_babel import Babel
-
 babel = Babel(app)
-
-@babel.localeselector
-def get_locale():
-    """ Use the browser's language preferences to select available translation """
-    '''
-    translations = [str(translation) for translation in
-                    babel.list_translations()]
-    return request.accept_languages.best_match(translations)
-    '''
-    return 'en'
-
 
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
@@ -34,6 +22,8 @@ migrate = Migrate(app, db)
 from flask_login import LoginManager
 lm = LoginManager()
 lm.init_app(app)
+from flask_babel import lazy_gettext as _
+lm.login_message = _('Please log in to access this page.')
 
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)

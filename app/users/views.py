@@ -69,6 +69,7 @@ def signup():
             new_user.set_password(form.password.data)
             new_user.generate_initials()
             new_user.generate_color()
+            new_user.set_locale(session['lang_code'])
             login_user(new_user)
             send_email('Welcome to {0}'.format(app.config['SITE_NAME']),
                        [new_user.email,],
