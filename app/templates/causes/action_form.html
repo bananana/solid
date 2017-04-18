@@ -6,22 +6,23 @@
     {% from "helpers/forms.html" import render_field, render_boolean %}
     <form id="cause" name="cause" action="" method="post">
         {{ form.hidden_tag() }}
+        {{ form_trans.hidden_tag() }}
         <div class="row">
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_field(form.title, class="u-full-width") }}
+                    {{ render_field(form_trans.title, class="u-full-width") }}
                 </div>
             </fieldset>
             <!--
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_field(form.summary, class="u-full-width")  }}
+                    {{ render_field(form_trans.summary, class="u-full-width")  }}
                 </div>
             </fieldset>
             -->
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_field(form.description, class="u-full-width")  }}
+                    {{ render_field(form_trans.description, class="u-full-width")  }}
                 </div>
             </fieldset>
             <fieldset>

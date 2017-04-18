@@ -6,6 +6,7 @@
     {% from "helpers/forms.html" import render_field, render_boolean %}
     <form id="cause" name="cause" action="" method="post">
         {{ form.hidden_tag() }}
+        {{ form_trans.hidden_tag() }}
         <div class="row">
             <fieldset>
                 <div class="six columns offset-by-three">

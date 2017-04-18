@@ -1,8 +1,8 @@
 from datetime import datetime
 from functools import wraps
 
-from flask import Blueprint, render_template, url_for, redirect, session,  \
-                  request, g, flash, abort, Markup
+from flask import (Blueprint, render_template, url_for, redirect, session,
+                   request, g, flash, abort, Markup)
 from flask_login import login_user, logout_user, current_user, login_required
 
 from app import app, db
@@ -10,7 +10,8 @@ from app.users.models import User
 from app.log.models import LogEvent, LogEventType
 
 from .models import Cause, Action
-from .forms import CauseForm, CauseTranslationForm, ActionForm
+from .forms import (CauseForm, CauseTranslationForm, ActionForm,
+                    ActionTranslationForm)
 
 from ..email import send_email
 
@@ -266,9 +267,11 @@ def action_edit(slug, pk):
         abort(404)
 
     form = ActionForm(request.form, action)
+    form_trans = ActionTranslationForm(request.form, action)
 
-    if form.validate_on_submit():
+    if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(action)
+        form_trans.populate_obj(action)
         action.update()
         flash('Action updated!', 'success')
         return redirect(url_for('.cause_detail', slug=slug))
@@ -276,6 +279,7 @@ def action_edit(slug, pk):
     context = {
         "cause": cause,
         "form": form,
+        "form_trans": form_trans,
     }
 
     return render_template('causes/action_form.html', **context)
