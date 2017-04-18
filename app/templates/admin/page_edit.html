@@ -11,16 +11,17 @@
     </div>
     <form id="page" name="page" action="" method="post">
         {{ form.hidden_tag() }}
+        {{ form_trans.hidden_tag() }}
         <div class="row">
             <fieldset>
                 <div class="six columns offset-by-three">
-                    {{ render_field(form.name, class="u-full-width") }}
+                    {{ render_field(form_trans.name, class="u-full-width") }}
                 </div>
                 <div class="six columns offset-by-three">
                     {{ render_field(form.url, class="u-full-width") }}
                 </div>
                 <div class="six columns offset-by-three">
-                    {{ render_field(form.content, class="u-full-width")  }}
+                    {{ render_field(form_trans.content, class="u-full-width")  }}
                 </div>
             </fieldset>
         </div>

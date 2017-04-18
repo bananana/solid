@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from app.causes.models import Cause
 from app.users.models import User
 from app.pages.models import Page
-from app.pages.forms import PageForm
+from app.pages.forms import PageForm, PageTranslationForm
 
 mod = Blueprint('admin', __name__)
 
@@ -17,12 +17,14 @@ def admin():
          return redirect('/')
     return render_template('admin/index.html')
 
+
 @mod.route('/admin/causes')
 @login_required
 def admin_cause_list():
     if not current_user.is_admin:
          return redirect('/')
     return render_template('admin/cause_list.html', causes=Cause.query.all())
+
 
 @mod.route('/admin/users')
 @login_required
@@ -52,16 +54,19 @@ def admin_page_edit(pk):
         abort(404)
 
     form = PageForm(request.form, page)
+    form_trans = PageTranslationForm(request.form, page)
 
-    if form.validate_on_submit():
+    if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(page)
+        form_trans.populate_obj(page)
         page.update()
         flash('Page updated!', 'success')
         return redirect(url_for('.admin_page_list', pk=pk))
 
     context = {
          "page": page,
-         "form": form
+         "form": form,
+         "form_trans": form_trans
     }
 
     return render_template('admin/page_edit.html', **context)
@@ -74,18 +79,21 @@ def admin_page_add():
          return redirect('/')
 
     form = PageForm(request.form)
+    form_trans = PageTranslationForm(request.form)
 
     page = Page.create(commit=False)
 
-    if form.validate_on_submit():
+    if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(page)
+        form_trans.populate_obj(page)
         page.save()
         flash('Page added!', 'success')
         return redirect(url_for('.admin_page_list', pk=page.id))
 
     context = {
          "page": page,
-         "form": form
+         "form": form,
+         "form_trans": form_trans
     }
 
     return render_template('admin/page_edit.html', **context)
