@@ -57,7 +57,16 @@
                     <!-- Language picker -->
                     <div id="lang-dropdown" class="dropdown u-pull-right">
                         <button class="button dropdown-button u-add-margin-left">
-                            <span class="button-text-with-img">En&nbsp;</span>
+                            <span class="button-text-with-img">
+                                {% if session['lang_code'] == 'en' %}
+                                    en
+                                {% elif session['lang_code'] == 'es' %}
+                                    es
+                                {% else %}
+                                    ??
+                                {% endif %}
+                                &nbsp;
+                            </span>
                             <img src="{{ url_for('static', filename='open-iconic/png/globe-2x.png') }}">&nbsp;
                             <img src="{{ url_for('static', filename='open-iconic/png/caret-bottom-2x.png') }}">
                         </button>

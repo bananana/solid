@@ -59,5 +59,8 @@ i18n_update:
 i18n_munge:
 	podebug --rewrite unicode app/translations/es/LC_MESSAGES/messages.po app/translations/es/LC_MESSAGES/messages.po
 
+i18n_blank:
+	podebug --rewrite blank app/translations/es/LC_MESSAGES/messages.po app/translations/es/LC_MESSAGES/messages.po
+
 i18n_compile:
 	pybabel compile -d app/translations/

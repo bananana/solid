@@ -10,7 +10,7 @@ from app.users.models import User
 from app.log.models import LogEvent, LogEventType
 
 from .models import Cause, Action
-from .forms import CauseForm, ActionForm
+from .forms import CauseForm, CauseTranslationForm, ActionForm
 
 from ..email import send_email
 
@@ -120,9 +120,11 @@ def cause_edit(slug):
         abort(404)
 
     form = CauseForm(request.form, cause)
+    form_trans = CauseTranslationForm(request.form, cause)
 
     if form.validate_on_submit():
         form.populate_obj(cause)
+        form_trans.populate_obj(cause)
         cause.update()
         flash('Cause updated!', 'success')
         LogEvent._log('cause_edit', cause, user=current_user)
@@ -131,6 +133,7 @@ def cause_edit(slug):
     context = {
         "cause": cause,
         "form": form,
+        "form_trans": form_trans,
     }
 
     return render_template('causes/cause_form.html', **context)

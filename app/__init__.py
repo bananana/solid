@@ -16,6 +16,9 @@ babel = Babel(app)
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
+from sqlalchemy_i18n import make_translatable
+make_translatable(db.Mapper)
+
 from flask_migrate import Migrate
 migrate = Migrate(app, db)
 
@@ -162,3 +165,7 @@ if not app.debug:
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
     app.logger.info('Application started up!')
+
+import sqlalchemy_utils
+from app.users.views import get_locale
+sqlalchemy_utils.i18n.get_locale = get_locale

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-17 22:50-0400\n"
+"POT-Creation-Date: 2017-04-18 02:29-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,51 +17,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: app/__init__.py:26
+#: app/__init__.py:29
 msgid "Please log in to access this page."
 msgstr ""
 
-#: app/causes/forms.py:19 app/causes/forms.py:35 app/posts/forms.py:14
-msgid "Title"
-msgstr ""
-
-#: app/causes/forms.py:20
-msgid "Intro"
-msgstr ""
-
-#: app/causes/forms.py:21
+#: app/causes/forms.py:15
 msgid "Location"
 msgstr ""
 
-#: app/causes/forms.py:22
+#: app/causes/forms.py:16
 msgid "Boss"
 msgstr ""
 
-#: app/causes/forms.py:23
+#: app/causes/forms.py:17
 msgid "Image"
 msgstr ""
 
-#: app/causes/forms.py:24
+#: app/causes/forms.py:27 app/causes/forms.py:41 app/posts/forms.py:14
+msgid "Title"
+msgstr ""
+
+#: app/causes/forms.py:28
+msgid "Intro"
+msgstr ""
+
+#: app/causes/forms.py:29
 msgid "Heading"
 msgstr ""
 
-#: app/causes/forms.py:25 app/posts/forms.py:15 app/posts/forms.py:21
+#: app/causes/forms.py:30 app/posts/forms.py:15 app/posts/forms.py:21
 msgid "Body"
 msgstr ""
 
-#: app/causes/forms.py:36
+#: app/causes/forms.py:42
 msgid "Summary"
 msgstr ""
 
-#: app/causes/forms.py:37 app/users/forms.py:50
+#: app/causes/forms.py:43 app/users/forms.py:50
 msgid "Description"
 msgstr ""
 
-#: app/causes/forms.py:38
+#: app/causes/forms.py:44
 msgid "Expiration"
 msgstr ""
 
-#: app/causes/forms.py:39
+#: app/causes/forms.py:45
 msgid "Link"
 msgstr ""
 
@@ -69,64 +69,64 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: app/templates/admin/index.html:10 app/templates/base.html:74
+#: app/templates/admin/index.html:10 app/templates/base.html:88
 msgid "Admin"
 msgstr ""
 
-#: app/templates/base.html:83 app/templates/base.html:116
-#: app/templates/base.html:118
+#: app/templates/base.html:97 app/templates/base.html:130
+#: app/templates/base.html:132
 msgid "Sign Up"
 msgstr ""
 
-#: app/templates/base.html:85
+#: app/templates/base.html:99
 msgid "Don't have an account?"
 msgstr ""
 
-#: app/templates/base.html:90 app/templates/base.html:113
+#: app/templates/base.html:104 app/templates/base.html:127
 msgid "Login"
 msgstr ""
 
-#: app/templates/base.html:99
+#: app/templates/base.html:113
 msgid "Logout"
 msgstr ""
 
-#: app/templates/base.html:102
+#: app/templates/base.html:116
 msgid "Logged&nbsp;in&nbsp;as&nbsp;"
 msgstr ""
 
-#: app/templates/base.html:110 app/templates/users/login.html:59
+#: app/templates/base.html:124 app/templates/users/login.html:59
 msgid "Log In"
 msgstr ""
 
-#: app/templates/base.html:147
+#: app/templates/base.html:161
 msgid "Information"
 msgstr ""
 
-#: app/templates/base.html:149
+#: app/templates/base.html:163
 msgid "Contact"
 msgstr ""
 
-#: app/templates/base.html:150
+#: app/templates/base.html:164
 msgid "About Us"
 msgstr ""
 
-#: app/templates/base.html:151
+#: app/templates/base.html:165
 msgid "How it works"
 msgstr ""
 
-#: app/templates/base.html:152
+#: app/templates/base.html:166
 msgid "Terms of service"
 msgstr ""
 
-#: app/templates/base.html:157
+#: app/templates/base.html:171
 msgid "Developers"
 msgstr ""
 
-#: app/templates/base.html:159
+#: app/templates/base.html:173
 msgid "Styleguide"
 msgstr ""
 
-#: app/templates/base.html:176
+#: app/templates/base.html:190
 msgid "Terms of Service"
 msgstr ""
 

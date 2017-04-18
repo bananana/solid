@@ -13,6 +13,7 @@ Flask-WTF>=0.12
 Flask-Testing>=0.4
 gunicorn==19.6.0
 SQLAlchemy>=1.0.12
+SQLAlchemy-i18n==1.0.3
 SQLAlchemy-Utils>=0.31.6
 SQLAlchemy-Migrate>=0.10.0
 slugify==0.0.1

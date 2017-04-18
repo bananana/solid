@@ -1,8 +1,9 @@
 import datetime
 
 from slugify import slugify
+from sqlalchemy_i18n import Translatable, translation_base
 
-from app import db
+from app import db, app
 from app.mixins import CRUDMixin 
 
 
@@ -17,18 +18,20 @@ cause_supporters = db.Table('causes_cause_supporters',
 )
 
 
-class Cause(CRUDMixin, db.Model):
+class Cause(CRUDMixin, db.Model, Translatable):
     __tablename__ = 'causes_cause'
+
+    __translatable__ = {
+        'locales': app.config['SUPPORTED_LANGUAGES']
+    }
+
     id            = db.Column(db.Integer, primary_key=True)
     demands       = db.relationship('Demand', backref='assigned_campaign', lazy='dynamic')
 
-    title         = db.Column(db.String(40), nullable=False)
     slug          = db.Column(db.String(128), nullable=False)
     boss          = db.Column(db.String(128))
     created_on    = db.Column(db.DateTime)
     location      = db.Column(db.String(128))
-
-    intro         = db.Column(db.Text(180))
 
     creators      = db.relationship('User', secondary=cause_creators,
                                     backref='causes_created', lazy='dynamic')
@@ -37,8 +40,6 @@ class Cause(CRUDMixin, db.Model):
 
     video         = db.Column(db.String(128))
     image         = db.Column(db.String(128))
-    story_heading = db.Column(db.String(128))
-    story_content = db.Column(db.Text)
 
     def save(self, *args, **kwargs):
         if not self.slug and self.title:
@@ -71,6 +72,18 @@ class Cause(CRUDMixin, db.Model):
         )
         result = db.engine.execute(query)
         return result.fetchone()[0]
+
+    def __repr__(self):
+        return '<Cause %r>' % (self.title)    
+
+
+class CauseTranslation(translation_base(Cause)):
+    __tablename__ = 'causes_cause_translation'
+
+    title         = db.Column(db.String(40))
+    story_heading = db.Column(db.String(128))
+    story_content = db.Column(db.Text)
+    intro         = db.Column(db.Text(180))
 
     def __repr__(self):
         return '<Cause %r>' % (self.title)    

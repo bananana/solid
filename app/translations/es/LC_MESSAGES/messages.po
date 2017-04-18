@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-17 22:50-0400\n"
+"POT-Creation-Date: 2017-04-18 02:29-0400\n"
 "PO-Revision-Date: 2016-11-09 11:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -18,325 +18,325 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: app/__init__.py:26
+#: app/__init__.py:29
 msgid "Please log in to access this page."
-msgstr "Ƥŀḗȧşḗ ŀǿɠ īƞ ŧǿ ȧƈƈḗşş ŧħīş ƥȧɠḗ."
+msgstr ""
 
-#: app/causes/forms.py:19 app/causes/forms.py:35 app/posts/forms.py:14
-msgid "Title"
-msgstr "Ŧīŧŀḗ"
-
-#: app/causes/forms.py:20
-msgid "Intro"
-msgstr "Īƞŧřǿ"
-
-#: app/causes/forms.py:21
+#: app/causes/forms.py:15
 msgid "Location"
-msgstr "Ŀǿƈȧŧīǿƞ"
+msgstr ""
 
-#: app/causes/forms.py:22
+#: app/causes/forms.py:16
 msgid "Boss"
-msgstr "Ɓǿşş"
+msgstr ""
 
-#: app/causes/forms.py:23
+#: app/causes/forms.py:17
 msgid "Image"
-msgstr "Īḿȧɠḗ"
+msgstr ""
 
-#: app/causes/forms.py:24
+#: app/causes/forms.py:27 app/causes/forms.py:41 app/posts/forms.py:14
+msgid "Title"
+msgstr ""
+
+#: app/causes/forms.py:28
+msgid "Intro"
+msgstr ""
+
+#: app/causes/forms.py:29
 msgid "Heading"
-msgstr "Ħḗȧḓīƞɠ"
+msgstr ""
 
-#: app/causes/forms.py:25 app/posts/forms.py:15 app/posts/forms.py:21
+#: app/causes/forms.py:30 app/posts/forms.py:15 app/posts/forms.py:21
 msgid "Body"
-msgstr "Ɓǿḓẏ"
+msgstr ""
 
-#: app/causes/forms.py:36
+#: app/causes/forms.py:42
 msgid "Summary"
-msgstr "Şŭḿḿȧřẏ"
+msgstr ""
 
-#: app/causes/forms.py:37 app/users/forms.py:50
+#: app/causes/forms.py:43 app/users/forms.py:50
 msgid "Description"
-msgstr "Ḓḗşƈřīƥŧīǿƞ"
+msgstr ""
 
-#: app/causes/forms.py:38
+#: app/causes/forms.py:44
 msgid "Expiration"
-msgstr "Ḗẋƥīřȧŧīǿƞ"
+msgstr ""
 
-#: app/causes/forms.py:39
+#: app/causes/forms.py:45
 msgid "Link"
-msgstr "Ŀīƞķ"
+msgstr ""
 
 #: app/posts/forms.py:26
 msgid "Are you sure?"
-msgstr "Ȧřḗ ẏǿŭ şŭřḗ?"
+msgstr ""
 
-#: app/templates/admin/index.html:10 app/templates/base.html:74
+#: app/templates/admin/index.html:10 app/templates/base.html:88
 msgid "Admin"
-msgstr "Ȧḓḿīƞ"
+msgstr ""
 
-#: app/templates/base.html:83 app/templates/base.html:116
-#: app/templates/base.html:118
+#: app/templates/base.html:97 app/templates/base.html:130
+#: app/templates/base.html:132
 msgid "Sign Up"
-msgstr "Şīɠƞ Ŭƥ"
-
-#: app/templates/base.html:85
-msgid "Don't have an account?"
-msgstr "Ḓǿƞ'ŧ ħȧṽḗ ȧƞ ȧƈƈǿŭƞŧ?"
-
-#: app/templates/base.html:90 app/templates/base.html:113
-msgid "Login"
-msgstr "Ŀǿɠīƞ"
+msgstr ""
 
 #: app/templates/base.html:99
+msgid "Don't have an account?"
+msgstr ""
+
+#: app/templates/base.html:104 app/templates/base.html:127
+msgid "Login"
+msgstr ""
+
+#: app/templates/base.html:113
 msgid "Logout"
-msgstr "Ŀǿɠǿŭŧ"
+msgstr ""
 
-#: app/templates/base.html:102
+#: app/templates/base.html:116
 msgid "Logged&nbsp;in&nbsp;as&nbsp;"
-msgstr "Ŀǿɠɠḗḓ&nbsp;īƞ&nbsp;ȧş&nbsp;"
+msgstr ""
 
-#: app/templates/base.html:110 app/templates/users/login.html:59
+#: app/templates/base.html:124 app/templates/users/login.html:59
 msgid "Log In"
-msgstr "Ŀǿɠ Īƞ"
+msgstr ""
 
-#: app/templates/base.html:147
+#: app/templates/base.html:161
 msgid "Information"
-msgstr "Īƞƒǿřḿȧŧīǿƞ"
+msgstr ""
 
-#: app/templates/base.html:149
+#: app/templates/base.html:163
 msgid "Contact"
-msgstr "Ƈǿƞŧȧƈŧ"
+msgstr ""
 
-#: app/templates/base.html:150
+#: app/templates/base.html:164
 msgid "About Us"
-msgstr "Ȧƀǿŭŧ Ŭş"
+msgstr ""
 
-#: app/templates/base.html:151
+#: app/templates/base.html:165
 msgid "How it works"
-msgstr "Ħǿẇ īŧ ẇǿřķş"
+msgstr ""
 
-#: app/templates/base.html:152
+#: app/templates/base.html:166
 msgid "Terms of service"
-msgstr "Ŧḗřḿş ǿƒ şḗřṽīƈḗ"
+msgstr ""
 
-#: app/templates/base.html:157
+#: app/templates/base.html:171
 msgid "Developers"
-msgstr "Ḓḗṽḗŀǿƥḗřş"
+msgstr ""
 
-#: app/templates/base.html:159
+#: app/templates/base.html:173
 msgid "Styleguide"
-msgstr "Şŧẏŀḗɠŭīḓḗ"
+msgstr ""
 
-#: app/templates/base.html:176
+#: app/templates/base.html:190
 msgid "Terms of Service"
-msgstr "Ŧḗřḿş ǿƒ Şḗřṽīƈḗ"
+msgstr ""
 
 #: app/templates/admin/index.html:14
 msgid "Manage causes"
-msgstr "Ḿȧƞȧɠḗ ƈȧŭşḗş"
+msgstr ""
 
 #: app/templates/admin/index.html:17
 msgid "Manage users"
-msgstr "Ḿȧƞȧɠḗ ŭşḗřş"
+msgstr ""
 
 #: app/templates/admin/index.html:20
 msgid "Manage pages"
-msgstr "Ḿȧƞȧɠḗ ƥȧɠḗş"
+msgstr ""
 
 #: app/templates/causes/action_form.html:45
 #: app/templates/posts/post_form.html:24
 msgid "Save"
-msgstr "Şȧṽḗ"
+msgstr ""
 
 #: app/templates/causes/cause.html:119
 msgid "You are supporting this cause"
-msgstr "Ẏǿŭ ȧřḗ şŭƥƥǿřŧīƞɠ ŧħīş ƈȧŭşḗ"
+msgstr ""
 
 #: app/templates/causes/cause.html:124
 msgid "Stand with us!"
-msgstr "Şŧȧƞḓ ẇīŧħ ŭş!"
+msgstr ""
 
 #: app/templates/causes/cause.html:127
 msgid "Join this cause's community, and stay updated on actions"
-msgstr "Ĵǿīƞ ŧħīş ƈȧŭşḗ'ş ƈǿḿḿŭƞīŧẏ, ȧƞḓ şŧȧẏ ŭƥḓȧŧḗḓ ǿƞ ȧƈŧīǿƞş"
+msgstr ""
 
 #: app/templates/causes/cause.html:143
 msgid "Share"
-msgstr "Şħȧřḗ"
+msgstr ""
 
 #: app/templates/causes/cause.html:146
 msgid "Creators"
-msgstr "Ƈřḗȧŧǿřş"
+msgstr ""
 
 #: app/templates/causes/cause.html:155 app/templates/helpers/actions.html:14
 #, python-format
 msgid "%(count)s supporters"
-msgstr "%(count)s şŭƥƥǿřŧḗřş"
+msgstr ""
 
 #: app/templates/causes/cause.html:164
 msgid "Actions taken"
-msgstr "Ȧƈŧīǿƞş ŧȧķḗƞ"
+msgstr ""
 
 #: app/templates/causes/cause.html:171
 msgid "Share this cause"
-msgstr "Şħȧřḗ ŧħīş ƈȧŭşḗ"
+msgstr ""
 
 #: app/templates/causes/cause.html:208
 msgid "Take action to win"
-msgstr "Ŧȧķḗ ȧƈŧīǿƞ ŧǿ ẇīƞ"
+msgstr ""
 
 #: app/templates/causes/cause.html:210
 #, python-format
 msgid "%(count)s available"
-msgstr "%(count)s ȧṽȧīŀȧƀŀḗ"
+msgstr ""
 
 #: app/templates/causes/cause.html:212
 #, python-format
 msgid "%(count)s taken"
-msgstr "%(count)s ŧȧķḗƞ"
+msgstr ""
 
 #: app/templates/causes/cause.html:220
 msgid "new action"
-msgstr "ƞḗẇ ȧƈŧīǿƞ"
+msgstr ""
 
 #: app/templates/causes/cause.html:231
 msgid "Conversation"
-msgstr "Ƈǿƞṽḗřşȧŧīǿƞ"
+msgstr ""
 
 #: app/templates/causes/cause.html:237
 msgid "new post"
-msgstr "ƞḗẇ ƥǿşŧ"
+msgstr ""
 
 #: app/templates/helpers/actions.html:42 app/templates/helpers/actions.html:45
 #: app/templates/helpers/actions.html:49
 msgid "Support!"
-msgstr "Şŭƥƥǿřŧ!"
+msgstr ""
 
 #: app/templates/helpers/actions.html:54
 msgid "You have already taken this action!"
-msgstr "Ẏǿŭ ħȧṽḗ ȧŀřḗȧḓẏ ŧȧķḗƞ ŧħīş ȧƈŧīǿƞ!"
+msgstr ""
 
 #: app/templates/helpers/actions.html:60
 msgid "Go to 3rd party site"
-msgstr "Ɠǿ ŧǿ 3řḓ ƥȧřŧẏ şīŧḗ"
+msgstr ""
 
 #: app/templates/helpers/posts.html:16
 msgid "(edit)"
-msgstr "(ḗḓīŧ)"
+msgstr ""
 
 #: app/templates/helpers/posts.html:29
 #, python-format
 msgid "%(count)s comments"
-msgstr "%(count)s ƈǿḿḿḗƞŧş"
+msgstr ""
 
 #: app/templates/helpers/posts.html:31
 msgid "Read More"
-msgstr "Řḗȧḓ Ḿǿřḗ"
+msgstr ""
 
 #: app/templates/helpers/posts.html:49
 msgid "No posts!"
-msgstr "Ƞǿ ƥǿşŧş!"
+msgstr ""
 
 #: app/templates/helpers/posts.html:53
 msgid "Start the conversation"
-msgstr "Şŧȧřŧ ŧħḗ ƈǿƞṽḗřşȧŧīǿƞ"
+msgstr ""
 
 #: app/templates/posts/comment_form.html:18
 msgid "Post"
-msgstr "Ƥǿşŧ"
+msgstr ""
 
 #: app/templates/posts/post.html:35
 #, python-format
 msgid "%(count)s comments for this post. Leave yours:"
-msgstr "%(count)s ƈǿḿḿḗƞŧş ƒǿř ŧħīş ƥǿşŧ. Ŀḗȧṽḗ ẏǿŭřş:"
+msgstr ""
 
 #: app/templates/posts/post.html:49
 msgid "Log in"
-msgstr "Ŀǿɠ īƞ"
+msgstr ""
 
 #: app/templates/posts/post.html:51 app/templates/posts/post.html:58
 msgid "to post."
-msgstr "ŧǿ ƥǿşŧ."
+msgstr ""
 
 #: app/templates/posts/post.html:56
 msgid "Support this cause"
-msgstr "Şŭƥƥǿřŧ ŧħīş ƈȧŭşḗ"
+msgstr ""
 
 #: app/templates/posts/post_form.html:31
 msgid "Delete"
-msgstr "Ḓḗŀḗŧḗ"
+msgstr ""
 
 #: app/templates/posts/post_list.html:15
 msgid "Add new post"
-msgstr "Ȧḓḓ ƞḗẇ ƥǿşŧ"
+msgstr ""
 
 #: app/templates/users/login.html:65
 msgid "By accessing and using this service, you agree to the"
-msgstr "Ɓẏ ȧƈƈḗşşīƞɠ ȧƞḓ ŭşīƞɠ ŧħīş şḗřṽīƈḗ, ẏǿŭ ȧɠřḗḗ ŧǿ ŧħḗ"
+msgstr ""
 
 #: app/templates/users/login.html:66
 msgid "terms of service"
-msgstr "ŧḗřḿş ǿƒ şḗřṽīƈḗ"
+msgstr ""
 
 #: app/templates/users/login.html:81
 msgid "Log In with Twitter"
-msgstr "Ŀǿɠ Īƞ ẇīŧħ Ŧẇīŧŧḗř"
+msgstr ""
 
 #: app/templates/users/login.html:86
 msgid "Log In with Google"
-msgstr "Ŀǿɠ Īƞ ẇīŧħ Ɠǿǿɠŀḗ"
+msgstr ""
 
 #: app/templates/users/login.html:91
 msgid "Log In with Facebook"
-msgstr "Ŀǿɠ Īƞ ẇīŧħ Ƒȧƈḗƀǿǿķ"
+msgstr ""
 
 #: app/users/forms.py:14
 msgid "Email or Username"
-msgstr "Ḗḿȧīŀ ǿř Ŭşḗřƞȧḿḗ"
+msgstr ""
 
 #: app/users/forms.py:16 app/users/forms.py:30
 msgid "Password"
-msgstr "Ƥȧşşẇǿřḓ"
+msgstr ""
 
 #: app/users/forms.py:18
 msgid "Remember me"
-msgstr "Řḗḿḗḿƀḗř ḿḗ"
+msgstr ""
 
 #: app/users/forms.py:23 app/users/forms.py:42
 msgid "Email"
-msgstr "Ḗḿȧīŀ"
+msgstr ""
 
 #: app/users/forms.py:25 app/users/forms.py:38
 msgid "Nickname"
-msgstr "Ƞīƈķƞȧḿḗ"
+msgstr ""
 
 #: app/users/forms.py:28 app/users/forms.py:40
 msgid "Full Name"
-msgstr "Ƒŭŀŀ Ƞȧḿḗ"
+msgstr ""
 
 #: app/users/forms.py:33 app/users/forms.py:57
 msgid "Verify password"
-msgstr "Ṽḗřīƒẏ ƥȧşşẇǿřḓ"
+msgstr ""
 
 #: app/users/forms.py:44
 msgid "Phone"
-msgstr "Ƥħǿƞḗ"
+msgstr ""
 
 #: app/users/forms.py:46
 msgid "Zip"
-msgstr "Ẑīƥ"
+msgstr ""
 
 #: app/users/forms.py:48
 msgid "Employer"
-msgstr "Ḗḿƥŀǿẏḗř"
+msgstr ""
 
 #: app/users/forms.py:52
 msgid "Current password"
-msgstr "Ƈŭřřḗƞŧ ƥȧşşẇǿřḓ"
+msgstr ""
 
 #: app/users/forms.py:54
 msgid "New password"
-msgstr "Ƞḗẇ ƥȧşşẇǿřḓ"
+msgstr ""
 
 #~ msgid "(%(count)s current)"
 #~ msgstr "(%(count)s ƈŭřřḗƞŧ)"
