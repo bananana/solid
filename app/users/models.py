@@ -16,7 +16,7 @@ class User(UserMixin, CRUDMixin, db.Model):
     full_name   = db.Column(db.String(64))
     initials    = db.Column(db.String(8))
     color       = db.Column(db.String(7))
-    email       = db.Column(db.String(128), index=True, unique=True)
+    email       = db.Column(db.String(128), index=True)
     phone       = db.Column(db.Integer, index=True)
     zip         = db.Column(db.String(5), index=True)
     employer    = db.Column(db.String(64), index=True)
