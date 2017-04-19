@@ -99,9 +99,9 @@
                         <small class="u-pull-right" style="margin-top:1.8em; margin-right:1em;">{{ _('Don\'t have an account?') }}</small>
                     {% elif active_page == "signup" %}
                         <!-- If on signup page, show login button only -->
-                        <a href="{{ url_for('users.login') }}" title="Log In" class="button u-pull-right">
-                            <span class="oi" data-glyph="account-login" title="Login" aria-hidden="true"></span>
-                            <span class="u-hide-on-mobile">&nbsp;{{ _('Login') }}</span>
+                        <a href="{{ url_for('users.login') }}" title="{{ _('Log in') }}" class="button u-pull-right">
+                            <span class="oi" data-glyph="account-login" title="{{ _('Log in') }}" aria-hidden="true"></span>
+                            <span class="u-hide-on-mobile">&nbsp;{{ _('Log in') }}</span>
                         </a>
                     {% else %}
                         {% if current_user.is_authenticated %} 
@@ -121,10 +121,10 @@
                         {% else %}
                             <!-- Otherwise show both Login and Signup buttons at the same time -->
                             <a href="{{ url_for('users.login') }}" 
-                               title="{{ _('Log In') }}" 
+                               title="{{ _('Log in') }}" 
                                class="button u-add-margin-left u-pull-right">
-                                <span class="oi" data-glyph="account-login" title="Login" aria-hidden="true"></span>
-                                <span class="u-hide-on-mobile">&nbsp;{{ _('Login') }}</span>
+                                <span class="oi" data-glyph="account-login" title="{{ _('Log in') }}" aria-hidden="true"></span>
+                                <span class="u-hide-on-mobile">&nbsp;{{ _('Log in') }}</span>
                             </a>
                             <a href="{{ url_for('users.signup') }}" 
                                title="{{ _('Sign Up') }}" 

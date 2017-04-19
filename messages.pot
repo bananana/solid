@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-18 02:29-0400\n"
+"POT-Creation-Date: 2017-04-19 14:20-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: app/causes/forms.py:27 app/causes/forms.py:41 app/posts/forms.py:14
+#: app/causes/forms.py:27 app/causes/forms.py:48 app/posts/forms.py:14
 msgid "Title"
 msgstr ""
 
@@ -49,20 +49,24 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
-#: app/causes/forms.py:42
-msgid "Summary"
-msgstr ""
-
-#: app/causes/forms.py:43 app/users/forms.py:50
-msgid "Description"
-msgstr ""
-
-#: app/causes/forms.py:44
+#: app/causes/forms.py:38
 msgid "Expiration"
 msgstr ""
 
-#: app/causes/forms.py:45
+#: app/causes/forms.py:39
 msgid "Link"
+msgstr ""
+
+#: app/causes/forms.py:49
+msgid "Summary"
+msgstr ""
+
+#: app/causes/forms.py:50 app/users/forms.py:50
+msgid "Description"
+msgstr ""
+
+#: app/causes/views.py:104
+msgid "Cause created!"
 msgstr ""
 
 #: app/posts/forms.py:26
@@ -82,8 +86,11 @@ msgstr ""
 msgid "Don't have an account?"
 msgstr ""
 
-#: app/templates/base.html:104 app/templates/base.html:127
-msgid "Login"
+#: app/templates/base.html:102 app/templates/base.html:103
+#: app/templates/base.html:104 app/templates/base.html:124
+#: app/templates/base.html:126 app/templates/base.html:127
+#: app/templates/posts/post.html:49 app/templates/users/login.html:59
+msgid "Log in"
 msgstr ""
 
 #: app/templates/base.html:113
@@ -92,10 +99,6 @@ msgstr ""
 
 #: app/templates/base.html:116
 msgid "Logged&nbsp;in&nbsp;as&nbsp;"
-msgstr ""
-
-#: app/templates/base.html:124 app/templates/users/login.html:59
-msgid "Log In"
 msgstr ""
 
 #: app/templates/base.html:161
@@ -142,7 +145,7 @@ msgstr ""
 msgid "Manage pages"
 msgstr ""
 
-#: app/templates/causes/action_form.html:45
+#: app/templates/causes/action_form.html:46
 #: app/templates/posts/post_form.html:24
 msgid "Save"
 msgstr ""
@@ -219,24 +222,24 @@ msgstr ""
 msgid "Go to 3rd party site"
 msgstr ""
 
-#: app/templates/helpers/posts.html:16
+#: app/templates/helpers/posts.html:21
 msgid "(edit)"
 msgstr ""
 
-#: app/templates/helpers/posts.html:29
+#: app/templates/helpers/posts.html:34
 #, python-format
 msgid "%(count)s comments"
 msgstr ""
 
-#: app/templates/helpers/posts.html:31
+#: app/templates/helpers/posts.html:36
 msgid "Read More"
 msgstr ""
 
-#: app/templates/helpers/posts.html:49
+#: app/templates/helpers/posts.html:54
 msgid "No posts!"
 msgstr ""
 
-#: app/templates/helpers/posts.html:53
+#: app/templates/helpers/posts.html:58
 msgid "Start the conversation"
 msgstr ""
 
@@ -247,10 +250,6 @@ msgstr ""
 #: app/templates/posts/post.html:35
 #, python-format
 msgid "%(count)s comments for this post. Leave yours:"
-msgstr ""
-
-#: app/templates/posts/post.html:49
-msgid "Log in"
 msgstr ""
 
 #: app/templates/posts/post.html:51 app/templates/posts/post.html:58
@@ -278,15 +277,15 @@ msgid "terms of service"
 msgstr ""
 
 #: app/templates/users/login.html:81
-msgid "Log In with Twitter"
+msgid "Log in with Twitter"
 msgstr ""
 
 #: app/templates/users/login.html:86
-msgid "Log In with Google"
+msgid "Log in with Google"
 msgstr ""
 
 #: app/templates/users/login.html:91
-msgid "Log In with Facebook"
+msgid "Log in with Facebook"
 msgstr ""
 
 #: app/users/forms.py:14
@@ -335,5 +334,17 @@ msgstr ""
 
 #: app/users/forms.py:54
 msgid "New password"
+msgstr ""
+
+#: app/users/views.py:108
+msgid "Nickname already exists, please pick a different one."
+msgstr ""
+
+#: app/users/views.py:146
+msgid "Email or Password is invalid"
+msgstr ""
+
+#: app/users/views.py:272
+msgid "You have been logged out successfully"
 msgstr ""
 
