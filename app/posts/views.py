@@ -33,6 +33,10 @@ def post_list(slug):
 def post_add(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
+    if current_user not in cause.supporters.all():
+        flash('You must be supporting this cause to post.', 'error')
+        return redirect(url_for('causes.cause_detail', slug=slug))
+
     form = PostForm(request.form)
 
     post = Post.create(commit=False)

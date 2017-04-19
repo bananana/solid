@@ -84,6 +84,9 @@ class User(UserMixin, CRUDMixin, db.Model):
         rand_color = '#%06x' % randint(0, 0xFFFFFF)
         self.update(**{'color': rand_color})
 
+    def set_locale(self, loc):
+        self.update(**{'locale': loc})
+
     def is_supporting(self, cause):
         return self.supports.filter(cause_supporters.c.cause_id == cause.id).count() > 0
 

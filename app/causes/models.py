@@ -25,6 +25,8 @@ class Cause(CRUDMixin, db.Model, Translatable):
         'locales': app.config['SUPPORTED_LANGUAGES']
     }
 
+    locale = 'en'
+
     id            = db.Column(db.Integer, primary_key=True)
     demands       = db.relationship('Demand', backref='assigned_campaign', lazy='dynamic')
 
@@ -101,6 +103,8 @@ class Action(CRUDMixin, db.Model, Translatable):
     __translatable__ = {
         'locales': app.config['SUPPORTED_LANGUAGES']
     }
+
+    locale = 'en'
 
     id            = db.Column(db.Integer, primary_key=True)
 

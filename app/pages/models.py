@@ -11,6 +11,8 @@ class Page(CRUDMixin, db.Model, Translatable):
         'locales': app.config['SUPPORTED_LANGUAGES']
     }
 
+    locale = 'en'
+
     id = db.Column(db.Integer, primary_key=True)
 
     url = db.Column(db.String(128), nullable=False)
