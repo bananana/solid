@@ -5,6 +5,7 @@ from flask_login import current_user, login_required
 from app.causes.models import Cause
 from app.causes.views import cause_required
 from app.log.models import LogEvent, LogEventType
+from app.users.models import User
 
 from .forms import PostForm, CommentForm, PostDeleteForm
 from .models import Post, Comment
@@ -44,9 +45,16 @@ def post_add(slug):
 
         if current_user in cause.creators.all() or current_user.is_admin:
             send_email('"{0.title}" - "{1.title}"'.format(post, cause),
-                    [s.email for s in cause.supporters.all() if s.id != current_user.id],
+                       [s.email for s in cause.supporters.all() if s.id != current_user.id],
                        {'cause': cause, 'post': post},
                        'email/post_supporters.txt')
+        else:
+            send_email('"{0.title}" - "{1.title}"'.format(post, cause),
+                    set([s.email for s in cause.creators.all() 
+                         + User.query.filter_by(is_admin=True).all()]),
+                       {'cause': cause, 'post': post},
+                       'email/post_creators.txt')
+
 
         flash('Post added!', 'success')
         LogEvent._log('post_add', post, user=current_user)
