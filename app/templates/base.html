@@ -54,40 +54,7 @@
                         <h4 class="title u-pull-left"><strong>SOLID</strong></h4>
                     </a>
                     
-                    <!-- Language picker -->
-                    <div id="lang-dropdown" class="dropdown u-pull-right">
-                        <button class="button dropdown-button u-add-margin-left">
-                            <span class="button-text-with-img">
-                                {% if session['lang_code'] == 'en' %}
-                                    en
-                                {% elif session['lang_code'] == 'es' %}
-                                    es
-                                {% else %}
-                                    ??
-                                {% endif %}
-                                &nbsp;
-                            </span>
-                            <img src="{{ url_for('static', filename='open-iconic/png/globe-2x.png') }}">&nbsp;
-                            <img src="{{ url_for('static', filename='open-iconic/png/caret-bottom-2x.png') }}">
-                        </button>
-                        <div class="dropdown-content">
-                            {% if session['lang_code'] != 'en' %}
-                                <a href="javascript:translate('en')">English</a>
-                            {% endif %}
-                            {% if session['lang_code'] != 'es' %}
-                                <a href="javascript:translate('es');">Espa&ntilde;ol</a>
-                            {% endif %}
-                        </div>
-                    </div>
                     
-                    <!-- Admin tools -->
-                    {% if current_user.is_admin %}
-                    <a href="{{ url_for('admin.admin') }}" 
-                        title="Admin" 
-                        class="button u-pull-right u-add-margin-left">
-                        {{ _('Admin') }}
-                    </a>
-                    {% endif %}
                     
                     <!-- Login, Signup, Logout and Prifile buttons -->
                     {% if active_page == "login" %}
@@ -105,19 +72,39 @@
                         </a>
                     {% else %}
                         {% if current_user.is_authenticated %} 
-                            <!-- If authenticated, show logout button -->
-                            <a href="{{ url_for('users.logout') }}" 
-                               title="Log Out"
-                               class="button u-pull-right">
-                                <span class="oi" data-glyph="account-logout" title="Logout" aria-hidden="true"></span>
-                                <span class="u-hide-on-mobile">&nbsp;{{ _('Logout') }}</span>
-                            </a>
-                            <span class="user">
-                                {{ _('Logged&nbsp;in&nbsp;as&nbsp;') }}
-                                <a href="{{ url_for('users.user', nickname=current_user.nickname) }}">
-                                    {{ current_user.nickname }}
-                                </a>
-                            </span>
+                            {% from "helpers/users.html" import render_avatar %}
+                            <div id="main-menu" class="dropdown u-pull-right">
+                                <div class="dropdown-button u-pull-right">
+                                    {{ render_avatar(current_user) }}
+                                    <span class="oi" data-glyph="caret-bottom" title="Menu" aria-hidden="true"></span>
+                                </div>
+                                <div class="dropdown-content">
+                                    <ul>
+                                        <li>
+                                            {{ _('Logged&nbsp;in&nbsp;as') }}&nbsp;<strong>{{ current_user.nickname }}</strong>
+                                        </li>
+                                        <li class="menu-separator"></li>
+                                        <li>
+                                            <a href="{{ url_for('users.user', nickname=current_user.nickname) }}" title="Profile">
+                                                {{ _('Your profile') }}
+                                            </a>
+                                        </li>
+                                        {% if current_user.is_admin %}
+                                        <!-- Admin tools -->
+                                        <li>
+                                            <a href="{{ url_for('admin.admin') }}" title="Admin">
+                                                {{ _('Admin') }}
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                        <li>
+                                            <a href="{{ url_for('users.logout') }}">
+                                                {{ _('Logout') }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         {% else %}
                             <!-- Otherwise show both Login and Signup buttons at the same time -->
                             <a href="{{ url_for('users.login') }}" 
@@ -133,6 +120,37 @@
                             </a>
                         {% endif %}
                     {% endif %}
+
+                    <!-- Language picker -->
+                    <div id="lang-dropdown" class="dropdown u-pull-right">
+                        <div class="dropdown-button u-pull-right">
+                            <span class="dropdown-lang-code">
+                                {% if session['lang_code'] == 'en' %}
+                                    en
+                                {% elif session['lang_code'] == 'es' %}
+                                    es
+                                {% else %}
+                                    ??
+                                {% endif %}
+                            </span>
+                            <img src="{{ url_for('static', filename='open-iconic/png/globe-3x.png') }}">&nbsp;
+                            <img style="margin-bottom:5px;" src="{{ url_for('static', filename='open-iconic/png/caret-bottom-2x.png') }}">
+                        </div>
+                        <div class="dropdown-content">
+                            <ul>
+                                {% if session['lang_code'] != 'en' %}
+                                <li>
+                                    <a href="javascript:translate('en')">English</a>
+                                </li>
+                                {% endif %}
+                                {% if session['lang_code'] != 'es' %}
+                                <li>
+                                    <a href="javascript:translate('es');">Espa&ntilde;ol</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
 
                 </div>
             </div>
