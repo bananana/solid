@@ -9,17 +9,9 @@
 			<h2>
 				{{ _('Admin') }}
 			</h2>
-			<ul>
-				<li><a href="{{ url_for('.admin_cause_list') }}">
-					{{ _('Manage causes') }}
-				</a></li>
-				<li><a href="{{ url_for('.admin_user_list') }}">
-					{{ _('Manage users') }}
-				</a></li>
-				<li><a href="{{ url_for('.admin_page_list') }}">
-					{{ _('Manage pages') }}
-				</a></li>
-			</ul>
+            <a class="button" href="{{ url_for('.admin_cause_list') }}">{{ _('Manage causes') }}</a>
+            <a class="button" href="{{ url_for('.admin_user_list') }}">{{ _('Manage users') }}</a>
+            <a class="button" href="{{ url_for('.admin_page_list') }}">{{ _('Manage pages') }}</a>
 		</div>
 	</div>
 </div>
