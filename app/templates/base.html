@@ -63,7 +63,6 @@
                             class="button button-primary u-pull-right">
                             {{ _('Sign Up') }}
                         </a>
-                        <small class="u-pull-right" style="margin-top:1.8em; margin-right:1em;">{{ _('Don\'t have an account?') }}</small>
                     {% elif active_page == "signup" %}
                         <!-- If on signup page, show login button only -->
                         <a href="{{ url_for('users.login') }}" title="{{ _('Log in') }}" class="button u-pull-right">
@@ -134,7 +133,7 @@
                                 {% endif %}
                             </span>
                             <img src="{{ url_for('static', filename='open-iconic/png/globe-3x.png') }}">&nbsp;
-                            <img style="margin-bottom:5px;" src="{{ url_for('static', filename='open-iconic/png/caret-bottom-2x.png') }}">
+                            <img style="margin-bottom:6px;" src="{{ url_for('static', filename='open-iconic/png/caret-bottom-2x.png') }}">
                         </div>
                         <div class="dropdown-content">
                             <ul>
