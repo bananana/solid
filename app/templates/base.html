@@ -88,6 +88,9 @@
                                                 {{ _('Your profile') }}
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{ url_for('users.edit', nickname=current_user.nickname) }}">Settings</a>
+                                        </li>
                                         {% if current_user.is_admin %}
                                         <!-- Admin tools -->
                                         <li>
