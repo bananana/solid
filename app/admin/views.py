@@ -15,7 +15,10 @@ mod = Blueprint('admin', __name__)
 def admin():
     if not current_user.is_admin:
          return redirect('/')
-    return render_template('admin/index.html')
+    return render_template('admin/index.html', 
+                           users=User.query.all(),
+                           causes=Cause.query.all(),
+                           pages=Page.query.all())
 
 
 @mod.route('/admin/causes')

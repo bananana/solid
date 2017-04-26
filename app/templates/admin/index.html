@@ -3,16 +3,217 @@
 {% block title %}Admin - {{ super() }}{% endblock title %}
 
 {% block content %}
-<div class="container u-add-margin-top">
-	<div class="row">
-		<div class="six columns offset-by-three">
-			<h2>
-				{{ _('Admin') }}
-			</h2>
-            <a class="button" href="{{ url_for('.admin_cause_list') }}">{{ _('Manage causes') }}</a>
-            <a class="button" href="{{ url_for('.admin_user_list') }}">{{ _('Manage users') }}</a>
-            <a class="button" href="{{ url_for('.admin_page_list') }}">{{ _('Manage pages') }}</a>
+{% set users_display_cap = 10 %}
+{% set causes_display_cap = 10 %}
+{% set pages_display_cap = 10 %}
+<div class="full-width-container">
+	<div class="row u-add-margin-top">
+		<div class="twelve columns">
+			<h1>{{ _('Admin') }}</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="one-third column">
+            <h3 class="u-pull-left">{{ _('Users') }} <sup><small>{{ users | length }}</small></sup></h3>
+            <a href="{{ url_for('.admin_user_list') }}" 
+               title="View all users" 
+               class="button u-pull-right u-add-margin-left">
+                <span class="oi" data-glyph="eye" title="View" aria-hidden="true"></span>
+                <span class="u-hide-on-mobile"> all</span>
+            </a>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>nickname</th>
+                        <th>e-mail</th>
+                        <th class="u-text-right">edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users[:users_display_cap] %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.nickname }}</td>
+                        <td>{{ user.email|default('n/a') }}</td>
+                        <td class="u-text-right">
+                          <a href="{{ url_for('users.edit', nickname=user.nickname) }}">
+                              <span class="oi" data-glyph="pencil" title="Edit" aria-hidden="true"></span>
+                          </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% if users | length > users_display_cap %}
+                <tfoot>
+                    <tr class="u-remove-border-bottom">
+                        <td>
+                            <span class="oi" 
+                                  data-glyph="ellipses" 
+                                  style="display:block; margin-bottom:-8px;"
+                                  title="More" 
+                                  aria-hidden="true"></span>
+                        </td>
+                        <td colspan="3" class="u-text-right">
+                            <small>
+                                {{ users | length -users_display_cap }} additional entries not displayed. 
+                                <a href="{{ url_for('.admin_user_list') }}">View all</a>.
+                            </small>
+                        </td>
+                    </tr>
+                </tfoot>
+                {% elif users | length == 0 %}
+                <tfoot>
+                    <tr class="u-remove-border-bottom">
+                        <td colspan="4" class="u-text-right">
+                            <small>
+                                Nothing here yet. 
+                            </small>
+                        </td>
+                    </tr> 
+                </tfoot>
+                {% endif %}
+            </table>
 		</div>
+        <div class="one-third column">
+            <h3 class="u-pull-left">{{ _('Causes') }} <sup><small>{{ causes | length }}</small></sup></h3>
+            <a href="{{ url_for('.admin_cause_list') }}" 
+               title="View all causes"
+               class="button u-pull-right u-add-margin-left">
+                <span class="oi" data-glyph="eye" title="View" aria-hidden="true"></span>
+                <span class="u-hide-on-mobile"> all</span>
+            </a>
+            <a href="{{ url_for('causes.cause_add') }}" 
+               title="Add new cause"
+               class="button u-pull-right">
+                <span class="oi" data-glyph="plus" title="Add" aria-hidden="true"></span>
+                <span class="u-hide-on-mobile"> cause</span>
+            </a>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>slug</th>
+                        <th class="u-text-right">edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cause in causes[:causes_display_cap] %}
+                    <tr>
+                        <td>{{ cause.id }}</td>
+                        <td><a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">{{ cause.title }}</a></td>
+                        <td>{{ cause.slug }}</td>
+                        <td class="u-text-right">
+                          <a href="{{ url_for('causes.cause_edit', slug=cause.slug) }}">
+                              <span class="oi" data-glyph="pencil" title="Edit" aria-hidden="true"></span>
+                          </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% if causes | length > causes_display_cap %}
+                <tfoot>
+                    <tr class="u-remove-border-bottom">
+                        <td>
+                            <span class="oi" 
+                                  data-glyph="ellipses" 
+                                  style="display:block; margin-bottom:-8px;"
+                                  title="More" 
+                                  aria-hidden="true"></span>
+                        </td>
+                        <td colspan="3" class="u-text-right">
+                            <small>
+                                {{ users | length -causes_display_cap }} additional entries not displayed. 
+                                <a href="{{ url_for('.admin_cause_list') }}">View all</a>.
+                            </small>
+                        </td>
+                    </tr>
+                </tfoot>
+                {% elif causes | length == 0 %}
+                <tfoot>
+                    <tr class="u-remove-border-bottom">
+                        <td colspan="4" class="u-text-right">
+                            <small>
+                                Nothing here yet. 
+                                <a href="{{ url_for('causes.cause_add') }}"> Add a new cause</a>.
+                            </small>
+                        </td>
+                    </tr> 
+                </tfoot>
+                {% endif %}
+            </table>
+        </div>
+        <div class="one-third column">
+            <h3 class="u-pull-left">{{ _('Pages') }} <sup><small>{{ pages | length }}</small></sup></h3>
+            <a href="{{ url_for('.admin_page_list') }}" 
+               title="View all pages"
+               class="button u-pull-right u-add-margin-left">
+                <span class="oi" data-glyph="eye" title="View" aria-hidden="true"></span>
+                <span class="u-hide-on-mobile"> all</span>
+            </a>
+            <a href="{{ url_for('.admin_page_add') }}" 
+               title="Add new page"
+               class="button u-pull-right">
+                <span class="oi" data-glyph="plus" title="Add" aria-hidden="true"></span>
+                <span class="u-hide-on-mobile"> page</span>
+            </a>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>url</th>
+                        <th class="u-text-right">edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for page in pages[:pages_display_cap] %}
+                    <tr>
+                        <td>{{ page.id }}</td>
+                        <td>{{ page.name }}</td>
+                        <td>{{ page.url }}</td>
+                        <td class="u-text-right">
+                            <a href="{{ url_for('.admin_page_edit', pk=page.id) }}">
+                                <span class="oi" data-glyph="pencil" title="Edit" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% if pages | length > pages_display_cap %}
+                <tfoot>
+                    <tr class="u-remove-border-bottom">
+                        <td>
+                            <span class="oi" 
+                                  data-glyph="ellipses" 
+                                  style="display:block; margin-bottom:-8px;"
+                                  title="More" 
+                                  aria-hidden="true"></span>
+                        </td>
+                        <td colspan="3" class="u-text-right">
+                            <small>
+                                {{ users | length -pages_display_cap }} additional entries not displayed. 
+                                <a href="{{ url_for('.admin_page_list') }}"> View all</a>.
+                            </small>
+                        </td>
+                    </tr>
+                </tfoot>
+                {% elif pages | length == 0 %}
+                <tfoot>
+                    <tr class="u-remove-border-bottom">
+                        <td colspan="4" class="u-text-right">
+                            <small>
+                                Nothing here yet. 
+                                <a href="{{ url_for('.admin_page_add') }}"> Add a new page</a>.
+                            </small>
+                        </td>
+                    </tr> 
+                </tfoot>
+                {% endif %}
+            </table>
+        </div>
 	</div>
 </div>
 {% endblock %}

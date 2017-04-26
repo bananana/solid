@@ -3,42 +3,75 @@
 {% block title %}Causes - {{ super() }}{% endblock title %}
 
 {% block content %}
-<div class="container u-add-margin-top">
-  <div class="row">
-    <div class="six columns offset-by-three">
-        <h2>Manage causes</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>title</th>
-                    <th>slug</th>
-                    <th>edit</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for cause in causes %}
-                <tr>
-                    <td>{{ cause.id }}</td>
-                    <td><a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">{{ cause.title }}</a></td>
-                    <td>{{ cause.slug }}</td>
-                    <td>
-                      <a href="{{ url_for('causes.cause_edit', slug=cause.slug) }}">
-                        edit
-                      </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-              <tfoot>
-                  <tr>
-                      <td colspan="4">
-                          <a href="{{ url_for('causes.cause_add') }}" class="button">Add cause</a>
-                      </td>
-                  </tr>
-              </tfoot>
-        </table>
+<div class="full-width-container">
+    <div class="row u-add-margin-top">
+        <div class="eight columns">
+            <h1>{{ _('Causes') }} <sup><small>{{ causes | length }}</small></sup></h1>
+        </div>
+        <div class="four columns">
+            <a href="{{ url_for('admin.admin') }}" 
+               class="button button-primary u-add-margin-top u-add-margin-left u-pull-right">
+                <span class="oi" data-glyph="caret-left" title="Back" aria-hidden="true"></span>
+                <span class="u-hide-on-mobile"> to Admin</span>
+            </a>
+            <a href="{{ url_for('causes.cause_add') }}" 
+               title="Add new cause"
+               class="button u-pull-right u-add-margin-top">
+                <span class="oi" data-glyph="plus" title="Add" aria-hidden="true"></span>
+                <span class="u-hide-on-mobile"> cause</span>
+            </a>
+        </div>
     </div>
-  </div>
+    <hr>
+    <div class="row">
+        <div class="twelve">
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>slug</th>
+                        <th>boss</th>
+                        <th>location</th>
+                        <th>supporters</th>
+                        <th>image</th>
+                        <th class="u-text-right">edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cause in causes %}
+                    <tr>
+                        <td>{{ cause.id }}</td>
+                        <td><a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">{{ cause.title }}</a></td>
+                        <td>{{ cause.slug }}</td>
+                        <td>{{ cause.boss }}</td>
+                        <td>{{ cause.location }}</td>
+                        <td>{{ cause.supporters.count() }}</td>
+                        <td>
+                            <a href="{{ url_for('static', filename=cause.image) }}">{{ cause.image }}</a>
+                        </td>
+                        <td class="u-text-right">
+                          <a href="{{ url_for('causes.cause_edit', slug=cause.slug) }}">
+                              <span class="oi" data-glyph="pencil" title="Edit" aria-hidden="true"></span>
+                          </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% if causes | length == 0 %}
+                <tfoot>
+                    <tr class="u-remove-border-bottom">
+                        <td colspan="4" class="u-text-right">
+                            <small>
+                                Nothing here yet. 
+                                <a href="{{ url_for('causes.cause_add') }}"> Add a new cause</a>.
+                            </small>
+                        </td>
+                    </tr> 
+                </tfoot>
+                {% endif %}
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}
