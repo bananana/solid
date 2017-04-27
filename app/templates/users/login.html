@@ -40,14 +40,16 @@ $(document).ready(function() {
                         class='u-full-width',
                         data_validation='required', 
                         data_validation_error_msg_container='#form-login-error',
-                        data_validation_error_msg='Required'
+                        data_validation_error_msg='Required',
+                        tabindex='1'
                     ) }}
                     {{ render_field(
                         form.password,
                         class='u-full-width',
                         data_validation='required',
                         data_validation_error_msg_container='#form-password-error',
-                        data_validation_error_msg='Required'
+                        data_validation_error_msg='Required',
+                        tabindex='2'
                     ) }}
                     {{ render_boolean(form.remember) }}
                 </div>
@@ -57,7 +59,7 @@ $(document).ready(function() {
             <div class="three columns offset-by-three">
                 <fieldset>
                     <input id="login" type="submit" value="{{ _('Log in') }}"
-                        class="button button-primary u-mobile-fixed-bottom" >
+                        class="button button-primary u-mobile-fixed-bottom" tabindex="3">
                 </fieldset>
             </div>
             <div class="three columns">

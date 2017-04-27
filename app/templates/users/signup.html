@@ -41,7 +41,8 @@ $(document).ready(function() {
                         class='u-full-width',
                         data_validation='email', 
                         data_validation_error_msg_container='#form-email-error',
-                        data_validation_error_msg='Not a valid email address'
+                        data_validation_error_msg='Not a valid email address',
+                        tabindex='1'
                     ) }}
                     {{ render_field(
                         form.nickname,
@@ -49,19 +50,22 @@ $(document).ready(function() {
                         data_validation='alphanumeric',
                         data_validation_allowing='-_',
                         data_validation_error_msg_container='#form-nickname-error',
-                        data_validation_error_msg='Only A-Z, 0-9, - and _ allowed'
+                        data_validation_error_msg='Only A-Z, 0-9, - and _ allowed',
+                        tabindex='2'
                     ) }}
                     {{ render_field(
                         form.full_name, 
                         class='u-full-width',
-                        data_validation_optional='true'
+                        data_validation_optional='true',
+                        tabindex='3'
                     ) }}
                     {{ render_field(
                         form.password,
                         class='u-full-width',
                         data_validation='required',
                         data_validation_error_msg_container='#form-password-error',
-                        data_validation_error_msg='Required'
+                        data_validation_error_msg='Required',
+                        tabindex='4'
                     ) }}
                     {{ render_field(
                         form.verify_password,
@@ -69,7 +73,8 @@ $(document).ready(function() {
                         data_validation='confirmation',
                         data_validation_confirm='password',
                         data_validation_error_msg_container='#form-verify_password-error',
-                        data_validation_error_msg='Doesn\'t match password'
+                        data_validation_error_msg='Doesn\'t match password',
+                        tabindex='5'
                     ) }}
                 </div>
             </fieldset>
@@ -77,7 +82,7 @@ $(document).ready(function() {
         <div class="row">
             <div class="three columns offset-by-three">
                 <fieldset>
-                    <input id="login" class="button button-primary u-full-width u-mobile-fixed-bottom" type="submit" value="Sign Up">
+                    <input id="login" class="button button-primary u-full-width u-mobile-fixed-bottom" type="submit" value="Sign Up" tabindex="6">
                 </fieldset>
             </div>
             <div class="three columns">
