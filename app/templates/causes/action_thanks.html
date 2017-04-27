@@ -1,35 +1,83 @@
 {% extends "base.html" %}
 {% set active_page = "cause" %}
 
+{% block meta %}
+{{ super() }}
+<meta property="og:title" content="{{ cause.title }} - Solid">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ url_for('.cause_detail', slug=cause.slug, _external=True) }}">
+<meta property="og:description" content="{{ cause.intro }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ cause.title }} - Solid">
+<meta name="twitter:text:description" content="{{ cause.intro }}">
+
+{% if cause.image -%}
+<meta property="og:image" content="{{ url_for('static', filename=cause.image, _external=True) }}">
+<meta name="twitter:image" content="{{ url_for('static', filename=cause.image, _external=True) }}">
+{% endif -%}    
+{% endblock meta %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bxslider-4/dist/jquery.bxslider.min.css') }}">
+<style>
+.hero,
+.glass::before {
+    {% if cause.image %}
+    background: url({{ url_for('static', filename=cause.image) }}) no-repeat fixed 0 65px;
+    {% endif %}
+}
+</style>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='jquery.lazy/jquery.lazy.min.js') }}"></script>
+{% endblock %}
+
 {% block content %}
-<div class="full-width-container">
-    <div class="row u-add-margin-top">
-        <div class="twelve columns u-text-center">
-            <h3>Thank you for taking <strong>{{ action.title }}</strong> action for <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">{{ cause.title }}</a> on Solid!</h3>
-            <p>By letting your friends know you proudly took action, you'll help get this victory to the finish line.</p>
-            <p>
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
-                         url_for('causes.cause_detail', slug=cause.slug,
-                                 _external=True) | urlencode
-                                 }}#modal-action-{{ action.id }}" 
-                   target="_blank"
-                   class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}"></a>
-                <a href="https://twitter.com/home?status={{
-                         url_for('causes.cause_detail', slug=cause.slug,
-                                 _external=True) | urlencode
-                                 }}#modal-action-{{ action.id }}"
-                   target="_blank"
-                   class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}"></a>
-                <a href="https://plus.google.com/share?url={{
-                         url_for('causes.cause_detail', slug=cause.slug,
-                                 _external=True) | urlencode
-                                 }}#modal-action-{{ action.id }}" 
-                   target="_blank"><img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}"></a>
-            </p>
-            <p><small>Sharing could inspire 3 or more actions for {{ cause.title }}!</small></p>
-            <hr>
-            <p>You've now taken {{ user.actions_per_cause(cause).count() }} action on behalf of <a href="{{ url_for('causes.cause_detail', slug=cause.slug)}}">{{ cause.title }}</a>. Share your experience in the <a href="{{ url_for('posts.post_list', slug=cause.slug) }}">Conversation section</a> or check out {{ cause.actions.count() }} other actions that are available.</p>
+<div class="section hero lazy" {% if cause.image %}data-src="{{ url_for('static', filename=cause.image) }}"{% endif %}>
+    <div class="full-width-container">
+        <div class="row">
+            <div class="twelve columns">
+                <div class="glass">
+                    <h4 class="hero-heading">
+                        {{ cause.title }}
+                    </h4>
+                    <p class="hero-content">
+                        Thank you for taking <strong>{{ action.title }}</strong> action on Solid!<br>
+                        By letting friends know you proudly took action, you'll help get this victory to the finish line.<br>
+                    </p>
+                    <div class="u-add-margin-top u-add-margin-bottom u-add-margin-left u-add-margin-right u-pull-left">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
+                                 url_for('causes.cause_detail', slug=cause.slug,
+                                         _external=True) | urlencode
+                                         }}#modal-action-{{ action.id }}" 
+                           target="_blank"
+                           class="u-add-margin-left u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}"></a>
+                        <a href="https://twitter.com/home?status={{
+                                 url_for('causes.cause_detail', slug=cause.slug,
+                                         _external=True) | urlencode
+                                         }}#modal-action-{{ action.id }}"
+                           target="_blank"
+                           class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}"></a>
+                        <a href="https://plus.google.com/share?url={{
+                                 url_for('causes.cause_detail', slug=cause.slug,
+                                         _external=True) | urlencode
+                                         }}#modal-action-{{ action.id }}" 
+                           target="_blank"><img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}"></a>
+                    </div>
+                    <span class="hero-aside" style="max-width:unset; padding-top:20px;">Sharing could inspire 3 or more actions for {{ cause.title }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="full-width-container u-add-margin-top">
+    <div class="row">
+        <div class="nine columns">
+            <p>You've now taken {{ user.actions_per_cause(cause).count() }} action{% if user.actions_per_cause(cause).count() != 0 %}s{% endif %} on behalf of <a href="{{ url_for('causes.cause_detail', slug=cause.slug)}}">{{ cause.title }}</a>. Share your experience in the <a href="{{ url_for('posts.post_list', slug=cause.slug) }}">Conversation section</a> or check out <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}#actions">{{ cause.actions.count() }} other actions</a> that are available.</p>
         </div>
     </div>
 </div>
 {% endblock %}
+
