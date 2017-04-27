@@ -32,14 +32,45 @@
             {% endif %}
         </div>
         <div class="six columns">
-            <ul>
+            <ul class="no-bullets">
             {% for post in feed %}
-                <li>
-                    <strong><a href="{{ url_for('posts.post_detail', slug=post.cause.slug, pk=post.pk) }} ">
-                        {{ post.title }}
-                    </a></strong><br>
-                    by <em>{{ post.author.nickname }}</em>, 
-                    {{ post.created_on.strftime('%b. %d, %Y') }}
+                <li class="post">
+                    {% if post.title %}
+                    <small>
+                        Posted to 
+                        <a href="{{ url_for('causes.cause_detail', slug=post.cause.slug) }}">{{ post.cause.title }}</a>
+                        on 
+                        {{ post.created_on.strftime('%b. %d, %Y') }}
+                    </small>
+                    <h5 class="u-remove-margin-bottom">
+                        <a href="{{ url_for('posts.post_detail', slug=post.cause.slug, pk=post.pk) }} ">
+                            {{ post.title }}
+                        </a>
+                    </h5>
+                    <p class="u-remove-margin-top u-remove-margin-bottom">
+                        {{ post.body }}
+                    </p>
+                    {% else %}
+                    <small>
+                        Replied to 
+                        <a href="{{ url_for('posts.post_detail', slug=post.post.slug, pk=post.post.pk) }}">
+                            {{ post.post.title }}
+                        </a>
+                        by 
+                        <a href="{{ url_for('users.user', nickname=post.author.nickname) }}">
+                            {{ post.author.nickname }}
+                        </a>
+                        from 
+                        <a href="{{ url_for('causes.cause_detail', slug=post.post.cause.slug) }}">
+                            {{ post.post.cause.title }}
+                        </a>
+                        on 
+                        {{ post.created_on.strftime('%b. %d, %Y') }}
+                    </small>
+                    <p class="u-remove-margin-top u-remove-margin-bottom">
+                        {{ post.body }}
+                    </p>
+                    {% endif %}
                 </li>
             {% else %}
                 <small>

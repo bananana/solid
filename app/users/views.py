@@ -18,7 +18,7 @@ from . import constants as USER
 from .forms import LoginForm, SignupForm, EditForm
 from .models import User
 
-from app.posts.models import Post
+from app.posts.models import Post, Comment
 
 import re
 
@@ -288,7 +288,10 @@ def user(nickname):
     supported_causes = user.supports.all()
 
     # Generate feed
-    feed = Post.query.filter_by(author_id=user.id).all()
+    user_posts = Post.query.filter_by(author_id=user.id).all()
+    user_comments = Comment.query.filter_by(author_id=user.id).all()
+    feed = user_posts + user_comments
+    feed = sorted(feed, key=lambda item: item.created_on)
 
     return render_template('users/index.html', user=user, feed=feed[::-1])
 
