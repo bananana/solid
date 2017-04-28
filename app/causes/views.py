@@ -10,7 +10,7 @@ from app import app, db
 from app.users.models import User
 from app.log.models import LogEvent, LogEventType
 
-from .models import Cause, Action
+from .models import Cause, CauseTranslation, Action, ActionTranslation
 from .forms import (CauseForm, CauseTranslationForm, ActionForm,
                     ActionTranslationForm)
 
@@ -94,19 +94,29 @@ def cause_detail(slug):
 @login_required
 def cause_add():
     form = CauseForm(request.form)
+    form_trans = CauseTranslationForm(request.form)
 
     cause = Cause.create(commit=False)
+    cause_translation = CauseTranslation()
 
-    if form.validate_on_submit():
+    if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(cause)
+        form_trans.populate_obj(cause_translation)
+
+        cause.fallback_translation = cause_translation
+        
         cause.creators.append(current_user)
         cause.save()
+
         flash(_('Cause created!'), 'success')
+
         LogEvent._log('cause_add', cause, user=current_user)
+
         return redirect(url_for('.cause_detail', slug=cause.slug))
 
     context = {
         "form": form,
+        "form_trans": form_trans
     }
 
     return render_template('causes/cause_form.html', **context)
@@ -232,15 +242,21 @@ def action_add(slug):
         abort(404)
 
     form = ActionForm(request.form)
+    form_trans = ActionTranslationForm(request.form)
 
     action = Action.create(commit=False)
+    action_translation = ActionTranslation()
 
-    if form.validate_on_submit():
+    if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(action)
+        form_trans.populate_obj(action_translation)
+
+        action.fallback_translation = action_translation
+
         action.cause = cause
         action.save()
 
-        send_email('Cause Update: A New Action is Available for {0.title}"'.format(cause),
+        send_email(u'Cause Update: A New Action is Available for {0.title}"'.format(cause),
                    [u.email for u in cause.supporters.all()],
                    {'cause': cause, 'action': action},
                    'email/cause_action_supporter.txt')
@@ -251,6 +267,7 @@ def action_add(slug):
     context = {
         "cause": cause,
         "form": form,
+        "form_trans": form_trans
     }
 
     return render_template('causes/action_form.html', **context)
