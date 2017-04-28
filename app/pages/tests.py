@@ -29,4 +29,3 @@ class PostViewsTests(BaseTestCase):
             response = client.get(self.test_page['url'])
             self.assert_context('page', p)
             self.assert_200(response)
-

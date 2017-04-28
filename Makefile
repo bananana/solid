@@ -50,6 +50,8 @@ restart:
 
 i18n_test: i18n_extract i18n_update i18n_munge i18n_compile
 
+i18n: i18n_extract i18n_update
+
 i18n_extract:
 	pybabel extract -F babel.cfg -o messages.pot app
 

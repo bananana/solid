@@ -17,3 +17,4 @@ coverage/
 
 # Misc.
 .DS_Store
+.ackrc
