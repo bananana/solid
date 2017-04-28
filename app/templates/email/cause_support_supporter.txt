@@ -10,9 +10,9 @@ Help this Cause win by sharing it with your friends:
 	Share on Twitter:
 		https://twitter.com/home?status={{ url_for('causes.cause_detail', slug=cause.slug, _external=True) | urlencode }} 
 
-{{ cause.action_supporters.count() }} people have taken {{ cause.actions.count() }} Actions on {{ site_name }} for this Cause so far.
+{{ cause.action_supporters.count() }} people have taken {{ cause.count_action_supports() }} Actions on {{ site_name }} for this Cause so far.
 
-Do one of the {{ cause.actions.count() }} Actions that are currently live; get updates and share what
+Take one of the {{ cause.actions.count() }} Actions that are currently live; get updates and share what
 you're up to; and connect with others advancing this Cause at
 {{ url_for('causes.cause_detail', slug=cause.slug, _external=True) }}.
 
