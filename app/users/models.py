@@ -27,15 +27,18 @@ class User(UserMixin, CRUDMixin, db.Model):
     supports    = db.relationship('Cause', 
                                   secondary=cause_supporters,
                                   backref='causes_supported', 
+                                  viewonly=True,
                                   lazy='dynamic')
 
     created     = db.relationship('Cause',
                                   secondary=cause_creators,
+                                  viewonly=True,
                                   backref='causes_created',
                                   lazy='dynamic')
 
     actions     = db.relationship('Action',
                                   secondary=action_supporters,
+                                  viewonly=True,
                                   backref='actions_supported',
                                   lazy='dynamic')
 

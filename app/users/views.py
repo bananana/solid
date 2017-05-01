@@ -388,6 +388,7 @@ def delete(nickname):
         logout_user()
 
     user.delete()
+    flash('User deleted successfully', 'success')
 
     return redirect(url_for('index')) 
 
