@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% set active_page = "user_edit" %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+{% from "helpers/forms.html" import render_field, render_boolean %}
+<div class="full-width-container">
+<form action="" method="post">
+    <div class="row u-add-margin-top">
+        <div class="six columns offset-by-three u-add-margin-top">
+            <h1>What's your e-mail?</h1>
+        </div>
+        <p class="six columns offset-by-three">
+            Please give us your e-mail address so that we can keep you
+            up-to-date about the causes you support. <strong>We will never sell
+            or share your data</strong> without your consent, see the
+            privacy policy on our <a href="/terms_of_service">terms of
+            service</a> page for details.
+        </p>
+        <div class="six columns offset-by-three">
+            {{ form.hidden_tag() }}
+            {{ render_field(form.email,
+                class='u-full-width',
+                data_validation='email',
+                data_validation_error_msg_container='#form-email-container',
+                data_validation_error_msg='Incorrect'
+            ) }}
+        </div>
+        <div class="six columns offset-by-three u-text-right">
+            <input type="submit" class="button-primary" value="Save">
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+    </div>
+</form>
+</div>
+{% endblock %}

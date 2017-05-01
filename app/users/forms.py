@@ -3,8 +3,11 @@ from flask_babel import lazy_gettext as _
 
 from wtforms import StringField, IntegerField, PasswordField, BooleanField, \
                     SelectField, HiddenField, TextAreaField
+from wtforms.ext.sqlalchemy.orm import model_form
 from wtforms.validators import DataRequired, Regexp, Length, Optional, EqualTo, \
                                Email
+
+from app import db
 from app.users import constants as USER
 from app.users.models import User
 
@@ -56,3 +59,8 @@ class EditForm(Form):
                                                  EqualTo('verify_password')])
     verify_password  = PasswordField(_('Verify password'),
                                      validators=[Optional()])
+
+
+EmailForm = model_form(User, base_class=Form, db_session=db.session, only=(
+    'email',
+))

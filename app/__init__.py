@@ -97,6 +97,23 @@ def config_vars():
     )
 
 
+# App-wide decorators
+
+@app.before_request
+def email_required():
+    from flask_login import current_user
+    from app.users.views import set_email
+
+    if (request.endpoint 
+        and 'static' not in request.endpoint
+        and not getattr(app.view_functions[request.endpoint], 'no_email_required', False)
+        and current_user.is_authenticated 
+        and not current_user.email):
+            from flask import session
+            session['next'] = request.path
+            return redirect(url_for('users.set_email'))
+
+
 # HTTP errors
 
 from flask import request

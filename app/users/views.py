@@ -15,8 +15,9 @@ from app import app, db, lm, babel
 from app.email import send_email
 
 from . import constants as USER
-from .forms import LoginForm, SignupForm, EditForm
+from .forms import LoginForm, SignupForm, EditForm, EmailForm
 from .models import User
+from ..decorators import no_email_required
 
 from app.posts.models import Post, Comment
 
@@ -42,6 +43,25 @@ def before_request():
     if g.user.is_authenticated:
         g.user.last_login = datetime.utcnow()
         g.user.save()
+
+
+@no_email_required
+@mod.route('/email', methods=['GET', 'POST'])
+def set_email():
+    form = EmailForm(request.form)
+
+    user = current_user
+
+    if form.validate_on_submit():
+        form.populate_obj(user)
+        user.update()
+        flash('Email updated successfully', 'success')
+        return redirect(
+            session.pop('next', False)
+            or url_for('.user', nickname=nickname)
+        )
+
+    return render_template('users/email.html', form=form, user=user)
 
 
 @oauth_authorized.connect
