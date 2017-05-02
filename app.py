@@ -158,7 +158,7 @@ def user(create, delete, modify, regenerate_colors, list_):
         #keys = sorted(u.__dict__.keys()[1:])
 
         #: Manually created list of keys in appropriate order
-        keys = ['nickname', 'email', 'full_name', 'private_full_name',
+        keys = ['nickname', 'email', 'full_name',
                 'is_admin', 'password', 'social_id', 'phone', 'zip',
                 'employer', 'description']
 
@@ -229,7 +229,7 @@ def user(create, delete, modify, regenerate_colors, list_):
         #keys = sorted(u.__dict__.keys()[1:])
 
         #: Manually created list of keys in appropriate order
-        keys = ['nickname', 'email', 'full_name', 'private_full_name',
+        keys = ['nickname', 'email', 'full_name',
                 'is_admin', 'password', 'social_id', 'phone', 'zip',
                 'employer', 'description']
 
@@ -285,7 +285,7 @@ def user(create, delete, modify, regenerate_colors, list_):
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
             exit(1)
 
-        keys = ['id', 'nickname', 'email', 'full_name', 'private_full_name',
+        keys = ['id', 'nickname', 'email', 'full_name',
                 'is_admin', 'phone', 'zip', 'employer']
         table_data = [keys]
         for u in usr_sr:

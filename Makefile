@@ -23,7 +23,7 @@ upload:
 	scp /tmp/$(RELEASE).tar.gz $(SSH_USER)@$(SSH_HOST):/tmp/
 
 extract:
-	@ tput setaf 5; tput bold; echo "Extracting '$(RELEASE).tar.gz'"; tput sgr0
+	@ tput setaf 5; tput bold; echo "Extracting '$(RELEASE).tar.gz' to $(ROOT)"; tput sgr0
 	@ ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "cd $(ROOT) && sudo -u bsolid tar -xzf /tmp/$(RELEASE).tar.gz"
 
 clean:
@@ -46,7 +46,7 @@ restart:
 	@ tput setaf 5; tput bold; echo "Restarting gunicorn server"; tput sgr0
 	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo systemctl restart bsolid.service"
 
-.PHONY : deploy archive upload clean extract pip migrate link restart i18n_test i18n_extract i18n_update i18n_munge i18n_compile
+.PHONY : deploy archive upload clean extract pip migrate link restart i18n_test i18n_extract i18n_update i18n_munge i18n_compile i18n
 
 i18n_test: i18n_extract i18n_update i18n_munge i18n_compile
 
