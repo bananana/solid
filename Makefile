@@ -1,5 +1,8 @@
 NAME := bsolid
+
 ROOT := /var/www/bsolid
+CONFIG := '../../config.py'
+SERVICE := bsolid
 
 SSH_HOST := spurio.supervacuo.com
 SSH_USER := admin
@@ -36,7 +39,7 @@ pip:
 
 migrate:
 	@ tput setaf 5; tput bold; echo "Migrating database"; tput sgr0
-	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "cd $(ROOT)/$(RELEASE) && sudo -u bsolid FLASK_CONFIG='../../config.py' $(ROOT)/venv/bin/python app.py db upgrade"
+	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "cd $(ROOT)/$(RELEASE) && sudo -u bsolid FLASK_CONFIG='$(CONFIG)' $(ROOT)/venv/bin/python app.py db upgrade"
 
 link:
 	@ tput setaf 5; tput bold; echo "Updating release symlink"; tput sgr0
@@ -44,7 +47,7 @@ link:
 
 restart:
 	@ tput setaf 5; tput bold; echo "Restarting gunicorn server"; tput sgr0
-	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo systemctl restart bsolid.service"
+	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo systemctl restart $(SERVICE).service"
 
 .PHONY : deploy archive upload clean extract pip migrate link restart i18n_test i18n_extract i18n_update i18n_munge i18n_compile i18n
 
