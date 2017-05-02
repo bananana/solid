@@ -95,13 +95,11 @@ class User(UserMixin, CRUDMixin, db.Model):
 
     def support(self, cause):
         if not self.is_supporting(cause):
-            self.supports.append(cause)
-            self.save()
+            cause.supporters.append(self)
     
     def unsupport(self, cause):
         if self.is_supporting(cause):
-            self.supports.remove(cause)
-            self.save()
+            cause.supporters.remove(self)
 
     def actions_per_cause(self, cause):
         return self.actions.filter_by(cause_id=cause.id)
