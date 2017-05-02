@@ -16,12 +16,14 @@ create a database
     virtualenv venv
     . venv/bin/activate
     pip install -r requirements.txt
-    ./app.py db --create
 
 **Note** `Flask-Misaka` requires that the following packages are installed on
 your computer: `gcc`, `libffi-dev`, `python-dev` and `python-cffi`. Make sure
 you install them using your distro's package manager before running `pip install
 -r requirements.txt`.
+
+The app comes with a demo database, `demo.db` -- to use it, copy `demo.db` to
+`app.db`. The password for the "admin" user is "far=dreary8title".
 
 ## Running the App
 
