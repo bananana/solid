@@ -13,9 +13,6 @@
 [submodule "app/static/jquery.lazy"]
 	path = app/static/jquery.lazy
 	url = https://github.com/eisbehr-/jquery.lazy
-[submodule "app/static/moment-timezone"]
-	path = app/static/moment-timezone
-	url = https://github.com/moment/moment-timezone.git
 [submodule "app/static/moment"]
 	path = app/static/moment
 	url = https://github.com/moment/moment

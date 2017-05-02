@@ -27,7 +27,7 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/translate.js') }}"></script>
     {{ moment.include_moment(local_js=url_for('static', filename='moment/min/moment.min.js')) }}
-    <script type="text/javascript" src="{{ url_for('static', filename='moment-timezone/builds/moment-timezone-with-data-2012-2022.min.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone-with-data-2012-2022.min.js"></script>
     {% block scripts %}{% endblock %}
     
     <!-- Analytics -->
