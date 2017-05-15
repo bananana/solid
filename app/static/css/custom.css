@@ -111,6 +111,16 @@ a.feed-link {
     border-color: #e5e5e5;
     color: #524535;
 }
+.flash-close {
+    display: inline-block;
+    float: right;
+    color: #161310;
+    cursor: pointer;
+}
+.flash-close:hover,
+.flash-close:active {
+    color: #A72b17;
+}
 .label,
 .help-block {
     display: inline;

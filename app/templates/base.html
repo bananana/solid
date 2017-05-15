@@ -25,6 +25,7 @@
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/dropdown.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/messages.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/translate.js') }}"></script>
     {{ moment.include_moment(local_js=url_for('static', filename='moment/min/moment.min.js')) }}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone-with-data-2012-2022.min.js"></script>
@@ -165,7 +166,10 @@
                 {% for category, message in messages %}
                     <div class="row">
                         <div class="twelve columns">
-                            <div class="flash {{ category }} u-remove-margin-bottom" role="alert">{{ message }}</div>
+                            <div class="flash {{ category }} u-remove-margin-bottom" role="alert">
+                                {{ message }}
+                                <a class="flash-close"><span class="oi" data-glyph="x"></span></a>
+                            </div>
                         </div>
                    </div>
                 {% endfor %}
