@@ -1,4 +1,4 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from flask_babel import lazy_gettext as _
 
 from wtforms import StringField, IntegerField, PasswordField, BooleanField, \
@@ -12,7 +12,7 @@ from app.users import constants as USER
 from app.users.models import User
 
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     '''Login form used by login() function in app/users/views.py'''
     login    = StringField(_('Email or Username'),
                            validators=[DataRequired()])
@@ -21,7 +21,7 @@ class LoginForm(Form):
     remember = BooleanField(_('Remember me'), default=False)
 
 
-class SignupForm(Form):
+class SignupForm(FlaskForm):
     '''Signup form used by signup() function in app/users/views.py'''
     email            = StringField(_('Email'),
                                    validators=[DataRequired(), Email()])
@@ -37,7 +37,7 @@ class SignupForm(Form):
                                      validators=[DataRequired()])
 
 
-class EditForm(Form):
+class EditForm(FlaskForm):
     nickname         = StringField(_('Nickname'),
                                    validators=[Optional(), Regexp('[\w-]')])
     full_name        = StringField(_('Full Name'),
@@ -61,6 +61,6 @@ class EditForm(Form):
                                      validators=[Optional()])
 
 
-EmailForm = model_form(User, base_class=Form, db_session=db.session, only=(
+EmailForm = model_form(User, base_class=FlaskForm, db_session=db.session, only=(
     'email',
 ))

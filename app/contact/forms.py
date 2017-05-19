@@ -1,9 +1,9 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, SubmitField
 from wtforms.validators import Email, InputRequired
 
 
-class ContactForm(Form):
+class ContactForm(FlaskForm):
   name = StringField("Name", validators=[InputRequired()])
   email = StringField("Your e-mail address", 
                       validators=[InputRequired(), Email()])

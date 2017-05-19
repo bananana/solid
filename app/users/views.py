@@ -360,6 +360,7 @@ def edit(nickname):
         fields.remove('verify_password')
         fields.remove('current_password')
         fields.remove('new_password') 
+        fields.remove('csrf_token')
 
         # Set default form field values based on current values in the 
         # database for user being edited.
