@@ -357,9 +357,9 @@ def edit(nickname):
         # Create a list of field keys, remove password fields from it because the
         # password has to be processed separately.
         fields = form.data.keys()
-        fields.remove('verify_password')
         fields.remove('current_password')
         fields.remove('new_password') 
+        fields.remove('confirm_password')
         fields.remove('csrf_token')
 
         # Set default form field values based on current values in the 

@@ -55,10 +55,10 @@ class EditForm(FlaskForm):
     current_password = PasswordField(_('Current password'),
                                      validators=[Optional()])
     new_password     = PasswordField(_('New password'),
-                                     validators=[Optional(),
-                                                 EqualTo('verify_password')])
-    verify_password  = PasswordField(_('Verify password'),
-                                     validators=[Optional()])
+                                       validators=[Optional(),
+                                       EqualTo('verify_password')])
+    confirm_password = PasswordField(_('Confirm password'),
+                                       validators=[Optional()])
 
 
 EmailForm = model_form(User, base_class=FlaskForm, db_session=db.session, only=(

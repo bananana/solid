@@ -2,11 +2,27 @@
 {% set active_page = "user_edit" %}
 
 {% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='jQuery-Form-Validator/form-validator/jquery.form-validator.min.js') }}"></script>
+<script>
+$(document).ready(function() {
+    $.validate({
+        modules : 'security',
+        errorMessageClass : 'danger',
+        form : '#edit',
+        onModulesLoaded : function () {
+            $('input[name="new_password"]').displayPasswordStrength();
+        }
+    });
+    $('#new_password').bind('keyup', function () {
+        $(this).css('width', '65%');
+    });
+});
+</script>
 {% endblock %}
 
 {% block content %}
 {% from "helpers/forms.html" import render_field, render_boolean %}
-<div class="full-width-container">
+<div class="container">
 <form id="edit" name="edit" action="" method="post">
     <div class="row u-add-margin-top">
         <div class="eight columns">
@@ -28,16 +44,16 @@
                 {{ render_field(form.email,
                     class='u-full-width',
                     data_validation='email',
-                    data_validation_error_msg_container='#form-email-container',
-                    data_validation_error_msg='Incorrect'
+                    data_validation_error_msg_container='#form-email-error',
+                    data_validation_error_msg='Not a valid email'
                 ) }}
                 {{ render_field(form.phone, class='u-full-width') }}
                 {{ render_field(form.zip, 
                     class='u-full-width',
                     data_validation='custom',
                     data_validation_regexp='^[0-9]{5}$',
-                    data_validation_error_msg_container='#form-zip-container',
-                    data_validation_error_msg='Incorrect'
+                    data_validation_error_msg_container='#form-zip-error',
+                    data_validation_error_msg='Not a valid zip code'
                 ) }}
                 {{ render_field(form.employer, class='u-full-width') }}
                 {{ render_field(form.description, class='u-full-width') }}
@@ -47,8 +63,21 @@
             <fieldset>
                 <legend><h3>Password</h3></legend>
                 {{ render_field(form.current_password, class='u-full-width') }}
-                {{ render_field(form.new_password, class='u-full-width') }}
-                {{ render_field(form.verify_password, class='u-full-width') }}
+                <div>
+                {{ render_field(form.new_password,
+                                class='u-full-width',
+                                data_validation='strength',
+                                data_validation_strength='3',
+                                data_validation_error_msg_container='#form-new_password-error'
+                ) }}
+                </div>
+                {{ render_field(form.confirm_password,
+                                class='u-full-width',
+                                data_validation='confirmation',
+                                data_validation_confirm='new_password',
+                                data_validation_error_msg_container='#form-confirm_password-error',
+                                data_validation_error_msg='Must match new password'
+                ) }}
             </fieldset>
         </div>
     </div>
