@@ -8,14 +8,18 @@ $(document).ready(function() {
     $.validate({
         modules : 'security',
         form : '#signup',
-        errorMessageClass : 'danger'
+        errorMessageClass : 'danger',
+        onModulesLoaded : function () {
+            $('input[name="password"]').displayPasswordStrength();
+        }
     });
-    $(document).ready(function() {
-        $('#email').change(function(e) {
-            if ($('#nickname').val() == '') {
-                $('#nickname').val($(e.target).val().split('@')[0]);
-            }
-        });
+    $('#password').bind('keyup', function () {
+        $(this).css('width', '65%');
+    });
+    $('#email').change(function(e) {
+        if ($('#nickname').val() == '') {
+            $('#nickname').val($(e.target).val().split('@')[0]);
+        }
     });
 });
 </script>   
@@ -60,14 +64,16 @@ $(document).ready(function() {
                         data_validation_optional='true',
                         tabindex='3'
                     ) }}
+                    <div>
                     {{ render_field(
                         form.password,
                         class='u-full-width',
-                        data_validation='required',
+                        data_validation='strength',
+                        data_validation_strength='3',
                         data_validation_error_msg_container='#form-password-error',
-                        data_validation_error_msg='Required',
                         tabindex='4'
                     ) }}
+                    </div>
                     {{ render_field(
                         form.verify_password,
                         class='u-full-width',
