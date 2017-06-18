@@ -7,14 +7,36 @@
 $(document).ready(function() {
     $.validate({
         modules : 'security',
-        errorMessageClass : 'danger',
         form : '#edit',
-        onModulesLoaded : function () {
-            $('input[name="new_password"]').displayPasswordStrength();
+        errorMessageClass : 'danger',
+        onModulesLoaded : function() {
+            var optionalConfig = {
+                bad    : function() {
+                            $('.strength-meter').attr('style', '');
+                            $('.strength-meter').attr('class', 'strength-meter');
+                            $('.strength-meter').addClass('bad');
+                         },
+                weak   : function() {
+                            $('.strength-meter').attr('style', '');
+                            $('.strength-meter').attr('class', 'strength-meter');
+                            $('.strength-meter').addClass('weak');
+                         },
+                good   : function() {
+                            $('.strength-meter').attr('style', '');
+                            $('.strength-meter').attr('class', 'strength-meter');
+                            $('.strength-meter').addClass('warning');
+                         },
+                strong : function() {
+                            $('.strength-meter').attr('style', '');
+                            $('.strength-meter').attr('class', 'strength-meter');
+                            $('.strength-meter').addClass('good');
+                         }
+            };
+            $('input[name="new_password"]').displayPasswordStrength(optionalConfig);
         }
     });
     $('#new_password').bind('keyup', function () {
-        $(this).css('width', '65%');
+        $(this).css('width', '85%');
     });
 });
 </script>

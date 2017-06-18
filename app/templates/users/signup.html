@@ -9,12 +9,34 @@ $(document).ready(function() {
         modules : 'security',
         form : '#signup',
         errorMessageClass : 'danger',
-        onModulesLoaded : function () {
-            $('input[name="password"]').displayPasswordStrength();
+        onModulesLoaded : function() {
+            var optionalConfig = {
+                bad    : function() {
+                            $('.strength-meter').attr('style', '');
+                            $('.strength-meter').attr('class', 'strength-meter');
+                            $('.strength-meter').addClass('bad');
+                         },
+                weak   : function() {
+                            $('.strength-meter').attr('style', '');
+                            $('.strength-meter').attr('class', 'strength-meter');
+                            $('.strength-meter').addClass('weak');
+                         },
+                good   : function() {
+                            $('.strength-meter').attr('style', '');
+                            $('.strength-meter').attr('class', 'strength-meter');
+                            $('.strength-meter').addClass('warning');
+                         },
+                strong : function() {
+                            $('.strength-meter').attr('style', '');
+                            $('.strength-meter').attr('class', 'strength-meter');
+                            $('.strength-meter').addClass('good');
+                         }
+            };
+            $('input[name="password"]').displayPasswordStrength(optionalConfig);
         }
     });
     $('#password').bind('keyup', function () {
-        $(this).css('width', '65%');
+        $(this).css('width', '85%');
     });
     $('#email').change(function(e) {
         if ($('#nickname').val() == '') {
@@ -64,7 +86,11 @@ $(document).ready(function() {
                         data_validation_optional='true',
                         tabindex='3'
                     ) }}
-                    <div>
+
+                    <!-- Password strength checker needs the password field to be
+                         inside a container, so the strenth meter shows up next 
+                         to the input field -->
+                    <span>
                     {{ render_field(
                         form.password,
                         class='u-full-width',
@@ -73,7 +99,8 @@ $(document).ready(function() {
                         data_validation_error_msg_container='#form-password-error',
                         tabindex='4'
                     ) }}
-                    </div>
+                    </span>
+
                     {{ render_field(
                         form.verify_password,
                         class='u-full-width',

@@ -152,17 +152,36 @@ a.feed-link {
 }
 .danger,
 .bad,
+.weak,
 .error {
     color: #524535;
     background-color: #f7e4e1;
     border-color: #BCADAB;
 }
+
 .strength-meter {
-    padding: 4px 10px !important;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
     float: right;
-    width: 125px;
     text-align: center;
+    font-size: 24px;
+    border-width: 1px;
+    border-style: solid;
 }
+.strength-meter.bad::before {
+    content: '😖';
+}
+.strength-meter.weak::before {
+    content: '😞';
+}
+.strength-meter.warning::before {
+    content: '😐';
+}
+.strength-meter.good::before {
+    content: '😃';
+}
+
 
 
 /* Images
