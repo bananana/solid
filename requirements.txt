@@ -9,7 +9,7 @@ Flask-Migrate==2.0.3
 Flask-Moment==0.5.1
 Flask-Misaka>=0.4.1
 Flask-SQLAlchemy>=2.1
-Flask-WTF>=0.12
+Flask-WTF==0.14.2
 Flask-Testing>=0.4
 gunicorn==19.6.0
 SQLAlchemy>=1.0.12
