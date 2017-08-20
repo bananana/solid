@@ -33,8 +33,8 @@ def post_list(slug):
 def post_add(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
-    if current_user not in cause.supporters.all():
-        flash('You must be supporting this cause to post.', 'error')
+    if current_user not in cause.creators.all() and not current_user.is_admin:
+        flash('You must be a cause creator or an admin to post.', 'error')
         return redirect(url_for('causes.cause_detail', slug=slug))
 
     form = PostForm(request.form)
