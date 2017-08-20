@@ -9,11 +9,6 @@ section (app/templates/styleguide/templating#discussion-helpers)
 <div class="post four columns">
     <h4>
         <a href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
-            {% if post.author in cause.creators.all() or post.author.is_admin %}
-            <img class="u-pull-right" 
-                src="{{ url_for('static', filename='open-iconic/png/star-2x.png') }}"
-                title="Announcement"> 
-            {% endif %}
             {{ post.title }}
         </a>
         {% if post.author == current_user %}

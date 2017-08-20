@@ -230,9 +230,9 @@
             <hr>
             <div class="row">
                 <div class="eight columns">
-                    <h3>{{ _('Conversation') }}</h3>
+                    <h3>{{ _('Updates') }}</h3>
                 </div>
-                {% if current_user in cause.supporters.all() or current_user.is_admin %}
+                {% if current_user in cause.creators.all() or current_user.is_admin %}
                 <div class="four columns">
                     <a class="button u-full-width" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
                         <span class="oi" data-glyph="plus" title="Add new post" aria-hidden="true"></span>
