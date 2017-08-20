@@ -1039,6 +1039,14 @@ input[type="submit"]:disabled:focus {
         display: initial !important;
     }
 }
+.u-hide-on-medium {
+    display: none !important;
+}
+@media (min-width: 750px) {
+    .hide-on-medium {
+        display: initial !important;
+    }
+}
 .u-show-on-mobile {
     display: initial;
 }
