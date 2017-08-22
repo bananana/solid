@@ -126,4 +126,11 @@ You will additionally need `make` and `git-archive-all`
 
 (you will need to enter your `sudo` password, if one is required, a few times)
 
+To deploy to a different project root, e.g. for a staging version, define
+`ROOT`, e.g.
+
+    $ make ROOT=/var/www/bsolid_staging
+
+(you may also wish to override `CONFIG`)
+
 ## [Contributing](CONTRIBUTING.md)
