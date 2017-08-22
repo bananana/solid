@@ -11,6 +11,7 @@ Flask-Misaka>=0.4.1
 Flask-SQLAlchemy>=2.1
 Flask-WTF==0.14.2
 Flask-Testing>=0.4
+Flask-Uploads==0.2.1
 gunicorn==19.6.0
 SQLAlchemy>=1.0.12
 SQLAlchemy-i18n==1.0.3
