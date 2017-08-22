@@ -40,6 +40,12 @@ mail = Mail(app)
 from flask_moment import Moment
 moment = Moment(app)
 
+from flask_uploads import (UploadSet, configure_uploads, IMAGES,
+                              UploadNotAllowed)
+
+uploaded_images = UploadSet('images', IMAGES)
+configure_uploads(app, uploaded_images)
+
 # Register blueprints
 from app.users.views import mod as usersModule
 app.register_blueprint(usersModule)
@@ -65,18 +71,18 @@ app.register_blueprint(logModule)
 
 from flask_dance.contrib.twitter import make_twitter_blueprint
 twitter_blueprint = make_twitter_blueprint(
-    redirect_to   = 'users.authorize_twitter' 
+    redirect_to   = 'users.authorize_twitter'
 )
 app.register_blueprint(twitter_blueprint, url_prefix='/login')
 
-from flask_dance.contrib.google import make_google_blueprint 
+from flask_dance.contrib.google import make_google_blueprint
 google_blueprint = make_google_blueprint(
     scope         = ['profile', 'email'],
     redirect_to   = 'users.authorize_google'
 )
 app.register_blueprint(google_blueprint, url_prefix='/login')
 
-from flask_dance.contrib.facebook import make_facebook_blueprint 
+from flask_dance.contrib.facebook import make_facebook_blueprint
 facebook_blueprint = make_facebook_blueprint(
     scope         = ['email'],
     redirect_to   = 'users.authorize_facebook'
@@ -89,7 +95,7 @@ app.register_blueprint(facebook_blueprint, url_prefix='/login')
 @app.context_processor
 def config_vars():
     return dict(
-        debug=app.debug, 
+        debug=app.debug,
         site_name=app.config['SITE_NAME'],
         server_name=app.config['SERVER_NAME'],
         fb_app_id=app.config['FACEBOOK_OAUTH_CLIENT_ID'],
@@ -104,10 +110,10 @@ def email_required():
     from flask_login import current_user
     from app.users.views import set_email
 
-    if (request.endpoint 
+    if (request.endpoint
         and 'static' not in request.endpoint
         and not getattr(app.view_functions[request.endpoint], 'no_email_required', False)
-        and current_user.is_authenticated 
+        and current_user.is_authenticated
         and not current_user.email):
             from flask import session
             session['next'] = request.path
@@ -161,7 +167,7 @@ def contact():
         send_email(
             'Solid inquiry via website',
             recipients,
-            {'name': form.name.data, 'body': form.message.data, 
+            {'name': form.name.data, 'body': form.message.data,
              'email': form.email.data},
             'email/contact.txt'
         )
@@ -171,7 +177,7 @@ def contact():
 
     return render_template('contact.html', form=form)
 
-# logging 
+# logging
 
 if not app.debug:
     import logging

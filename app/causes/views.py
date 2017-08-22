@@ -6,7 +6,7 @@ from flask import (Blueprint, render_template, url_for, redirect, session,
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_babel import gettext as _
 
-from app import app, db
+from app import app, db, uploaded_images
 from app.users.models import User
 from app.log.models import LogEvent, LogEventType
 
@@ -131,12 +131,16 @@ def cause_edit(slug):
     if cause is None:
         abort(404)
 
-    form = CauseForm(request.form, cause)
-    form_trans = CauseTranslationForm(request.form, cause)
+    form = CauseForm(request.form, obj=cause)
+    form_trans = CauseTranslationForm(request.form, obj=cause)
 
     if form.validate_on_submit():
         form.populate_obj(cause)
         form_trans.populate_obj(cause)
+
+        if request.files['image'].filename:
+            filename = uploaded_images.save(request.files['image'])
+            cause.image = filename
         cause.update()
         flash('Cause updated!', 'success')
         LogEvent._log('cause_edit', cause, user=current_user)
@@ -284,8 +288,8 @@ def action_edit(slug, pk):
     if cause is None or action is None:
         abort(404)
 
-    form = ActionForm(request.form, action)
-    form_trans = ActionTranslationForm(request.form, action)
+    form = ActionForm(request.form, obj=action)
+    form_trans = ActionTranslationForm(request.form, obj=action)
 
     if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(action)

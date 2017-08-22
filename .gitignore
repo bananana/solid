@@ -1,3 +1,6 @@
+# uploaded files
+uploads/
+
 # Python
 *.pyc
 python.stackdump

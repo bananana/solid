@@ -14,9 +14,9 @@
 <meta name="twitter:text:description" content="{{ cause.intro }}">
 
 {% if cause.image -%}
-<meta property="og:image" content="{{ url_for('static', filename=cause.image, _external=True) }}">
-<meta name="twitter:image" content="{{ url_for('static', filename=cause.image, _external=True) }}">
-{% endif -%}    
+<meta property="og:image" content="{{ cause.image_url }}">
+<meta name="twitter:image" content="{{ cause.image_url }}">
+{% endif -%}
 {% endblock meta %}
 
 {% block styles %}
@@ -25,7 +25,7 @@
 .hero,
 .glass::before {
     {% if cause.image %}
-    background: url({{ url_for('static', filename=cause.image) }}) no-repeat fixed 0 65px;
+    background: url({{ cause.image_url }}) no-repeat fixed 0 65px;
     {% endif %}
 }
 </style>
@@ -102,7 +102,7 @@
 {% from "helpers/users.html" import render_avatar %}
 {% from "helpers/actions.html" import render_action_list with context %}
 {% from "helpers/posts.html" import render_post_list %}
-<div class="section hero lazy" {% if cause.image %}data-src="{{ url_for('static', filename=cause.image) }}"{% endif %}>
+<div class="section hero lazy" {% if cause.image %}data-src="{{ cause.image_url }}"{% endif %}>
     <div class="full-width-container">
         <div class="row">
             <div class="twelve columns">
@@ -118,8 +118,8 @@
                     {% if supporter %}
                     <h5 class="u-add-margin-left u-add-margin-right">&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
                     {% else %}
-                        <a id="stand-with-us" 
-                           class="button button-primary hero-button" 
+                        <a id="stand-with-us"
+                           class="button button-primary hero-button"
                            href="{{ url_for('causes.cause_support', slug=cause.slug) }}">
                            {{ _('Stand with us!') }}
                        </a>
@@ -174,10 +174,10 @@
                             <img src="/static/open-iconic/png/x-2x.png" alt="X" />
                         </a>
                         <p class="u-cf u-full-width u-text-center">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{
                                      url_for('causes.cause_detail', slug=cause.slug,
                                              _external=True) | urlencode
-                                     }}" 
+                                     }}"
                                target="_blank"
                                class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}"></a>
                             <a href="https://twitter.com/home?status={{
@@ -189,7 +189,7 @@
                             <a href="https://plus.google.com/share?url={{
                                      url_for('causes.cause_detail', slug=cause.slug,
                                              _external=True) | urlencode
-                                     }}" 
+                                     }}"
                                target="_blank"><img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}"></a>
                         </p>
                     </div>
@@ -224,7 +224,7 @@
                 </div>
                 {% endif %}
             </div>
-            
+
             {{ render_action_list(actions.all()) }}
 
             <hr>
@@ -247,7 +247,7 @@
         <div class="three columns">
             <div class="row">
                 <div class="twelve columns">
-                    {{ render_log(log) }}  
+                    {{ render_log(log) }}
                 </div>
             </div>
         </div>

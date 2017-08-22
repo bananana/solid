@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container u-add-margin-top">
     {% from "helpers/forms.html" import render_field, render_boolean %}
-    <form id="cause" name="cause" action="" method="post">
+    <form id="cause" name="cause" action="" method="post" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         {{ form_trans.hidden_tag() }}
         <div class="row">

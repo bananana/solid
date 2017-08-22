@@ -3,7 +3,7 @@ import datetime
 from slugify import slugify
 from sqlalchemy_i18n import Translatable, translation_base
 
-from app import db, app
+from app import db, app, uploaded_images
 from app.mixins import CRUDMixin 
 
 
@@ -42,6 +42,10 @@ class Cause(CRUDMixin, db.Model, Translatable):
 
     video         = db.Column(db.String(128))
     image         = db.Column(db.String(128))
+
+    @property
+    def image_url(self):
+        return uploaded_images.url(self.image)
 
     def save(self, *args, **kwargs):
         if not self.slug and self.title:
