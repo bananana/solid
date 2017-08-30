@@ -91,65 +91,53 @@ def cause_detail(slug):
 
 
 @mod.route('/cause/add', methods=('GET', 'POST'))
+@mod.route('/cause/<slug>/edit', methods=('GET', 'POST'))
 @login_required
-def cause_add():
-    form = CauseForm(request.form)
-    form_trans = CauseTranslationForm(request.form)
+def cause_add_edit(slug=None):
+    if slug is None:
+        form = CauseForm(request.form)
+        form_trans = CauseTranslationForm(request.form)
 
-    cause = Cause.create(commit=False)
-    cause_translation = CauseTranslation()
+        cause = Cause.create(commit=False)
+        cause_translation = CauseTranslation()
+    else:
+        cause = Cause.query.filter_by(slug=slug).first()
+
+        if cause is None:
+            abort(404)
+
+        form = CauseForm(request.form, obj=cause)
+        form_trans = CauseTranslationForm(request.form, obj=cause)
 
     if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(cause)
-        form_trans.populate_obj(cause_translation)
-
-        cause.fallback_translation = cause_translation
-        
-        cause.creators.append(current_user)
-        cause.save()
-
-        flash(_('Cause created!'), 'success')
-
-        LogEvent._log('cause_add', cause, user=current_user)
-
-        return redirect(url_for('.cause_detail', slug=cause.slug))
-
-    context = {
-        "form": form,
-        "form_trans": form_trans
-    }
-
-    return render_template('causes/cause_form.html', **context)
-
-
-@mod.route('/cause/<slug>/edit', methods=('GET', 'POST'))
-@login_required
-@cause_required
-def cause_edit(slug):
-    cause = Cause.query.filter_by(slug=slug).first()
-
-    if cause is None:
-        abort(404)
-
-    form = CauseForm(request.form, obj=cause)
-    form_trans = CauseTranslationForm(request.form, obj=cause)
-
-    if form.validate_on_submit():
-        form.populate_obj(cause)
-        form_trans.populate_obj(cause)
 
         if request.files['image'].filename:
             filename = uploaded_images.save(request.files['image'])
             cause.image = filename
-        cause.update()
-        flash('Cause updated!', 'success')
-        LogEvent._log('cause_edit', cause, user=current_user)
-        return redirect(url_for('.cause_detail', slug=slug))
+
+        if slug is None:
+            form_trans.populate_obj(cause_translation)
+
+            cause.fallback_translation = cause_translation
+            cause.creators.append(current_user)
+            cause.save()
+
+            flash(_('Cause created!'), 'success')
+            LogEvent._log('cause_add', cause, user=current_user)
+        else:
+            form_trans.populate_obj(cause)
+            
+            cause.update()
+            flash('Cause updated!', 'success')
+            LogEvent._log('cause_edit', cause, user=current_user)
+
+        return redirect(url_for('.cause_detail', slug=cause.slug))
 
     context = {
         "cause": cause,
         "form": form,
-        "form_trans": form_trans,
+        "form_trans": form_trans
     }
 
     return render_template('causes/cause_form.html', **context)
@@ -237,71 +225,64 @@ def view_cause_actions(slug):
 
 
 @mod.route('/cause/<slug>/actions/add', methods=('GET', 'POST'))
+@mod.route('/cause/<slug>/actions/<pk>/edit', methods=('GET', 'POST'))
 @login_required
 @cause_required
-def action_add(slug):
+def action_add_edit(slug, pk=None):
     cause = Cause.query.filter_by(slug=slug).first()
 
     if cause is None:
         abort(404)
 
-    form = ActionForm(request.form)
-    form_trans = ActionTranslationForm(request.form)
+    if pk is None:
 
-    action = Action.create(commit=False)
-    action_translation = ActionTranslation()
+        form = ActionForm(request.form)
+        form_trans = ActionTranslationForm(request.form)
+
+        action = Action.create(commit=False)
+        action_translation = ActionTranslation()
+    else:
+        action = cause.actions.filter_by(id=pk).first()
+
+        form = ActionForm(request.form, obj=action)
+        form_trans = ActionTranslationForm(request.form, obj=action)
+
+        if action is None:
+            abort(404)
 
     if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(action)
-        form_trans.populate_obj(action_translation)
 
-        action.fallback_translation = action_translation
+        if request.files['image'].filename:
+            filename = uploaded_images.save(request.files['image'])
+            action.image = filename
 
-        action.cause = cause
-        action.save()
+        if pk is None:
+            form_trans.populate_obj(action_translation)
 
-        send_email(u'Cause Update: A New Action is Available for {0.title}"'.format(cause),
-                   [u.email for u in cause.supporters.all()],
-                   {'cause': cause, 'action': action},
-                   'email/cause_action_supporter.txt')
-        flash('Action added!', 'success')
-        LogEvent._log('action_add', action, user=current_user)
+            action.fallback_translation = action_translation
+
+            action.cause = cause
+            action.save()
+
+            send_email(u'Cause Update: A New Action is Available for {0.title}"'.format(cause),
+                       [u.email for u in cause.supporters.all()],
+                       {'cause': cause, 'action': action},
+                       'email/cause_action_supporter.txt')
+            flash('Action added!', 'success')
+            LogEvent._log('action_add', action, user=current_user)
+        else:
+            form_trans.populate_obj(action)
+
+            action.update()
+            flash('Action updated!', 'success')
+
         return redirect(url_for('.cause_detail', slug=slug))
 
     context = {
         "cause": cause,
         "form": form,
         "form_trans": form_trans
-    }
-
-    return render_template('causes/action_form.html', **context)
-
-
-@mod.route('/cause/<slug>/actions/<pk>/edit', methods=('GET', 'POST'))
-@login_required
-@cause_required
-def action_edit(slug, pk):
-    cause = Cause.query.filter_by(slug=slug).first()
-
-    action = cause.actions.filter_by(id=pk).first()
-
-    if cause is None or action is None:
-        abort(404)
-
-    form = ActionForm(request.form, obj=action)
-    form_trans = ActionTranslationForm(request.form, obj=action)
-
-    if form.validate_on_submit() and form_trans.validate_on_submit():
-        form.populate_obj(action)
-        form_trans.populate_obj(action)
-        action.update()
-        flash('Action updated!', 'success')
-        return redirect(url_for('.cause_detail', slug=slug))
-
-    context = {
-        "cause": cause,
-        "form": form,
-        "form_trans": form_trans,
     }
 
     return render_template('causes/action_form.html', **context)

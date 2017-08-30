@@ -124,6 +124,12 @@ class Action(CRUDMixin, db.Model, Translatable):
 
     expiration    = db.Column(db.DateTime)
 
+    image         = db.Column(db.String(128))
+
+    @property
+    def image_url(self):
+        return uploaded_images.url(self.image)
+
     def __repr__(self):
        return '<Action %r>' % (self.title)
 

@@ -4,7 +4,11 @@ section (app/templates/styleguide/templating#)
 -->
 {% macro render_action_box(cause, action) %}
 <a class="support-action u-pull-left" 
-   data-target="modal-action-{{ action.id }}">
+   data-target="modal-action-{{ action.id }}"
+   {% if action.image %}
+   style="background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url({{ action.image_url }}) no-repeat; background-size: cover"
+   {% endif %}
+   >
     <div class="support-action-modal-description">
         <h5 class="u-remove-margin-bottom">{{ action.title }}</h5>
         <article class="u-add-margin-top">{{ action.description|truncate(90, True) }}</article>
@@ -18,7 +22,7 @@ section (app/templates/styleguide/templating#)
         Expires: {{ action.expiration.strftime('%b. %d, %Y') }}
     </small>
     {% endif %}
-    </a>
+</a>
 {% endmacro %}
 
 {% macro render_action_modal(cause, action) %}
@@ -64,7 +68,7 @@ section (app/templates/styleguide/templating#)
         {% if current_user in cause.creators.all() or current_user.is_admin %}
         <p class="u-remove-margin-bottom u-pull-right">
             <a class="button primary u-add-margin-right" 
-                href="{{ url_for('causes.action_edit', slug=cause.slug,
+                href="{{ url_for('causes.action_add_edit', slug=cause.slug,
                 pk=action.id) }}">Edit!</a>
         </p>
         {% endif %}

@@ -1,7 +1,14 @@
 {% extends "base_form.html" %}
 {% set active_page = "cause" %}
 
-{% block title %}{{ _("Edit Cause") }} - {{ super() }}{% endblock %}
+{% block title %}
+    {% if cause.id %}
+    {{ _("Edit Cause") }} 
+    {% else %}
+    {{ _("Add Cause") }} 
+    {% endif %}
+    - {{ super() }}
+{% endblock %}
 
 {% block content %}
 <div class="container u-add-margin-top">

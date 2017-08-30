@@ -24,6 +24,7 @@ class CauseForm(ModelForm):
 			'image': {'label': _('Image') },
 		}
 
+
 class CauseTranslationForm(ModelForm):
 	class Meta:
 		model = CauseTranslation
@@ -37,13 +38,17 @@ class CauseTranslationForm(ModelForm):
 
 
 class ActionForm(ModelForm):
+	image = FileField()
+
 	class Meta:
 		model = Action
-		only = ('expiration', 'link',)
+		only = ('expiration', 'link')
 		field_args = {
 			'expiration': {'label': _('Expiration') },
 			'link': {'label': _('Link') },
+			'image': {'label': _('Image') },
 		}
+
 
 class ActionTranslationForm(ModelForm):
 	class Meta:
