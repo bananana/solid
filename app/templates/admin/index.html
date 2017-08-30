@@ -84,7 +84,7 @@
                 <span class="oi" data-glyph="eye" title="View" aria-hidden="true"></span>
                 <span class="u-hide-on-mobile"> all</span>
             </a>
-            <a href="{{ url_for('causes.cause_add') }}" 
+            <a href="{{ url_for('causes.cause_add_edit') }}" 
                title="Add new cause"
                class="button u-pull-right">
                 <span class="oi" data-glyph="plus" title="Add" aria-hidden="true"></span>
@@ -106,7 +106,7 @@
                         <td><a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">{{ cause.title }}</a></td>
                         <td>{{ cause.slug }}</td>
                         <td class="u-text-right">
-                          <a href="{{ url_for('causes.cause_edit', slug=cause.slug) }}">
+                          <a href="{{ url_for('causes.cause_add_edit', slug=cause.slug) }}">
                               <span class="oi" data-glyph="pencil" title="Edit" aria-hidden="true"></span>
                           </a>
                         </td>
@@ -137,7 +137,7 @@
                         <td colspan="4" class="u-text-right">
                             <small>
                                 Nothing here yet. 
-                                <a href="{{ url_for('causes.cause_add') }}"> Add a new cause</a>.
+                                <a href="{{ url_for('causes.cause_add_edit') }}"> Add a new cause</a>.
                             </small>
                         </td>
                     </tr> 

@@ -217,7 +217,7 @@
                 </div>
                 {% if current_user in cause.creators.all() or current_user.is_admin %}
                 <div class="four columns">
-                    <a class="button u-full-width" href="{{ url_for('.action_add', slug=cause.slug) }}">
+                    <a class="button u-full-width" href="{{ url_for('.action_add_edit', slug=cause.slug) }}">
                         <span class="oi" data-glyph="plus" title="Add new action" aria-hidden="true"></span>
                         <span>&nbsp;{{ _('new action') }}</span>
                     </a>
