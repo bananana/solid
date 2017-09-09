@@ -146,6 +146,30 @@ class ActionTranslation(translation_base(Action)):
        return '<Action %r>' % (self.title)
 
 
+class ActionComment(CRUDMixin, db.Model):
+    __tablename__ = 'causes_action_comment'
+
+    id            = db.Column(db.Integer, primary_key=True)
+
+    created_on    = db.Column(db.DateTime)
+
+    action_id       = db.Column(db.Integer, db.ForeignKey('causes_action.id'))
+    action          = db.relationship('Action', backref=db.backref('comments', lazy='dynamic'))
+
+    body          = db.Column(db.Text)
+    author_id     = db.Column(db.Integer, db.ForeignKey('users_user.id'))
+    author        = db.relationship('User', backref=db.backref('action_comments', lazy='dynamic'))
+
+    def save(self, *args, **kwargs):
+        if not self.created_on:
+            self.created_on = datetime.datetime.utcnow()
+
+        return super(ActionComment, self).save(*args, **kwargs)
+
+    def __repr__(self):
+        return '<Action @{0.id} on "{0.action.title}">'.format(self)
+
+
 class Demand(CRUDMixin, db.Model):
     __tablename__ = 'causes_demand'
     id            = db.Column(db.Integer, primary_key=True)
