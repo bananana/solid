@@ -1055,6 +1055,19 @@ input[type="submit"]:disabled:focus {
         display: none;
     }
 }
+.u-show-on-large {
+    display: none !important;
+}
+@media (min-width: 1200px) {
+    .u-show-on-large {
+        display: block !important;
+    }
+}
+@media (max-width: 550px) {
+    .u-show-on-large {
+        display: block !important;
+    }
+}
 .u-remove-border-bottom td {
     border-bottom: none;
 }
@@ -1163,4 +1176,10 @@ table tr td:last-child,
 table tr th:last-child {
     padding-right: 10px;
 }
-
+th,
+td {
+    border-bottom: none;
+}
+tr {
+    border-bottom: 1px solid #e1e1e1;
+}

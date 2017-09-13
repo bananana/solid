@@ -25,18 +25,22 @@
             <table class="u-full-width">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th class="u-show-on-large">id</th>
                         <th>nickname</th>
-                        <th>e-mail</th>
+                        <th class="u-show-on-large">e-mail</th>
                         <th class="u-text-right">edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for user in users[:users_display_cap] %}
                     <tr>
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.nickname }}</td>
-                        <td>{{ user.email|default('n/a') }}</td>
+                        <td class="u-show-on-large">{{ user.id }}</td>
+                        <td>
+                            <a href="{{ url_for('users.user', nickname=user.nickname) }}">
+                                {{ user.nickname }}
+                            </a>
+                        </td>
+                        <td class="u-show-on-large">{{ user.email|default('n/a') }}</td>
                         <td class="u-text-right">
                           <a href="{{ url_for('users.edit', nickname=user.nickname) }}">
                               <span class="oi" data-glyph="pencil" title="Edit" aria-hidden="true"></span>
@@ -93,18 +97,18 @@
             <table class="u-full-width">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th class="u-show-on-large">id</th>
                         <th>title</th>
-                        <th>slug</th>
+                        <th class="u-show-on-large">slug</th>
                         <th class="u-text-right">edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for cause in causes[:causes_display_cap] %}
                     <tr>
-                        <td>{{ cause.id }}</td>
+                        <td class="u-show-on-large">{{ cause.id }}</td>
                         <td><a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">{{ cause.title }}</a></td>
-                        <td>{{ cause.slug }}</td>
+                        <td class="u-show-on-large">{{ cause.slug }}</td>
                         <td class="u-text-right">
                           <a href="{{ url_for('causes.cause_add_edit', slug=cause.slug) }}">
                               <span class="oi" data-glyph="pencil" title="Edit" aria-hidden="true"></span>
@@ -162,18 +166,18 @@
             <table class="u-full-width">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th class="u-show-on-large">id</th>
                         <th>name</th>
-                        <th>url</th>
+                        <th class="u-show-on-large">url</th>
                         <th class="u-text-right">edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for page in pages[:pages_display_cap] %}
                     <tr>
-                        <td>{{ page.id }}</td>
+                        <td class="u-show-on-large">{{ page.id }}</td>
                         <td>{{ page.name }}</td>
-                        <td>{{ page.url }}</td>
+                        <td class="u-show-on-large">{{ page.url }}</td>
                         <td class="u-text-right">
                             <a href="{{ url_for('.admin_page_edit', pk=page.id) }}">
                                 <span class="oi" data-glyph="pencil" title="Edit" aria-hidden="true"></span>
