@@ -29,6 +29,10 @@
                             href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
                             edit
                         </a>
+                        <a class="button u-pull-right u-remove-margin-bottom u-add-margin-right"
+                            href="{{ url_for('posts.post_delete', slug=cause.slug, pk=post.id) }}">
+                            delete
+                        </a>
                     {% endif %}
                 </p>
             </div>
