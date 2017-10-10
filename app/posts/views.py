@@ -99,7 +99,7 @@ def post_edit(slug, pk):
     if current_user.id is not post.author.id and not current_user.is_admin:
         abort(403)
 
-    form = PostForm(request.form, post)
+    form = PostForm(request.form, obj=post)
 
     if form.validate_on_submit():
         form.populate_obj(post)
