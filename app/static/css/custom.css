@@ -326,13 +326,6 @@ p {
 .hero-content {
     font-weight: 400;
 }
-.hero-button {
-    margin: 0 2rem 4rem 2rem;
-}
-.hero-aside {
-    padding-bottom: 6px;
-    line-height: 1.4em;
-}
 .glass {
     position: relative;
     background-color: #fff;
@@ -430,6 +423,7 @@ p {
     box-shadow: none;
     border: none;
     background: none;
+    z-index: -10;
 }
 .bx-wrapper img {
     max-width: initial;

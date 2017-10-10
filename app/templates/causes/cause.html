@@ -41,15 +41,15 @@
             responsive: true,
             slideWidth: 345,
             minSlides: 1,
-            maxSlides: 3,
+            maxSlides: 4,
             slideMargin: 32,
             infiniteLoop: false
         });
-        $('#stand-with-us').click(function() {
+        $('#follow').click(function() {
             ga('send', {
                 hitType: 'event',
                 eventCategory: 'cause',
-                eventAction: 'click support',
+                eventAction: 'click follow',
                 eventLabel: '{{ cause.slug }}'
             });
         });
@@ -116,18 +116,6 @@
                         {{ cause.intro|truncate(180) }}
                     </p>
                     {% endif %}
-                    {% if supporter %}
-                    <h5 class="u-add-margin-left u-add-margin-right">&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
-                    {% else %}
-                        <a id="stand-with-us"
-                           class="button button-primary hero-button"
-                           href="{{ url_for('causes.cause_support', slug=cause.slug) }}">
-                           {{ _('Stand with us!') }}
-                       </a>
-                       <span class="hero-aside">
-                           {{ _("Join this cause's community, and stay updated on actions") }}
-                       </span>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -135,114 +123,104 @@
 </div>
 <div class="full-width-container u-add-margin-top">
     <div class="row">
-        <div class="nine columns">
-            <div class="row">
+        <div class="eight columns">
+            <h3 id="actions">
+                {{ _('Take action to win') }}
+                <span>
+                    {{ _('%(count)s available', count=actions.count()) }}
+                    <!--
+                    &nbsp;|&nbsp;
+                    {{ _('%(count)s taken', count=cause.count_action_supports) }}
+                    -->
+                </span>
+            </h3>
+        </div>
+        {% if current_user in cause.creators.all() or current_user.is_admin %}
+        <div class="four columns">
+            <a class="button u-full-width" href="{{ url_for('.action_add_edit', slug=cause.slug) }}">
+                <span class="oi" data-glyph="plus" title="Add new action" aria-hidden="true"></span>
+                <span>&nbsp;{{ _('new action') }}</span>
+            </a>
+        </div>
+        {% endif %}
 
-                <div class="one-third column">
-                    <a class="button button-modal u-full-width u-add-margin-top"
-                        data-target="modal-share">
-                        {{ _('Share') }}
-                    </a>
-                    <h4 class="u-add-margin-top u-remove-margin-bottom">
-                        {{ _('Creators') }}
-                    </h4>
-                    {% for u in cause.creators.all()[-10:] | reverse %}
-                        {{ render_avatar(u) }}
-                        {% if loop.last and loop.index == 10 %}
-                            <small class="see-all"><a href="{{ url_for('causes.view_cause_creators', slug=cause.slug) }}">See&nbsp;all&nbsp;{{ cause.creators.all() | length }}</a></small>
-                        {% endif %}
-                    {% endfor %}
-<h4 class="u-add-margin-top u-remove-margin-bottom">
-                        {{ _('%(count)s supporters', count=cause.supporters.all() | length) }}
-                    </h4>
-                    {% for u in cause.supporters.all()[-10:] | reverse %}
-                        {{ render_avatar(u) }}
-                        {% if loop.last and loop.index == 10 %}
-                            <small class="see-all"><a href="{{ url_for('causes.view_cause_supporters', slug=cause.slug) }}">See&nbsp;all&nbsp;{{ cause.supporters.all() | length }}</a></small>
-                        {% endif %}
-                    {% endfor %}
-                    <h4 class="u-add-margin-top u-remove-margin-bottom">
-                        {{ _('Actions taken') }}
-                    </h4>
-                    <h1>{{ cause.count_action_supports }}</h1>
-                </div>
-                <div id="modal-share" class="modal">
-                    <div style="width:300px;">
-                        <h3 class="u-pull-left">
-                            {{ _('Share this cause') }}
-                        </h3>
-                        <a href="#" class="button-modal-close u-pull-right">
-                            <img src="/static/open-iconic/png/x-2x.png" alt="X" />
-                        </a>
-                        <p class="u-cf u-full-width u-text-center">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{
-                                     url_for('causes.cause_detail', slug=cause.slug,
-                                             _external=True) | urlencode
-                                     }}"
-                               target="_blank"
-                               class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}"></a>
-                            <a href="https://twitter.com/home?status={{
-                                     url_for('causes.cause_detail', slug=cause.slug,
-                                             _external=True) | urlencode
-                                     }}"
-                               target="_blank"
-                               class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}"></a>
-                            <a href="https://plus.google.com/share?url={{
-                                     url_for('causes.cause_detail', slug=cause.slug,
-                                             _external=True) | urlencode
-                                     }}"
-                               target="_blank"><img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}"></a>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="two-thirds column">
-                    <h3>{{ cause.story_heading }}</h3>
-                    {{ cause.story_content|markdown }}
-                </div>
-
-            </div>
-            <hr>
-            <div class="row">
-                <div class="eight columns">
-                    <h3 id="actions">
-                        {{ _('Take action to win') }}
-                        <span>
-                            {{ _('%(count)s available', count=actions.count()) }}
-                            <!--
-                            &nbsp;|&nbsp;
-                            {{ _('%(count)s taken', count=cause.count_action_supports) }}
-                            -->
-                        </span>
-                    </h3>
-                </div>
-                {% if current_user in cause.creators.all() or current_user.is_admin %}
-                <div class="four columns">
-                    <a class="button u-full-width" href="{{ url_for('.action_add_edit', slug=cause.slug) }}">
-                        <span class="oi" data-glyph="plus" title="Add new action" aria-hidden="true"></span>
-                        <span>&nbsp;{{ _('new action') }}</span>
-                    </a>
-                </div>
+        {{ render_action_list(actions.all()) }}
+    </div>
+    <div class="row">
+        <div class="three columns">
+            {% if supporter %}
+            <h5 class="u-add-margin-left u-add-margin-right">&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
+            {% else %}
+            <p>
+                <a id="follow"
+                   class="button button-primary"
+                   href="{{ url_for('causes.cause_support', slug=cause.slug) }}"
+                   title="{{ _("Stay updated on actions") }}">
+                   {{ _('Follow') }}
+               </a><br>
+           </p>
+            {% endif %}
+            <a class="button button-modal u-full-width u-add-margin-top"
+                data-target="modal-share">
+                {{ _('Share') }}
+            </a>
+            <h4 class="u-add-margin-top u-remove-margin-bottom">
+                {{ _('Creators') }}
+            </h4>
+            {% for u in cause.creators.all()[-10:] | reverse %}
+                {{ render_avatar(u) }}
+                {% if loop.last and loop.index == 10 %}
+                    <small class="see-all"><a href="{{ url_for('causes.view_cause_creators', slug=cause.slug) }}">See&nbsp;all&nbsp;{{ cause.creators.all() | length }}</a></small>
                 {% endif %}
-            </div>
-
-            {{ render_action_list(actions.all()) }}
-
-            <hr>
-            <div class="row">
-                <div class="eight columns">
-                    <h3>{{ _('Updates') }}</h3>
-                </div>
-                {% if current_user in cause.creators.all() or current_user.is_admin %}
-                <div class="four columns">
-                    <a class="button u-full-width" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
-                        <span class="oi" data-glyph="plus" title="Add new post" aria-hidden="true"></span>
-                        <span>&nbsp;{{ _('new post') }}</span>
-                    </a>
-                </div>
+            {% endfor %}
+            <h4 class="u-add-margin-top u-remove-margin-bottom">
+                {{ _('%(count)s supporters', count=cause.supporters.all() | length) }}
+            </h4>
+            {% for u in cause.supporters.all()[-10:] | reverse %}
+                {{ render_avatar(u) }}
+                {% if loop.last and loop.index == 10 %}
+                    <small class="see-all"><a href="{{ url_for('causes.view_cause_supporters', slug=cause.slug) }}">See&nbsp;all&nbsp;{{ cause.supporters.all() | length }}</a></small>
                 {% endif %}
+            {% endfor %}
+            <h4 class="u-add-margin-top u-remove-margin-bottom">
+                {{ _('Actions taken') }}
+            </h4>
+            <h1>{{ cause.count_action_supports }}</h1>
+        </div>
+
+        <div id="modal-share" class="modal">
+            <div style="width:300px;">
+                <h3 class="u-pull-left">
+                    {{ _('Share this cause') }}
+                </h3>
+                <a href="#" class="button-modal-close u-pull-right">
+                    <img src="/static/open-iconic/png/x-2x.png" alt="X" />
+                </a>
+                <p class="u-cf u-full-width u-text-center">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{
+                             url_for('causes.cause_detail', slug=cause.slug,
+                                     _external=True) | urlencode
+                             }}"
+                       target="_blank"
+                       class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}"></a>
+                    <a href="https://twitter.com/home?status={{
+                             url_for('causes.cause_detail', slug=cause.slug,
+                                     _external=True) | urlencode
+                             }}"
+                       target="_blank"
+                       class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}"></a>
+                    <a href="https://plus.google.com/share?url={{
+                             url_for('causes.cause_detail', slug=cause.slug,
+                                     _external=True) | urlencode
+                             }}"
+                       target="_blank"><img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}"></a>
+                </p>
             </div>
-            {{ render_post_list(cause) }}
+        </div>
+
+        <div class="six columns">
+            <h3>{{ cause.story_heading }}</h3>
+            {{ cause.story_content|markdown }}
         </div>
 
         <div class="three columns">
@@ -252,6 +230,22 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="eight columns">
+                <h3>{{ _('Updates') }}</h3>
+            </div>
+            {% if current_user in cause.creators.all() or current_user.is_admin %}
+            <div class="four columns">
+                <a class="button u-full-width" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
+                    <span class="oi" data-glyph="plus" title="Add new post" aria-hidden="true"></span>
+                    <span>&nbsp;{{ _('new post') }}</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        {{ render_post_list(cause) }}
+    </div>
 
     </div>
 
