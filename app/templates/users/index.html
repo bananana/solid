@@ -53,7 +53,7 @@
                     {% else %}
                     <small>
                         Replied to 
-                        <a href="{{ url_for('posts.post_detail', slug=post.cause.slug, pk=post.post.id) }}">
+                        <a href="{{ url_for('posts.post_detail', slug=post.post.cause.slug, pk=post.post.id) }}">
                             {{ post.post.title }}
                         </a>
                         by 
