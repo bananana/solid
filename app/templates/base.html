@@ -58,15 +58,23 @@
                     <!-- Login, Signup, Logout and Prifile buttons -->
                     {% if active_page == "login" %}
                         <!-- If on login page, show only signup button -->
-                        <a href="{{ url_for('users.signup') }}" title="Sign Up"
-                            class="button button-primary u-pull-right">
-                            {{ _('Sign Up') }}
+                        <a href="{{ url_for('users.signup') }}"
+                           title="{{ _('Sign up') }}"
+                           class="u-pull-right u-text-center"
+                           style="margin-top:22px; line-height:8px;">
+                            <img src="{{ url_for('static', filename='open-iconic/png/task-3x.png') }}">
+                            <br>
+                            <small>Signup</small>
                         </a>
                     {% elif active_page == "signup" %}
                         <!-- If on signup page, show login button only -->
-                        <a href="{{ url_for('users.login') }}" title="{{ _('Log in') }}" class="button u-pull-right">
-                            <span class="oi" data-glyph="account-login" title="{{ _('Log in') }}" aria-hidden="true"></span>
-                            <span class="u-hide-on-mobile">&nbsp;{{ _('Log in') }}</span>
+                        <a href="{{ url_for('users.login') }}"
+                           title="{{ _('Log in') }}"
+                           class="u-pull-right"
+                           style="margin-top:22px; line-height:8px;">
+                            <img src="{{ url_for('static', filename='open-iconic/png/account-login-3x.png') }}">
+                            <br>
+                            <small>Login</small>
                         </a>
                     {% else %}
                         {% if current_user.is_authenticated %} 
@@ -108,16 +116,21 @@
                             </div>
                         {% else %}
                             <!-- Otherwise show both Login and Signup buttons at the same time -->
-                            <a href="{{ url_for('users.login') }}" 
-                               title="{{ _('Log in') }}" 
-                               class="button u-add-margin-left u-pull-right">
-                                <span class="oi" data-glyph="account-login" title="{{ _('Log in') }}" aria-hidden="true"></span>
-                                <span class="u-hide-on-mobile">&nbsp;{{ _('Log in') }}</span>
+                            <a href="{{ url_for('users.login') }}"
+                               title="{{ _('Log in') }}"
+                               class="u-pull-right u-add-margin-left"
+                               style="margin-top:22px; line-height:8px;">
+                                <img src="{{ url_for('static', filename='open-iconic/png/account-login-3x.png') }}">
+                                <br>
+                                <small>Login</small>
                             </a>
-                            <a href="{{ url_for('users.signup') }}" 
-                               title="{{ _('Sign Up') }}" 
-                               class="button button-primary u-pull-right">
-                                {{ _('Sign Up') }}
+                            <a href="{{ url_for('users.signup') }}"
+                               title="{{ _('Sign up') }}"
+                               class="u-pull-right u-text-center"
+                               style="margin-top:22px; line-height:8px;">
+                                <img src="{{ url_for('static', filename='open-iconic/png/task-3x.png') }}">
+                                <br>
+                                <small>Signup</small>
                             </a>
                         {% endif %}
                     {% endif %}
