@@ -86,9 +86,16 @@ def get_locale():
             session['lang_code'] = current_user.locale
         else:
             # Use the browser's language preferences to select available translation
+            # !! Note: This doesn't work on Safari for some reason, so it's disabled 
+            # for now.
+            '''
             session['lang_code'] = request.accept_languages.best_match(
                 app.config['SUPPORTED_LANGUAGES'].keys()
             )
+            '''
+            # Use default babel locale setting from config
+            session['lang_code'] = app.config['BABEL_DEFAULT_LOCALE'] 
+
     return session['lang_code']
 
 
