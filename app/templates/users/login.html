@@ -23,13 +23,33 @@ $(document).ready(function() {
             <strong>Need to protect your privacy?</strong> Use a pseudonym when you
             <a href="{{ url_for('.signup') }}">sign up</a>, and don't log
             in with a social media account linked to your real identity.
-            <a class="flash-close"><span class="oi" data-glyph="x"></span></a>
         </div>
     </div>
 </div>
 <div class="container u-add-margin-top">
     <div class="row">
+        <div class="three columns">
+            <a href="{{ url_for('twitter.login') }}" class="button u-full-width">
+                {{ _('Log in with Twitter') }}
+            </a>
+        </div>
+        <div class="three columns">
+            <a href="{{ url_for('google.login') }}" class="button u-full-width">
+                {{ _('Log in with Google') }}
+            </a>
+        </div>
+        <div class="three columns">
+            <a href="{{ url_for('facebook.login') }}" class="button u-full-width">
+                {{ _('Log in with Facebook') }}
+            </a>
+        </div>
+        <div class="three columns">
+            <a href="{{ url_for('.signup') }}" class="button u-full-width">
+                {{ _('Sign up') }}
+            </a>
+        </div>
     </div>
+    <hr>
     {% from "helpers/forms.html" import render_field, render_boolean %}
     <form id="login-form" name="login-form" action="" method="post">
         {{ form.hidden_tag() }}
@@ -77,23 +97,5 @@ $(document).ready(function() {
             </small>
         </div>
     </form>
-    <hr>
-    <div class="row">
-        <div class="one-third column">
-            <a href="{{ url_for('twitter.login') }}" class="button u-full-width">
-                {{ _('Log in with Twitter') }}
-            </a>
-        </div>
-        <div class="one-third column">
-            <a href="{{ url_for('google.login') }}" class="button u-full-width">
-                {{ _('Log in with Google') }}
-            </a>
-        </div>
-        <div class="one-third column">
-            <a href="{{ url_for('facebook.login') }}" class="button u-full-width">
-                {{ _('Log in with Facebook') }}
-            </a>
-        </div>
-    </div>
 </div>
 {% endblock %}
