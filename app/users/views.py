@@ -348,7 +348,8 @@ def edit(nickname):
         # processed separately anyway
         del(complete_form_data['verify_password'], 
             complete_form_data['current_password'], 
-            complete_form_data['new_password'])
+            complete_form_data['new_password'],
+            complete_form_data['csrf_token'])
 
         # Remove empty fields from list
         form_data = {k:v for k,v in complete_form_data.iteritems() if not v == ''}
