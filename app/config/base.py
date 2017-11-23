@@ -32,4 +32,4 @@ SUPPORTED_LANGUAGES = {
 BABEL_DEFAULT_LOCALE = 'en'
 BABEL_DEFAULT_TIMEZONE = 'EST'
 
-UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'uploads')
+UPLOADS_DEFAULT_DEST = os.path.join(basedir, '..', 'uploads')

@@ -18,6 +18,8 @@ FACEBOOK_OAUTH_CLIENT_SECRET = '1a6d52a5e39ffb7e3e018a89543ae731'
 
 SECRET_KEY = 'veryverysecret'
 
+UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'uploads')
+
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
