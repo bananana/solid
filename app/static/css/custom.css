@@ -474,7 +474,7 @@ p {
     background: url(../open-iconic/png/chevron-left-3x.png) no-repeat center left;
 }
 .bx-viewport {
-    padding: 2em 0 10px 0;
+    padding: 0 0 10px 0;
 }
 .actions-slider {
     margin-right: 16px;
