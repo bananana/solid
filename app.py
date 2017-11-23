@@ -277,57 +277,27 @@ def user(create, delete, modify, regenerate_colors, list_):
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
             exit(1)
 
-
     elif list_ is not None:
+        insp = inspect(User)
         try:
             usr_sr = User.query.filter(User.nickname.contains(list_)).all()
         except Exception as e:
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
             exit(1)
 
-        keys = ['id', 'nickname', 'email', 'full_name',
-                'is_admin', 'phone', 'zip', 'employer']
+        keys = ['id', 'nickname', 'email', 'full_name', 'is_admin']
+
         table_data = [keys]
         for u in usr_sr:
             usr = []
             for k in keys:
-                #: Get type of database column and cast the input into that type
-                val_type = str(getattr(insp.columns, k).type)
-                if val_type == 'INTEGER':
-                    inpt = raw_input(k + ' (int): ')
-                    values.append(None if inpt == '' else int(inpt))
-                elif fnmatch.fnmatch(val_type, 'VARCHAR*'):
-                    inpt = raw_input(k + ' (str): ')
-                    values.append(None if inpt == '' else str(inpt))
-                elif val_type == 'TEXT':
-                    inpt = raw_input(k + ' (text): ')
-                    values.append(None if inpt == '' else str(inpt))
-                elif val_type == 'BOOLEAN':
-                    inpt = raw_input(k + ' (bool): ')
-                    values.append(None if inpt == '' else strtobool(inpt))
-                else:
-                    values.append(raw_input(k + ': '))
+                attr = getattr(u, k)
+                usr.append(('None' if attr is None else str(attr)))
+            table_data.append(usr)
+        table = AsciiTable(table_data)
+        print(table.table)
+        exit(0)
 
-            #: Key-value pairs to be used in the create() method of mixins.py
-            kv = dict(zip(keys,values))
-
-            #: Remove password from the above list because it has to be set with
-            #: set_password() method
-            passwd = kv.pop('password')
-
-            # Try to create the user
-            try:
-                u.create(**kv)
-                new_user = User.query.filter_by(nickname=kv.get('nickname')).first()
-                new_user.generate_initials()
-                new_user.generate_color()
-                new_user.set_password(passwd)
-                print(bcolors.OKGREEN + 'User ' + kv.get('nickname') + \
-                      ' created successfully' + bcolors.ENDC)
-                exit(0)
-            except Exception as e:
-                print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
-                exit(1)
 
     elif regenerate_colors:
         for user in User.query.all():
