@@ -200,7 +200,8 @@ a.feed-link {
     color: #fff;
     font-weight: 600;
     text-align: center;
-    line-height: 2.1em;
+    line-height: 1.9em;
+    text-transform: uppercase;
     text-decoration: none;
     font-size: 1.6rem;
     margin-bottom: 0.3em;
