@@ -433,7 +433,6 @@ p {
     box-shadow: none;
     border: none;
     background: none;
-    z-index: -10;
 }
 .bx-wrapper img {
     max-width: initial;
