@@ -153,20 +153,22 @@
         <div class="three columns">
             {% if supporter %}
             <h5 class="u-add-margin-left u-add-margin-right">&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
-            {% else %}
-            <p>
-                <a id="follow"
-                   class="button button-primary"
-                   href="{{ url_for('causes.cause_support', slug=cause.slug) }}"
-                   title="{{ _("Stay updated on actions") }}">
-                   {{ _('Follow') }}
-               </a><br>
-           </p>
-            {% endif %}
-            <a class="button button-modal u-full-width u-add-margin-top"
+            <a class="button button-modal u-add-margin-top u-full-width"
                 data-target="modal-share">
                 {{ _('Share') }}
             </a>
+            {% else %}
+            <a id="follow"
+               class="button button-primary"
+               href="{{ url_for('causes.cause_support', slug=cause.slug) }}"
+               title="{{ _("Stay updated on actions") }}">
+               {{ _('Follow') }}
+            </a>
+            <a class="button button-modal u-add-margin-top"
+                data-target="modal-share">
+                {{ _('Share') }}
+            </a>
+            {% endif %}
             <h4 class="u-add-margin-top u-remove-margin-bottom">
                 {{ _('Cause creators') }}
             </h4>
