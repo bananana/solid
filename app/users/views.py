@@ -363,11 +363,18 @@ def edit(nickname):
         return redirect(url_for('.user', nickname=nickname))
     else:
         # Create a list of field keys, remove password fields from it because the
-        # password has to be processed separately.
+        # password has to be processed separately. 
         fields = form.data.keys()
         fields.remove('current_password')
         fields.remove('new_password') 
         fields.remove('confirm_password')
+        
+        # Removing csrf_token key prevents the app from breaking when trying to 
+        # pre-pupulate csrf_token hidden input (usually when trying to edit
+        # your profile. csrf_token field does not exist in the user object,
+        # so it crashes the app. This does not compromise the functionality of
+        # wtforms' csrf_token.
+        fields.remove('csrf_token')
 
         # Set default form field values based on current values in the 
         # database for user being edited.
