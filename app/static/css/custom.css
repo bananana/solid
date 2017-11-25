@@ -944,10 +944,12 @@ input[type="submit"]:disabled:focus {
 .dropdown {
     position: relative;
     display: inline-block;
+    padding-top: 3px;
 }
 .dropdown-button {
     position: relative;
     margin-top: 1em;
+    z-index: 1;
 }
 .dropdown-button .dropdown-lang-code {
     position: absolute;
