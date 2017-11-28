@@ -290,20 +290,13 @@ p {
     border-bottom: 1px solid #ff9900;
 }
 .header .logo {
-    width: 5rem;
-    height: 5rem;
-    margin: 0.7rem 1rem 0 0;
+    height: 40px;
 }
 .header .button {
     margin-top: 1.5rem;
 }
 .header .title {
-    margin-top: 1.6rem;
-}
-@media (min-width: 550px) {
-    .header .title {
-        margin-top: 1.2rem;
-    }
+    margin-top: 1.2rem;
 }
 .header .user {
     margin: 1.3em 1em 0 0;
