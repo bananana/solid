@@ -22,3 +22,6 @@
 [submodule "app/static/fonts/Raleway_Fixed_Numerals"]
 	path = app/static/fonts/Raleway_Fixed_Numerals
 	url = https://github.com/h-ibaldo/Raleway_Fixed_Numerals
+[submodule "app/static/Readmore.js"]
+	path = app/static/Readmore.js
+	url = https://github.com/jedfoster/Readmore.js

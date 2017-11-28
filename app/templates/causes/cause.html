@@ -33,6 +33,7 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script src="{{ url_for('static', filename='Readmore.js/readmore.min.js') }}"></script>
 <script src="{{ url_for('static', filename='jquery.lazy/jquery.lazy.min.js') }}"></script>
 <script src="{{ url_for('static', filename='bxslider-4/dist/jquery.bxslider.min.js') }}"></script>
 <script>
@@ -45,6 +46,7 @@
             slideMargin: 32,
             infiniteLoop: false
         });
+
         $('#follow').click(function() {
             ga('send', {
                 hitType: 'event',
@@ -53,6 +55,7 @@
                 eventLabel: '{{ cause.slug }}'
             });
         });
+
         $('a.support-action').click(function(e) {
             var action_name = $(e.target).parents('.support-action').find('h4').text();
             ga('send', {
@@ -62,9 +65,11 @@
                 eventLabel: action_name
             });
         });
+
         $('a.support[rel=external]').click(function(e) {
             window.location.href = $(e.target).data('supportHref');
         });
+
         $('.button-modal-close').click(function(e) {
             var action_name = $(e.target).parents('.modal').find('h3').text();
             ga('send', {
@@ -76,6 +81,7 @@
             e.preventDefault();
             history.pushState("", document.title, window.location.pathname);
         });
+
         $('a.support').click(function(e) {
             var action_name = $(e.target).parents('.modal').find('h3').text();
             ga('send', {
@@ -85,6 +91,23 @@
                 eventLabel: action_name
             });
         });
+
+        var breakpoint = {};
+        breakpoint.refreshValue = function () {
+          this.value = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '');
+        };
+
+        function read_more() {
+          if (breakpoint.value == 'smartphone'){
+            $('.read_more').readmore({collapsedHeight: 300});
+          }
+        }
+
+        $(window).resize(function () {
+          breakpoint.refreshValue();
+          read_more();
+        }).resize();
+        
         {% if cause_support %}
             ga('send', {
                 hitType: 'event',
@@ -225,7 +248,9 @@
 
         <div class="six columns">
             <h3>{{ cause.story_heading }}</h3>
-            {{ cause.story_content|markdown }}
+            <div class="read_more">
+                {{ cause.story_content|markdown }}
+            </div>
         </div>
 
         <div class="three columns">
