@@ -10,6 +10,7 @@
 
 /* Table of contents
 ––––––––––––––––––––––––––––––––––––––––––––––––––
+- Breakpoints
 - Color Scheme
 - General
 - Links
@@ -32,6 +33,24 @@
 - Code
 - Animations
 */
+
+/* Breakpoints
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+body:before {
+  content: "smartphone";
+  display: none; /* Prevent from displaying. */
+}
+@media (min-width: 550px) {
+  body:before {
+    content: "tablet";
+  }
+}
+@media (min-width: 700px) {
+  body:before {
+    content: "desktop";
+  }
+}
 
 /* Color Scheme 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -59,6 +78,8 @@
  * Error Neutral...: #7d3432
  * Error Dark......: #A72b17
  */
+
+
 
 
 /* General
