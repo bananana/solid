@@ -699,7 +699,8 @@ a.support-action {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .modal {
     visibility: hidden;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
     position: fixed;
     left: 0px;
     top: 0px;
