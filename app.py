@@ -292,7 +292,7 @@ def user(create, delete, modify, regenerate_colors, list_):
             usr = []
             for k in keys:
                 attr = getattr(u, k)
-                usr.append(('None' if attr is None else str(attr)))
+                usr.append(('None' if attr is None else unicode(attr)))
             table_data.append(usr)
         table = AsciiTable(table_data)
         print(table.table)
