@@ -34,8 +34,9 @@ bcrypt = Bcrypt(app)
 from flask_misaka import Misaka
 mikasa = Misaka(app)
 
-from flask_mail import Mail
-mail = Mail(app)
+from flask_mailgun import MailGun
+mailgun = MailGun()
+mailgun.init_app(app)
 
 from flask_moment import Moment
 moment = Moment(app)

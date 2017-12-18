@@ -1,14 +1,15 @@
 from threading import Thread
 
 from flask import render_template
-from flask_mail import Message
 
-from app import app, mail
+from flask_mailgun.message import Message
+
+from app import app, mailgun
 
 
 def _send_async_email(app, msg):
     with app.app_context():
-        mail.send(msg)
+        r = mailgun.send(msg)
 
 
 def send_email(subject, recipients, context, template_text, template_html=None, sender=None, bcc=None):
