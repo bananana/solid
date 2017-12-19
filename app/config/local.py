@@ -2,7 +2,7 @@ from app.config.base import *
 
 DEBUG = True
 
-SERVER_NAME = 'localhost:5001'
+SERVER_NAME = 'localhost:5000'
 
 MAIL_PORT = 1025
 MAIL_DEFAULT_SENDER = 'noreply@bsolid.org'
