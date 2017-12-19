@@ -1,4 +1,4 @@
-Hi {{ user.nickname }},
+Hi {{ user.name }},
 
 Welcome to the {{ site_name }} community!
 

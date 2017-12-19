@@ -104,5 +104,12 @@ class User(UserMixin, CRUDMixin, db.Model):
     def actions_per_cause(self, cause):
         return self.actions.filter_by(cause_id=cause.id)
 
+    @property
+    def name(self):
+        if self.full_name:
+            return self.full_name
+        else:
+            return self.nickname
+
     def __repr__(self):
         return '<User %r>' % (self.nickname) 

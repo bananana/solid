@@ -1,4 +1,4 @@
-Hi {% if user.full_name is not none %}{{ user.full_name }}{% else %}{{ user.nickname }}{% endif %},
+Hi {{ user.name }},
 
 Thank you for standing with the "{{ cause.title }}" Cause on {{ site_name }}.
 
