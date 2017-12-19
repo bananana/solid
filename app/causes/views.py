@@ -2,7 +2,7 @@ from datetime import datetime
 from functools import wraps
 
 from flask import (Blueprint, render_template, url_for, redirect, session,
-                   request, g, flash, abort, Markup)
+                   request, g, flash, abort, Markup, jsonify)
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_babel import gettext as _
 
@@ -311,11 +311,14 @@ def action_support(slug, pk):
                    {'user': current_user, 'cause': cause, 'action': action},
                    'email/action_support_supporter.txt')
         LogEvent._log('action_support', action, user=current_user)
+        action_status = 'new'
     else:
-        flash('You already took this action')
-        return redirect(url_for('.cause_detail', slug=slug))
+        flash('You already took this action', 'warning')
+        action_status = 'repeat'
+        #return redirect(url_for('.cause_detail', slug=slug))
 
-    return redirect(url_for('.action_thanks', slug=slug, pk=pk))
+    #return redirect(url_for('.action_thanks', slug=slug, pk=pk))
+    return jsonify({ 'actionTaken': str(action.id), 'actionStatus': action_status })
 
 
 @mod.route('/cause/<slug>/actions/<pk>/thanks')
