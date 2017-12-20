@@ -249,6 +249,10 @@ a.feed-link {
     width:2em;
     height:2em;
 }
+.icon-social-lg {
+    width: 3em;
+    height: 3em;
+}
 .icon-demand {
     height: 32px;
     margin-top: 7px;
@@ -713,6 +717,10 @@ a.support-action {
 }
 .modal h3 {
     width: 94%;
+}
+.modal .oi {
+    color: #ff9900;
+    font-size: 0.8em;
 }
 .modal div {
     width: 90%;

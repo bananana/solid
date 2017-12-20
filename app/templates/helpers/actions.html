@@ -29,15 +29,18 @@ section (app/templates/styleguide/templating#)
 {% from "helpers/users.html" import render_avatar %}
 <div id="modal-action-{{ action.id }}" class="modal">
     <div>
-        <h3 class="u-pull-left u-remove-margin-bottom">{{ action.title }}</h3>
+        
+        <h3 class="u-pull-left">
+            <span class="oi" 
+                  data-glyph="check" 
+                  style="display:{% if current_user in action.supporters.all() %}inline{% else %}none{% endif %};"></span>  
+            {{ action.title }}
+        </h3>
         <a href="#" class="button-modal-close u-pull-right">
             <img src="/static/open-iconic/png/x-2x.png" alt="X" />
         </a>
-        <span id="action-description-{{ action.id }}" class="u-cf">
-            {{ action.description|markdown }}
-        </span>
-        <span id="action-thanks-{{ action.id }}" class="u-cf" style="display:none;">
-            <p><strong>Thank you for taking this action on Solid!</strong> By letting friends know about it, you can help get this victory to the finish line. Sharing could inspire 3 or more actions for the {{ cause.title }} cause.</p>
+        <span id="action-thanks-{{ action.id }}" class="good u-cf" style="padding:0 1em; display:none;">
+            <p><strong>Thank you for taking this action on Solid!</strong> By letting friends know about it, you can help get this victory to the finish line. Sharing could inspire more actions for the {{ cause.title }} cause.</p>
             <p class="u-text-center">
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ 
                          url_for('causes.cause_detail', slug=cause.slug,
@@ -57,33 +60,28 @@ section (app/templates/styleguide/templating#)
                                  }}#modal-action-{{ action.id }}" 
                    target="_blank"><img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}"></a>
             </p>
-            <small>You've now taken {{ current_user.actions_per_cause(cause).count() }} action{% if current_user.actions_per_cause(cause).count() != 0 %}s{% endif %} on behalf of <a href="{{ url_for('causes.cause_detail', slug=cause.slug)}}">{{ cause.title }}</a>. Share your experience in the <a href="{{ url_for('posts.post_list', slug=cause.slug) }}">Conversation section</a> or check out <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}#actions">{{ cause.actions.count() }} other actions</a> that are available.</small>
+        </span>
+        <span id="action-description-{{ action.id }}" class="u-cf">
+            {{ action.description|markdown }}
         </span>
         {% if current_user not in action.supporters.all() %}
         <p class="u-remove-margin-bottom u-pull-right">
-            {% if action.link %}
-                {% if current_user.is_authenticated %}
-                <a class="button button-primary support" rel="external"  target="_blank"
-                    data-support-href="{{ url_for('causes.action_support', slug=cause.slug,
-                    pk=action.id) }}"
-                    href="{{ action.link }}">{{ _('Support!') }}</a>
+            {% if current_user.is_authenticated %}
+                {% if action.link %}
+                <a id="action-{{ action.id }}" class="button button-primary support" rel="external" target="_blank"
+                   href="{{ action.link }}">{{ _('Go to 3rd party site') }}</a>
                 {% else %}
-                <a class="button button-primary support"
-                   href="{{ url_for('users.login', next='/cause/demo/dashboard') }}#modal-action-{{ action.id }}">{{ _('Support!') }}</a>
+                <a id="action-{{ action.id }}" class="button button-primary support" href="#">{{ _('Support!') }}</a>
                 {% endif %}
-            {% else %}
-            <a class="button button-primary" href="{{ url_for('causes.action_support', slug=cause.slug,
-                pk=action.id) }}">{{ _('Support!') }}</a>
+            {% else %} 
+            <a class="button button-primary support"
+               href="{{ url_for('users.login', next='/cause/demo/dashboard') }}#modal-action-{{ action.id }}">{{ _('Support!') }}</a>
             {% endif %}
         </p>
         {% else %}
-        <p class="u-cf u-full-width">
-            <small class="u-pull-right">{{ _('You have already taken this action!') }}</small> 
-        </p>
         <p class="u-remove-margin-bottom u-pull-right">
             {% if action.link %}
                 <a id="action-{{ action.id }}" class="button button-primary support" rel="external" target="_blank"
-                   data-support-href="{{ url_for('causes.action_support', slug=cause.slug, pk=action.id) }}"
                    href="{{ action.link }}">{{ _('Go to 3rd party site') }}</a>
             {% endif %}
         </p>
@@ -92,7 +90,7 @@ section (app/templates/styleguide/templating#)
         <p class="u-remove-margin-bottom u-pull-right">
             <a class="button primary u-add-margin-right" 
                 href="{{ url_for('causes.action_add_edit', slug=cause.slug,
-                pk=action.id) }}">Edit!</a>
+                pk=action.id) }}">{{ _('Edit') }}</a>
         </p>
         {% endif %}
         {% if action.supporters %}
