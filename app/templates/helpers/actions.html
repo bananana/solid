@@ -80,7 +80,7 @@ section (app/templates/styleguide/templating#)
                 {% endif %}
             {% else %} 
             <a class="button button-primary support"
-               href="{{ url_for('users.login', next='/cause/demo/dashboard') }}#modal-action-{{ action.id }}">{{ _('Support!') }}</a>
+               href="{{ url_for('users.login', next='/cause/' + cause.slug + '/dashboard') }}#modal-action-{{ action.id }}">{{ _('Support!') }}</a>
             {% endif %}
         </p>
         {% else %}
