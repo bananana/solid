@@ -1,7 +1,14 @@
 {% extends "base_form.html" %}
 {% set active_page = "cause" %}
 
-{% block title %}{{ _("Edit Action") }} - {{ super() }}{% endblock %}
+{% block title %}
+    {% if action.id %} 
+    {{ _("Edit Action") }}
+    {% else %}
+    {{ _("Add Action") }}
+    {% endif %}
+    - {{ super() }}
+{% endblock %}
 
 {% block content %}
 <div class="container u-add-margin-top">
@@ -43,6 +50,9 @@
                         class="button button-primary u-mobile-fixed-bottom">
                 </div>
                 <div class="three columns">
+                    {% if current_user in cause.creators.all() or current_user.is_admin %}
+                    <a href="{{ url_for('causes.action_delete', slug=cause.slug, pk=action.id) }}" class="button danger u-full-width">Delete</a>
+                    {% endif %}
                 </div>
             </fieldset>
         </div>

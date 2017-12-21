@@ -281,11 +281,33 @@ def action_add_edit(slug, pk=None):
 
     context = {
         "cause": cause,
+        "action": action,
         "form": form,
         "form_trans": form_trans
     }
 
     return render_template('causes/action_form.html', **context)
+
+
+@mod.route('/cause/<slug>/actions/<pk>/delete')
+@login_required
+@cause_required
+def action_delete(slug, pk):
+    cause = Cause.query.filter_by(slug=slug).first()
+
+    if cause is None or pk is None:
+        abort(404)
+
+    action = cause.actions.filter_by(id=pk).first()
+
+    if action is None:
+        abort(404)
+
+    if current_user in cause.creators.all() or current_user.is_admin:
+        action.delete()
+        flash('Action deleted successfully', 'success')
+
+    return redirect(url_for('.cause_detail', slug=slug))
 
 
 @mod.route('/cause/<slug>/actions/<pk>/support', methods=('GET', 'POST'))
