@@ -109,7 +109,7 @@ def cause_add_edit(slug=None):
         form = CauseForm(request.form, obj=cause)
         form_trans = CauseTranslationForm(request.form, obj=cause)
 
-    if current_user not in cause.creators.all() or not current_user.is_admin:
+    if current_user not in cause.creators.all() and not current_user.is_admin:
         abort(404)
 
     if form.validate_on_submit() and form_trans.validate_on_submit():
@@ -237,7 +237,7 @@ def action_add_edit(slug, pk=None):
     if cause is None:
         abort(404)
     
-    if current_user not in cause.creators.all() or not current_user.is_admin:
+    if current_user not in cause.creators.all() and not current_user.is_admin:
         abort(404)
 
     if pk is None:
