@@ -2,12 +2,11 @@ from datetime import datetime
 from functools import wraps
 
 from flask import (Blueprint, render_template, url_for, redirect, session,
-                   request, g, flash, abort, Markup, jsonify)
-from flask_login import login_user, logout_user, current_user, login_required
+                   request, flash, abort, Markup)
+from flask_login import current_user, login_required
 from flask_babel import gettext as _
 
-from app import app, db, uploaded_images
-from app.users.models import User
+from app import db, uploaded_images
 from app.log.models import LogEvent, LogEventType
 
 from .models import Cause, CauseTranslation, Action, ActionTranslation
@@ -100,6 +99,9 @@ def cause_add_edit(slug=None):
 
         cause = Cause.create(commit=False)
         cause_translation = CauseTranslation()
+
+        if not current_user.is_admin:
+            abort(404)
     else:
         cause = Cause.query.filter_by(slug=slug).first()
 
@@ -109,8 +111,8 @@ def cause_add_edit(slug=None):
         form = CauseForm(request.form, obj=cause)
         form_trans = CauseTranslationForm(request.form, obj=cause)
 
-    if current_user not in cause.creators.all() and not current_user.is_admin:
-        abort(404)
+        if current_user not in cause.creators.all() and not current_user.is_admin:
+            abort(404)
 
     if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(cause)
@@ -241,7 +243,6 @@ def action_add_edit(slug, pk=None):
         abort(404)
 
     if pk is None:
-
         form = ActionForm(request.form)
         form_trans = ActionTranslationForm(request.form)
 
