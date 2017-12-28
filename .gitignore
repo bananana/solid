@@ -18,6 +18,9 @@ envvars_dev.sh
 db_repository/
 coverage/
 
+# local settings
+/app/config/local_*.py
+
 # Misc.
 .DS_Store
 .ackrc
