@@ -74,7 +74,7 @@ section (app/templates/styleguide/templating#)
             {% if current_user.is_authenticated %}
                 {% if action.link %}
                 <a id="action-{{ action.id }}" class="button button-primary support" rel="external" target="_blank"
-                   href="{{ action.link }}">{{ _('Go to 3rd party site') }}</a>
+                   href="{{ action.link }}">{{ _('Support!') }}</a>
                 {% else %}
                 <a id="action-{{ action.id }}" class="button button-primary support" href="#">{{ _('Support!') }}</a>
                 {% endif %}
