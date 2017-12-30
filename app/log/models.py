@@ -1,5 +1,6 @@
-from pytz import timezone
 from datetime import datetime
+
+from pytz import timezone
 
 from sqlalchemy_utils import generic_relationship
 
@@ -48,8 +49,8 @@ class LogEvent(db.Model):
     item_type = db.Column(db.Unicode(255))
     item_id = db.Column(db.Integer)
     item = generic_relationship(item_type, item_id)
-    
-    logged_at = db.Column(db.DateTime(), default=datetime.now(timezone('UTC')))
+
+    logged_at = db.Column(db.DateTime(), default=datetime.utcnow)
 
     @staticmethod
     def _log(name, item, user=None):
