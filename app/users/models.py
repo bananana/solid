@@ -1,8 +1,9 @@
-from app import db, bcrypt
+from app import app, db, bcrypt
 from app.mixins import CRUDMixin 
 from app.causes.models import cause_supporters, cause_creators, action_supporters
 from flask_login import UserMixin
 from random import randint
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 
 class User(UserMixin, CRUDMixin, db.Model):
@@ -103,6 +104,22 @@ class User(UserMixin, CRUDMixin, db.Model):
 
     def actions_per_cause(self, cause):
         return self.actions.filter_by(cause_id=cause.id)
+
+    def get_token(self, expiration=1800):
+        s = Serializer(app.config['SECRET_KEY']) 
+        return s.dumps({'user': self.id}).decode('utf-8')
+
+    @staticmethod
+    def verify_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return None
+        id = data.get('user')
+        if id:
+            return User.query.get(id)
+        return None
 
     @property
     def name(self):
