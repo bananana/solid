@@ -15,7 +15,8 @@ from app import app, db, lm, babel
 from app.email import send_email
 
 from . import constants as USER
-from .forms import LoginForm, SignupForm, EditForm, EmailForm
+from .forms import (LoginForm, SignupForm, EditForm, EmailForm, ResetPassword,
+                    ResetPasswordSubmit)
 from .models import User
 from ..decorators import no_email_required
 
@@ -420,3 +421,42 @@ def translate():
             current_user.locale = session['lang_code']
             current_user.update()
     return ('', 204)
+
+
+@mod.route('/reset-password', methods=['GET', 'POST'])
+def reset_password():
+    '''User submits email and a link with a token is sent to the address
+    they specified in their account.
+    '''
+    form = ResetPassword(request.form)
+    if form.validate_on_submit():
+        email = form.email.data
+        user = User.query.filter_by(email=email).first()
+        if user:
+            token = user.get_token()
+            link = request.url + '/' + token
+            send_email('Password reset for {0}'.format(app.config['SITE_NAME']),
+                       [user.email,],
+                       {'user': user, 'link': link},
+                       'email/reset_password.txt')
+            flash('Email with password reset instructions sent to {0}. \
+                  You can close this window now.'.format(user.email), 
+                  'success')
+    return render_template('users/reset_password.html', form=form)
+
+
+@mod.route('/reset-password/<token>', methods=['GET', 'POST'])
+def reset_password_submit(token):
+    '''User can get here through the password reset link they get in their email.
+    If the token is valid, the password reset form is displayed, otherwise 404.
+    '''
+    verified_result = User.verify_token(token)
+    if token and verified_result:
+        form = ResetPasswordSubmit(request.form)
+        if form.validate_on_submit():
+            verified_result.set_password(form.password.data)
+            flash('Password reset successful', 'success')
+            return redirect(url_for('.login'))
+        return render_template('users/reset_password_submit.html', form=form)
+    else:
+        abort(404)

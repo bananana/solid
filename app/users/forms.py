@@ -57,8 +57,22 @@ class EditForm(FlaskForm):
     new_password     = PasswordField(_('New password'),
                                        validators=[Optional(),
                                        EqualTo('verify_password')])
-    confirm_password = PasswordField(_('Confirm password'),
+    verify_password  = PasswordField(_('Verify password'),
                                        validators=[Optional()])
+
+
+class ResetPassword(FlaskForm):
+    email = StringField(_('Email'), validators=[DataRequired(), Email()])
+
+
+class ResetPasswordSubmit(FlaskForm):
+    password = PasswordField(_('New Password'), 
+                             validators=[DataRequired(), 
+                             EqualTo('confirm_password')])
+    confirm_password  = PasswordField(_('Confirm password'), 
+                                      validators=[DataRequired()])
+
+
 
 
 EmailForm = model_form(User, base_class=FlaskForm, db_session=db.session, only=(
