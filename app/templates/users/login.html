@@ -85,16 +85,13 @@ $(document).ready(function() {
                 </fieldset>
             </div>
             <div class="three columns">
-                <small class="small-block">
-                    {{ _('By accessing and using this service, you agree to the') }}
-                    <a href="/terms_of_service">{{ _('terms of service') }}</a>.
-                </small>
+                <a style="display:block; padding-top:0.4em;" class="u-text-center" href="{{ url_for('.reset_password') }}">{{ _('Forgot password?') }}</a>
             </div>
         </div>
         <div class="row">
-            <small class="six columns offset-by-three flash">
-                <strong>Forgot your password?</strong> E-mail us for assistance:
-                <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+            <small class="six columns offset-by-three u-add-margin-top u-text-center">
+                {{ _('By accessing and using this service, you agree to the') }}
+                <a href="/terms_of_service">{{ _('terms of service') }}</a>.
             </small>
         </div>
     </form>
