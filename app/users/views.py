@@ -368,7 +368,7 @@ def edit(nickname):
         fields = form.data.keys()
         fields.remove('current_password')
         fields.remove('new_password') 
-        fields.remove('confirm_password')
+        fields.remove('verify_password')
         
         # Removing csrf_token key prevents the app from breaking when trying to 
         # pre-pupulate csrf_token hidden input (usually when trying to edit

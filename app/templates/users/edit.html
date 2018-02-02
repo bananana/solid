@@ -93,11 +93,11 @@ $(document).ready(function() {
                                 data_validation_error_msg_container='#form-new_password-error'
                 ) }}
                 </div>
-                {{ render_field(form.confirm_password,
+                {{ render_field(form.verify_password,
                                 class='u-full-width',
                                 data_validation='confirmation',
                                 data_validation_confirm='new_password',
-                                data_validation_error_msg_container='#form-confirm_password-error',
+                                data_validation_error_msg_container='#form-verify_password-error',
                                 data_validation_error_msg='Must match new password'
                 ) }}
             </fieldset>
