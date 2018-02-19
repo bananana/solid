@@ -229,6 +229,26 @@ def view_cause_actions(slug):
     return render_template('causes/actions.html', **context)
 
 
+@mod.route('/cause/<slug>/actions/<pk>')
+@cause_required
+def view_single_action(slug, pk=None):
+    cause = Cause.query.filter_by(slug=slug).first()
+    action = cause.actions.filter_by(id=pk).first()
+
+    if cause is None:
+        abort(404)
+
+    if action is None:
+        abort(404)
+
+    context = {
+        "cause": cause,
+        "action": action
+    }
+
+    return render_template('causes/action_single.html', **context)
+
+
 @mod.route('/cause/<slug>/actions/add', methods=('GET', 'POST'))
 @mod.route('/cause/<slug>/actions/<pk>/edit', methods=('GET', 'POST'))
 @login_required
