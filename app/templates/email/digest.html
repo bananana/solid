@@ -1,0 +1,57 @@
+{% extends "email/base.html" %}
+
+{% block title %}Latest updates on your Solid causes{% endblock %}
+
+{% block heading %}Latest updates on your Solid causes{% endblock heading %}
+
+{% block content %}
+<p>Hi {{ user.name }},</p>
+
+<p>The Causes you are taking Action for have advanced!</p>
+
+<p>
+	Here's your {{ period.0.strftime('%b %d') }} - {{ period.1.strftime('%b %d')
+	}} summary  of Solid causes that you are helping win:
+</p>
+
+<h2>New actions available to take</h2>
+
+{% if actions_new %}
+<ul>
+{% for action in actions_new %}
+	<li>
+		<a href="{{ url_for('causes.cause_detail', slug=action.cause.slug, _external=True) }}#modal-action-{{ action.id }}">
+			{{ action.title }}
+		</a>
+	</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+
+<h2>New Posts</h2>
+
+{% if actions_new %}
+<ul>
+{% for post in posts_new %}
+	<li>
+    <a href="{{ url_for('posts.post_detail', slug=post.cause.slug, pk=post.id, _external=True) }}">
+			{{ post.title }}
+		</a>
+	</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+
+<h2>Actions completed</h2>
+
+{{ actions_completed|length }}
+
+
+<p>Taking Actions and sharing helps your Solid Causes win. Thank you for all you're doing!</p>
+
+<p>In solidarity,</p>
+
+<p>The {{ site_name }} Team</p>
+{% endblock content %}

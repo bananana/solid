@@ -725,7 +725,7 @@ def email():
             'actions_new': actions_new,
             'posts_new': posts_new,
             'actions_completed': actions_completed
-        }, 'email/digest.txt')
+        }, 'email/digest.txt', template_html='email/digest.html')
         break
 
 if __name__ == "__main__":

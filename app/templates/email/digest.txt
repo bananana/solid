@@ -1,0 +1,31 @@
+Hi {{ user.name }},
+
+The Causes you are taking Action for have advanced!
+
+Here's your {{ period.0.strftime('%b %d') }} - {{ period.1.strftime('%b %d') }} summary  of Solid causes that you are helping win:
+
+
+New actions available to take
+-----------------------------
+{% for action in actions_new %}
+  * {{ action.title }}
+    {{ url_for('causes.cause_detail', slug=action.cause.slug, _external=True) }}#modal-action-{{ action.id }}{% endfor %}
+
+
+New Posts
+-----------------------------
+{% for post in posts_new %}
+  * {{ post.title }}
+    {{ url_for('posts.post_detail', slug=post.cause.slug, pk=post.id, _external=True) }}{% endfor %}
+
+
+Actions completed
+-----------------------------
+{{ actions_completed|length }}
+
+
+Taking Actions and sharing helps your Solid Causes win. Thank you for all you're doing!
+
+In solidarity,
+
+The {{ site_name }} Team
