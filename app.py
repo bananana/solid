@@ -7,9 +7,10 @@
 #               modules, runs the app in Werkzeug, cleans up temporary files.
 # License.....: GPLv3 (see LICENSE file)
 
+from datetime import datetime, timedelta
 from distutils.util import strtobool
 import fnmatch
-from os import path, walk, listdir, makedirs, remove
+from os import path, walk, makedirs, remove
 from sys import argv
 import unittest
 
@@ -18,13 +19,17 @@ if __name__ == '__main__' and len(argv) > 1 and argv[1] == 'test':
     cov = coverage(branch=True, include=['app/*'])
     cov.start()
 
+from flask import render_template
 from flask_script import Manager
 from flask_migrate import MigrateCommand
 from sqlalchemy import inspect
 from terminaltables import AsciiTable
 
 from app import app, db
+from app.email import send_email
 from app.causes.models import Cause, Action
+from app.log.models import LogEvent, LogEventType
+from app.posts.models import Post
 from app.users.models import User
 
 
@@ -44,6 +49,7 @@ class bcolors:
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
+
 
 @manager.option('-l', '--list', dest='list_', action='store_true')
 @manager.option('-t', '--type', dest='type_', choices=['all', 'py', 'tmp'],
@@ -297,7 +303,6 @@ def user(create, delete, modify, regenerate_colors, list_):
         table = AsciiTable(table_data)
         print(table.table)
         exit(0)
-
 
     elif regenerate_colors:
         for user in User.query.all():
@@ -658,6 +663,68 @@ def test(module=None, verbose=False):
     cov.html_report(directory='coverage')
     cov.erase()
 
+
+@manager.command
+def email():
+    period = (
+        datetime.utcnow() - timedelta(14),
+        datetime.utcnow()
+    )
+
+    for user in User.query.all():
+        if user.email != 'carl@supervacuo.com':
+            continue
+
+        user_causes = user.supports
+
+        if user_causes.count() == 0:
+            continue
+
+        user_cause_actions = Action.query.filter(Action.cause_id.in_(
+            [c.id for c in user_causes.all()]
+        ))
+
+        if user_cause_actions.count() > 0:
+            actions_new = [r.item for r in LogEvent.query.filter(
+                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['action_add'])
+                & (LogEvent.logged_at > period[0])
+                & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
+            ).all()]
+            actions_completed = [r.item for r in LogEvent.query.filter(
+                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['action_support'])
+                & (LogEvent.logged_at > period[0])
+                & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
+            ).all()]
+        else:
+            actions_new = []
+            actions_completed = []
+
+        user_cause_posts = Post.query.filter(Post.cause_id.in_(
+            [c.id for c in user_causes.all()]
+        ))
+        
+        if user_cause_posts.count() > 0:
+            posts_new = [r.item for r in LogEvent.query.filter(
+                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['post_add'])
+                & (LogEvent.logged_at > period[0])
+                & (LogEvent.item_id.in_([p.id for p in user_cause_posts.all()]))
+            ).all()]
+        else:
+            posts_new = []
+
+        if (len(actions_new) == 0 and len(actions_completed) == 0 and
+            len(posts_new) == 0):
+                continue
+
+        send_email('Latest updates on your Solid causes',
+                   [user.email,],
+                   {
+            'user': user, 'period': period,
+            'actions_new': actions_new,
+            'posts_new': posts_new,
+            'actions_completed': actions_completed
+        }, 'email/digest.txt')
+        break
 
 if __name__ == "__main__":
     manager.run()
