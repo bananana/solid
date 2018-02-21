@@ -608,6 +608,7 @@ def support(nickname, cause_slug):
         user = User.query.filter_by(nickname=nickname).first()
         cause = Cause.query.filter_by(slug=cause_slug).first()
         user.support(cause)
+        db.session.commit()
         print(bcolors.OKGREEN + 'User ' + nickname + \
               ' is now supporting ' + cause_slug + bcolors.ENDC)
         exit(0)
@@ -624,6 +625,7 @@ def unsupport(nickname, cause_slug):
         user = User.query.filter_by(nickname=nickname).first()
         cause = Cause.query.filter_by(slug=cause_slug).first()
         user.unsupport(cause)
+        db.session.commit()
         print(bcolors.OKGREEN + 'User ' + nickname + \
               ' no longer supports ' + cause_slug + bcolors.ENDC)
     except Exception as e:
