@@ -7,7 +7,16 @@
 {% endblock %}
 
 {% block content %}
+{% from "helpers/users.html" import render_avatar %}
 <div class="container u-add-margin-top">
+    <div class="row">
+        <div class="twelve columns">
+            <a class="action-support-cause-title" href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">
+                <h1>{{ cause.title }}</h1>
+            </a>
+            <hr>
+        </div>
+    </div>
     <div class="row">
         <div class="two-thirds column">
             <h3 class="u-pull-left">
@@ -25,7 +34,11 @@
                     <a id="action-{{ action.id }}" class="button button-primary support" rel="external" target="_blank"
                        href="{{ action.link }}">{{ _('Support!') }}</a>
                     {% else %}
-                    <a id="action-{{ action.id }}" class="button button-primary support" href="#">{{ _('Support!') }}</a>
+                    <a id="action-{{ action.id }}" 
+                       class="button button-primary support" 
+                       href="{{ url_for('causes.action_support', slug=cause.slug, pk=action.id) }}">
+                        {{ _('Support!') }}
+                    </a>
                     {% endif %}
                 {% else %} 
                 <a class="button button-primary support"
@@ -59,13 +72,15 @@
             {% endif %}
         </div>
         <div class="one-third column">
-            <p class="support-action-counter"> 
-                <img class="icon" src="{{ url_for('static', filename='open-iconic/png/bullhorn-2x.png') }}"> 
-                {{ _('%(count)s action takers', count=action.supporters.count()) }}
+            <p class="support-action-counter u-pull-right"> 
+                <strong>{{ _('%(count)s people took this action', count=action.supporters.count()) }}</strong>
             </p>
-            {% for supporter in action.supporters %}
-                {{ render_avatar(supporter) }}
-            {% endfor %}
+            <br class="u-cf">
+            <span class="support-action-takers">
+                {% for supporter in action.supporters %}
+                    {{ render_avatar(supporter) }}
+                {% endfor %}
+            </span>
         </div>
     </div>
     <div class="row">

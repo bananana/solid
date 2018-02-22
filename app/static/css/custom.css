@@ -523,10 +523,19 @@ a.support-action {
 .support-action:hover h5 {
     text-decoration: underline;
 }
+.action-support-cause-title,
+.action-support-cause-title:hover, 
+.action-support-cause-title:active, 
+.action-support-cause-title:focus {
+    outline: 0;
+}
 .support-action article,
 .support-action-counter {
     color: #161310;
 }
+.support-action-takers {
+    float: right;
+} 
 .support-action-expiration {
     color: #652a28;
 }

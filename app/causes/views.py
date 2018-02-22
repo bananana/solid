@@ -361,7 +361,8 @@ def action_support(slug, pk):
                    'email/action_support_supporter.txt')
         LogEvent._log('action_support', action, user=current_user)
 
-    return ('', 204)
+    #return ('', 204)
+    return redirect(url_for('.view_single_action', slug=slug, pk=pk)) 
 
 
 @mod.route('/cause/<slug>/actions/<pk>/thanks')
