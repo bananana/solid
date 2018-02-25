@@ -24,6 +24,11 @@
             </fieldset>
             <fieldset>
                 <div class="six columns offset-by-three">
+                    {{ render_field(form_trans.summary, class="u-full-width")  }}
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="six columns offset-by-three">
                     {{ render_field(form_trans.description, class="u-full-width")  }}
                     {{ render_field(form.image, class="u-full-width")  }}
                 </div>

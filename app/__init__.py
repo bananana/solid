@@ -1,3 +1,4 @@
+import json
 from os import environ
 
 from flask import Flask, render_template, flash, redirect, url_for
@@ -178,7 +179,9 @@ def contact():
 
     return render_template('contact.html', form=form)
 
+
 # logging
+
 
 if not app.debug:
     import logging

@@ -11,6 +11,7 @@ from datetime import datetime, timedelta
 from distutils.util import strtobool
 import fnmatch
 from os import path, walk, makedirs, remove
+import random
 from sys import argv
 import unittest
 
@@ -19,9 +20,9 @@ if __name__ == '__main__' and len(argv) > 1 and argv[1] == 'test':
     cov = coverage(branch=True, include=['app/*'])
     cov.start()
 
-from flask import render_template
 from flask_script import Manager
 from flask_migrate import MigrateCommand
+import jinja2
 from sqlalchemy import inspect
 from terminaltables import AsciiTable
 
@@ -668,6 +669,8 @@ def test(module=None, verbose=False):
 
 @manager.command
 def email():
+    from flask import url_for
+
     period = (
         datetime.utcnow() - timedelta(14),
         datetime.utcnow()
@@ -692,7 +695,7 @@ def email():
                 & (LogEvent.logged_at > period[0])
                 & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
             ).all()]
-            actions_completed = [r.item for r in LogEvent.query.filter(
+            actions_supporters = [r.item for r in LogEvent.query.filter(
                 (LogEvent.event_type_id == LogEventType.EVENT_TYPES['action_support'])
                 & (LogEvent.logged_at > period[0])
                 & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
@@ -714,19 +717,69 @@ def email():
         else:
             posts_new = []
 
+        causes_supporters = [r.item for r in LogEvent.query.filter(
+            (LogEvent.event_type_id == LogEventType.EVENT_TYPES['cause_support'])
+            & (LogEvent.logged_at > period[0])
+            & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
+        ).all()]
+
         if (len(actions_new) == 0 and len(actions_completed) == 0 and
             len(posts_new) == 0):
                 continue
 
-        send_email('Latest updates on your Solid causes',
-                   [user.email,],
-                   {
+        highlights = actions_new + posts_new
+        _highlights = []
+
+        for highlight in random.sample(highlights, min(4, len(highlights))):
+            if isinstance(highlight, Action):
+                _highlights += [{
+                    'url': url_for(
+                        'causes.cause_detail', slug=highlight.cause.slug, 
+                        _external=True
+                    ),
+                    'title': highlight.title,
+                    'type': 'action',
+                    'summary': highlight.summary
+                }]
+            else:
+                _highlights += [{
+                    'url': url_for(
+                        'posts.post_detail', slug=highlight.cause.slug, 
+                        pk=highlight.id, _external=True
+                    ),
+                    'title': highlight.title,
+                    'type': 'post',
+                    'summary': jinja2.filters.do_truncate(
+                        None, highlight.body, 180, True, leeway=5
+                    )
+                }]
+
+        context = {
             'user': user, 'period': period,
             'actions_new': actions_new,
             'posts_new': posts_new,
-            'actions_completed': actions_completed
-        }, 'email/digest.txt', template_html='email/digest.html')
-        break
+            'actions_supporters': actions_supporters,
+            'causes_supporters': causes_supporters,
+            'highlights': _highlights,
+        }
+
+        with app.app_context():
+            if app.debug:
+                context['url_for'] = lambda url, slug, _external=False, pk=None: url
+                f = open('email.html', 'w')
+                f.write(jinja2.Environment(
+                        loader=jinja2.FileSystemLoader('app/templates/')
+                    ).get_template('email/digest.html').render(context)
+                )
+                f.close()
+
+            send_email('Latest updates on your Solid causes',
+                       [user.email,],
+                       context, 
+                       'email/digest.txt', template_html='email/digest.html')
+
+
+        return
 
 if __name__ == "__main__":
     manager.run()
