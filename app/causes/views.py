@@ -233,10 +233,11 @@ def view_cause_actions(slug):
 @cause_required
 def view_single_action(slug, pk=None):
     cause = Cause.query.filter_by(slug=slug).first()
-    action = cause.actions.filter_by(id=pk).first()
-
+    
     if cause is None:
         abort(404)
+
+    action = cause.actions.filter_by(id=pk).first()
 
     if action is None:
         abort(404)
@@ -245,6 +246,9 @@ def view_single_action(slug, pk=None):
         "cause": cause,
         "action": action
     }
+
+    if current_user in action.supporters.all():
+        flash('You are already supporting this action', 'success')
 
     return render_template('causes/action_single.html', **context)
 
