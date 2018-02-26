@@ -2,8 +2,27 @@
 {% set active_page = "action" %}
 
 {% block title %}
-    {{ action.title }}
-    - {{ super() }}
+    {{ cause.title }} | {{ action.title }} - {{ super() }}
+{% endblock %}
+
+{% block meta %}
+{{ super() }}
+<meta property="og:title" content="{{ cause.title }} | {{ action.title }} - Solid">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ url_for('.view_single_action', slug=cause.slug, pk=action.id, _external=True) }}">
+<meta property="og:description" content="{{ action.summary }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ cause.title }} | {{ action.title }} - Solid">
+<meta name="twitter:text:description" content="{{ action.summary }}">
+
+{% if cause.image -%}
+<meta property="og:image" content="{{ cause.image_url }}">
+<meta name="twitter:image" content="{{ cause.image_url }}">
+{% endif -%}
+{% endblock meta %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -31,8 +50,13 @@
             <p class="u-remove-margin-bottom u-pull-right">
                 {% if current_user.is_authenticated %}
                     {% if action.link %}
-                    <a id="action-{{ action.id }}" class="button button-primary support" rel="external" target="_blank"
-                       href="{{ action.link }}">{{ _('Support!') }}</a>
+                    <a id="action-{{ action.id }}" 
+                       class="button button-primary support" 
+                       rel="external" 
+                       target="_blank"
+                       href="{{ action.link }}">
+                        {{ _('Support!') }}
+                    </a>
                     {% else %}
                     <a id="action-{{ action.id }}" 
                        class="button button-primary support" 
@@ -42,22 +66,73 @@
                     {% endif %}
                 {% else %} 
                 <a class="button button-primary support"
-                   href="{{ url_for('users.login', next='/cause/' + cause.slug + '/dashboard') }}#modal-action-{{ action.id }}">{{ _('Support!') }}</a>
+                   href="{{ url_for('users.login', next='/cause/' + cause.slug + '/actions/' + action.id|string) }}">
+                    {{ _('Support!') }}
+                </a>
                 {% endif %}
             </p>
             {% else %}
             <p class="u-remove-margin-bottom u-pull-right">
                 {% if action.link %}
-                    <a id="action-{{ action.id }}" class="button button-primary support" rel="external" target="_blank"
-                       href="{{ action.link }}">{{ _('Go to 3rd party site') }}</a>
+                    <a id="action-{{ action.id }}" 
+                       class="button button-primary support" 
+                       rel="external" 
+                       target="_blank"
+                       href="{{ action.link }}">
+                        {{ _('Go to 3rd party site') }}
+                    </a>
                 {% endif %}
             </p>
             {% endif %}
+
+            <p class="u-remove-margin-bottom u-pull-right">
+                <a class="button button-modal u-add-margin-right"
+                   data-target="modal-share">
+                    {{ _('Share') }}
+                </a>
+            </p>
+            <div id="modal-share" class="modal">
+                <div style="width:300px;">
+                    <h3 class="u-pull-left">
+                        {{ _('Share this cause') }}
+                    </h3>
+                    <a href="#" class="button-modal-close u-pull-right">
+                        <img src="/static/open-iconic/png/x-2x.png" alt="X" />
+                    </a>
+                    <p class="u-cf u-full-width u-text-center">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{
+                                 url_for('causes.cause_detail', slug=cause.slug,
+                                         _external=True) | urlencode
+                                 }}"
+                           target="_blank"
+                           class="u-add-margin-right">
+                            <img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}">
+                        </a>
+                        <a href="https://twitter.com/home?status={{
+                                 url_for('causes.cause_detail', slug=cause.slug,
+                                         _external=True) | urlencode
+                                 }}"
+                           target="_blank"
+                           class="u-add-margin-right">
+                            <img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}">
+                        </a>
+                        <a href="https://plus.google.com/share?url={{
+                                 url_for('causes.cause_detail', slug=cause.slug,
+                                         _external=True) | urlencode
+                                 }}"
+                           target="_blank">
+                            <img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}">
+                        </a>
+                    </p>
+                </div>
+            </div>
+
             {% if current_user in cause.creators.all() or current_user.is_admin %}
             <p class="u-remove-margin-bottom u-pull-right">
                 <a class="button primary u-add-margin-right" 
-                    href="{{ url_for('causes.action_add_edit', slug=cause.slug,
-                    pk=action.id) }}">{{ _('Edit') }}</a>
+                   href="{{ url_for('causes.action_add_edit', slug=cause.slug, pk=action.id) }}">
+                    {{ _('Edit') }}
+                </a>
             </p>
             {% endif %}
         </div>
@@ -73,7 +148,15 @@
         </div>
         <div class="one-third column">
             <p class="support-action-counter u-pull-right"> 
-                <strong>{{ _('%(count)s people took this action', count=action.supporters.count()) }}</strong>
+                <strong>
+                    {% if action.supporters.count() == 0 %}
+                        {{ _('Be the first to take this action!') }}
+                    {% elif action.supporters.count() == 1 %}
+                        {{ _('1 person took this action') }}
+                    {% else %}
+                        {{ _('%(count)s people took this action', count=action.supporters.count()) }}
+                    {% endif %}
+                </strong>
             </p>
             <br class="u-cf">
             <span class="support-action-takers">
@@ -85,6 +168,7 @@
     </div>
     <div class="row">
         <div class="twelve columns">
+            <!-- Action discussion should go here -->
         </div>
     </div>
 </div>

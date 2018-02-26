@@ -56,30 +56,6 @@
             });
         });
 
-        $('a.support-action').click(function(e) {
-            var action_name = $(e.target).parents('.support-action').find('h4').text();
-            ga('send', {
-                hitType: 'event',
-                eventCategory: 'action',
-                eventAction: 'popup',
-                eventLabel: action_name
-            });
-        });
-
-        $('a.support').click(function(e) {
-            var action_id = $(this).attr('id');
-            var prefix = 'action-';
-            action_id = parseInt(action_id.substring(prefix.length), 10);
-
-            $.post('/cause/' + '{{ cause.slug }}' + '/actions/' + action_id + '/support'
-            ).done(function() {
-                $('#modal-action-' + action_id + ' .oi').slideDown();
-                $('#action-thanks-' + action_id).show();
-            }).fail(function() {
-                console.log('failed to support action ' + action_id);
-            });
-        });
-
         $('.button-modal-close').click(function(e) {
             var action_name = $(e.target).parents('.modal').find('h3').text();
             ga('send', {
@@ -90,16 +66,6 @@
             });
             e.preventDefault();
             history.pushState("", document.title, window.location.pathname);
-        });
-
-        $('a.support').click(function(e) {
-            var action_name = $(e.target).parents('.modal').find('h3').text();
-            ga('send', {
-                hitType: 'event',
-                eventCategory: 'action',
-                eventAction: 'support',
-                eventLabel: action_name
-            });
         });
 
         var breakpoint = {};
