@@ -539,6 +539,15 @@ a.support-action {
 .support-action-expiration {
     color: #652a28;
 }
+.support-action-share {
+    display: inline-block;
+}
+.support-action-share a,
+.support-action-share a:hover, 
+.support-action-share a:active,
+.support-action-share a:focus {
+    text-decoration: none;
+}
 .support-action-modal-description {
     min-height: 180px;
 }
