@@ -4,7 +4,7 @@ section (app/templates/styleguide/templating#)
 -->
 {% macro render_action_box(cause, action) %}
 <a class="support-action u-pull-left" 
-   data-target="modal-action-{{ action.id }}"
+   href="{{ url_for('causes.view_single_action', slug=cause.slug, pk=action.id) }}"
    {% if action.image %}
    style="background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url({{ action.image_url }}) no-repeat; background-size: cover"
    {% endif %}
@@ -25,6 +25,34 @@ section (app/templates/styleguide/templating#)
     {% if action.expiration %}
     <small class="support-action-expiration u-pull-right">
         Expires: {{ action.expiration.strftime('%b. %d, %Y') }}
+    </small>
+    {% endif %}
+</a>
+{% endmacro %}
+
+{% macro render_action_box_sp(cause, action) %}
+<a class="support-action three columns u-add-margin-top u-add-margin-bottom"
+   href="{{ url_for('causes.view_single_action', slug=cause.slug, pk=action.id) }}"
+   {% if action.image %}
+   style="background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url({{ action.image_url }}) no-repeat; background-size: cover"
+   {% endif %}
+   >
+    <div class="support-action-modal-description">
+       <h5 class="u-remove-margin-bottom">
+           {% if current_user in action.supporters.all() %}
+           <span class="oi" data-glyph="check" style="color:#ff9900;"></span>
+           {% endif %}
+           {{ action.title }}
+       </h5>
+       <article class="u-add-margin-top">{{ action.description|truncate(90, True) }}</article>
+    </div>
+    <small class="support-action-counter u-pull-left">
+        <img class="icon" src="{{ url_for('static', filename='open-iconic/png/bullhorn-2x.png') }}"> 
+        {{ _('%(count)s supporters', count=action.supporters.count()) }}
+    </small>
+    {% if action.expiration %}
+    <small class="support-action-counter u-pull-right">
+       Expires: {{ action.expiration.strftime('%b. %d, %Y') }}
     </small>
     {% endif %}
 </a>
@@ -116,7 +144,13 @@ section (app/templates/styleguide/templating#)
     <li>{{ render_action_box(cause, action) }}</li>
 {% endfor %}
 </ul>
-{% for action in actions %}
-    {{ render_action_modal(cause, action) }}
-{% endfor %}
+{% endmacro %}
+
+{% macro render_action_list_full(actions) %}
+    {% for action in actions %}
+        {% if loop.first %}<div class="row">{% endif %}
+        {{ render_action_box_sp(cause, action) }}
+        {% if loop.index is divisibleby(4) and not loop.last %}</div><div class="row">{% endif %}
+        {% if loop.last %}</div>{% endif %}
+    {% endfor %}
 {% endmacro %}
