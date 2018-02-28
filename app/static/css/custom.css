@@ -514,6 +514,7 @@ a.support-action {
     border: 1px solid #3299bb;
     box-shadow: 0 0 10px #e5e5e5;
     padding: 0.5em 1em;
+    margin-bottom: 3em;
 }
 .support-action:hover {
     border-color: #1eaeda;
