@@ -229,6 +229,30 @@ def view_cause_actions(slug):
     return render_template('causes/actions.html', **context)
 
 
+@mod.route('/cause/<slug>/actions/<pk>')
+@cause_required
+def view_single_action(slug, pk=None):
+    cause = Cause.query.filter_by(slug=slug).first()
+    
+    if cause is None:
+        abort(404)
+
+    action = cause.actions.filter_by(id=pk).first()
+
+    if action is None:
+        abort(404)
+
+    context = {
+        "cause": cause,
+        "action": action
+    }
+
+    if current_user in action.supporters.all():
+        flash(Markup('You are already supporting this action. <a href="/cause/' + cause.slug + '/actions">See other ways you can help this cause</a>.'), 'success')
+
+    return render_template('causes/action_single.html', **context)
+
+
 @mod.route('/cause/<slug>/actions/add', methods=('GET', 'POST'))
 @mod.route('/cause/<slug>/actions/<pk>/edit', methods=('GET', 'POST'))
 @login_required
@@ -341,7 +365,8 @@ def action_support(slug, pk):
                    'email/action_support_supporter.txt')
         LogEvent._log('action_support', action, user=current_user)
 
-    return ('', 204)
+    #return ('', 204)
+    return redirect(url_for('.view_single_action', slug=slug, pk=pk)) 
 
 
 @mod.route('/cause/<slug>/actions/<pk>/thanks')
