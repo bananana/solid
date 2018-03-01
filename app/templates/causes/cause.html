@@ -137,7 +137,7 @@
         </div>
         {% if current_user in cause.creators.all() or current_user.is_admin %}
         <div class="four columns">
-            <a class="button u-full-width" href="{{ url_for('.action_add_edit', slug=cause.slug) }}">
+            <a class="button u-pull-right" href="{{ url_for('.action_add_edit', slug=cause.slug) }}">
                 <span class="oi" data-glyph="plus" title="Add new action" aria-hidden="true"></span>
                 <span>&nbsp;{{ _('new action') }}</span>
             </a>
@@ -234,6 +234,18 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="eight columns">
+                <h3>{{ _('Updates') }}</h3>
+            </div>
+            {% if current_user in cause.creators.all() or current_user.is_admin %}
+            <div class="four columns">
+                <a class="button u-pull-right" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
+                    <span class="oi" data-glyph="plus" title="Add new post" aria-hidden="true"></span>
+                    <span>&nbsp;{{ _('new post') }}</span>
+                </a>
+            </div>
+        </div>
         <div class="nine columns">
             <h3>{{ cause.story_heading }}</h3>
             <div class="read_more">
