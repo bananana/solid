@@ -23,6 +23,23 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script>
+		$('a.support[rel=external]').click(function(e) {
+            //window.location.href = $(e.target).data('supportHref');
+            var action_id = $(this).attr('id');
+            var prefix = 'action-';
+            action_id = parseInt(action_id.substring(prefix.length), 10);
+            $.post('/cause/' + '{{ cause.slug }}' + '/actions/' + action_id + '/support'
+            ).done(function(action) {
+                $('#action-description-' + action_id).hide();
+                $('#action-thanks-' + action_id).show();
+                console.log(action['actionTaken']);
+                console.log(action['actionStatus']);
+            }).fail(function() {
+                console.log("fail");
+            });
+        });
+</script>
 {% endblock %}
 
 {% block content %}
