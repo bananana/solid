@@ -24,6 +24,7 @@
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 <script>
+    $(document).ready(function() {
 		$('a.support[rel=external]').click(function(e) {
             //window.location.href = $(e.target).data('supportHref');
             var action_id = $(this).attr('id');
@@ -31,14 +32,13 @@
             action_id = parseInt(action_id.substring(prefix.length), 10);
             $.post('/cause/' + '{{ cause.slug }}' + '/actions/' + action_id + '/support'
             ).done(function(action) {
-                $('#action-description-' + action_id).hide();
-                $('#action-thanks-' + action_id).show();
-                console.log(action['actionTaken']);
-                console.log(action['actionStatus']);
+                window.location.reload();
+                console.log("Took action " + action_id);
             }).fail(function() {
-                console.log("fail");
+                console.log("Failed to take action " + action_id);
             });
         });
+    });
 </script>
 {% endblock %}
 
@@ -89,7 +89,7 @@
             <p class="u-remove-margin-bottom u-pull-right">
                 {% if action.link %}
                     <a id="action-{{ action.id }}" 
-                       class="button button-primary support" 
+                       class="button button-primary support u-add-margin-left" 
                        rel="external" 
                        target="_blank"
                        href="{{ action.link }}">
