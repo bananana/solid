@@ -248,7 +248,9 @@ def view_single_action(slug, pk=None):
     }
 
     if current_user in action.supporters.all():
-        flash(Markup('You are already supporting this action. <a href="/cause/' + cause.slug + '/actions">See other ways you can help this cause</a>.'), 'success')
+        flash(Markup('You are supporting this action! <a href="/cause/' + 
+                     cause.slug + '/actions">See other ways you can help ' + 
+                     cause.title + '</a>.'), 'success')
 
     return render_template('causes/action_single.html', **context)
 
