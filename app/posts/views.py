@@ -27,14 +27,38 @@ def post_list(slug):
     return render_template('posts/post_list.html', **context)
 
 
+@mod.route('/cause/<slug>/posts/<pk>')
+@cause_required
+def post_detail(slug, pk):
+    cause = Cause.query.filter_by(slug=slug).first()
+    post = cause.posts.filter_by(id=pk).one()
+
+    comment_form = CommentForm(request.form)
+
+    context = {
+        'cause': cause,
+        'post': post,
+        'comment_form': comment_form
+    }
+
+    return render_template('posts/post.html', **context)
+
+
+@mod.route('/cause/<slug>/posts/add')
+@login_required
+@cause_required
+def post_add_get(slug):
+    return redirect(url_for('causes.cause_detail', slug=slug))
+
+
 @mod.route('/cause/<slug>/posts/add', methods=('GET', 'POST'))
 @login_required
 @cause_required
 def post_add(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
-    if current_user not in cause.creators.all() and not current_user.is_admin:
-        flash('You must be a cause creator or an admin to post.', 'error')
+    if current_user not in cause.supporters.all() and not current_user.is_admin:
+        flash('You must be casupporting this cause to post.', 'error')
         return redirect(url_for('causes.cause_detail', slug=slug))
 
     form = PostForm(request.form)
@@ -66,30 +90,19 @@ def post_add(slug):
 
     context = {
         "cause": cause,
-        "form": form,
+        "post_form": form,
     }
 
     return render_template('posts/post_form.html', **context)
 
 
-@mod.route('/cause/<slug>/posts/<pk>')
-@cause_required
-def post_detail(slug, pk):
-    cause = Cause.query.filter_by(slug=slug).first()
-    post = cause.posts.filter_by(id=pk).one()
-
-    comment_form = CommentForm(request.form)
-
-    context = {
-        'cause': cause,
-        'post': post,
-        'comment_form': comment_form
-    }
-
-    return render_template('posts/post.html', **context)
+@mod.route('/cause/<slug>/posts/<pk>/edit')
+def post_edit_get(slug, pk):
+    """ Inline editing only; redirect back to .post_detail """
+    return redirect(url_for('.post_detail', slug=slug, pk=pk))
 
 
-@mod.route('/cause/<slug>/posts/<pk>/edit', methods=('GET', 'POST'))
+@mod.route('/cause/<slug>/posts/<pk>/edit', methods=('POST',))
 @login_required
 @cause_required
 def post_edit(slug, pk):
@@ -109,7 +122,7 @@ def post_edit(slug, pk):
 
     context = {
         "cause": cause,
-        "form": form,
+        "post_form": form,
         "post": post,
     }
 

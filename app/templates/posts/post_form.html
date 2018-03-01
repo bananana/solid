@@ -1,39 +1,27 @@
-{% extends "base_form.html" %}
-{% set active_page = "comments" %}
-
-{% block content %}
-<div class="container u-add-margin-top">
-    {% from "helpers/forms.html" import render_field, render_boolean %}
-    <form id="post" name="post" action="" method="post">
-        {{ form.hidden_tag() }}
-        <div class="row">
-            <fieldset>
-                <div class="six columns offset-by-three">
-                    {{ render_field(form.title, class="u-full-width") }}
-                </div>
-            </fieldset>
-            <fieldset>
-                <div class="six columns offset-by-three">
-                    {{ render_field(form.body, class="u-full-width")  }}
-                </div>
-            </fieldset>
-        </div>
-        <div class="row">
-            <fieldset>
-                <div class="three columns offset-by-three">
-                    <input id="save" type="submit" value="{{ _('Save') }}"
-                        class="button button-primary u-mobile-fixed-bottom">
-                </div>
-                <div class="three columns">
-                    {% if post %}
-                    <a href="{{ url_for('.post_delete', slug=cause.slug, pk=post.id) }}"
-                        id="delete" class="button danger u-mobile-fixed-bottom">
-                        {{ _('Delete') }}
-                    </a>
-                    {% endif %}
-                </div>
-            </fieldset>
-        </div>
-    </form>
-</div>
-{% endblock %}
+{% from "helpers/forms.html" import render_field_no_label %}
+<form id="post" name="post" action="{{ url_for('posts.post_add', slug=cause.slug) }}" method="post">
+    {{ post_form.hidden_tag() }}
+    <div class="row">
+        <fieldset>
+            <div class="u-full-width">
+                {{ render_field_no_label(post_form.body, class="u-full-width")  }}
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset>
+            <div class="three columns offset-by-three">
+                <input id="save" type="submit" value="{{ _('Post') }}"
+                    class="button button-primary u-mobile-fixed-bottom">
+            </div>
+            <div class="three columns">
+                {% if post %}
+                <a href="{{ url_for('.post_delete', slug=cause.slug, pk=post.id) }}"
+                    id="delete" class="button danger u-mobile-fixed-bottom">
+                    {{ _('Delete') }}
+                </a>
+                {% endif %}
+            </div>
+        </fieldset>
+    </div>
+</form>

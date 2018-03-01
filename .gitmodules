@@ -25,3 +25,6 @@
 [submodule "app/static/Readmore.js"]
 	path = app/static/Readmore.js
 	url = https://github.com/jedfoster/Readmore.js
+[submodule "app/static/jQuery-form"]
+	path = app/static/jQuery-form
+	url = http://github.com/malsup/form/

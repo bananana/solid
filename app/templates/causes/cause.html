@@ -33,6 +33,8 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script src="{{ url_for('static', filename='jQuery-form/dist/jquery.form.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/update_bar.js') }}"></script>
 <script src="{{ url_for('static', filename='Readmore.js/readmore.min.js') }}"></script>
 <script src="{{ url_for('static', filename='jquery.lazy/jquery.lazy.min.js') }}"></script>
 <script src="{{ url_for('static', filename='bxslider-4/dist/jquery.bxslider.min.js') }}"></script>
@@ -101,7 +103,6 @@
 {% from "helpers/modals.html" import render_modal %}
 {% from "helpers/users.html" import render_avatar %}
 {% from "helpers/actions.html" import render_action_list with context %}
-{% from "helpers/posts.html" import render_post_list %}
 <div class="section hero lazy" {% if cause.image %}data-src="{{ cause.image_url }}"{% endif %}>
     <div class="full-width-container">
         <div class="row">
@@ -222,38 +223,22 @@
             </div>
         </div>
 
-        <div class="six columns">
+        <div class="nine columns">
+            <div class="row">
+                {% if current_user.is_authenticated %}
+                {% include 'posts/post_form.html' %}
+                {% else %}
+                    {# TODO "log in to post" message #}
+                {% endif %}
+                {{ render_log(log) }}
+            </div>
+        </div>
+
+        <div class="nine columns">
             <h3>{{ cause.story_heading }}</h3>
             <div class="read_more">
                 {{ cause.story_content|markdown }}
             </div>
         </div>
-
-        <div class="three columns">
-            <div class="row">
-                <div class="twelve columns">
-                    {{ render_log(log) }}
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="eight columns">
-                <h3>{{ _('Updates') }}</h3>
-            </div>
-            {% if current_user in cause.creators.all() or current_user.is_admin %}
-            <div class="four columns">
-                <a class="button u-full-width" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
-                    <span class="oi" data-glyph="plus" title="Add new post" aria-hidden="true"></span>
-                    <span>&nbsp;{{ _('new post') }}</span>
-                </a>
-            </div>
-            {% endif %}
-        </div>
-        {{ render_post_list(cause) }}
-    </div>
-
-    </div>
-
 </div>
 {% endblock %}

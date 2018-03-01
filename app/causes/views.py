@@ -8,6 +8,7 @@ from flask_babel import gettext as _
 
 from app import db, uploaded_images
 from app.log.models import LogEvent, LogEventType
+from app.posts.forms import PostForm
 
 from .models import Cause, CauseTranslation, Action, ActionTranslation
 from .forms import (CauseForm, CauseTranslationForm, ActionForm,
@@ -71,7 +72,8 @@ def cause_detail(slug):
         "actions": cause.actions.filter(
             (Action.expiration >= datetime.now()) |
             (Action.expiration == None)
-        )
+        ),
+        "post_form": PostForm()
     }
 
     try:

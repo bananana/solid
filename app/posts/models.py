@@ -16,11 +16,13 @@ class Post(CRUDMixin, db.Model):
         'posts', lazy='dynamic', order_by="Post.created_on.desc()"
     ))
 
-    title         = db.Column(db.String(128), nullable=False)
-    summary       = db.Column(db.Text)
     body          = db.Column(db.Text, nullable=False)
     author_id     = db.Column(db.Integer, db.ForeignKey('users_user.id'))
     author        = db.relationship('User', backref=db.backref('posts', lazy='dynamic'))
+
+    # FIXME deprecated
+    summary       = db.Column(db.Text)
+    title         = db.Column(db.String(128))
 
     created_on    = db.Column(db.DateTime)
 
