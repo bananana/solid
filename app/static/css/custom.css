@@ -579,6 +579,9 @@ a.support-action {
         min-height: 299px;
     }
 }
+.post-box textarea {
+    min-height: 2.5em;
+}
 
 /* Footer 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

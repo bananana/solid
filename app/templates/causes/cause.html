@@ -38,6 +38,7 @@
 <script src="{{ url_for('static', filename='Readmore.js/readmore.min.js') }}"></script>
 <script src="{{ url_for('static', filename='jquery.lazy/jquery.lazy.min.js') }}"></script>
 <script src="{{ url_for('static', filename='bxslider-4/dist/jquery.bxslider.min.js') }}"></script>
+<script src="{{ url_for('static', filename='autosize/dist/autosize.min.js') }}"></script>
 <script>
     $(document).ready(function() {
         $('.actions-slider').bxSlider({
@@ -94,6 +95,8 @@
                 eventLabel: '{{ cause_support }}'
             });
         {% endif %}
+
+        autosize(document.getElementById('body'));
     });
 </script>
 {% endblock %}
@@ -224,20 +227,16 @@
         </div>
 
         <div class="nine columns">
-            <div class="row">
-                {% if current_user.is_authenticated %}
-                {% include 'posts/post_form.html' %}
-                {% else %}
-                    {# TODO "log in to post" message #}
-                {% endif %}
-                {{ render_log(log) }}
-            </div>
+            {% if current_user.is_authenticated %}
+            {% include 'posts/post_form.html' %}
+            {% else %}
+                {# TODO "log in to post" message #}
+            {% endif %}
+            {{ render_log(log) }}
         </div>
 
+        <!--
         <div class="row">
-            <div class="eight columns">
-                <h3>{{ _('Updates') }}</h3>
-            </div>
             {% if current_user in cause.creators.all() or current_user.is_admin %}
             <div class="four columns">
                 <a class="button u-pull-right" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
@@ -245,11 +244,15 @@
                     <span>&nbsp;{{ _('new post') }}</span>
                 </a>
             </div>
+            {% endif %}
         </div>
-        <div class="nine columns">
-            <h3>{{ cause.story_heading }}</h3>
-            <div class="read_more">
-                {{ cause.story_content|markdown }}
+        -->
+        <div class="row">
+            <div class="nine columns">
+                <h3>{{ cause.story_heading }}</h3>
+                <div class="read_more">
+                    {{ cause.story_content|markdown }}
+                </div>
             </div>
         </div>
 </div>
