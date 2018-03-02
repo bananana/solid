@@ -157,7 +157,7 @@
             {% if supporter %}
             <h5 class="u-add-margin-left u-add-margin-right">&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
             <a class="button button-modal u-add-margin-top u-full-width"
-                data-target="modal-share">
+               data-target="modal-share">
                 {{ _('Share') }}
             </a>
             {% else %}
@@ -172,22 +172,30 @@
                 {{ _('Share') }}
             </a>
             {% endif %}
-            <h4 class="u-add-margin-top u-remove-margin-bottom">
+            <h4 class="u-add-margin-top">
                 {{ _('Cause creators') }}
             </h4>
             {% for u in cause.creators.all()[-10:] | reverse %}
                 {{ render_avatar(u) }}
                 {% if loop.last and loop.index == 10 %}
-                    <small class="see-all"><a href="{{ url_for('causes.view_cause_creators', slug=cause.slug) }}">See&nbsp;all&nbsp;{{ cause.creators.all() | length }}</a></small>
+                    <small class="see-all">
+                        <a href="{{ url_for('causes.view_cause_creators', slug=cause.slug) }}">
+                            See&nbsp;all&nbsp;{{ cause.creators.all() | length }}
+                        </a>
+                    </small>
                 {% endif %}
             {% endfor %}
-            <h4 class="u-add-margin-top u-remove-margin-bottom">
+            <h4 class="u-add-margin-top">
                 {{ _('%(count)s supporters', count=cause.supporters.all() | length) }}
             </h4>
             {% for u in cause.supporters.all()[-10:] | reverse %}
                 {{ render_avatar(u) }}
                 {% if loop.last and loop.index == 10 %}
-                    <small class="see-all"><a href="{{ url_for('causes.view_cause_supporters', slug=cause.slug) }}">See&nbsp;all&nbsp;{{ cause.supporters.all() | length }}</a></small>
+                    <small class="see-all">
+                        <a href="{{ url_for('causes.view_cause_supporters', slug=cause.slug) }}">
+                            See&nbsp;all&nbsp;{{ cause.supporters.all() | length }}
+                        </a>
+                    </small>
                 {% endif %}
             {% endfor %}
             <h4 class="u-add-margin-top u-remove-margin-bottom">
@@ -210,18 +218,24 @@
                                      _external=True) | urlencode
                              }}"
                        target="_blank"
-                       class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}"></a>
+                       class="u-add-margin-right">
+                        <img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}">
+                    </a>
                     <a href="https://twitter.com/home?status={{
                              url_for('causes.cause_detail', slug=cause.slug,
                                      _external=True) | urlencode
                              }}"
                        target="_blank"
-                       class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}"></a>
+                       class="u-add-margin-right">
+                        <img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}">
+                    </a>
                     <a href="https://plus.google.com/share?url={{
                              url_for('causes.cause_detail', slug=cause.slug,
                                      _external=True) | urlencode
                              }}"
-                       target="_blank"><img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}"></a>
+                       target="_blank">
+                        <img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}">
+                    </a>
                 </p>
             </div>
         </div>

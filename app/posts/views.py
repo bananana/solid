@@ -95,14 +95,14 @@ def post_add(slug):
 
     return render_template('posts/post_form.html', **context)
 
-
+'''
 @mod.route('/cause/<slug>/posts/<pk>/edit')
 def post_edit_get(slug, pk):
     """ Inline editing only; redirect back to .post_detail """
     return redirect(url_for('.post_detail', slug=slug, pk=pk))
+'''
 
-
-@mod.route('/cause/<slug>/posts/<pk>/edit', methods=('POST',))
+@mod.route('/cause/<slug>/posts/<pk>/edit', methods=('GET', 'POST'))
 @login_required
 @cause_required
 def post_edit(slug, pk):
@@ -126,7 +126,7 @@ def post_edit(slug, pk):
         "post": post,
     }
 
-    return render_template('posts/post_form.html', **context)
+    return render_template('posts/edit.html', **context)
 
 
 @mod.route('/cause/<slug>/posts/<pk>/delete', methods=('GET', 'POST'))
