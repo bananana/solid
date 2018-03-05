@@ -136,25 +136,12 @@ def post_delete(slug, pk):
     cause = Cause.query.filter_by(slug=slug).first()
     post = cause.posts.filter_by(id=pk).one()
 
-    if current_user.id is not post.author.id and not current_user.is_admin:
-        abort(403)
-
-    form = PostDeleteForm(request.form, obj=post)
-
-    if form.validate_on_submit():
-        form.populate_obj(post)
+    if current_user.id is post.author.id or current_user.is_admin:
         post.delete()
         flash('Post deleted!', 'success')
-        return redirect(url_for('.post_list', slug=cause.slug))
-
-    context = {
-        "cause": cause,
-        "form": form,
-        "post": post,
-    }
-
-    return render_template('posts/delete.html', **context)
-
+        return redirect(url_for('causes.cause_detail', slug=cause.slug))
+    else:
+        abort(404)
 
 @mod.route('/cause/<slug>/posts/<pk>/comments/add', methods=('GET', 'POST'))
 @login_required

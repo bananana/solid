@@ -12,56 +12,56 @@
     {% from "helpers/forms.html" import render_field, render_boolean %}
     <form id="post" name="post" action="" method="post">
         {{ post_form.hidden_tag() }}
-        <div class="row">
-            <fieldset>
-                <div class="six columns offset-by-three">
-                    {{ render_field(post_form.title, class="u-full-width") }}
-                </div>
-            </fieldset>
-            <fieldset>
-                <div class="six columns offset-by-three">
-                    {{ render_field(post_form.body, class="u-full-width")  }}
-                </div>
-            </fieldset>
+        <div class="row u-add-margin-bottom">
+            <div class="six columns offset-by-three">
+                <span class="u-pull-left">{{ render_avatar(post.author) }}</span>
+                <span class="u-pull-right">{{ post.created_on.strftime('%b. %d, %Y') }}</span>
+            </div>
         </div>
         <div class="row">
-            <fieldset>
-                <div class="four columns offset-by-three">
-                    <input id="save" type="submit" value="{{ _('Save') }}"
-                        class="button button-primary u-mobile-fixed-bottom">
-                </div>
-                <div class="two columns">
-                    {% if post %}
-                    <!--
-                    <a href="{{ url_for('.post_delete', slug=cause.slug, pk=post.id) }}"
-                        id="delete" class="button danger u-mobile-fixed-bottom">
-                        {{ _('Delete') }}
-                    </a>
-                    -->
-                    <a class="button danger u-mobile-fixed-bottom"
-                       data-target="modal-delete">
-                        {{ _('Delete') }}
-                    </a>
-                    <div id="modal-delete" class="modal">
-                        <div style="width:300px;">
-                            <h3 class="u-pull-left">Are you sure?</h3>
-                            <a href="#" class="button-modal-close u-pull-right">
-                                <img src="/static/open-iconic/png/x-2x.png" alt="X" />
-                            </a>
-                            <a class="button u-pull-left"
-                               style="width:50%;">
-                                No
-                            </a>
-                            <a class="button danger u-pull-left"
-                               style="width:50%;">
-                                Yes
-                            </a>
-                            <br class="u-cf">
-                        </div>
+            <div class="six columns offset-by-three">
+                {{ render_field(post_form.title, class="u-full-width") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="six columns offset-by-three">
+                {{ render_field(post_form.body, class="u-full-width")  }}
+            </div>
+        </div>
+        <div class="row u-add-margin-top">
+            <div class="four columns offset-by-three">
+                <input id="save" type="submit" value="{{ _('Save') }}"
+                    class="button button-primary u-mobile-fixed-bottom">
+            </div>
+            <div class="two columns">
+                {% if post %}
+                <a class="button danger u-mobile-fixed-bottom"
+                   data-target="modal-delete">
+                    {{ _('Delete') }}
+                </a>
+                <div id="modal-delete" class="modal">
+                    <div style="width:300px;">
+                        <h3 class="u-pull-left">Are you sure?</h3>
+                        <a href="#" class="button-modal-close u-pull-right">
+                            <img src="/static/open-iconic/png/x-2x.png" alt="X" />
+                        </a>
+                        <p>This post and any replies to it will be <strong>permanently removed</strong>.</p>
+                        <p><small>Number of replies to this post: {{ post.comments.count() }}</small></p>
+                        <br>
+                        <a class="button button-modal-close u-pull-left"
+                           style="width:48%;">
+                            Cancel
+                        </a>
+                        <a class="button danger u-pull-left u-add-margin-left"
+                           style="width:48%;"
+                           href="{{ url_for('.post_delete', slug=cause.slug, pk=post.id) }}">
+                            Delete
+                        </a>
+                        <br class="u-cf">
                     </div>
-                    {% endif %}
                 </div>
-            </fieldset>
+                {% endif %}
+            </div>
         </div>
     </form>
 </div>
