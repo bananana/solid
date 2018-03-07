@@ -22,12 +22,12 @@ section (app/templates/styleguide/templating#cause-helpers)
     6: 'supported an action',
     7: 'commented on action',
     8: 'added a post',
-    9: 'posted a reply'
+    9: 'posted a reply',
+    10: 'said'
     }
 %}
 {% for event in log %}
-<div id="log">
-    <div class="feed-item twelve columns">
+    <div class="feed-item">
     {% if event.event_type_id == 8 %}
         {{ render_post(event.item.cause, event.item) }}
     {% else %}
@@ -46,6 +46,5 @@ section (app/templates/styleguide/templating#cause-helpers)
     </p>
     {% endif %}
     </div>
-</div>
 {% endfor %}
 {% endmacro %}
