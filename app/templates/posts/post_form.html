@@ -1,8 +1,9 @@
-{% from "helpers/forms.html" import render_field_no_label %}
+{% from "helpers/forms.html" import render_field, render_field_no_label %}
 <form id="post" name="post" action="{{ url_for('posts.post_add', slug=cause.slug) }}" method="post">
     {{ post_form.hidden_tag() }}
     <fieldset style="width:80%;" class="post-box u-pull-left">
         {{ render_field_no_label(post_form.body, class="u-full-width", placeholder="Say something nice") }}
+        {{ render_field(post_form.images) }}
     </fieldset>
     <fieldset>
         <input id="save" 

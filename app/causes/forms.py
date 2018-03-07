@@ -1,9 +1,7 @@
 from flask_babel import lazy_gettext as _
 from flask_wtf import Form
-from flask_wtf.file import FileField, FileRequired
+from flask_wtf.file import FileField
 from werkzeug.utils import secure_filename
-
-from app import db
 
 from .models import Cause, CauseTranslation, Action, ActionTranslation
 

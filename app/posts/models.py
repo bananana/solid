@@ -1,6 +1,6 @@
 import datetime
 
-from app import db
+from app import db, uploaded_images
 from app.mixins import CRUDMixin
 
 from app.causes.models import Cause
@@ -53,7 +53,6 @@ class PostImage(CRUDMixin, db.Model):
         return uploaded_images.url(self.image)
 
     created_on    = db.Column(db.DateTime)
-
 
     def save(self, *args, **kwargs):
         if not self.created_on:

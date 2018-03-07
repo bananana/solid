@@ -1,14 +1,16 @@
 from flask import (Blueprint, render_template, url_for, redirect, request,
                    flash, abort)
 from flask_login import current_user, login_required
+from werkzeug.datastructures import CombinedMultiDict
 
+from app import uploaded_images
 from app.causes.models import Cause
 from app.causes.views import cause_required
-from app.log.models import LogEvent, LogEventType
+from app.log.models import LogEvent
 from app.users.models import User
 
-from .forms import PostForm, CommentForm, PostDeleteForm
-from .models import Post, Comment
+from .forms import PostForm, CommentForm
+from .models import Post, Comment, PostImage
 
 from ..email import send_email
 
@@ -58,18 +60,26 @@ def post_add(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
     if current_user not in cause.supporters.all() and not current_user.is_admin:
-        flash('You must be casupporting this cause to post.', 'error')
+        flash('You must be supporting this cause to post.', 'error')
         return redirect(url_for('causes.cause_detail', slug=slug))
 
-    form = PostForm(request.form)
+    form = PostForm(CombinedMultiDict((request.files, request.form)))
 
     post = Post.create(commit=False)
+
+    del form._fields['images']
 
     if form.validate_on_submit():
         form.populate_obj(post)
         post.author = current_user
         post.cause = cause
         post.save()
+
+        for image in form.images.data:
+            post_image = PostImage.create(commit=False)
+            post_image.image = uploaded_images.save(image)
+            post_image.post = post
+            post_image.save()
 
         if current_user in cause.creators.all() or current_user.is_admin:
             send_email('"{0.title}" - "{1.title}"'.format(post, cause),
@@ -83,7 +93,6 @@ def post_add(slug):
                        {'cause': cause, 'post': post},
                        'email/post_creators.txt')
 
-
         flash('Post added!', 'success')
         LogEvent._log('post_add', post, user=current_user)
         return redirect(url_for('.post_list', slug=cause.slug))
@@ -95,12 +104,6 @@ def post_add(slug):
 
     return render_template('posts/post_form.html', **context)
 
-'''
-@mod.route('/cause/<slug>/posts/<pk>/edit')
-def post_edit_get(slug, pk):
-    """ Inline editing only; redirect back to .post_detail """
-    return redirect(url_for('.post_detail', slug=slug, pk=pk))
-'''
 
 @mod.route('/cause/<slug>/posts/<pk>/edit', methods=('GET', 'POST'))
 @login_required
