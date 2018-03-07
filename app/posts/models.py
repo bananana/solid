@@ -52,6 +52,10 @@ class PostImage(CRUDMixin, db.Model):
     def image_url(self):
         return uploaded_images.url(self.image)
 
+    @property
+    def image_path(self):
+        return uploaded_images.path(self.image)
+
     created_on    = db.Column(db.DateTime)
 
     def save(self, *args, **kwargs):

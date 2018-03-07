@@ -43,10 +43,13 @@ from flask_moment import Moment
 moment = Moment(app)
 
 from flask_uploads import (UploadSet, configure_uploads, IMAGES,
-                              UploadNotAllowed)
+                           UploadNotAllowed)
 
 uploaded_images = UploadSet('images', IMAGES)
 configure_uploads(app, uploaded_images)
+
+import flask_resize
+resize = flask_resize.Resize(app)
 
 # Register blueprints
 from app.users.views import mod as usersModule

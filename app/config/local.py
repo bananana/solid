@@ -18,7 +18,9 @@ FACEBOOK_OAUTH_CLIENT_SECRET = '1a6d52a5e39ffb7e3e018a89543ae731'
 
 SECRET_KEY = 'veryverysecret'
 
-UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'uploads')
+RESIZE_URL = 'http://{0}/static/uploads/'.format(SERVER_NAME)
+UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'app', 'static', 'uploads')
+RESIZE_ROOT = UPLOADS_DEFAULT_DEST
 
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'

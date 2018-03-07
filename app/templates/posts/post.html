@@ -6,7 +6,6 @@
 {% block content %}
 {% from "helpers/users.html" import render_avatar %}
 <div class="full-width-container">
-
     <div class="row u-add-margin-top">
         <div class="twelve columns">
             <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">
@@ -20,7 +19,12 @@
         <div class="one-half column">
             <div class="post u-remove-margin-top u-add-margin-bottom">
                 <h2 class="u-pull-left">{{ post.title }}</h2>
-                <article class="u-cf">{{ post.body|markdown }}</article>
+                <article class="u-cf">
+                    {% for image in post.images.all() %}
+                        <image src="{{ image.image_path|resize('200x200', fill=True) }}" />
+                    {% endfor %}
+                    {{ post.body|markdown }}
+                </article>
                 <p class="u-remove-margin-bottom">
                     {{ render_avatar(post.author) }}&nbsp;
                     {{ post.created_on.strftime('%b. %d, %Y') }}
@@ -83,6 +87,5 @@
             {% endfor %}
         </div>
     </div>
-
 </div>
 {% endblock %}
