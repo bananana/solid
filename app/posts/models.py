@@ -34,7 +34,35 @@ class Post(CRUDMixin, db.Model):
         return super(Post, self).save(*args, **kwargs)
 
     def __repr__(self):
-       return '<Post "%r">' % (self.title)
+        return '<Post "%r">' % (self.body[:20])
+
+
+class PostImage(CRUDMixin, db.Model):
+    __tablename__ = 'discussions_postimage'
+    id            = db.Column(db.Integer, primary_key=True)
+
+    post_id       = db.Column(db.Integer, db.ForeignKey('discussions_post.id'))
+    post          = db.relationship('Post', backref=db.backref(
+        'images', lazy='dynamic'
+    ))
+
+    image         = db.Column(db.String(128))
+
+    @property
+    def image_url(self):
+        return uploaded_images.url(self.image)
+
+    created_on    = db.Column(db.DateTime)
+
+
+    def save(self, *args, **kwargs):
+        if not self.created_on:
+            self.created_on = datetime.datetime.utcnow()
+
+        return super(PostImage, self).save(*args, **kwargs)
+
+    def __repr__(self):
+       return '<PostImage "%r">' % (self.id)
 
 
 class Comment(CRUDMixin, db.Model):
