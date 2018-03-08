@@ -21,11 +21,9 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         only = (
-            'title',
             'body',
         )
         field_args = {
-            'title': {'label': _('Title')},
             'body': {'label': _('Body')}
         }
 
