@@ -1,5 +1,5 @@
 # uploaded files
-/app/static/uploads/
+#/app/static/uploads/
 
 # Python
 *.pyc
