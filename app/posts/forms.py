@@ -14,7 +14,7 @@ ModelForm = model_form_factory(FlaskForm)
 
 class PostForm(ModelForm):
     images = MultipleFileField(
-        'images',
+        '+ add photos',
         widget=FileInput(multiple=True, accept=['image/*']),
     )
 
@@ -28,6 +28,7 @@ class PostForm(ModelForm):
             'title': {'label': _('Title')},
             'body': {'label': _('Body')}
         }
+
 
 class CommentForm(ModelForm):
     class Meta:

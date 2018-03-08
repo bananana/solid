@@ -243,24 +243,13 @@
         <div class="nine columns">
             {% if current_user.is_authenticated %}
             {% include 'posts/post_form.html' %}
+            <hr class="u-cf"/>
             {% else %}
                 {# TODO "log in to post" message #}
             {% endif %}
             {{ render_log(log) }}
         </div>
 
-        <!--
-        <div class="row">
-            {% if current_user in cause.creators.all() or current_user.is_admin %}
-            <div class="four columns">
-                <a class="button u-pull-right" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
-                    <span class="oi" data-glyph="plus" title="Add new post" aria-hidden="true"></span>
-                    <span>&nbsp;{{ _('new post') }}</span>
-                </a>
-            </div>
-            {% endif %}
-        </div>
-        -->
         <div class="row">
             <div class="nine columns">
                 <h3>{{ cause.story_heading }}</h3>
