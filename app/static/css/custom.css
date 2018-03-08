@@ -762,6 +762,9 @@ a.support-action {
 
 /* Input 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="file"] {
+    display: none;
+}
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -1057,6 +1060,12 @@ input[type="submit"]:disabled:focus {
 }
 .u-remove-margin-top {
     margin-top: 0;
+}
+.u-remove-margin-left {
+    margin-left: 0;
+}
+.u-remove-margin-right {
+    margin-right: 0;
 }
 .u-to-upper {
     text-transform: uppercase;

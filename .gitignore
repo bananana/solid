@@ -1,6 +1,3 @@
-# uploaded files
-#/app/static/uploads/
-
 # Python
 *.pyc
 python.stackdump

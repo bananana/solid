@@ -155,7 +155,7 @@
     <div class="row" id="log">
         <div class="three columns">
             {% if supporter %}
-            <h5 class="u-add-margin-left u-add-margin-right">&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
+            <h5>&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
             <a class="button button-modal u-add-margin-top u-full-width"
                data-target="modal-share">
                 {{ _('Share') }}
@@ -242,10 +242,13 @@
 
         <div class="nine columns">
             {% if current_user.is_authenticated %}
-            {% include 'posts/post_form.html' %}
+                {% include 'posts/post_form.html' %}
             {% else %}
                 {# TODO "log in to post" message #}
             {% endif %}
+        </div>
+
+        <div class="nine columns">
             {{ render_log(log) }}
         </div>
 
