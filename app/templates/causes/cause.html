@@ -247,7 +247,13 @@
             {% else %}
                 {# TODO "log in to post" message #}
             {% endif %}
-            {{ render_log(log) }}
+            {{ render_log(log.items) }}
+            {% if log.has_prev %}
+            <a href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}">Newer</a>
+            {% endif %}
+            {% if log.has_next %}
+            <a href="{{ url_for('.cause_detail', slug=cause.slug, page=log.next_num) }}">Older</a>
+            {% endif %}
         </div>
 </div>
 {% endblock %}

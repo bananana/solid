@@ -6,7 +6,7 @@ from flask import (Blueprint, render_template, url_for, redirect, session,
 from flask_login import current_user, login_required
 from flask_babel import gettext as _
 
-from app import db, uploaded_images
+from app import app, db, uploaded_images
 from app.log.models import LogEvent, LogEventType
 from app.posts.forms import PostForm
 
@@ -54,6 +54,8 @@ def cause_detail(slug):
 
     session["last_cause"] = cause.id
 
+    page = request.args.get('page', 1, type=int)
+
     log = LogEvent.query.filter(
         (
             (LogEvent.item == cause) | (
@@ -64,7 +66,9 @@ def cause_detail(slug):
                 & (LogEvent.item_id.in_([p.id for p in cause.posts.all()]))
             )
         ) & (LogEvent.item_id != LogEventType.EVENT_TYPES['cause_edit'])
-    ).order_by(LogEvent.logged_at.desc()).limit(12)
+    ).order_by(LogEvent.logged_at.desc()).paginate(
+        page, app.config['LOG_PER_PAGE'], False
+    )
 
     context = {
         "cause": cause,

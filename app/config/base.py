@@ -37,3 +37,5 @@ RESIZE_ROOT = os.path.join(basedir, '..', 'resized')
 
 MAILGUN_API_KEY = 'key-e57445fe7e1ad02c5481f8398186589f'
 MAILGUN_DOMAIN = 'sandbox40316c4ae2364191a9387fe1be902d37.mailgun.org'
+
+LOG_PER_PAGE = 10
