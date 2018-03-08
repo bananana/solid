@@ -590,7 +590,6 @@ form#post input#images {
 form#post label[for=images] {
  display: inline-block;
  background-color: #3299bb;
- border: 1px solid #bbb;
  color: #fff;
  cursor: pointer;
  padding: 0 15px;
