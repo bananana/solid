@@ -15,13 +15,10 @@ $(document).ready(function () {
             preview.appendChild(list);
             for(var i = 0; i < curFiles.length; i++) {
                 var listItem = document.createElement('li');
-                //var para = document.createElement('p');
                 if(validFileType(curFiles[i])) {
-                    //para.textContent = curFiles[i].name;
                     var image = document.createElement('img');
                     image.src = window.URL.createObjectURL(curFiles[i]);
                     listItem.appendChild(image);
-                    //listItem.appendChild(para);
                 } else {
                     var para = document.createElement('p');
                     para.innerHTML = curFiles[i].name + '<br><strong>Not a valid file type.</strong>';

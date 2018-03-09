@@ -6,16 +6,9 @@
             {{ render_field_no_label(post_form.body, class="u-full-width", placeholder="Say something nice") }}
         </div>
         <div class="three columns">
-            <!--
-            <label for="images" class="button u-full-width">
-                <span class="oi" data-glyph="paperclip" title="Attach" aria-hidden="true"></span>
-                <span>Add Image</span>
-            </label>
-            -->
             <input id="save" 
                    type="submit" 
                    value="{{ _('Post') }}" 
-                   style="width:50%;"
                    class="button button-primary u-pull-right u-add-margin-left">
 
             <label for="images" class="button-icon u-pull-right u-add-margin-right">
