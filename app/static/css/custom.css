@@ -583,6 +583,23 @@ a.support-action {
     min-height: 2em;
 }
 
+form#post input#images {
+ display: none;
+}
+
+form#post label[for=images] {
+ display: inline-block;
+ background-color: #3299bb;
+ color: #fff;
+ cursor: pointer;
+ padding: 0 15px;
+ line-height: 28px;
+ font-size: 11px;
+ font-weight: 600;
+ border-radius: 4px;
+ text-transform: uppercase;
+}
+
 /* Footer 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .footer {

@@ -243,6 +243,7 @@
         <div class="nine columns">
             {% if current_user.is_authenticated %}
                 {% include 'posts/post_form.html' %}
+                <hr class="u-cf"/>
             {% else %}
                 {# TODO "log in to post" message #}
             {% endif %}
@@ -250,6 +251,12 @@
 
         <div class="nine columns">
             {{ render_log(log) }}
+            {% if log.has_prev %}
+                <a href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}">Newer</a>
+            {% endif %}
+            {% if log.has_next %}
+                <a href="{{ url_for('.cause_detail', slug=cause.slug, page=log.next_num) }}">Older</a>
+            {% endif %}
         </div>
 
         <!--
@@ -264,13 +271,5 @@
             {% endif %}
         </div>
         -->
-        <div class="row">
-            <div class="nine columns">
-                <h3>{{ cause.story_heading }}</h3>
-                <div class="read_more">
-                    {{ cause.story_content|markdown }}
-                </div>
-            </div>
-        </div>
 </div>
 {% endblock %}

@@ -76,7 +76,7 @@ def clean(list_, type_):
     else:
         for f in files:
             remove(f)
-        print(bcolors.OKGREEN + 'Removed ' + str(len(files)) 
+        print(bcolors.OKGREEN + 'Removed ' + str(len(files))
               + ' files' + bcolors.ENDC)
 
 
@@ -327,8 +327,8 @@ def cause(create, delete, modify, list_):
         #keys = sorted(c.__dict__.keys()[1:])
 
         #: Manually created list of keys in appropriate order
-        keys = ['title', 'boss', 'location', 'video', 'image',
-                'story_heading', 'story_content']
+        keys = ['title', 'boss', 'location', 'video', 'image']
+
 
         #: Empty arrays to store user input
         values = []
@@ -395,8 +395,7 @@ def cause(create, delete, modify, list_):
         #keys = sorted(c.__dict__.keys()[1:])
 
         #: Manually created list of keys in appropriate order
-        keys = ['title', 'boss', 'location', 'video', 'image',
-                'story_heading', 'story_content']
+        keys = ['title', 'boss', 'location', 'video', 'image']
 
         #: Empty arrays to store user input
         values = []
@@ -439,13 +438,13 @@ def cause(create, delete, modify, list_):
 
     elif list_ is not None:
         try:
-            cause_sr = Cause.query.filter_by(slug=list_).all()
+            cause_sr = Cause.query.filter(Cause.slug.contains(list_)).all()
         except Exception as e:
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
             exit(1)
 
         keys = ['id', 'title', 'slug', 'boss', 'location',
-                'video', 'image', 'story_heading', 'story_content']
+                'video', 'image']
         table_data = [keys]
         for c in cause_sr:
             cause = []
@@ -575,10 +574,9 @@ def action(create, delete, modify, list_):
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
             exit(1)
 
-
     elif list_ is not None:
         try:
-            action_sr = Action.query.filter_by(title=list_).all()
+            action_sr = Action.query.filter(Action.title.contains(list_)).all()
         except Exception as e:
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
             exit(1)
@@ -589,7 +587,7 @@ def action(create, delete, modify, list_):
             action = []
             for k in keys:
                 attr = getattr(a, k)
-                cause.append(('None' if attr is None else str(attr)))
+                action.append(('None' if attr is None else unicode(attr)))
             table_data.append(action)
         table = AsciiTable(table_data)
         print(table.table)
@@ -707,7 +705,7 @@ def email():
         user_cause_posts = Post.query.filter(Post.cause_id.in_(
             [c.id for c in user_causes.all()]
         ))
-        
+
         if user_cause_posts.count() > 0:
             posts_new = [r.item for r in LogEvent.query.filter(
                 (LogEvent.event_type_id == LogEventType.EVENT_TYPES['post_add'])
@@ -734,7 +732,7 @@ def email():
             if isinstance(highlight, Action):
                 _highlights += [{
                     'url': url_for(
-                        'causes.cause_detail', slug=highlight.cause.slug, 
+                        'causes.cause_detail', slug=highlight.cause.slug,
                         _external=True
                     ),
                     'title': highlight.title,
@@ -744,7 +742,7 @@ def email():
             else:
                 _highlights += [{
                     'url': url_for(
-                        'posts.post_detail', slug=highlight.cause.slug, 
+                        'posts.post_detail', slug=highlight.cause.slug,
                         pk=highlight.id, _external=True
                     ),
                     'title': highlight.title,
@@ -775,7 +773,7 @@ def email():
 
             send_email('Latest updates on your Solid causes',
                        [user.email,],
-                       context, 
+                       context,
                        'email/digest.txt', template_html='email/digest.html')
 
 
