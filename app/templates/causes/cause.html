@@ -154,7 +154,7 @@
         </div>
     </div>
     <div class="row" id="log">
-        <div class="three columns">
+        <div class="one-third column">
             {% if supporter %}
             <h5>&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
             <a class="button button-modal u-add-margin-top u-full-width"
@@ -241,7 +241,7 @@
             </div>
         </div>
 
-        <div class="nine columns">
+        <div class="two-thirds column">
             {% if current_user.is_authenticated %}
                 {% include 'posts/post_form.html' %}
             {% else %}
@@ -249,7 +249,7 @@
             {% endif %}
         </div>
 
-        <div class="nine columns">
+        <div class="two-thirds column">
             {{ render_log(log.items) }}
             {% if log.has_prev %}
                 <a href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}">Newer</a>

@@ -10,8 +10,8 @@
 
 /* Table of contents
 ––––––––––––––––––––––––––––––––––––––––––––––––––
-- Breakpoints
 - Color Scheme
+- Breakpoints
 - General
 - Links
 - Alerts 
@@ -35,23 +35,6 @@
 - Animations
 */
 
-/* Breakpoints
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-body:before {
-  content: "smartphone";
-  display: none; /* Prevent from displaying. */
-}
-@media (min-width: 550px) {
-  body:before {
-    content: "tablet";
-  }
-}
-@media (min-width: 700px) {
-  body:before {
-    content: "desktop";
-  }
-}
 
 /* Color Scheme 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -81,6 +64,22 @@ body:before {
  */
 
 
+/* Breakpoints
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+body:before {
+  content: "smartphone";
+  display: none; /* Prevent from displaying. */
+}
+@media (min-width: 550px) {
+  body:before {
+    content: "tablet";
+  }
+}
+@media (min-width: 700px) {
+  body:before {
+    content: "desktop";
+  }
+}
 
 
 /* General
@@ -117,9 +116,13 @@ a:hover {
     text-decoration: underline;
 }
 a.feed-link {
-    margin-left: 2.7em;
-    display: block;
+    display: inline-block;
     cursor: pointer;
+}
+.feed-item .post article {
+    margin-left: 15px;
+    padding-left: 24px;
+    border-left: 2px solid #e5e5e5;
 }
 
 /* Alerts 
@@ -602,9 +605,6 @@ a.support-action {
     line-height: 20px;
     padding: 0 10px;
     font-size: small;
-}
-#save {
-    width: 50%;
 }
 
 

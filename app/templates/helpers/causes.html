@@ -21,30 +21,31 @@ section (app/templates/styleguide/templating#cause-helpers)
     5: 'added an action',
     6: 'supported an action',
     7: 'commented on action',
-    8: 'added a post',
+    8: 'said',
     9: 'posted a reply',
-    10: 'said'
     }
 %}
 {% for event in log %}
-    <div class="feed-item">
-    {% if event.event_type_id == 8 %}
-        {{ render_post(event.item.cause, event.item) }}
-    {% else %}
+<div class="feed-item">
+    {% if event.event_type_id in [1,2,3,4] %}
     <p>
         {{ render_avatar(event.user) }}&nbsp;
-        {{ captions[event.event_type_id] }}:<br>
-        {% if event.event_type_id in [1,2,3,4] %}
-            <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.slug) }}">
-                {{ event.item.title }}
-            </a>
-        {% elif event.event_type_id in [5,6,7] %}
+        {{ captions[event.event_type_id] }}:
+        <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.slug) }}">
+            {{ event.item.title }}
+        </a>
+    </p>
+    {% elif event.event_type_id in [5,6,7] %}
+    <p>
+        {{ render_avatar(event.user) }}&nbsp;
+        {{ captions[event.event_type_id] }}:
         <a class="feed-link"  data-target="modal-action-{{ event.item.id }}">
             {{ event.item.title }}
         </a>
-        {% endif %}
     </p>
+    {% elif event.event_type_id in [8] %}
+        {{ render_post(event.item.cause, event.item) }}
     {% endif %}
-    </div>
+</div>
 {% endfor %}
 {% endmacro %}
