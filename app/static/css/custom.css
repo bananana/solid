@@ -26,6 +26,7 @@
 - Navigation
 - Modals
 - Input
+- Icon Buttons
 - Dropdown
 - Utilities
 - Lists
@@ -582,19 +583,30 @@ a.support-action {
 .post-box textarea {
     min-height: 2em;
 }
-.button-icon {
+
+#post #preview ul {
+    margin-left: 0;
+}
+#post #preview li,
+#post #preview > p {
     display: inline-block;
-    line-height: 8px;
-    height: 41px;
-    padding-top: 7px;
-    font-weight: normal;
+    margin-right: 1em;
+    list-style-type: none;
 }
-.button-icon:hover {
-    cursor: pointer;
+#post #preview img {
+    height: 64px;
+    order: 1;
+    vertical-align: -67%;
 }
-.button-icon img {
-    vertical-align: -80%;
+#post #preview p {
+    line-height: 20px;
+    padding: 0 10px;
+    font-size: small;
 }
+#save {
+    width: 50%;
+}
+
 
 /* Footer 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -993,6 +1005,25 @@ input[type="submit"]:disabled:focus {
 }
 .no-label label {
     display: none;
+}
+
+
+/* Icon Buttons 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button-icon {
+    display: inline-block;
+    line-height: 8px;
+    height: 32px;
+    padding: 7px 7px 0 7px;
+    font-weight: normal;
+}
+.button-icon:hover {
+    cursor: pointer;
+    background-color: #FBFAF9;
+    border-radius: 4px;
+}
+.button-icon img {
+    vertical-align: -80%;
 }
 
 

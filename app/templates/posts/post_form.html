@@ -15,7 +15,7 @@
             <input id="save" 
                    type="submit" 
                    value="{{ _('Post') }}" 
-                   style="width:55%;"
+                   style="width:50%;"
                    class="button button-primary u-pull-right u-add-margin-left">
 
             <label for="images" class="button-icon u-pull-right u-add-margin-right">
@@ -24,5 +24,6 @@
             </label>
             {{ render_field_no_label(post_form.images) }}
         </div>
+        <div class="nine columns u-remove-margin-left" id="preview"></div>
     </form>
 </div>
