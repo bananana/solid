@@ -243,14 +243,13 @@
         <div class="nine columns">
             {% if current_user.is_authenticated %}
                 {% include 'posts/post_form.html' %}
-                <hr class="u-cf"/>
             {% else %}
                 {# TODO "log in to post" message #}
             {% endif %}
         </div>
 
         <div class="nine columns">
-            {{ render_log(log) }}
+            {{ render_log(log.items) }}
             {% if log.has_prev %}
                 <a href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}">Newer</a>
             {% endif %}
