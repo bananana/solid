@@ -2,20 +2,20 @@
 <div class="row">
     <form id="post" name="post" action="{{ url_for('posts.post_add', slug=cause.slug) }}" method="post">
         {{ post_form.hidden_tag() }}
-        <div class="nine columns u-remove-margin-left post-box">
-            {{ render_field_no_label(post_form.body, class="u-full-width", placeholder="Say something nice") }}
-        </div>
-        <div class="three columns">
-            <input id="save" 
-                   type="submit" 
-                   value="{{ _('Post') }}" 
-                   class="button button-primary u-pull-right u-add-margin-left">
+        <div class="twelve columns u-remove-margin-left post-box">
+            {{ render_field_no_label(post_form.body, class="", placeholder="Say something nice") }}
+            <fieldset class="post-box-controls">
+                <input id="save" 
+                       type="submit" 
+                       value="{{ _('Post') }}" 
+                       class="button button-primary u-pull-right u-add-margin-left">
 
-            <label for="images" class="button-icon u-pull-right">
-                <img src="{{ url_for('static', filename='open-iconic/png/image-3x.png') }}">
-                <small>Add Image</small>
-            </label>
-            {{ render_field_no_label(post_form.images) }}
+                <label for="images" class="button-icon u-pull-right">
+                    <img src="{{ url_for('static', filename='open-iconic/png/image-3x.png') }}">
+                    <small>Add Image</small>
+                </label>
+                {{ render_field_no_label(post_form.images) }}
+            </fieldset>
         </div>
         <div class="nine columns u-remove-margin-left" id="preview"></div>
     </form>

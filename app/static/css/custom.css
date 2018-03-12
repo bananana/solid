@@ -583,10 +583,14 @@ a.support-action {
         min-height: 299px;
     }
 }
+.post-box {
+    display: flex;
+    flex-direction: row;
+}
 .post-box textarea {
+    flex: auto;
     min-height: 2em;
 }
-
 #post #preview ul {
     margin-left: 0;
 }
@@ -605,6 +609,9 @@ a.support-action {
     line-height: 20px;
     padding: 0 10px;
     font-size: small;
+}
+#post #save {
+    width: 100px;
 }
 
 
