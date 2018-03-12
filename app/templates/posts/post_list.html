@@ -5,7 +5,7 @@
 
 {% block content %}
 {% from "helpers/posts.html" import render_post_list with context %}
-<div class="full-width-container">
+<div class="container">
     <div class="row u-add-margin-top">
         <div class="nine columns">
             <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">
