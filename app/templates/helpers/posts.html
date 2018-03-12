@@ -9,25 +9,42 @@ section (app/templates/styleguide/templating#discussion-helpers)
 <div class="post">
     <p class="u-remove-margin-top u-remove-margin-bottom">
         {{ render_avatar(post.author) }}&nbsp;said:
+        {% if post.author == current_user or current_user.is_admin %}
+        <small class="u-pull-right">
+            <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
+                <span class="oi" data-glyph="pencil"></span>
+                {{ _('Edit') }}
+            </a>
+        </small>
+        {% endif %}
     </p>
     <article id="post-body-{{ post.id }}">
-        {{ post.body | markdown | striptags | truncate(90, True) }} 
-        {% for image in post.images.all() %}
-            <image src="{{ image.image_path|resize('50x50', fill=True) }}" />
-        {% endfor %}
+        <span class="u-pull-left">
+            {% for image in post.images.all() %}
+                <a data-target="modal-post-image-{{ post.id }}">
+                    <img class="post-image-thumbnail" src="{{ image.image_path|resize('128x128', fill='True') }}" />
+                </a>
+                <div id="modal-post-image-{{ post.id }}" class="modal">
+                    <div style="width:initial; display:inline-block">
+                        <a class="button-modal-close u-pull-right">
+                            <img src="{{ url_for('static', filename='open-iconic/png/x-2x.png') }}" alt="X" style="margin-bottom:0.5em" />
+                        </a>
+                        <img class="u-cf" src="{{ image.image_url }}" />
+                    </div>
+                </div>
+            {% endfor %}
+        </span>
+        {{ post.body | markdown | striptags | truncate(280, True) }} 
+        <br class="u-cf">
     </article>
     <small>
-        <a href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
-            {{ post.created_on.strftime('%b. %d, %Y') }}:
-        </a>
-        {% if post.author == current_user or current_user.is_admin %}
-        <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
-            {{ _('(edit)') }}
-        </a>
-        <img class="icon u-add-margin-left" 
-            src="{{ url_for('static', filename='open-iconic/png/comment-square-2x.png') }}"> 
-        {{ _('%(count)s comments', count=post.comments.count()) }}
-        {% endif %}
+        {{ post.created_on.strftime('%b. %d, %Y') }}
+        <span class="u-pull-right">
+            <a href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
+                <span class="oi" data-glyph="comment-square"></span>
+                {{ _('%(count)s comments', count=post.comments.count()) }}
+            </a>
+        </span>
     </small>
 </div>
 {% endmacro %}

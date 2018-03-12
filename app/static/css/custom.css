@@ -110,6 +110,7 @@ small.small-block {
 a {
     color: #3299bb;
     text-decoration: none;
+    cursor: pointer;
 }
 a:hover {
     color: #1eaeda;
@@ -576,6 +577,10 @@ a.support-action {
 .post article h4, .comment article h4 {
     font-weight: bold;
     font-size: larger;
+}
+.post .post-image-thumbnail {
+    vertical-align: top;
+    margin-right: 1em;
 }
 @media (min-width: 550px) {
     .post-full-view {
@@ -1182,7 +1187,9 @@ input[type="submit"]:disabled:focus {
 .u-remove-border-bottom td {
     border-bottom: none;
 }
-
+.u-force-cursor {
+    cursor: pointer;
+}
 
 /* Lists 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
