@@ -1187,9 +1187,6 @@ input[type="submit"]:disabled:focus {
 .u-remove-border-bottom td {
     border-bottom: none;
 }
-.u-force-cursor {
-    cursor: pointer;
-}
 
 /* Lists 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
