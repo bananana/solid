@@ -249,29 +249,23 @@
             {% else %}
                 {# TODO "log in to post" message #}
             {% endif %}
-        </div>
-
-        <div class="two-thirds column">
             {{ render_log(log.items) }}
-            {% if log.has_prev %}
-                <a href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}">Newer</a>
-            {% endif %}
-            {% if log.has_next %}
-                <a href="{{ url_for('.cause_detail', slug=cause.slug, page=log.next_num) }}">Older</a>
-            {% endif %}
         </div>
 
-        <!--
-        <div class="row">
-            {% if current_user in cause.creators.all() or current_user.is_admin %}
-            <div class="four columns">
-                <a class="button u-pull-right" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
-                    <span class="oi" data-glyph="plus" title="Add new post" aria-hidden="true"></span>
-                    <span>&nbsp;{{ _('new post') }}</span>
+        <div class="two-thirds offset-by-one-third column">
+            {% if log.has_next %}
+                <a class="u-pull-left" 
+                   href="{{ url_for('.cause_detail', slug=cause.slug, page=log.next_num) }}">
+                    <span class="oi" data-glyph="caret-left"></span><span style="vertical-align:2px;">Older</span>
                 </a>
-            </div>
+            {% endif %}
+            {% if log.has_prev %}
+                <a class="u-pull-right" i
+                   href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}">
+                    <span style="vertical-align:2px;">Newer</span><span class="oi" data-glyph="caret-right"></span>
+                </a>
             {% endif %}
         </div>
-        -->
+    </div>
 </div>
 {% endblock %}
