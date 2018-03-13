@@ -81,17 +81,11 @@ def post_add(slug):
             post_image.post = post
             post_image.save()
 
-        if current_user in cause.creators.all() or current_user.is_admin:
-            send_email('"{0.title}" - "{1.title}"'.format(post, cause),
-                       [s.email for s in cause.supporters.all() if s.id != current_user.id],
-                       {'cause': cause, 'post': post},
-                       'email/post_supporters.txt')
-        else:
-            send_email('"{0.title}" - "{1.title}"'.format(post, cause),
-                    set([s.email for s in cause.creators.all() 
-                         + User.query.filter_by(is_admin=True).all()]),
-                       {'cause': cause, 'post': post},
-                       'email/post_creators.txt')
+        send_email('"{0.title}" - "{1.title}"'.format(post, cause),
+                set([s.email for s in cause.creators.all() 
+                     + User.query.filter_by(is_admin=True).all()]),
+                   {'cause': cause, 'post': post},
+                   'email/post_creators.txt')
 
         flash('Post added!', 'success')
         LogEvent._log('post_add', post, user=current_user)
