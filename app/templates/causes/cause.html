@@ -247,7 +247,10 @@
             {% if current_user.is_authenticated %}
                 {% include 'posts/post_form.html' %}
             {% else %}
-                {# TODO "log in to post" message #}
+                <small class="u-text-center" style="display:block; background-color:#fbfaf9; padding:1em;">
+                    Only supporters can post messages. 
+                    Please <a href="{{ url_for('users.login') }}">log in</a>.
+                </small>
             {% endif %}
             {{ render_log(log.items) }}
         </div>
