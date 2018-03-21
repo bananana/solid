@@ -3,7 +3,7 @@
     <form id="post" name="post" action="{{ url_for('posts.post_add', slug=cause.slug) }}" method="post">
         {{ post_form.hidden_tag() }}
         <div class="twelve columns u-remove-margin-left post-box">
-            {{ render_field_no_label(post_form.body, class="", placeholder="Say something nice") }}
+            {{ render_field_no_label(post_form.body, class="", placeholder="Start a conversation") }}
             <fieldset class="post-box-controls">
                 <input id="save" 
                        type="submit" 
