@@ -35,7 +35,7 @@ clean:
 
 pip:
 	@ tput setaf 5; tput bold; echo "Installing pip requirements"; tput sgr0
-	@ ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo -u bsolid $(ROOT)/venv/bin/pip install -r $(ROOT)/$(RELEASE)/requirements.txt"
+	@ ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo -u bsolid $(ROOT)/venv/bin/pip install -U -r $(ROOT)/$(RELEASE)/requirements.txt"
 
 migrate:
 	@ tput setaf 5; tput bold; echo "Migrating database"; tput sgr0
