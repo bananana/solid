@@ -621,6 +621,11 @@ a.support-action {
 #post #save {
     width: 100px;
 }
+.posting-unauthorized {
+    display: block;
+    background-color: #fbfaf9;
+    padding: 1em;
+}
 
 
 /* Footer 
