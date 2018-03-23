@@ -596,6 +596,9 @@ a.support-action {
     flex: auto;
     min-height: 2em;
 }
+#post {
+    margin-bottom: 0;
+}
 #post #preview ul {
     margin-left: 0;
 }

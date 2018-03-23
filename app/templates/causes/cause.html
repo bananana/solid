@@ -156,7 +156,7 @@
         </div>
     </div>
     <div class="row" id="log">
-        <div class="one-third column">
+        <div class="three columns">
             {% if supporter %}
             <h5>&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
             <a class="button button-modal u-add-margin-top u-full-width"
@@ -243,7 +243,7 @@
             </div>
         </div>
 
-        <div class="two-thirds column">
+        <div class="six columns">
             {% if current_user.is_authenticated %}
                 {% include 'posts/post_form.html' %}
             {% else %}
@@ -253,21 +253,27 @@
                 </small>
             {% endif %}
             {{ render_log(log.items) }}
+            <div class="u-full-width">
+                {% if log.has_next %}
+                    <a class="u-pull-left" 
+                       href="{{ url_for('.cause_detail', slug=cause.slug, page=log.next_num) }}">
+                        <span class="oi" data-glyph="caret-left"></span><span style="vertical-align:2px;">Older</span>
+                    </a>
+                {% endif %}
+                {% if log.has_prev %}
+                    <a class="u-pull-right" i
+                       href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}">
+                        <span style="vertical-align:2px;">Newer</span><span class="oi" data-glyph="caret-right"></span>
+                    </a>
+                {% endif %}
+            </div>
         </div>
 
-        <div class="two-thirds offset-by-one-third column">
-            {% if log.has_next %}
-                <a class="u-pull-left" 
-                   href="{{ url_for('.cause_detail', slug=cause.slug, page=log.next_num) }}">
-                    <span class="oi" data-glyph="caret-left"></span><span style="vertical-align:2px;">Older</span>
-                </a>
-            {% endif %}
-            {% if log.has_prev %}
-                <a class="u-pull-right" i
-                   href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}">
-                    <span style="vertical-align:2px;">Newer</span><span class="oi" data-glyph="caret-right"></span>
-                </a>
-            {% endif %}
+        <div class="three columns">
+            <h3>{{ cause.story_heading }}</h3>
+            <article class="read_more">
+                {{ cause.story_content|markdown }}
+            </article>
         </div>
     </div>
 </div>
