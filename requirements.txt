@@ -21,3 +21,4 @@ SQLAlchemy-Utils>=0.31.6
 slugify==0.0.1
 terminaltables==2.1.0
 WTForms-Alchemy==0.16.3
+raven[flask]==6.6.0

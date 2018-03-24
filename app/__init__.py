@@ -48,7 +48,15 @@ from flask_uploads import (UploadSet, configure_uploads, IMAGES,
 uploaded_images = UploadSet('images', IMAGES)
 configure_uploads(app, uploaded_images)
 
+import flask_resize
+resize = flask_resize.Resize(app)
+
+if 'SENTRY_CONFIG' in app.config:
+    from raven.contrib.flask import Sentry
+    sentry = Sentry(app)
+
 # Register blueprints
+
 from app.users.views import mod as usersModule
 app.register_blueprint(usersModule)
 lm.login_view = 'users.login'
@@ -96,13 +104,21 @@ app.register_blueprint(facebook_blueprint, url_prefix='/login')
 
 @app.context_processor
 def config_vars():
-    return dict(
+    c = dict(
         debug=app.debug,
         site_name=app.config['SITE_NAME'],
         server_name=app.config['SERVER_NAME'],
         fb_app_id=app.config['FACEBOOK_OAUTH_CLIENT_ID'],
         contact_email=app.config['CONTACT_EMAIL']
     )
+    if 'SENTRY_CONFIG' in app.config:
+        try:
+            c['sentry_environment'] = app.config['SENTRY']['environment']
+        except KeyError:
+            pass
+    if 'SENTRY_JS_KEY' in app.config:
+        c['sentry_js_key'] = app.config['SENTRY_JS_KEY']
+    return c
 
 
 # App-wide decorators
@@ -182,7 +198,6 @@ def contact():
 
 # logging
 
-
 if not app.debug:
     import logging
     from logging.handlers import RotatingFileHandler
@@ -192,6 +207,9 @@ if not app.debug:
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
     app.logger.info('Application started up!')
+
+
+# i18n 
 
 import sqlalchemy_utils
 from app.users.views import get_locale

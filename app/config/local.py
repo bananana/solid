@@ -16,9 +16,18 @@ TWITTER_OAUTH_API_SECRET = 'lSCt1Srf6zgPsH1F6av4ouNhePOYxyUhWPwf7tiaIOiMXUJ7BY'
 FACEBOOK_OAUTH_CLIENT_ID = '733401776796802'
 FACEBOOK_OAUTH_CLIENT_SECRET = '1a6d52a5e39ffb7e3e018a89543ae731'
 
+MAILGUN_API_KEY = 'key-e57445fe7e1ad02c5481f8398186589f'
+MAILGUN_DOMAIN = 'sandbox40316c4ae2364191a9387fe1be902d37.mailgun.org'
+
 SECRET_KEY = 'veryverysecret'
 
 UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'uploads')
+
+SENTRY_CONFIG = {
+    "dsn": '',
+    "environment": "local"
+}
+SENTRY_JS_KEY = ''
 
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
