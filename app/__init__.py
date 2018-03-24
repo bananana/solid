@@ -48,8 +48,8 @@ from flask_uploads import (UploadSet, configure_uploads, IMAGES,
 uploaded_images = UploadSet('images', IMAGES)
 configure_uploads(app, uploaded_images)
 
-import flask_resize
-resize = flask_resize.Resize(app)
+#import flask_resize
+#resize = flask_resize.Resize(app)
 
 if 'SENTRY_CONFIG' in app.config:
     from raven.contrib.flask import Sentry
@@ -109,7 +109,8 @@ def config_vars():
         site_name=app.config['SITE_NAME'],
         server_name=app.config['SERVER_NAME'],
         fb_app_id=app.config['FACEBOOK_OAUTH_CLIENT_ID'],
-        contact_email=app.config['CONTACT_EMAIL']
+        contact_email=app.config['CONTACT_EMAIL'],
+        sentry_js_key=app.config['SENTRY_JS_KEY']
     )
     if 'SENTRY_CONFIG' in app.config:
         try:
