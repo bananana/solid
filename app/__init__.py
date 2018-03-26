@@ -49,8 +49,8 @@ from flask_uploads import (UploadSet, configure_uploads, IMAGES,
 uploaded_images = UploadSet('images', IMAGES)
 configure_uploads(app, uploaded_images)
 
-#import flask_resize
-#resize = flask_resize.Resize(app)
+import flask_resize
+resize = flask_resize.Resize(app)
 
 if 'SENTRY_CONFIG' in app.config:
     from raven.contrib.flask import Sentry
