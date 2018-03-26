@@ -125,6 +125,18 @@ a.feed-link {
     padding-left: 24px;
     border-left: 2px solid #e5e5e5;
 }
+.feed-separator {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px dotted #e5e5e5; 
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+.feed-separator span {
+    background: #fff;
+    padding: 0 10px;
+}
 
 /* Alerts 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -566,7 +578,7 @@ a.support-action {
     -webkit-box-shadow: 0 0 10px #e5e5e5;
     box-shadow: 0 0 10px #e5e5e5;
     padding: 1em;
-    margin-top: 2em;
+    margin: 1.25rem 0 1.75rem 0;
 }
 .post small a {
     margin-top: 3px;
@@ -625,6 +637,9 @@ a.support-action {
     display: block;
     background-color: #fbfaf9;
     padding: 1em;
+}
+.post-comment-count {
+    margin-left: 0.8em;
 }
 
 

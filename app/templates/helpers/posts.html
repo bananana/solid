@@ -9,14 +9,6 @@ section (app/templates/styleguide/templating#discussion-helpers)
 <div class="post">
     <p class="u-remove-margin-top u-remove-margin-bottom">
         {{ render_avatar(post.author) }}&nbsp;said:
-        {% if post.author == current_user or current_user.is_admin %}
-        <small class="u-pull-right">
-            <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
-                <span class="oi" data-glyph="pencil"></span>
-                {{ _('Edit') }}
-            </a>
-        </small>
-        {% endif %}
     </p>
     <article id="post-body-{{ post.id }}">
         <span class="u-pull-left">
@@ -37,15 +29,21 @@ section (app/templates/styleguide/templating#discussion-helpers)
         {{ post.body | markdown | striptags | truncate(280, True) }} 
         <br class="u-cf">
     </article>
-    <small>
-        {{ post.created_on.strftime('%b. %d, %Y') }}
-        <span class="u-pull-right">
-            <a href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
-                <span class="oi" data-glyph="comment-square"></span>
-                {{ _('%(count)s comments', count=post.comments.count()) }}
-            </a>
-        </span>
+    <small class="u-pull-left u-add-margin-top">
+        <a class="post-comment-count" href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
+            <span class="oi" data-glyph="comment-square"></span>
+            {{ _('%(count)s comments', count=post.comments.count()) }}
+        </a>
     </small>
+    {% if post.author == current_user or current_user.is_admin %}
+    <small class="u-pull-right u-add-margin-top">
+        <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
+            <span class="oi" data-glyph="pencil"></span>
+            {{ _('Edit') }}
+        </a>
+    </small>
+    {% endif %}
+    <br class="u-cf">
 </div>
 {% endmacro %}
 
