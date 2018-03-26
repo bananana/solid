@@ -7,9 +7,11 @@
 #               modules, runs the app in Werkzeug, cleans up temporary files.
 # License.....: GPLv3 (see LICENSE file)
 
+from datetime import datetime, timedelta
 from distutils.util import strtobool
 import fnmatch
-from os import path, walk, listdir, makedirs, remove
+from os import path, walk, makedirs, remove
+import random
 from sys import argv
 import unittest
 
@@ -20,11 +22,15 @@ if __name__ == '__main__' and len(argv) > 1 and argv[1] == 'test':
 
 from flask_script import Manager
 from flask_migrate import MigrateCommand
+import jinja2
 from sqlalchemy import inspect
 from terminaltables import AsciiTable
 
 from app import app, db
+from app.email import send_email
 from app.causes.models import Cause, Action
+from app.log.models import LogEvent, LogEventType
+from app.posts.models import Post
 from app.users.models import User
 
 
@@ -44,6 +50,7 @@ class bcolors:
 manager = Manager(app)
 
 manager.add_command('db', MigrateCommand)
+
 
 @manager.option('-l', '--list', dest='list_', action='store_true')
 @manager.option('-t', '--type', dest='type_', choices=['all', 'py', 'tmp'],
@@ -297,7 +304,6 @@ def user(create, delete, modify, regenerate_colors, list_):
         table = AsciiTable(table_data)
         print(table.table)
         exit(0)
-
 
     elif regenerate_colors:
         for user in User.query.all():
@@ -603,6 +609,7 @@ def support(nickname, cause_slug):
         user = User.query.filter_by(nickname=nickname).first()
         cause = Cause.query.filter_by(slug=cause_slug).first()
         user.support(cause)
+        db.session.commit()
         print(bcolors.OKGREEN + 'User ' + nickname + \
               ' is now supporting ' + cause_slug + bcolors.ENDC)
         exit(0)
@@ -619,6 +626,7 @@ def unsupport(nickname, cause_slug):
         user = User.query.filter_by(nickname=nickname).first()
         cause = Cause.query.filter_by(slug=cause_slug).first()
         user.unsupport(cause)
+        db.session.commit()
         print(bcolors.OKGREEN + 'User ' + nickname + \
               ' no longer supports ' + cause_slug + bcolors.ENDC)
     except Exception as e:
@@ -658,6 +666,120 @@ def test(module=None, verbose=False):
     cov.html_report(directory='coverage')
     cov.erase()
 
+
+@manager.command
+def email():
+    from flask import url_for
+
+    period = (
+        datetime.utcnow() - timedelta(14),
+        datetime.utcnow()
+    )
+
+    for user in User.query.all():
+        if user.email != 'carl@supervacuo.com':
+            continue
+
+        user_causes = user.supports
+
+        if user_causes.count() == 0:
+            continue
+
+        user_cause_actions = Action.query.filter(Action.cause_id.in_(
+            [c.id for c in user_causes.all()]
+        ))
+
+        if user_cause_actions.count() > 0:
+            actions_new = [r.item for r in LogEvent.query.filter(
+                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['action_add'])
+                & (LogEvent.logged_at > period[0])
+                & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
+            ).all()]
+            actions_supporters = [r.item for r in LogEvent.query.filter(
+                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['action_support'])
+                & (LogEvent.logged_at > period[0])
+                & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
+            ).all()]
+        else:
+            actions_new = []
+            actions_completed = []
+
+        user_cause_posts = Post.query.filter(Post.cause_id.in_(
+            [c.id for c in user_causes.all()]
+        ))
+        
+        if user_cause_posts.count() > 0:
+            posts_new = [r.item for r in LogEvent.query.filter(
+                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['post_add'])
+                & (LogEvent.logged_at > period[0])
+                & (LogEvent.item_id.in_([p.id for p in user_cause_posts.all()]))
+            ).all()]
+        else:
+            posts_new = []
+
+        causes_supporters = [r.item for r in LogEvent.query.filter(
+            (LogEvent.event_type_id == LogEventType.EVENT_TYPES['cause_support'])
+            & (LogEvent.logged_at > period[0])
+            & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
+        ).all()]
+
+        if (len(actions_new) == 0 and len(actions_completed) == 0 and
+            len(posts_new) == 0):
+                continue
+
+        highlights = actions_new + posts_new
+        _highlights = []
+
+        for highlight in random.sample(highlights, min(4, len(highlights))):
+            if isinstance(highlight, Action):
+                _highlights += [{
+                    'url': url_for(
+                        'causes.cause_detail', slug=highlight.cause.slug, 
+                        _external=True
+                    ),
+                    'title': highlight.title,
+                    'type': 'action',
+                    'summary': highlight.summary
+                }]
+            else:
+                _highlights += [{
+                    'url': url_for(
+                        'posts.post_detail', slug=highlight.cause.slug, 
+                        pk=highlight.id, _external=True
+                    ),
+                    'title': highlight.title,
+                    'type': 'post',
+                    'summary': jinja2.filters.do_truncate(
+                        None, highlight.body, 180, True, leeway=5
+                    )
+                }]
+
+        context = {
+            'user': user, 'period': period,
+            'actions_new': actions_new,
+            'posts_new': posts_new,
+            'actions_supporters': actions_supporters,
+            'causes_supporters': causes_supporters,
+            'highlights': _highlights,
+        }
+
+        with app.app_context():
+            if app.debug:
+                context['url_for'] = lambda url, slug, _external=False, pk=None: url
+                f = open('email.html', 'w')
+                f.write(jinja2.Environment(
+                        loader=jinja2.FileSystemLoader('app/templates/')
+                    ).get_template('email/digest.html').render(context)
+                )
+                f.close()
+
+            send_email('Latest updates on your Solid causes',
+                       [user.email,],
+                       context, 
+                       'email/digest.txt', template_html='email/digest.html')
+
+
+        return
 
 if __name__ == "__main__":
     manager.run()

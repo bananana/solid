@@ -30,6 +30,10 @@
     {{ moment.include_moment(local_js=url_for('static', filename='moment/min/moment.min.js')) }}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone-with-data-2012-2022.min.js"></script>
     {% block scripts %}{% endblock %}
+
+    <!-- Sentry -->
+    <script src="https://cdn.ravenjs.com/3.24.0/raven.min.js" crossorigin="anonymous"></script>
+    <script>Raven.config('{{ sentry_js_key }}').install();</script>
     
     <!-- Analytics -->
     <script>

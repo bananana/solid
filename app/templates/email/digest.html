@@ -1,0 +1,66 @@
+{% extends "email/base.html" %}
+
+{% block title %}Latest updates on your Solid causes{% endblock %}
+
+{% block heading %}Latest updates on your Solid causes{% endblock heading %}
+
+{% block content %}
+<p>Hi {{ user.name }},</p>
+
+<p>The Causes you are taking Action for have advanced!</p>
+
+<p>
+	Here's your {{ period.0.strftime('%b %d') }} - {{ period.1.strftime('%b %d')
+	}} summary  of Solid causes that you are helping win:
+</p>
+
+<p style="font-weight: bold; padding: 0.5em 5%; border: 1px solid #ff9900; background-color: #fbfaf9; width: 90%;">
+	New actions available to take
+	<span style="float: right">
+		{{ actions_new|length }}
+	</span>
+</p>
+
+<p style="font-weight: bold; padding: 0.5em 5%; border: 1px solid #ff9900; background-color: #fbfaf9; width: 90%;">
+	New posts from the community
+	<span style="float: right">
+		{{ posts_new|length }}
+	</span>
+</p>
+
+<p style="font-weight: bold; padding: 0.5em 5%; border: 1px solid #ff9900; background-color: #fbfaf9; width: 90%;">
+	Actions completed
+	<span style="float: right">
+		{{ actions_supporters|length }}
+	</span>
+</p>
+
+<p style="font-weight: bold; padding: 0.5em 5%; border: 1px solid #ff9900; background-color: #fbfaf9; width: 90%;">
+	New supporters
+	<span style="float: right">
+		{{ causes_supporters|length }}
+	</span>
+</p>
+
+{% if highlights %}
+<h2>Highlights</h2>
+{% for highlight in highlights %}
+<p>
+	<span style="font-size: 80%; color: #161310; font-weight: bold;">
+		{{ highlight.type|upper }}
+	</span> 
+	<a style="color: #3299bb; font-weight: bold; text-decoration: none;" 
+			href="{{ highlight.url }}#modal-action-{{ highlight.id }}">
+		{{ highlight.title }}</a>: {{ highlight.summary }}
+</p>
+{% endfor %}
+</ul>
+{% endif %}
+
+
+<p>Taking Actions and sharing helps your Solid Causes win. Thank you for all you're doing!</p>
+
+<p>In solidarity,</p>
+
+<p>The {{ site_name }} Team</p>
+{% endblock content %}
