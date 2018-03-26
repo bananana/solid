@@ -21,7 +21,9 @@ MAILGUN_DOMAIN = 'sandbox40316c4ae2364191a9387fe1be902d37.mailgun.org'
 
 SECRET_KEY = 'veryverysecret'
 
-UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'uploads')
+RESIZE_URL = 'http://{0}/static/uploads/'.format(SERVER_NAME)
+UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'app', 'static', 'uploads')
+RESIZE_ROOT = UPLOADS_DEFAULT_DEST
 
 SENTRY_CONFIG = {
     "dsn": '',

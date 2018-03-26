@@ -26,6 +26,7 @@ migrate = Migrate(app, db)
 from flask_login import LoginManager
 lm = LoginManager()
 lm.init_app(app)
+
 from flask_babel import lazy_gettext as _
 lm.login_message = _('Please log in to access this page.')
 
@@ -43,7 +44,7 @@ from flask_moment import Moment
 moment = Moment(app)
 
 from flask_uploads import (UploadSet, configure_uploads, IMAGES,
-                              UploadNotAllowed)
+                           UploadNotAllowed)
 
 uploaded_images = UploadSet('images', IMAGES)
 configure_uploads(app, uploaded_images)
@@ -55,8 +56,8 @@ if 'SENTRY_CONFIG' in app.config:
     from raven.contrib.flask import Sentry
     sentry = Sentry(app)
 
-# Register blueprints
 
+# Register blueprints
 from app.users.views import mod as usersModule
 app.register_blueprint(usersModule)
 lm.login_view = 'users.login'
@@ -101,7 +102,6 @@ app.register_blueprint(facebook_blueprint, url_prefix='/login')
 
 
 # Context processors
-
 @app.context_processor
 def config_vars():
     c = dict(
@@ -123,7 +123,6 @@ def config_vars():
 
 
 # App-wide decorators
-
 @app.before_request
 def email_required():
     from flask_login import current_user
@@ -140,7 +139,6 @@ def email_required():
 
 
 # HTTP errors
-
 from flask import request
 from app.pages.models import Page
 
@@ -162,7 +160,6 @@ def internal_error(error):
 
 
 # views
-
 from app.causes.views import cause_required
 @app.route('/')
 @cause_required
@@ -198,7 +195,6 @@ def contact():
 
 
 # logging
-
 if not app.debug:
     import logging
     from logging.handlers import RotatingFileHandler
@@ -211,7 +207,6 @@ if not app.debug:
 
 
 # i18n 
-
 import sqlalchemy_utils
 from app.users.views import get_locale
 sqlalchemy_utils.i18n.get_locale = get_locale

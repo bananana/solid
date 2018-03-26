@@ -34,5 +34,3 @@ $(document).ready(function () {
         $('[data-target="' + hash + '"]').click();
     }
 });
-
-

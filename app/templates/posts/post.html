@@ -3,10 +3,13 @@
 
 {% block title %}{{ post.title }} - {{ super() }}{% endblock title %}
 
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+{% endblock %}
+
 {% block content %}
 {% from "helpers/users.html" import render_avatar %}
 <div class="full-width-container">
-
     <div class="row u-add-margin-top">
         <div class="twelve columns">
             <a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">
@@ -19,8 +22,23 @@
     <div class="row u-add-margin-top">
         <div class="one-half column">
             <div class="post u-remove-margin-top u-add-margin-bottom">
-                <h2 class="u-pull-left">{{ post.title }}</h2>
-                <article class="u-cf">{{ post.body|markdown }}</article>
+                {% if post.title %}<h2 class="u-pull-left">{{ post.title }}</h2>{% endif %}
+                <article class="u-cf">
+                    {% for image in post.images.all() %}
+                        <a data-target="modal-post-image-{{ post.id }}">
+                            <image src="{{ image.image_path|resize('200x200', fill=True) }}" />
+                        </a>
+                        <div id="modal-post-image-{{ post.id }}" class="modal">
+                            <div style="width:initial; display:inline-block">
+                                <a class="button-modal-close u-pull-right">
+                                    <img src="{{ url_for('static', filename='open-iconic/png/x-2x.png') }}" alt="X" style="margin-bottom:0.5em" />
+                                </a>
+                                <img class="u-cf" src="{{ image.image_url }}" />
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {{ post.body|markdown }}
+                </article>
                 <p class="u-remove-margin-bottom">
                     {{ render_avatar(post.author) }}&nbsp;
                     {{ post.created_on.strftime('%b. %d, %Y') }}
@@ -83,6 +101,5 @@
             {% endfor %}
         </div>
     </div>
-
 </div>
 {% endblock %}

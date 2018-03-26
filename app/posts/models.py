@@ -1,6 +1,6 @@
 import datetime
 
-from app import db
+from app import db, uploaded_images
 from app.mixins import CRUDMixin
 
 from app.causes.models import Cause
@@ -16,11 +16,13 @@ class Post(CRUDMixin, db.Model):
         'posts', lazy='dynamic', order_by="Post.created_on.desc()"
     ))
 
-    title         = db.Column(db.String(128), nullable=False)
-    summary       = db.Column(db.Text)
     body          = db.Column(db.Text, nullable=False)
     author_id     = db.Column(db.Integer, db.ForeignKey('users_user.id'))
     author        = db.relationship('User', backref=db.backref('posts', lazy='dynamic'))
+
+    # FIXME deprecated
+    summary       = db.Column(db.Text)
+    title         = db.Column(db.String(128))
 
     created_on    = db.Column(db.DateTime)
 
@@ -32,7 +34,38 @@ class Post(CRUDMixin, db.Model):
         return super(Post, self).save(*args, **kwargs)
 
     def __repr__(self):
-       return '<Post "%r">' % (self.title)
+        return '<Post "%r">' % (self.body[:20])
+
+
+class PostImage(CRUDMixin, db.Model):
+    __tablename__ = 'discussions_postimage'
+    id            = db.Column(db.Integer, primary_key=True)
+
+    post_id       = db.Column(db.Integer, db.ForeignKey('discussions_post.id'))
+    post          = db.relationship('Post', backref=db.backref(
+        'images', lazy='dynamic'
+    ))
+
+    image         = db.Column(db.String(128))
+
+    @property
+    def image_url(self):
+        return uploaded_images.url(self.image)
+
+    @property
+    def image_path(self):
+        return uploaded_images.path(self.image)
+
+    created_on    = db.Column(db.DateTime)
+
+    def save(self, *args, **kwargs):
+        if not self.created_on:
+            self.created_on = datetime.datetime.utcnow()
+
+        return super(PostImage, self).save(*args, **kwargs)
+
+    def __repr__(self):
+       return '<PostImage "%r">' % (self.id)
 
 
 class Comment(CRUDMixin, db.Model):

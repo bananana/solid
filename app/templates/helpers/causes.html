@@ -12,6 +12,7 @@ section (app/templates/styleguide/templating#cause-helpers)
 
 {% macro render_log(log) %}
 {% from "helpers/users.html" import render_avatar %}
+{% from "helpers/posts.html" import render_post with context %}
 {% set captions={
     1: 'added a cause',
     2: 'edited a cause',
@@ -20,30 +21,40 @@ section (app/templates/styleguide/templating#cause-helpers)
     5: 'added an action',
     6: 'supported an action',
     7: 'commented on action',
-    8: 'added a post',
-    9: 'posted a reply'
+    8: 'said',
+    9: 'posted a reply',
     }
 %}
+{% set log_loop = namespace(previous=log[0].logged_at.strftime('%b. %d, %Y')) %}
 {% for event in log %}
-<div class="feed-item">
-    <small>{{ moment(event.logged_at).format('MMM Do, YYYY @ HH:mm') }}</small>
-    <p>
-        {{ render_avatar(event.user) }}&nbsp;
-        {{ captions[event.event_type_id] }}:<br>
+    {% if log_loop.previous != event.logged_at.strftime('%b. %d, %Y') %} 
+        <small class="feed-separator">
+            <span>
+                {{ event.logged_at.strftime('%b. %d, %Y') }}
+            </span>
+        </small>
+    {% endif %}
+    {% set log_loop.previous = event.logged_at.strftime('%b. %d, %Y') %} 
+    <div class="feed-item">
         {% if event.event_type_id in [1,2,3,4] %}
-        <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.slug) }}">
-            {{ event.item.title }}
-        </a>
+        <p>
+            {{ render_avatar(event.user) }}&nbsp;
+            {{ captions[event.event_type_id] }}:
+            <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.slug) }}">
+                {{ event.item.title }}
+            </a>
+        </p>
         {% elif event.event_type_id in [5,6,7] %}
-        <a class="feed-link"  data-target="modal-action-{{ event.item.id }}">
-            {{ event.item.title }}
-        </a>
-        {% elif event.event_type_id in [8,9] %}
-        <a class="feed-link" href="{{ url_for('posts.post_detail', slug=event.item.cause.slug, pk=event.item.id) }}">
-            {{ event.item.title }}
-        </a>
+        <p>
+            {{ render_avatar(event.user) }}&nbsp;
+            {{ captions[event.event_type_id] }}:
+            <a class="feed-link"  data-target="modal-action-{{ event.item.id }}">
+                {{ event.item.title }}
+            </a>
+        </p>
+        {% elif event.event_type_id in [8] %}
+            {{ render_post(event.item.cause, event.item) }}
         {% endif %}
-    </p>
-</div>
+    </div>
 {% endfor %}
 {% endmacro %}

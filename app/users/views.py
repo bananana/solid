@@ -349,8 +349,12 @@ def edit(nickname):
         # processed separately anyway
         del(complete_form_data['verify_password'], 
             complete_form_data['current_password'], 
-            complete_form_data['new_password'],
-            complete_form_data['csrf_token'])
+            complete_form_data['new_password'])
+
+        try:
+            del complete_form_data['csrf_token']
+        except KeyError:
+            pass
 
         # Remove empty fields from list
         form_data = {k:v for k,v in complete_form_data.iteritems() if not v == ''}
@@ -375,7 +379,10 @@ def edit(nickname):
         # your profile. csrf_token field does not exist in the user object,
         # so it crashes the app. This does not compromise the functionality of
         # wtforms' csrf_token.
-        fields.remove('csrf_token')
+        try:
+            fields.remove('csrf_token')
+        except ValueError:
+            pass
 
         # Set default form field values based on current values in the 
         # database for user being edited.

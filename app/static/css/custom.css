@@ -10,8 +10,8 @@
 
 /* Table of contents
 ––––––––––––––––––––––––––––––––––––––––––––––––––
-- Breakpoints
 - Color Scheme
+- Breakpoints
 - General
 - Links
 - Alerts 
@@ -26,6 +26,7 @@
 - Navigation
 - Modals
 - Input
+- Icon Buttons
 - Dropdown
 - Utilities
 - Lists
@@ -34,23 +35,6 @@
 - Animations
 */
 
-/* Breakpoints
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-body:before {
-  content: "smartphone";
-  display: none; /* Prevent from displaying. */
-}
-@media (min-width: 550px) {
-  body:before {
-    content: "tablet";
-  }
-}
-@media (min-width: 700px) {
-  body:before {
-    content: "desktop";
-  }
-}
 
 /* Color Scheme 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -80,6 +64,22 @@ body:before {
  */
 
 
+/* Breakpoints
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+body:before {
+  content: "smartphone";
+  display: none; /* Prevent from displaying. */
+}
+@media (min-width: 550px) {
+  body:before {
+    content: "tablet";
+  }
+}
+@media (min-width: 700px) {
+  body:before {
+    content: "desktop";
+  }
+}
 
 
 /* General
@@ -110,15 +110,32 @@ small.small-block {
 a {
     color: #3299bb;
     text-decoration: none;
+    cursor: pointer;
 }
 a:hover {
     color: #1eaeda;
     text-decoration: underline;
 }
 a.feed-link {
-    margin-left: 2.7em;
-    display: block;
+    display: inline-block;
     cursor: pointer;
+}
+.feed-item .post article {
+    margin-left: 15px;
+    padding-left: 24px;
+    border-left: 2px solid #e5e5e5;
+}
+.feed-separator {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px dotted #e5e5e5; 
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+.feed-separator span {
+    background: #fff;
+    padding: 0 10px;
 }
 
 /* Alerts 
@@ -561,7 +578,7 @@ a.support-action {
     -webkit-box-shadow: 0 0 10px #e5e5e5;
     box-shadow: 0 0 10px #e5e5e5;
     padding: 1em;
-    margin-top: 2em;
+    margin: 1.25rem 0 1.75rem 0;
 }
 .post small a {
     margin-top: 3px;
@@ -573,12 +590,58 @@ a.support-action {
     font-weight: bold;
     font-size: larger;
 }
+.post .post-image-thumbnail {
+    vertical-align: top;
+    margin-right: 1em;
+}
 @media (min-width: 550px) {
     .post-full-view {
         display: block;
         min-height: 299px;
     }
 }
+.post-box {
+    display: flex;
+    flex-direction: row;
+}
+.post-box textarea {
+    flex: auto;
+    min-height: 2em;
+}
+#post {
+    margin-bottom: 0;
+}
+#post #preview ul {
+    margin-left: 0;
+}
+#post #preview li,
+#post #preview > p {
+    display: inline-block;
+    margin-right: 1em;
+    list-style-type: none;
+}
+#post #preview img {
+    height: 64px;
+    order: 1;
+    vertical-align: -67%;
+}
+#post #preview p {
+    line-height: 20px;
+    padding: 0 10px;
+    font-size: small;
+}
+#post #save {
+    width: 100px;
+}
+.posting-unauthorized {
+    display: block;
+    background-color: #fbfaf9;
+    padding: 1em;
+}
+.post-comment-count {
+    margin-left: 0.8em;
+}
+
 
 /* Footer 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -759,6 +822,9 @@ a.support-action {
 
 /* Input 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="file"] {
+    display: none;
+}
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -977,6 +1043,25 @@ input[type="submit"]:disabled:focus {
 }
 
 
+/* Icon Buttons 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button-icon {
+    display: inline-block;
+    line-height: 8px;
+    height: 32px;
+    padding: 7px 7px 0 7px;
+    font-weight: normal;
+}
+.button-icon:hover {
+    cursor: pointer;
+    background-color: #FBFAF9;
+    border-radius: 4px;
+}
+.button-icon img {
+    vertical-align: -80%;
+}
+
+
 /* Dropdown 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 #lang-dropdown {
@@ -1055,6 +1140,12 @@ input[type="submit"]:disabled:focus {
 .u-remove-margin-top {
     margin-top: 0;
 }
+.u-remove-margin-left {
+    margin-left: 0;
+}
+.u-remove-margin-right {
+    margin-right: 0;
+}
 .u-to-upper {
     text-transform: uppercase;
 }
@@ -1119,7 +1210,6 @@ input[type="submit"]:disabled:focus {
 .u-remove-border-bottom td {
     border-bottom: none;
 }
-
 
 /* Lists 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

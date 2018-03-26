@@ -33,9 +33,15 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script src="{{ url_for('static', filename='jQuery-form/dist/jquery.form.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/update_bar.js') }}"></script>
 <script src="{{ url_for('static', filename='Readmore.js/readmore.min.js') }}"></script>
 <script src="{{ url_for('static', filename='jquery.lazy/jquery.lazy.min.js') }}"></script>
 <script src="{{ url_for('static', filename='bxslider-4/dist/jquery.bxslider.min.js') }}"></script>
+<script src="{{ url_for('static', filename='autosize/dist/autosize.min.js') }}"></script>
+{% if current_user.is_authenticated %}
+<script src="{{ url_for('static', filename='js/post_image_preview.js') }}"></script>
+{% endif %}
 <script>
     $(document).ready(function() {
         $('.actions-slider').bxSlider({
@@ -92,6 +98,8 @@
                 eventLabel: '{{ cause_support }}'
             });
         {% endif %}
+
+        autosize(document.getElementById('body'));
     });
 </script>
 {% endblock %}
@@ -101,7 +109,6 @@
 {% from "helpers/modals.html" import render_modal %}
 {% from "helpers/users.html" import render_avatar %}
 {% from "helpers/actions.html" import render_action_list with context %}
-{% from "helpers/posts.html" import render_post_list %}
 <div class="section hero lazy" {% if cause.image %}data-src="{{ cause.image_url }}"{% endif %}>
     <div class="full-width-container">
         <div class="row">
@@ -148,12 +155,12 @@
             {{ render_action_list(actions.all()) }}
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="log">
         <div class="three columns">
             {% if supporter %}
-            <h5 class="u-add-margin-left u-add-margin-right">&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
+            <h5>&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
             <a class="button button-modal u-add-margin-top u-full-width"
-                data-target="modal-share">
+               data-target="modal-share">
                 {{ _('Share') }}
             </a>
             {% else %}
@@ -168,22 +175,30 @@
                 {{ _('Share') }}
             </a>
             {% endif %}
-            <h4 class="u-add-margin-top u-remove-margin-bottom">
+            <h4 class="u-add-margin-top">
                 {{ _('Cause creators') }}
             </h4>
             {% for u in cause.creators.all()[-10:] | reverse %}
                 {{ render_avatar(u) }}
                 {% if loop.last and loop.index == 10 %}
-                    <small class="see-all"><a href="{{ url_for('causes.view_cause_creators', slug=cause.slug) }}">See&nbsp;all&nbsp;{{ cause.creators.all() | length }}</a></small>
+                    <small class="see-all">
+                        <a href="{{ url_for('causes.view_cause_creators', slug=cause.slug) }}">
+                            See&nbsp;all&nbsp;{{ cause.creators.all() | length }}
+                        </a>
+                    </small>
                 {% endif %}
             {% endfor %}
-            <h4 class="u-add-margin-top u-remove-margin-bottom">
+            <h4 class="u-add-margin-top">
                 {{ _('%(count)s supporters', count=cause.supporters.all() | length) }}
             </h4>
             {% for u in cause.supporters.all()[-10:] | reverse %}
                 {{ render_avatar(u) }}
                 {% if loop.last and loop.index == 10 %}
-                    <small class="see-all"><a href="{{ url_for('causes.view_cause_supporters', slug=cause.slug) }}">See&nbsp;all&nbsp;{{ cause.supporters.all() | length }}</a></small>
+                    <small class="see-all">
+                        <a href="{{ url_for('causes.view_cause_supporters', slug=cause.slug) }}">
+                            See&nbsp;all&nbsp;{{ cause.supporters.all() | length }}
+                        </a>
+                    </small>
                 {% endif %}
             {% endfor %}
             <h4 class="u-add-margin-top u-remove-margin-bottom">
@@ -206,54 +221,60 @@
                                      _external=True) | urlencode
                              }}"
                        target="_blank"
-                       class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}"></a>
+                       class="u-add-margin-right">
+                        <img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}">
+                    </a>
                     <a href="https://twitter.com/home?status={{
                              url_for('causes.cause_detail', slug=cause.slug,
                                      _external=True) | urlencode
                              }}"
                        target="_blank"
-                       class="u-add-margin-right"><img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}"></a>
+                       class="u-add-margin-right">
+                        <img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}">
+                    </a>
                     <a href="https://plus.google.com/share?url={{
                              url_for('causes.cause_detail', slug=cause.slug,
                                      _external=True) | urlencode
                              }}"
-                       target="_blank"><img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}"></a>
+                       target="_blank">
+                        <img class="icon-social" src="{{ url_for('static', filename='icons/googleplus-square.png') }}">
+                    </a>
                 </p>
             </div>
         </div>
 
         <div class="six columns">
-            <h3>{{ cause.story_heading }}</h3>
-            <div class="read_more">
-                {{ cause.story_content|markdown }}
+            {% if current_user.is_authenticated %}
+                {% include 'posts/post_form.html' %}
+            {% else %}
+                <small class="posting-unauthorized u-text-center">
+                    Only supporters can post messages. 
+                    Please <a href="{{ url_for('users.login') }}">log in</a>.
+                </small>
+            {% endif %}
+            {{ render_log(log.items) }}
+            <div class="u-full-width">
+                {% if log.has_next %}
+                    <a class="u-pull-left" 
+                       href="{{ url_for('.cause_detail', slug=cause.slug, page=log.next_num) }}">
+                        <span class="oi" data-glyph="caret-left"></span><span style="vertical-align:2px;">Older</span>
+                    </a>
+                {% endif %}
+                {% if log.has_prev %}
+                    <a class="u-pull-right" i
+                       href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}">
+                        <span style="vertical-align:2px;">Newer</span><span class="oi" data-glyph="caret-right"></span>
+                    </a>
+                {% endif %}
             </div>
         </div>
 
         <div class="three columns">
-            <div class="row">
-                <div class="twelve columns">
-                    {{ render_log(log) }}
-                </div>
-            </div>
+            <h3>{{ cause.story_heading }}</h3>
+            <article class="read_more">
+                {{ cause.story_content|markdown }}
+            </article>
         </div>
-
-        <div class="row">
-            <div class="eight columns">
-                <h3>{{ _('Updates') }}</h3>
-            </div>
-            {% if current_user in cause.creators.all() or current_user.is_admin %}
-            <div class="four columns">
-                <a class="button u-pull-right" href="{{ url_for('posts.post_add', slug=cause.slug) }}">
-                    <span class="oi" data-glyph="plus" title="Add new post" aria-hidden="true"></span>
-                    <span>&nbsp;{{ _('new post') }}</span>
-                </a>
-            </div>
-            {% endif %}
-        </div>
-        {{ render_post_list(cause) }}
     </div>
-
-    </div>
-
 </div>
 {% endblock %}
