@@ -12,6 +12,7 @@ from flask_babel import refresh, get_locale, gettext as _
 from slugify import slugify
 
 from app import app, db, lm, babel
+from app.log.models import LogEvent, LogEventType
 from app.email import send_email
 
 from . import constants as USER
@@ -312,16 +313,18 @@ def user(nickname):
     if user is None:
         abort(404)
 
-    #: Causes supported by user being viewed
-    supported_causes = user.supports.all()
+    # Show log of user activity
+    page = request.args.get('page', 1, type=int)
+    log = LogEvent.query.filter_by(user_id=user.id)\
+            .order_by(LogEvent.logged_at.desc())\
+            .paginate(page, app.config['LOG_PER_PAGE'], False)
 
-    # Generate feed
-    user_posts = Post.query.filter_by(author_id=user.id).all()
-    user_comments = Comment.query.filter_by(author_id=user.id).all()
-    feed = user_posts + user_comments
-    feed = sorted(feed, key=lambda item: item.created_on)
+    context = {
+        "user": user,
+        "log": log,
+    }
 
-    return render_template('users/index.html', user=user, feed=feed[::-1])
+    return render_template('users/index.html', **context)
 
 
 @mod.route('/user/<nickname>/edit', methods=['GET', 'POST'])

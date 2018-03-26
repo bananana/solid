@@ -4,9 +4,12 @@
 {% block title %}{{ user.nickname }} - {{ super() }}{% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock %}
 
 {% block content %}
+{% from "helpers/causes.html" import render_log with context %}
+{% from "helpers/modals.html" import render_modal %}
 {% from "helpers/users.html" import render_avatar %}
 <div class="full-width-container">
     <div class="row u-add-margin-top">
@@ -14,14 +17,14 @@
             <span>
                 {{ render_avatar(user) }} 
                 <strong>{{ user.nickname }}</strong> 
-                {% if user.is_admin %} | <small>Admin</small>{% endif %}
+                {% if user.is_admin %}<sup><small>Admin</small></sup>{% endif %}
             </span>
             {% if user.full_name %}
                 <h5 class="u-remove-margin-bottom">{{ user.full_name }}</h5>
             {% endif %}
             {% if current_user == user or current_user.is_admin %}
                 <div class="u-add-margin-top">
-                    <small>Other users won't see these details</small>
+                    <small>Other users won't see the details below</small>
                 </div>
                 {% if user.email %}<div>{{ user.email }}</div>{% endif %}
                 {% if user.phone %}<div>{{ user.phone }}</div>{% endif %}
@@ -33,45 +36,8 @@
         </div>
         <div class="six columns">
             <ul class="no-bullets">
-            {% for post in feed %}
-                <li class="post">
-                    {% if post.title %}
-                    <small>
-                        Posted to 
-                        <a href="{{ url_for('causes.cause_detail', slug=post.cause.slug) }}">{{ post.cause.title }}</a>
-                        on 
-                        {{ post.created_on.strftime('%b. %d, %Y') }}
-                    </small>
-                    <h5 class="u-remove-margin-bottom">
-                        <a href="{{ url_for('posts.post_detail', slug=post.cause.slug, pk=post.id) }} ">
-                            {{ post.title }}
-                        </a>
-                    </h5>
-                    <p class="u-remove-margin-top u-remove-margin-bottom">
-                        {{ post.body }}
-                    </p>
-                    {% else %}
-                    <small>
-                        Replied to 
-                        <a href="{{ url_for('posts.post_detail', slug=post.post.cause.slug, pk=post.post.id) }}">
-                            {{ post.post.title }}
-                        </a>
-                        by 
-                        <a href="{{ url_for('users.user', nickname=post.author.nickname) }}">
-                            {{ post.author.nickname }}
-                        </a>
-                        from 
-                        <a href="{{ url_for('causes.cause_detail', slug=post.post.cause.slug) }}">
-                            {{ post.post.cause.title }}
-                        </a>
-                        on 
-                        {{ post.created_on.strftime('%b. %d, %Y') }}
-                    </small>
-                    <p class="u-remove-margin-top u-remove-margin-bottom">
-                        {{ post.body }}
-                    </p>
-                    {% endif %}
-                </li>
+            {% if log %}
+                {{ render_log(log.items) }} 
             {% else %}
                 <small>
                     <strong>There's nothing to show here yet.</strong><br>
@@ -83,7 +49,7 @@
                         see it here!
                     {% endif %}
                 </small>
-            {% endfor %}
+            {% endif %}
             </ul>
         </div>
         <div class="three columns">
@@ -110,12 +76,12 @@
                 <ul class="no-bullets">
                 {% for action in user.actions %}
                     <li>
-                        <a href="{{ url_for('causes.cause_detail', slug=action.cause.slug) | replace('/dashboard', '') }}#modal-action-{{ action.id }}">
+                        <a href="{{ url_for('causes.view_single_action', slug=action.cause.slug, pk=action.id) }}">
                             {{ action.title }}
                         </a>
                         <small>
                             from
-                            <a href="{{ url_for('causes.cause_detail', slug=action.cause_slug) }}">{{ action.cause.title }}</a>
+                            <a href="{{ url_for('causes.cause_detail', slug=action.cause.slug) }}">{{ action.cause.title }}</a>
                         </small>
                     </li>
                 {% endfor %}    
