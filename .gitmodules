@@ -28,3 +28,7 @@
 [submodule "app/static/autosize"]
 	path = app/static/autosize
 	url = https://github.com/jackmoore/autosize
+[submodule "app/static/bxslider-4"]
+	path = app/static/bxslider-4
+    url = https://github.com/Intera/bxslider-4
+    branch = 4.2-allfixes
