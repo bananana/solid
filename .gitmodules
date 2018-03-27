@@ -16,9 +16,6 @@
 [submodule "app/static/moment"]
 	path = app/static/moment
 	url = https://github.com/moment/moment
-[submodule "app/static/bxslider-4"]
-	path = app/static/bxslider-4
-	url = https://github.com/stevenwanderski/bxslider-4
 [submodule "app/static/fonts/Raleway_Fixed_Numerals"]
 	path = app/static/fonts/Raleway_Fixed_Numerals
 	url = https://github.com/h-ibaldo/Raleway_Fixed_Numerals
