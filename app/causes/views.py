@@ -123,7 +123,7 @@ def cause_add_edit(slug=None):
     if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(cause)
 
-        if request.files['image'].filename:
+        if 'image' in request.files and request.files['image'].filename:
             filename = uploaded_images.save(request.files['image'])
             cause.image = filename
 
@@ -292,7 +292,7 @@ def action_add_edit(slug, pk=None):
     if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(action)
 
-        if request.files['image'].filename:
+        if 'image' in request.files and request.files['image'].filename:
             filename = uploaded_images.save(request.files['image'])
             action.image = filename
 
