@@ -26,10 +26,11 @@ class CauseForm(ModelForm):
 class CauseTranslationForm(ModelForm):
 	class Meta:
 		model = CauseTranslation
-		only = ('title', 'intro')
+		only = ('title', 'intro', 'story_content')
 		field_args = {
 			'title': {'label': _('Title') },
 			'intro': {'label': _('Intro') },
+			'story_content': {'label': _('Body') },
 		}
 
 
