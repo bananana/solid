@@ -82,16 +82,12 @@ app.register_blueprint(logModule)
 
 from flask_dance.contrib.twitter import make_twitter_blueprint
 twitter_blueprint = make_twitter_blueprint(
-    api_key       = app.config['TWITTER_OAUTH_API_KEY'],
-    api_secret    = app.config['TWITTER_OAUTH_API_SECRET'],
     redirect_to   = 'users.authorize_twitter'
 )
 app.register_blueprint(twitter_blueprint, url_prefix='/login')
 
 from flask_dance.contrib.google import make_google_blueprint
 google_blueprint = make_google_blueprint(
-    client_id     = app.config['GOOGLE_OAUTH_CLIENT_ID'],
-    client_secret = app.config['GOOGLE_OAUTH_CLIENT_SECRET'],
     scope         = ['profile', 'email'],
     redirect_to   = 'users.authorize_google'
 )
@@ -99,8 +95,6 @@ app.register_blueprint(google_blueprint, url_prefix='/login')
 
 from flask_dance.contrib.facebook import make_facebook_blueprint
 facebook_blueprint = make_facebook_blueprint(
-    client_id     = app.config['FACEBOOK_OAUTH_CLIENT_ID'],
-    client_secret = app.config['FACEBOOK_OAUTH_CLIENT_SECRET'],
     scope         = ['email'],
     redirect_to   = 'users.authorize_facebook'
 )
