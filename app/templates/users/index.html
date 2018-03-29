@@ -76,7 +76,7 @@
                 <ul class="no-bullets">
                 {% for action in user.actions %}
                     <li>
-                        <a href="{{ url_for('causes.view_single_action', slug=action.cause.slug, pk=action.id) }}">
+                        <a href="{{ url_for('causes.action_detail', slug=action.cause.slug, pk=action.id) }}">
                             {{ action.title }}
                         </a>
                         <small>
