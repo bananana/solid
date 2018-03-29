@@ -52,7 +52,7 @@ section (app/templates/styleguide/templating#cause-helpers)
                 {{ event.item.title }}
             </a>
         </p>
-        {% elif event.event_type_id in [8] %}
+        {% elif event.event_type_id == 8 and not event.item.deleted %}
             {{ render_post(event.item.cause, event.item) }}
         {% endif %}
     </div>

@@ -35,6 +35,9 @@ def post_detail(slug, pk):
     cause = Cause.query.filter_by(slug=slug).first()
     post = cause.posts.filter_by(id=pk).one()
 
+    if post.deleted and not current_user.is_admin:
+        abort(404)
+
     comment_form = CommentForm(request.form)
 
     context = {
@@ -44,13 +47,6 @@ def post_detail(slug, pk):
     }
 
     return render_template('posts/post.html', **context)
-
-
-@mod.route('/cause/<slug>/posts/add')
-@login_required
-@cause_required
-def post_add_get(slug):
-    return redirect(url_for('causes.cause_detail', slug=slug))
 
 
 @mod.route('/cause/<slug>/posts/add', methods=('GET', 'POST'))
@@ -109,6 +105,9 @@ def post_edit(slug, pk):
     if current_user.id is not post.author.id and not current_user.is_admin:
         abort(403)
 
+    if post.deleted and not current_user.is_admin:
+        abort(404)
+
     form = PostForm(request.form, obj=post)
 
     if form.validate_on_submit():
@@ -134,7 +133,8 @@ def post_delete(slug, pk):
     post = cause.posts.filter_by(id=pk).one()
 
     if current_user.id is post.author.id or current_user.is_admin:
-        post.delete()
+        post.deleted = True
+        post.save()
         flash('Post deleted!', 'success')
         return redirect(url_for('causes.cause_detail', slug=cause.slug))
     else:

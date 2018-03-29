@@ -26,6 +26,8 @@ class Post(CRUDMixin, db.Model):
 
     created_on    = db.Column(db.DateTime)
 
+    deleted = db.Column(db.Boolean)
+
 
     def save(self, *args, **kwargs):
         if not self.created_on:
