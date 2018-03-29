@@ -48,7 +48,7 @@ section (app/templates/styleguide/templating#cause-helpers)
         <p>
             {{ render_avatar(event.user) }}&nbsp;
             {{ captions[event.event_type_id] }}:
-            <a class="feed-link"  data-target="modal-action-{{ event.item.id }}">
+            <a class="feed-link"  href="{{ url_for('causes.action_detail', slug=event.item.cause.slug, pk=event.item.id) }}">
                 {{ event.item.title }}
             </a>
         </p>

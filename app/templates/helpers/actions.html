@@ -4,7 +4,7 @@ section (app/templates/styleguide/templating#)
 -->
 {% macro render_action_box(cause, action) %}
 <a class="support-action u-pull-left" 
-   href="{{ url_for('causes.view_single_action', slug=cause.slug, pk=action.id) }}"
+   href="{{ url_for('causes.action_detail', slug=cause.slug, pk=action.id) }}"
    {% if action.image %}
    style="background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url({{ action.image_url }}) no-repeat; background-size: cover"
    {% endif %}
@@ -32,7 +32,7 @@ section (app/templates/styleguide/templating#)
 
 {% macro render_action_box_sp(cause, action) %}
 <a class="support-action three columns u-add-margin-top u-add-margin-bottom"
-   href="{{ url_for('causes.view_single_action', slug=cause.slug, pk=action.id) }}"
+   href="{{ url_for('causes.action_detail', slug=cause.slug, pk=action.id) }}"
    {% if action.image %}
    style="background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url({{ action.image_url }}) no-repeat; background-size: cover"
    {% endif %}

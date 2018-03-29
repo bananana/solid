@@ -9,7 +9,7 @@
 {{ super() }}
 <meta property="og:title" content="{{ cause.title }} | {{ action.title }} - Solid">
 <meta property="og:type" content="article">
-<meta property="og:url" content="{{ url_for('.view_single_action', slug=cause.slug, pk=action.id, _external=True) }}">
+<meta property="og:url" content="{{ url_for('.action_detail', slug=cause.slug, pk=action.id, _external=True) }}">
 <meta property="og:description" content="{{ action.summary }}">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ cause.title }} | {{ action.title }} - Solid">
@@ -121,7 +121,7 @@
             {% endif %}
             <span class="support-action-share">
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{
-                         url_for('causes.view_single_action', slug=cause.slug, pk=action.id,
+                         url_for('causes.action_detail', slug=cause.slug, pk=action.id,
                                  _external=True) | urlencode
                          }}"
                    target="_blank"
@@ -129,7 +129,7 @@
                     <img class="icon-social" src="{{ url_for('static', filename='icons/facebook-square.png') }}">
                 </a>
                 <a href="https://twitter.com/home?status={{
-                         url_for('causes.view_single_action', slug=cause.slug, pk=action.id,
+                         url_for('causes.action_detail', slug=cause.slug, pk=action.id,
                                  _external=True) | urlencode
                          }}"
                    target="_blank"
@@ -137,7 +137,7 @@
                     <img class="icon-social" src="{{ url_for('static', filename='icons/twitter.png') }}">
                 </a>
                 <a href="https://plus.google.com/share?url={{
-                         url_for('causes.view_single_action', slug=cause.slug, pk=action.id, 
+                         url_for('causes.action_detail', slug=cause.slug, pk=action.id, 
                                  _external=True) | urlencode
                          }}"
                    target="_blank">

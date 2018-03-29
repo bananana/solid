@@ -281,6 +281,7 @@ def authorize_facebook():
         login_user(new_user)
     else:
         login_user(user_query)
+
     return redirect(
         request.args.get('next') 
         or session.get('next', False)

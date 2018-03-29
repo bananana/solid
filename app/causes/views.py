@@ -221,7 +221,7 @@ def view_cause_supporters(slug):
 
 @mod.route('/cause/<slug>/actions')
 @cause_required
-def view_cause_actions(slug):
+def action_list(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
     if cause is None:
@@ -237,7 +237,7 @@ def view_cause_actions(slug):
 
 @mod.route('/cause/<slug>/actions/<pk>')
 @cause_required
-def view_single_action(slug, pk=None):
+def action_detail(slug, pk=None):
     cause = Cause.query.filter_by(slug=slug).first()
     
     if cause is None:
@@ -258,7 +258,7 @@ def view_single_action(slug, pk=None):
                      cause.slug + '/actions">See other ways you can help ' + 
                      cause.title + '</a>.'), 'success')
 
-    return render_template('causes/action_single.html', **context)
+    return render_template('causes/action.html', **context)
 
 
 @mod.route('/cause/<slug>/actions/add', methods=('GET', 'POST'))
@@ -316,7 +316,7 @@ def action_add_edit(slug, pk=None):
             action.update()
             flash('Action updated!', 'success')
 
-        return redirect(url_for('.cause_detail', slug=slug))
+        return redirect(url_for('.cause_detail', slug=slug, pk=pk)) 
 
     context = {
         "cause": cause,
@@ -374,7 +374,7 @@ def action_support(slug, pk):
         LogEvent._log('action_support', action, user=current_user)
 
     #return ('', 204)
-    return redirect(url_for('.view_single_action', slug=slug, pk=pk)) 
+    return redirect(url_for('.cause_detail', slug=slug, pk=pk)) 
 
 
 @mod.route('/cause/<slug>/actions/<pk>/thanks')
