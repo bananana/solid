@@ -25,7 +25,7 @@
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 <script>
     $(document).ready(function() {
-		$('a.support[rel=external]').click(function(e) {
+        $('a.support[rel=external]').click(function(e) {
             //window.location.href = $(e.target).data('supportHref');
             var action_id = $(this).attr('id');
             var prefix = 'action-';
@@ -80,7 +80,7 @@
                     {% endif %}
                 {% else %} 
                 <a class="button button-primary support u-add-margin-left"
-                   href="{{ url_for('users.login', next='/cause/' + cause.slug + '/actions/' + action.id|string) }}">
+                   href="{{ url_for('causes.action_support', slug=cause.slug, pk=action.id) }}">
                     {{ _('Support!') }}
                 </a>
                 {% endif %}
