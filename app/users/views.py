@@ -66,11 +66,6 @@ def set_email():
     return render_template('users/email.html', form=form, user=user)
 
 
-@oauth_authorized.connect
-def logged_in(blueprint, token):
-    return redirect(request.args.get('next') or url_for('index'))
-
-
 @babel.localeselector
 def get_locale():
     '''This method has to return a language code that determines the app's 
