@@ -128,7 +128,7 @@
     </div>
 </div>
 <div class="full-width-container u-add-margin-top">
-    <div class="row">
+    <div id="actions" class="row">
         <div class="eight columns">
             <h3 id="actions">
                 {{ _('Take action to win') }}
@@ -155,7 +155,7 @@
             {{ render_action_list(actions.all()) }}
         </div>
     </div>
-    <div class="row" id="log">
+    <div class="row">
         <div class="three columns">
             {% if supporter %}
             <h5>&#10004;&nbsp;{{ _('You are supporting this cause') }}</h5>
@@ -256,13 +256,13 @@
             <div class="u-full-width">
                 {% if log.has_next %}
                     <a class="u-pull-left" 
-                       href="{{ url_for('.cause_detail', slug=cause.slug, page=log.next_num) }}">
+                       href="{{ url_for('.cause_detail', slug=cause.slug, page=log.next_num) }}#actions">
                         <span class="oi" data-glyph="caret-left"></span><span style="vertical-align:2px;">Older</span>
                     </a>
                 {% endif %}
                 {% if log.has_prev %}
                     <a class="u-pull-right" i
-                       href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}">
+                       href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}#actions">
                         <span style="vertical-align:2px;">Newer</span><span class="oi" data-glyph="caret-right"></span>
                     </a>
                 {% endif %}
