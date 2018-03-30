@@ -13,6 +13,7 @@ section (app/templates/styleguide/templating#cause-helpers)
 {% macro render_log(log) %}
 {% from "helpers/users.html" import render_avatar %}
 {% from "helpers/posts.html" import render_post with context %}
+{% from "helpers/posts.html" import render_post_comment with context %}
 {% set captions={
     1: 'added a cause',
     2: 'edited a cause',
@@ -40,7 +41,8 @@ section (app/templates/styleguide/templating#cause-helpers)
         <p>
             {{ render_avatar(event.user) }}&nbsp;
             {{ captions[event.event_type_id] }}:
-            <a class="feed-link"  href="{{ url_for('causes.cause_detail', slug=event.item.slug) }}">
+            <a class="feed-link"
+               href="{{ url_for('causes.cause_detail', slug=event.item.slug) }}">
                 {{ event.item.title }}
             </a>
         </p>
@@ -48,12 +50,15 @@ section (app/templates/styleguide/templating#cause-helpers)
         <p>
             {{ render_avatar(event.user) }}&nbsp;
             {{ captions[event.event_type_id] }}:
-            <a class="feed-link"  href="{{ url_for('causes.action_detail', slug=event.item.cause.slug, pk=event.item.id) }}">
+            <a class="feed-link"  
+               href="{{ url_for('causes.action_detail', slug=event.item.cause.slug, pk=event.item.id) }}">
                 {{ event.item.title }}
             </a>
         </p>
         {% elif event.event_type_id == 8 and event.item and not event.item.deleted %}
             {{ render_post(event.item.cause, event.item) }}
+        {% elif event.event_type_id == 9 and event.item and not event.item.deleted %}
+            {{ render_post_comment(event.item.cause, event.item) }}
         {% endif %}
     </div>
 {% endfor %}

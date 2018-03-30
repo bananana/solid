@@ -47,6 +47,29 @@ section (app/templates/styleguide/templating#discussion-helpers)
 </div>
 {% endmacro %}
 
+{% macro render_post_comment(cause, comment) %}
+<div class="post">
+    <p class="u-remove-margin-top u-remove-margin-bottom">
+        {% if comment.author == comment.post.author %}
+            {{ render_avatar(comment.author) }} commented on their own post:
+        {% else %}
+            {{ render_avatar(comment.author) }} replied to {{ render_avatar(comment.post.author) }}
+        {% endif %}
+    </p>
+    <article id="comment-body-{{ comment.id }}">
+        {{ comment.body | markdown | striptags | truncate(280, True) }} 
+    </article>
+    <small class="u-pull-left u-add-margin-top">
+        <a class="post-comment-count" 
+           href="{# url_for('posts.post_detail', slug=cause.slug, pk=comment.post.id) #}">
+            <span class="oi" data-glyph="comment-square"></span>
+            {{ _('View conversation') }}
+        </a>
+    </small>
+    <br class="u-cf">
+</div>
+{% endmacro %}
+
 {% macro render_post_list(cause) %}
 {% if cause.posts %}
     {% for post in cause.posts.all() %}

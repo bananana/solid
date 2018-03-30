@@ -64,6 +64,9 @@ def cause_detail(slug):
             ) | (
                 (LogEvent.item_type == 'Post')
                 & (LogEvent.item_id.in_([p.id for p in cause.posts.all()]))
+            ) | (
+                (LogEvent.item_type == 'Comment')
+                & (LogEvent.item_id.in_([c.id for c in [p for p in cause.posts.all()]]))
             )
         ) & (LogEvent.item_id != LogEventType.EVENT_TYPES['cause_edit'])
     ).order_by(LogEvent.logged_at.desc()).paginate(

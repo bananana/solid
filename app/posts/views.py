@@ -171,7 +171,7 @@ def comment_add(slug, pk):
                    'email/post_comment.txt')
 
         flash('Comment added!', 'success')
-        LogEvent._log('post_reply', post, user=current_user)
+        LogEvent._log('post_reply', comment, user=current_user)
         return redirect(url_for('.post_detail', slug=cause.slug, pk=post.id))
 
     context = {
