@@ -26,7 +26,13 @@ section (app/templates/styleguide/templating#discussion-helpers)
                 </div>
             {% endfor %}
         </span>
-        {{ post.body | markdown | striptags | truncate(280, True) }} 
+        {% set post_body = post.body | markdown | striptags %}
+        {{ post_body | truncate(280, True) }} 
+        {% if post_body | length > 280 %}
+            <a href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
+                (read more)
+            </a>
+        {% endif %}
         <br class="u-cf">
     </article>
     <small class="u-pull-left u-add-margin-top">
