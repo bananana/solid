@@ -675,9 +675,6 @@ def email():
     )
 
     for user in User.query.all():
-        if user.email != 'carl@supervacuo.com':
-            continue
-
         user_causes = user.supports
 
         if user_causes.count() == 0:
