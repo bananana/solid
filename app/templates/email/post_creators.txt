@@ -1,9 +1,9 @@
 Hi!
 
-A user has posted a new discussion post on the  "{{ cause.title }}" page.
+"{{ post.author.initials }}" has posted a new discussion post on the  "{{ cause.title }}" page.
 
-"{{ post.title }}" by {{ post.author.initials }}
-{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id, _external=True) }}
+See it here:
+	{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id, _external=True) }}
 
 Solidarity,
 

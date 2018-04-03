@@ -1,7 +1,7 @@
 {% extends "base_form.html" %}
 {% set active_page = "discussion" %}
 
-{% block title %}{{ post.title }} - {{ super() }}{% endblock title %}
+{% block title %}Post - {{ post.cause.title }} - {{ super() }}{% endblock title %}
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
