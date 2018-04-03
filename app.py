@@ -745,7 +745,10 @@ def email():
                         'posts.post_detail', slug=highlight.cause.slug,
                         pk=highlight.id, _external=True
                     ),
-                    'title': highlight.title,
+                    'title': '{0}, {1}'.format(
+                        highlight.author.initials.upper(),
+                        highlight.created_on.strftime('%b. %d, %Y')
+                    ),
                     'type': 'post',
                     'summary': jinja2.filters.do_truncate(
                         None, highlight.body, 180, True, leeway=5
