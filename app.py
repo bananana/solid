@@ -700,7 +700,7 @@ def email():
             ).all()]
         else:
             actions_new = []
-            actions_completed = []
+            actions_supporters = []
 
         user_cause_posts = Post.query.filter(Post.cause_id.in_(
             [c.id for c in user_causes.all()]
@@ -721,7 +721,7 @@ def email():
             & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
         ).all()]
 
-        if (len(actions_new) == 0 and len(actions_completed) == 0 and
+        if (len(actions_new) == 0 and len(actions_supporters) == 0 and
             len(posts_new) == 0):
                 continue
 
@@ -776,8 +776,6 @@ def email():
                        context,
                        'email/digest.txt', template_html='email/digest.html')
 
-
-        return
 
 if __name__ == "__main__":
     manager.run()
