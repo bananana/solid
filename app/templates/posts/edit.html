@@ -5,12 +5,13 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/post_image_preview.js') }}"></script>
 {% endblock %}
 
 {% block content %}
 <div class="container u-add-margin-top">
-    {% from "helpers/forms.html" import render_field, render_boolean %}
-    <form id="post" name="post" action="" method="post">
+    {% from "helpers/forms.html" import render_field, render_field_no_label, render_boolean %}
+    <form id="post" name="post" action="" method="post" enctype="multipart/form-data">
         {{ post_form.hidden_tag() }}
         <div class="row u-add-margin-bottom">
             <div class="six columns offset-by-three">
@@ -19,10 +20,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="six columns offset-by-three">
-                {{ render_field(post_form.body, class="u-full-width")  }}
+            <div class="twelve columns u-remove-margin-left post-box">
+                {{ render_field_no_label(post_form.body, class="", placeholder="Start a conversation") }}
+                <fieldset class="post-box-controls">
+                    <label for="images" class="button-icon u-pull-right">
+                        <img src="{{ url_for('static', filename='open-iconic/png/image-3x.png') }}">
+                        <small>Add Image</small>
+                    </label>
+                    {{ render_field_no_label(post_form.images) }}
+                </fieldset>
             </div>
         </div>
+        <div class="nine columns u-remove-margin-left" id="preview"></div>
         <div class="row u-add-margin-top">
             <div class="four columns offset-by-three">
                 <input id="save" type="submit" value="{{ _('Save') }}"

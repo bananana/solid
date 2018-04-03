@@ -108,11 +108,20 @@ def post_edit(slug, pk):
     if post.deleted and not current_user.is_admin:
         abort(404)
 
-    form = PostForm(request.form, obj=post)
+    form = PostForm(CombinedMultiDict((request.files, request.form)), obj=post)
+
+    del form._fields['images']
 
     if form.validate_on_submit():
         form.populate_obj(post)
         post.save()
+
+        for image in form.images.data:
+            post_image = PostImage.create(commit=False)
+            post_image.image = uploaded_images.save(image)
+            post_image.post = post
+            post_image.save()
+
         flash('Post updated!', 'success')
         return redirect(url_for('.post_detail', slug=cause.slug, pk=post.id))
 

@@ -1,6 +1,7 @@
 {% from "helpers/forms.html" import render_field, render_field_no_label %}
 <div class="row">
-    <form id="post" name="post" action="{{ url_for('posts.post_add', slug=cause.slug) }}" method="post">
+    <form id="post" name="post" action="{{ url_for('posts.post_add',
+        slug=cause.slug) }}" method="post" enctype="multipart/form-data">
         {{ post_form.hidden_tag() }}
         <div class="twelve columns u-remove-margin-left post-box">
             {{ render_field_no_label(post_form.body, class="", placeholder="Start a conversation") }}
