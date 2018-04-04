@@ -24,24 +24,30 @@
             <div class="post u-remove-margin-top u-add-margin-bottom">
                 {% if post.title %}<h2 class="u-pull-left">{{ post.title }}</h2>{% endif %}
                 <article class="u-cf">
+                    <span class="u-pull-left">
                     {% for image in post.images.all() %}
                         <a data-target="modal-post-image-{{ post.id }}">
-                            <image src="{{ image.image_path|resize('200x200', fill=True) }}" />
+                            <img class="post-image-thumbnail" src="{{ image.image_path|resize('200x200', fill=True) }}" />
                         </a>
                         <div id="modal-post-image-{{ post.id }}" class="modal">
                             <div style="width:initial; display:inline-block">
                                 <a class="button-modal-close u-pull-right">
-                                    <img src="{{ url_for('static', filename='open-iconic/png/x-2x.png') }}" alt="X" style="margin-bottom:0.5em" />
+                                    <img src="{{ url_for('static', filename='open-iconic/png/x-2x.png') }}" 
+                                         alt="X" 
+                                         style="margin-bottom:0.5em" />
                                 </a>
                                 <img class="u-cf" src="{{ image.image_url }}" />
                             </div>
                         </div>
                     {% endfor %}
-                    {{ post.body|markdown }}
+                    </span>
+                    <span class="u-pull-left">
+                        {{ post.body|markdown }}
+                    </span>
                 </article>
                 <p class="u-remove-margin-bottom">
                     {{ render_avatar(post.author) }}&nbsp;
-                    {{ post.created_on.strftime('%b. %d, %Y') }}
+                    <small>{{ post.created_on.strftime('%b. %d, %Y') }}</small>
                     {% if post.author == current_user or current_user.is_admin %}
                         <a class="button u-pull-right u-remove-margin-bottom"
                             href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
