@@ -29,7 +29,7 @@ section (app/templates/styleguide/templating#cause-helpers)
 {% set log_loop = namespace(previous=None) %}
 {% for event in log %}
     {% if log_loop.previous != event.logged_at.strftime('%b. %d, %Y') %} 
-        <small class="feed-separator">
+        <small class="separator">
             <span>
                 {{ event.logged_at.strftime('%b. %d, %Y') }}
             </span>

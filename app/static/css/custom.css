@@ -104,6 +104,19 @@ small.small-block {
     display: block;
     line-height: 1.4;
 }
+.separator {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px dotted #e5e5e5; 
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+.separator span {
+    background: #fff;
+    padding: 0 10px;
+}
+
 
 /* Links 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -124,18 +137,6 @@ a.feed-link {
     margin-left: 15px;
     padding-left: 24px;
     border-left: 2px solid #e5e5e5;
-}
-.feed-separator {
-    display: block;
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px dotted #e5e5e5; 
-    line-height: 0.1em;
-    margin: 10px 0 20px;
-}
-.feed-separator span {
-    background: #fff;
-    padding: 0 10px;
 }
 
 /* Alerts 
