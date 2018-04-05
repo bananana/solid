@@ -36,9 +36,13 @@ class Cause(CRUDMixin, db.Model, Translatable):
     location      = db.Column(db.String(128))
 
     creators      = db.relationship('User', secondary=cause_creators,
-                                    backref='causes_created', lazy='dynamic')
+                                    backref=db.backref(
+                                        'causes_created', lazy='dynamic'
+                                        ), lazy='dynamic')
     supporters    = db.relationship('User', secondary=cause_supporters,
-                                    backref='causes_supported', lazy='dynamic')
+                                    backref=db.backref(
+                                        'causes_supports', lazy='dynamic'
+                                    ), lazy='dynamic')
 
     video         = db.Column(db.String(128))
     image         = db.Column(db.String(128))

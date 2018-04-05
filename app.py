@@ -200,7 +200,7 @@ def user(create, delete, modify, regenerate_colors, list_):
         # Try to create the user
         try:
             u.create(**kv)
-            new_user = User.query.filter_by(nickname=kv.get('nickname')).first()
+            new_user = User.query.filter_by(nickname=kv.get('nickname')).one()
             new_user.generate_initials()
             new_user.generate_color()
             new_user.set_password(passwd)
@@ -213,7 +213,7 @@ def user(create, delete, modify, regenerate_colors, list_):
 
     elif delete:
         try:
-            to_del = User.query.filter_by(nickname=delete).first()
+            to_del = User.query.filter_by(nickname=delete).one()
             to_del.delete()
             print(bcolors.OKGREEN + 'User ' + delete + \
                   ' deleted successfully' + bcolors.ENDC)
@@ -224,7 +224,7 @@ def user(create, delete, modify, regenerate_colors, list_):
 
     elif modify:
         try:
-            u = User.query.filter_by(nickname=modify).first()
+            u = User.query.filter_by(nickname=modify).one()
         except Exception as e:
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
             exit(1)
@@ -366,7 +366,7 @@ def cause(create, delete, modify, list_):
 
     elif delete:
         try:
-            to_del = Cause.query.filter_by(slug=delete).first()
+            to_del = Cause.query.filter_by(slug=delete).one()
             to_del.delete()
             print(bcolors.OKGREEN + 'Cause ' + delete + \
                   ' deleted successfully' + bcolors.ENDC)
@@ -377,7 +377,7 @@ def cause(create, delete, modify, list_):
 
     elif modify:
         try:
-            c = Cause.query.filter_by(slug=modify).first()
+            c = Cause.query.filter_by(slug=modify).one()
         except Exception as e:
             c = None
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
@@ -511,7 +511,7 @@ def action(create, delete, modify, list_):
 
     elif delete:
         try:
-            to_del = Action.query.filter_by(slug=delete).first()
+            to_del = Action.query.filter_by(slug=delete).one()
             to_del.delete()
             print(bcolors.OKGREEN + 'Action ' + delete + \
                   ' deleted successfully' + bcolors.ENDC)
@@ -522,7 +522,7 @@ def action(create, delete, modify, list_):
 
     elif modify:
         try:
-            a = Action.query.filter_by(id=modify).first()
+            a = Action.query.filter_by(id=modify).one()
         except Exception as e:
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
             exit(1)
@@ -599,13 +599,10 @@ def action(create, delete, modify, list_):
 
 @manager.command
 def support(nickname, cause_slug):
-    '''Make user support a cause
-    '''
-
-    # Process subcommands for cause support
+    ''' Make user support a cause '''
     try:
-        user = User.query.filter_by(nickname=nickname).first()
-        cause = Cause.query.filter_by(slug=cause_slug).first()
+        user = User.query.filter_by(nickname=nickname).one()
+        cause = Cause.query.filter_by(slug=cause_slug).one()
         user.support(cause)
         db.session.commit()
         print(bcolors.OKGREEN + 'User ' + nickname + \
@@ -621,8 +618,8 @@ def unsupport(nickname, cause_slug):
     '''Make user unsupport a cause
     '''
     try:
-        user = User.query.filter_by(nickname=nickname).first()
-        cause = Cause.query.filter_by(slug=cause_slug).first()
+        user = User.query.filter_by(nickname=nickname).one()
+        cause = Cause.query.filter_by(slug=cause_slug).one()
         user.unsupport(cause)
         db.session.commit()
         print(bcolors.OKGREEN + 'User ' + nickname + \
@@ -674,94 +671,96 @@ def email():
         datetime.utcnow()
     )
 
-    for user in User.query.all():
-        user_causes = user.supports
+    with app.app_context():
+        for user in User.query.all():
+            user_causes = user.causes_supports
 
-        if user_causes.count() == 0:
-            continue
+            print user.initials, user_causes.count()
 
-        user_cause_actions = Action.query.filter(Action.cause_id.in_(
-            [c.id for c in user_causes.all()]
-        ))
-
-        if user_cause_actions.count() > 0:
-            actions_new = [r.item for r in LogEvent.query.filter(
-                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['action_add'])
-                & (LogEvent.logged_at > period[0])
-                & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
-            ).all()]
-            actions_supporters = [r.item for r in LogEvent.query.filter(
-                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['action_support'])
-                & (LogEvent.logged_at > period[0])
-                & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
-            ).all()]
-        else:
-            actions_new = []
-            actions_supporters = []
-
-        user_cause_posts = Post.query.filter(Post.cause_id.in_(
-            [c.id for c in user_causes.all()]
-        ))
-
-        if user_cause_posts.count() > 0:
-            posts_new = [r.item for r in LogEvent.query.filter(
-                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['post_add'])
-                & (LogEvent.logged_at > period[0])
-                & (LogEvent.item_id.in_([p.id for p in user_cause_posts.all()]))
-            ).all()]
-        else:
-            posts_new = []
-
-        causes_supporters = [r.item for r in LogEvent.query.filter(
-            (LogEvent.event_type_id == LogEventType.EVENT_TYPES['cause_support'])
-            & (LogEvent.logged_at > period[0])
-            & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
-        ).all()]
-
-        if (len(actions_new) == 0 and len(actions_supporters) == 0 and
-            len(posts_new) == 0):
+            if user_causes.count() == 0:
                 continue
 
-        highlights = actions_new + posts_new
-        _highlights = []
+            user_cause_actions = Action.query.filter(Action.cause_id.in_(
+                [c.id for c in user_causes.all()]
+            ))
 
-        for highlight in random.sample(highlights, min(4, len(highlights))):
-            if isinstance(highlight, Action):
-                _highlights += [{
-                    'url': url_for(
-                        'causes.cause_detail', slug=highlight.cause.slug,
-                        _external=True
-                    ),
-                    'title': highlight.title,
-                    'type': 'action',
-                    'summary': highlight.summary
-                }]
+            if user_cause_actions.count() > 0:
+                actions_new = [r.item for r in LogEvent.query.filter(
+                    (LogEvent.event_type_id == LogEventType.EVENT_TYPES['action_add'])
+                    & (LogEvent.logged_at > period[0])
+                    & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
+                ).all()]
+                actions_supporters = [r.item for r in LogEvent.query.filter(
+                    (LogEvent.event_type_id == LogEventType.EVENT_TYPES['action_support'])
+                    & (LogEvent.logged_at > period[0])
+                    & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
+                ).all()]
             else:
-                _highlights += [{
-                    'url': url_for(
-                        'posts.post_detail', slug=highlight.cause.slug,
-                        pk=highlight.id, _external=True
-                    ),
-                    'title': '{0}, {1}'.format(
-                        highlight.author.initials.upper(),
-                        highlight.created_on.strftime('%b. %d, %Y')
-                    ),
-                    'type': 'post',
-                    'summary': jinja2.filters.do_truncate(
-                        None, highlight.body, 180, True, leeway=5
-                    )
-                }]
+                actions_new = []
+                actions_supporters = []
 
-        context = {
-            'user': user, 'period': period,
-            'actions_new': actions_new,
-            'posts_new': posts_new,
-            'actions_supporters': actions_supporters,
-            'causes_supporters': causes_supporters,
-            'highlights': _highlights,
-        }
+            user_cause_posts = Post.query.filter(Post.cause_id.in_(
+                [c.id for c in user_causes.all()]
+            ))
 
-        with app.app_context():
+            if user_cause_posts.count() > 0:
+                posts_new = [r.item for r in LogEvent.query.filter(
+                    (LogEvent.event_type_id == LogEventType.EVENT_TYPES['post_add'])
+                    & (LogEvent.logged_at > period[0])
+                    & (LogEvent.item_id.in_([p.id for p in user_cause_posts.all()]))
+                ).all()]
+            else:
+                posts_new = []
+
+            causes_supporters = [r.item for r in LogEvent.query.filter(
+                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['cause_support'])
+                & (LogEvent.logged_at > period[0])
+                & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
+            ).all()]
+
+            if (len(actions_new) == 0 and len(actions_supporters) == 0 and
+                len(posts_new) == 0):
+                    continue
+
+            highlights = actions_new + posts_new
+            _highlights = []
+
+            for highlight in random.sample(highlights, min(4, len(highlights))):
+                if isinstance(highlight, Action):
+                    _highlights += [{
+                        'url': url_for(
+                            'causes.cause_detail', slug=highlight.cause.slug,
+                            _external=True
+                        ),
+                        'title': highlight.title,
+                        'type': 'action',
+                        'summary': highlight.summary
+                    }]
+                else:
+                    _highlights += [{
+                        'url': url_for(
+                            'posts.post_detail', slug=highlight.cause.slug,
+                            pk=highlight.id, _external=True
+                        ),
+                        'title': '{0}, {1}'.format(
+                            highlight.author.initials.upper(),
+                            highlight.created_on.strftime('%b. %d, %Y')
+                        ),
+                        'type': 'post',
+                        'summary': jinja2.filters.do_truncate(
+                            None, highlight.body, 180, True, leeway=5
+                        )
+                    }]
+
+            context = {
+                'user': user, 'period': period,
+                'actions_new': actions_new,
+                'posts_new': posts_new,
+                'actions_supporters': actions_supporters,
+                'causes_supporters': causes_supporters,
+                'highlights': _highlights,
+            }
+
             if app.debug:
                 context['url_for'] = lambda url, slug, _external=False, pk=None: url
                 f = open('email.html', 'w')
