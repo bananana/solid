@@ -24,7 +24,6 @@
             <div class="post u-remove-margin-top u-add-margin-bottom">
                 {% if post.title %}<h2 class="u-pull-left">{{ post.title }}</h2>{% endif %}
                 <article class="u-cf">
-                    <span class="u-pull-left">
                     {% for image in post.images.all() %}
                         <a data-target="modal-post-image-{{ post.id }}">
                             <img class="post-image-thumbnail" src="{{ image.image_path|resize('200x200', fill=True) }}" />
@@ -40,10 +39,7 @@
                             </div>
                         </div>
                     {% endfor %}
-                    </span>
-                    <span class="u-pull-left">
-                        {{ post.body|markdown }}
-                    </span>
+                    {{ post.body|markdown }}
                 </article>
                 <p class="u-remove-margin-bottom">
                     {{ render_avatar(post.author) }}&nbsp;

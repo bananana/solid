@@ -591,6 +591,12 @@ a.support-action {
     font-weight: bold;
     font-size: larger;
 }
+.post article img {
+    float: left;
+}
+.post article p {
+    margin-top: 0;
+}
 .post .post-image-thumbnail {
     vertical-align: top;
     margin-right: 1em;
