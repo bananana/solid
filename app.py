@@ -200,7 +200,7 @@ def user(create, delete, modify, regenerate_colors, list_):
         # Try to create the user
         try:
             u.create(**kv)
-            new_user = User.query.filter_by(nickname=kv.get('nickname')).first()
+            new_user = User.query.filter_by(nickname=kv.get('nickname')).one()
             new_user.generate_initials()
             new_user.generate_color()
             new_user.set_password(passwd)
@@ -213,7 +213,7 @@ def user(create, delete, modify, regenerate_colors, list_):
 
     elif delete:
         try:
-            to_del = User.query.filter_by(nickname=delete).first()
+            to_del = User.query.filter_by(nickname=delete).one()
             to_del.delete()
             print(bcolors.OKGREEN + 'User ' + delete + \
                   ' deleted successfully' + bcolors.ENDC)
@@ -224,7 +224,7 @@ def user(create, delete, modify, regenerate_colors, list_):
 
     elif modify:
         try:
-            u = User.query.filter_by(nickname=modify).first()
+            u = User.query.filter_by(nickname=modify).one()
         except Exception as e:
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
             exit(1)
@@ -366,7 +366,7 @@ def cause(create, delete, modify, list_):
 
     elif delete:
         try:
-            to_del = Cause.query.filter_by(slug=delete).first()
+            to_del = Cause.query.filter_by(slug=delete).one()
             to_del.delete()
             print(bcolors.OKGREEN + 'Cause ' + delete + \
                   ' deleted successfully' + bcolors.ENDC)
@@ -377,7 +377,7 @@ def cause(create, delete, modify, list_):
 
     elif modify:
         try:
-            c = Cause.query.filter_by(slug=modify).first()
+            c = Cause.query.filter_by(slug=modify).one()
         except Exception as e:
             c = None
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
@@ -511,7 +511,7 @@ def action(create, delete, modify, list_):
 
     elif delete:
         try:
-            to_del = Action.query.filter_by(slug=delete).first()
+            to_del = Action.query.filter_by(slug=delete).one()
             to_del.delete()
             print(bcolors.OKGREEN + 'Action ' + delete + \
                   ' deleted successfully' + bcolors.ENDC)
@@ -522,7 +522,7 @@ def action(create, delete, modify, list_):
 
     elif modify:
         try:
-            a = Action.query.filter_by(id=modify).first()
+            a = Action.query.filter_by(id=modify).one()
         except Exception as e:
             print(bcolors.FAIL + 'Error: ' + str(e) + bcolors.ENDC)
             exit(1)
@@ -599,13 +599,10 @@ def action(create, delete, modify, list_):
 
 @manager.command
 def support(nickname, cause_slug):
-    '''Make user support a cause
-    '''
-
-    # Process subcommands for cause support
+    ''' Make user support a cause '''
     try:
-        user = User.query.filter_by(nickname=nickname).first()
-        cause = Cause.query.filter_by(slug=cause_slug).first()
+        user = User.query.filter_by(nickname=nickname).one()
+        cause = Cause.query.filter_by(slug=cause_slug).one()
         user.support(cause)
         db.session.commit()
         print(bcolors.OKGREEN + 'User ' + nickname + \
@@ -621,8 +618,8 @@ def unsupport(nickname, cause_slug):
     '''Make user unsupport a cause
     '''
     try:
-        user = User.query.filter_by(nickname=nickname).first()
-        cause = Cause.query.filter_by(slug=cause_slug).first()
+        user = User.query.filter_by(nickname=nickname).one()
+        cause = Cause.query.filter_by(slug=cause_slug).one()
         user.unsupport(cause)
         db.session.commit()
         print(bcolors.OKGREEN + 'User ' + nickname + \
