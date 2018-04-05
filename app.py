@@ -673,7 +673,7 @@ def email():
 
     with app.app_context():
         for user in User.query.all():
-            user_causes = user.supports
+            user_causes = user.causes_supports
 
             print user.initials, user_causes.count()
 
