@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% set active_page = "styleguide_utilities" %}
 
-{% block scripts %}
-{% endblock %}
+{% block title %}Utilities - Style Guide - {{ super() }}{% endblock title %}
 
 {% block content %}
 {% from "helpers/navigation.html" import render_styleguide_nav, render_scrollspy %}

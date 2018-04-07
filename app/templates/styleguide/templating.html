@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% set active_page = "styleguide_templating" %}
 
+{% block title %}Templating - Style Guide - {{ super() }}{% endblock title %}
+
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/scroll-spy.js') }}"></script>
 {% endblock %}
