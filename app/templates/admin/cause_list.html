@@ -48,7 +48,9 @@
                         <td>{{ cause.location }}</td>
                         <td>{{ cause.supporters.count() }}</td>
                         <td>
+                            {% if cause.image %}
                             <a href="{{ url_for('static', filename=cause.image) }}">{{ cause.image }}</a>
+                            {% endif %}
                         </td>
                         <td class="u-text-right">
                           <a href="{{ url_for('causes.cause_add_edit', slug=cause.slug) }}">
