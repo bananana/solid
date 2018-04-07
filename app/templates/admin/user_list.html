@@ -22,7 +22,6 @@
             <thead>
                 <tr>
                     <th>id</th>
-                    <th>avatar</th>
                     <th>nickname</th>
                     <th>full name</th>
                     <th>e-mail</th>
@@ -37,8 +36,12 @@
                 {% for user in users %}
                 <tr>
                     <td>{{ user.id }}</td>
-                    <td>{{ render_avatar(user) }}</td>
-                    <td>{{ user.nickname }}</td>
+                    <td>
+                      {{ render_avatar(user) }}
+                      <a href="{{ url_for('users.user', nickname=user.nickname) }}">
+                        {{ user.nickname }}
+                      </a>
+                    </td>
                     <td>{{ user.full_name|default('n/a') }}</td>
                     <td>{{ user.email|default('n/a') }}</td>
                     <td>
@@ -48,8 +51,8 @@
                             {{ user.last_login }}
                         {% endif %}
                     </td>
-                    <td>{{ user.created.count() }}</td>
-                    <td>{{ user.supports.distinct().count() }}</td>
+                    <td>{{ user.causes_created.count() }}</td>
+                    <td>{{ user.causes_supports.distinct().count() }}</td>
                     <td>{{ user.actions.count() }}</td>
                     <td class="u-text-right">
                       <a href="{{ url_for('users.edit', nickname=user.nickname) }}">

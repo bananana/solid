@@ -54,20 +54,20 @@
             </ul>
         </div>
         <div class="three columns">
-            <h5>Created {{ user.created.count() }} cause{% if user.created.count() != 1 %}s{% endif %}</h5>
-            {% if user.created.count() > 0 %}
+            <h5>Created {{ user.causes_created.count() }} cause{% if user.causes_created.count() != 1 %}s{% endif %}</h5>
+            {% if user.causes_created.count() > 0 %}
                 <ul class="no-bullets">
-                {% for cause in user.created %}
-                    <li><a href="/cause/{{ cause.slug }}">{{ cause.title }}</a></li>
+                {% for cause in user.causes_created %}
+                    <li><a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">{{ cause.title }}</a></li>
                 {% endfor %}
                 </ul>
                 <hr>
             {% endif %}
-            <h5>Supporting {{ user.supports.distinct().count() }} cause{% if user.supports.distinct().count() != 1 %}s{% endif %}</h5>
-            {% if user.supports.distinct().count() > 0 %}
+            <h5>Supporting {{ user.causes_supports.distinct().count() }} cause{% if user.causes_supports.distinct().count() != 1 %}s{% endif %}</h5>
+            {% if user.causes_supports.distinct().count() > 0 %}
                 <ul class="no-bullets">
-                {% for cause in user.supports %}
-                    <li><a href="/cause/{{ cause.slug }}">{{ cause.title }}</a></li>
+                {% for cause in user.causes_supports %}
+                    <li><a href="{{ url_for('causes.cause_detail', slug=cause.slug) }}">{{ cause.title }}</a></li>
                 {% endfor %}
                 </ul>
                 <hr>
