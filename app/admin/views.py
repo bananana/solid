@@ -49,15 +49,15 @@ def admin_page_list():
 @login_required
 def admin_page_edit(pk):
     if not current_user.is_admin:
-         return redirect('/')
+        return redirect('/')
 
     page = Page.query.filter_by(id=pk).first()
 
     if page is None:
         abort(404)
 
-    form = PageForm(request.form, page)
-    form_trans = PageTranslationForm(request.form, page)
+    form = PageForm(request.form, obj=page)
+    form_trans = PageTranslationForm(request.form, obj=page)
 
     if form.validate_on_submit() and form_trans.validate_on_submit():
         form.populate_obj(page)
@@ -67,9 +67,9 @@ def admin_page_edit(pk):
         return redirect(url_for('.admin_page_list', pk=pk))
 
     context = {
-         "page": page,
-         "form": form,
-         "form_trans": form_trans
+        "page": page,
+        "form": form,
+        "form_trans": form_trans
     }
 
     return render_template('admin/page_edit.html', **context)
@@ -94,9 +94,9 @@ def admin_page_add():
         return redirect(url_for('.admin_page_list', pk=page.id))
 
     context = {
-         "page": page,
-         "form": form,
-         "form_trans": form_trans
+        "page": page,
+        "form": form,
+        "form_trans": form_trans
     }
 
     return render_template('admin/page_edit.html', **context)

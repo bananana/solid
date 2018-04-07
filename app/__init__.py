@@ -142,17 +142,6 @@ def email_required():
 from flask import request
 from app.pages.models import Page
 
-@app.errorhandler(404)
-def not_found_error(error):
-    # Look for a Page with this URL
-    page = Page.query.filter_by(url=request.path).first()
-
-    if page:
-        return render_template('pages/page.html', page=page)
-
-    return render_template('404.html'), 404
-
-
 @app.errorhandler(500)
 def internal_error(error):
     db.session.rollback()
