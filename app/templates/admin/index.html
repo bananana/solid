@@ -12,10 +12,15 @@
             <h1>{{ _('Admin') }}</h1>
         </div>
     </div>
-    <hr>
+    <hr class="u-remove-margin-top">
     <div class="row">
         <div class="one-third column">
-            <h3 class="u-pull-left">{{ _('Users') }} <sup><small>{{ users | length }}</small></sup></h3>
+	    <h3 class="u-pull-left">
+		<a href="{{ url_for('.admin_cause_list') }}">
+		    {{ _('Users') }}
+		</a>
+		<sup><small>{{ users | length }}</small></sup>
+	    </h3>
             <a href="{{ url_for('.admin_user_list') }}"
                title="View all users"
                class="button u-pull-right u-add-margin-left">
@@ -79,7 +84,12 @@
             </table>
         </div>
         <div class="one-third column">
-            <h3 class="u-pull-left">{{ _('Causes') }} <sup><small>{{ causes | length }}</small></sup></h3>
+	    <h3 class="u-pull-left">
+		<a href="{{ url_for('.admin_cause_list') }}">
+		    {{ _('Causes') }}
+		</a>
+		<sup><small>{{ causes | length }}</small></sup>
+	    </h3>
             <a href="{{ url_for('.admin_cause_list') }}"
                title="View all causes"
                class="button u-pull-right u-add-margin-left">
@@ -149,7 +159,12 @@
             </table>
         </div>
         <div class="one-third column">
-            <h3 class="u-pull-left">{{ _('Pages') }} <sup><small>{{ pages | length }}</small></sup></h3>
+	    <h3 class="u-pull-left">
+		<a href="{{ url_for('.admin_page_list') }}">
+		    {{ _('Pages') }}
+		</a>
+		<sup><small>{{ pages | length }}</small></sup>
+	    </h3>
             <a href="{{ url_for('.admin_page_list') }}"
                title="View all pages"
                class="button u-pull-right u-add-margin-left">

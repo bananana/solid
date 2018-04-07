@@ -9,12 +9,12 @@
             <h1>{{ _('Causes') }} <sup><small>{{ causes | length }}</small></sup></h1>
         </div>
         <div class="four columns">
-            <a href="{{ url_for('admin.admin') }}" 
+            <a href="{{ url_for('admin.admin') }}"
                class="button button-primary u-add-margin-top u-add-margin-left u-pull-right">
                 <span class="oi" data-glyph="caret-left" title="Back" aria-hidden="true"></span>
                 <span class="u-hide-on-mobile"> to Admin</span>
             </a>
-            <a href="{{ url_for('causes.cause_add_edit') }}" 
+            <a href="{{ url_for('causes.cause_add_edit') }}"
                title="Add new cause"
                class="button u-pull-right u-add-margin-top">
                 <span class="oi" data-glyph="plus" title="Add" aria-hidden="true"></span>
@@ -65,11 +65,11 @@
                     <tr class="u-remove-border-bottom">
                         <td colspan="4" class="u-text-right">
                             <small>
-                                Nothing here yet. 
+                                Nothing here yet.
                                 <a href="{{ url_for('causes.cause_add_edit') }}"> Add a new cause</a>.
                             </small>
                         </td>
-                    </tr> 
+                    </tr>
                 </tfoot>
                 {% endif %}
             </table>
