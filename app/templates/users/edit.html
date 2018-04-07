@@ -55,7 +55,7 @@ $(document).ready(function() {
             <input type="submit" class="button-primary" value="Save">
         </div>
     </div>
-    <hr>
+    <hr class="u-remove-margin-top">
     <div class="row">
         <div class="six columns">
             <fieldset>
@@ -70,7 +70,7 @@ $(document).ready(function() {
                     data_validation_error_msg='Not a valid email'
                 ) }}
                 {{ render_field(form.phone, class='u-full-width') }}
-                {{ render_field(form.zip, 
+                {{ render_field(form.zip,
                     class='u-full-width',
                     data_validation='custom',
                     data_validation_regexp='^[0-9]{5}$',
