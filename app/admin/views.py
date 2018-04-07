@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, url_for, redirect, session, \
-                  request, g, flash, abort
-from flask_login import login_user, logout_user, current_user, login_required
+from flask import (Blueprint, render_template, url_for, redirect, request,
+                   flash, abort)
+from flask_login import login_user, current_user, login_required
 
 from app.causes.models import Cause
 from app.users.models import User
@@ -14,18 +14,19 @@ mod = Blueprint('admin', __name__)
 @login_required
 def admin():
     if not current_user.is_admin:
-         return redirect('/')
-    return render_template('admin/index.html', 
-                           users=User.query.all(),
-                           causes=Cause.query.all(),
-                           pages=Page.query.all())
+        return redirect('/')
+
+    return render_template('admin/index.html',
+                           users=User.query.order_by('-id').all(),
+                           causes=Cause.query.order_by('-id').all(),
+                           pages=Page.query.order_by('-id').all())
 
 
 @mod.route('/admin/causes')
 @login_required
 def admin_cause_list():
     if not current_user.is_admin:
-         return redirect('/')
+        return redirect('/')
     return render_template('admin/cause_list.html', causes=Cause.query.all())
 
 
@@ -33,7 +34,7 @@ def admin_cause_list():
 @login_required
 def admin_user_list():
     if not current_user.is_admin:
-         return redirect('/')
+        return redirect('/')
     return render_template('admin/user_list.html', users=User.query.all())
 
 
@@ -41,7 +42,7 @@ def admin_user_list():
 @login_required
 def admin_page_list():
     if not current_user.is_admin:
-         return redirect('/')
+        return redirect('/')
     return render_template('admin/page_list.html', pages=Page.query.all())
 
 
@@ -79,7 +80,7 @@ def admin_page_edit(pk):
 @login_required
 def admin_page_add():
     if not current_user.is_admin:
-         return redirect('/')
+        return redirect('/')
 
     form = PageForm(request.form)
     form_trans = PageTranslationForm(request.form)
