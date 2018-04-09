@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Causes - {{ super() }}{% endblock title %}
+{% block title %}{{ _('Causes') }} - {{ super() }}{% endblock title %}
 
 {% block content %}
 <div class="full-width-container">
@@ -12,13 +12,13 @@
             <a href="{{ url_for('admin.admin') }}"
                class="button button-primary u-add-margin-top u-add-margin-left u-pull-right">
                 <span class="oi" data-glyph="caret-left" title="Back" aria-hidden="true"></span>
-                <span class="u-hide-on-mobile"> to Admin</span>
+                <span class="u-hide-on-mobile"> {{ _('to Admin') }}</span>
             </a>
             <a href="{{ url_for('causes.cause_add_edit') }}"
-               title="Add new cause"
+                title="{{ _('Add new cause') }}"
                class="button u-pull-right u-add-margin-top">
                 <span class="oi" data-glyph="plus" title="Add" aria-hidden="true"></span>
-                <span class="u-hide-on-mobile"> cause</span>
+                <span class="u-hide-on-mobile"> {{ _('cause') }}</span>
             </a>
         </div>
     </div>
@@ -28,14 +28,14 @@
             <table class="u-full-width">
                 <thead>
                     <tr>
-                        <th>id</th>
-                        <th>title</th>
-                        <th>slug</th>
-                        <th>boss</th>
-                        <th>location</th>
-                        <th>supporters</th>
-                        <th>image</th>
-                        <th class="u-text-right">edit</th>
+                        <th>{{ _('id') }}</th>
+                        <th>{{ _('title') }}</th>
+                        <th>{{ _('slug') }}</th>
+                        <th>{{ _('boss') }}</th>
+                        <th>{{ _('location') }}</th>
+                        <th>{{ _('supporters') }}</th>
+                        <th>{{ _('image') }}</th>
+                        <th class="u-text-right">{{ _('edit') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,7 +54,8 @@
                         </td>
                         <td class="u-text-right">
                           <a href="{{ url_for('causes.cause_add_edit', slug=cause.slug) }}">
-                              <span class="oi" data-glyph="pencil" title="Edit" aria-hidden="true"></span>
+                              <span class="oi" data-glyph="pencil" 
+                                  title="{{ _('Edit') }}" aria-hidden="true"></span>
                           </a>
                         </td>
                     </tr>

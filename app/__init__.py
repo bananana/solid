@@ -177,7 +177,7 @@ def contact():
             'email/contact.txt'
         )
 
-        flash('Your message has been sent!.', 'success')
+        flash(_('Your message has been sent!'), 'success')
         return redirect(url_for('.contact'))
 
     return render_template('contact.html', form=form)

@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, url_for, redirect, session, \
-                  request, g, flash, abort
+from flask import (Blueprint, render_template, url_for, redirect, request, g,
+                   flash, abort)
 
+from sqlalchemy.orm.exc import NoResultFound
 
 from app.pages.models import Page
 

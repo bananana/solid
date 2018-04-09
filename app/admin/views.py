@@ -64,7 +64,7 @@ def admin_page_edit(pk):
         form.populate_obj(page)
         form_trans.populate_obj(page)
         page.update()
-        flash('Page updated!', 'success')
+        flash(_('Page updated!'), 'success')
         return redirect(url_for('.admin_page_list', pk=pk))
 
     context = {
@@ -91,7 +91,7 @@ def admin_page_add():
         form.populate_obj(page)
         form_trans.populate_obj(page)
         page.save()
-        flash('Page added!', 'success')
+        flash(_('Page added!'), 'success')
         return redirect(url_for('.admin_page_list', pk=page.id))
 
     context = {

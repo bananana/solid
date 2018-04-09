@@ -26,7 +26,7 @@ def cause_required(f):
         causes = Cause.query.all()
 
         if len(causes) == 0:
-            flash('No causes found', 'error')
+            flash(_('No causes found'), 'error')
             return redirect(url_for('causes.cause_add'))
 
         return f(*args, **kwargs)
@@ -181,7 +181,7 @@ def cause_support(slug):
         LogEvent._log('cause_support', cause, user=current_user)
         session['cause_support'] = cause.slug
     else:
-        flash('You are already supporting this cause.', 'error')
+        flash(_('You are already supporting this cause.'), 'error')
 
     return redirect(url_for('.cause_detail', slug=slug))
 
@@ -257,9 +257,12 @@ def action_detail(slug, pk=None):
     }
 
     if current_user in action.supporters.all():
-        flash(Markup('You are supporting this action! <a href="/cause/' + 
-                     cause.slug + '/actions">See other ways you can help ' + 
-                     cause.title + '</a>.'), 'success')
+        url = url_for('.action_list', slug=cause.slug)
+        flash(Markup(_(
+            'You are supporting this action! <a href="%(cause_url)s">See other ways you can help %(cause_title)s"</a>.',
+            cause_url=url,
+            cause_title=cause.title,
+        )), 'success')
 
     return render_template('causes/action.html', **context)
 
@@ -311,13 +314,13 @@ def action_add_edit(slug, pk=None):
                        [u.email for u in cause.supporters.all()],
                        {'cause': cause, 'action': action},
                        'email/cause_action_supporter.txt')
-            flash('Action added!', 'success')
+            flash(_('Action added!'), 'success')
             LogEvent._log('action_add', action, user=current_user)
         else:
             form_trans.populate_obj(action)
 
             action.update()
-            flash('Action updated!', 'success')
+            flash(_('Action updated!'), 'success')
 
         return redirect(url_for('.cause_detail', slug=slug, pk=pk)) 
 
@@ -347,7 +350,7 @@ def action_delete(slug, pk):
 
     if current_user in cause.creators.all() or current_user.is_admin:
         action.delete()
-        flash('Action deleted successfully', 'success')
+        flash(_('Action deleted successfully'), 'success')
 
     return redirect(url_for('.cause_detail', slug=slug))
 

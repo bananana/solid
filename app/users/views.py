@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import (Blueprint, render_template, url_for, redirect, session,
                    request, g, flash, abort)
 from flask_login import login_user, logout_user, current_user, login_required
-from flask_dance.contrib.google import google 
+from flask_dance.contrib.google import google
 from flask_dance.contrib.twitter import twitter
 from flask_dance.contrib.facebook import facebook
 from flask_dance.consumer import oauth_authorized
@@ -57,7 +57,7 @@ def set_email():
     if form.validate_on_submit():
         form.populate_obj(user)
         user.update()
-        flash('Email updated successfully', 'success')
+        flash(_('Email updated successfully'), 'success')
         return redirect(
             session.pop('next', False)
             or url_for('.user', nickname=nickname)
@@ -68,12 +68,12 @@ def set_email():
 
 @babel.localeselector
 def get_locale():
-    '''This method has to return a language code that determines the app's 
+    '''This method has to return a language code that determines the app's
     display language. lang_code session variable is used to store such a code.
     If user is unauthenticated it is set to whatever their browser locale is.
-    It can be changed with the language select widget which uses the 
-    translate() method implemented in this file. Alternatively, if a user is 
-    authenticated, they can set their language preferences in their profile 
+    It can be changed with the language select widget which uses the
+    translate() method implemented in this file. Alternatively, if a user is
+    authenticated, they can set their language preferences in their profile
     settings.
     '''
 
@@ -83,7 +83,7 @@ def get_locale():
             session['lang_code'] = current_user.locale
         else:
             # Use the browser's language preferences to select available translation
-            # !! Note: This doesn't work on Safari for some reason, so it's disabled 
+            # !! Note: This doesn't work on Safari for some reason, so it's disabled
             # for now.
             '''
             session['lang_code'] = request.accept_languages.best_match(
@@ -91,7 +91,7 @@ def get_locale():
             )
             '''
             # Use default babel locale setting from config
-            session['lang_code'] = app.config['BABEL_DEFAULT_LOCALE'] 
+            session['lang_code'] = app.config['BABEL_DEFAULT_LOCALE']
 
     return session['lang_code']
 
@@ -124,7 +124,7 @@ def signup():
                        {'user': new_user},
                        'email/user_signup.txt')
             return redirect(
-                request.args.get('next') 
+                request.args.get('next')
                 or session.pop('next', False)
                 or url_for('index')
             )
@@ -150,7 +150,7 @@ def login():
         login = form.login.data
         remember = bool(form.remember.data)
 
-        #: Query the database with the provided credentials 
+        #: Query the database with the provided credentials
         email = re.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])+")
         match = email.match(login)
         if match:
@@ -162,7 +162,7 @@ def login():
            user_query.is_valid_password(form.password.data):
             login_user(user_query, remember=remember)
             return redirect(
-                request.args.get('next') 
+                request.args.get('next')
                 or session.pop('next', False)
                 or url_for('index')
             )
@@ -184,16 +184,16 @@ def authorize_google():
     resp = google.get('/plus/v1/people/me')
     assert resp.ok, resp.text
     social_id = str(resp.json()['id'])
-    nickname = '_'.join([str(resp.json()['name']['givenName']), 
+    nickname = '_'.join([str(resp.json()['name']['givenName']),
                          str(resp.json()['name']['familyName'])])
-    full_name = ' '.join([str(resp.json()['name']['givenName']), 
+    full_name = ' '.join([str(resp.json()['name']['givenName']),
                           str(resp.json()['name']['familyName'])])
     email = str(resp.json()['emails'][0]['value'])
-    
+
     #: Query the database to see if user already exists
     user_query = User.query.filter_by(social_id=social_id).first()
 
-    if user_query is None: 
+    if user_query is None:
         #: User is not in database, create a new one
         new_user = User.create(**{
             'social_id' : social_id,
@@ -207,7 +207,7 @@ def authorize_google():
         login_user(user_query)
 
     return redirect(
-        request.args.get('next') 
+        request.args.get('next')
         or session.get('next', False)
         or url_for('index')
     )
@@ -237,7 +237,7 @@ def authorize_twitter():
     #: Query the database to see if user already exists
     user_query = User.query.filter_by(social_id=social_id).first()
 
-    if user_query is None: 
+    if user_query is None:
         #: User is not in database, create a new one
         new_user = User.create(**{
             'social_id' : social_id,
@@ -250,7 +250,7 @@ def authorize_twitter():
     else:
         login_user(user_query)
     return redirect(
-        request.args.get('next') 
+        request.args.get('next')
         or session.get('next', False)
         or url_for('index')
     )
@@ -266,7 +266,7 @@ def authorize_facebook():
     #: Query the database to see if user already exists
     user_query = User.query.filter_by(social_id=r['id']).first()
 
-    if user_query is None: 
+    if user_query is None:
         #: User is not in database, create a new one
         new_user = User.create(**{
             'social_id' : r['id'],
@@ -283,7 +283,7 @@ def authorize_facebook():
         login_user(user_query)
 
     return redirect(
-        request.args.get('next') 
+        request.args.get('next')
         or session.get('next', False)
         or url_for('index')
     )
@@ -305,7 +305,7 @@ def user(nickname):
     '''
     #: User who is being viewed
     user = User.query.filter_by(nickname=nickname).first()
-    
+
     if user is None:
         abort(404)
 
@@ -344,10 +344,10 @@ def edit(nickname):
         #: A list of all the form data, including empty fields
         complete_form_data = form.data
 
-        # Delete password fields from the list because password has to be 
+        # Delete password fields from the list because password has to be
         # processed separately anyway
-        del(complete_form_data['verify_password'], 
-            complete_form_data['current_password'], 
+        del(complete_form_data['verify_password'],
+            complete_form_data['current_password'],
             complete_form_data['new_password'])
 
         try:
@@ -363,17 +363,17 @@ def edit(nickname):
 
         user.update(**form_data)
         user.generate_initials()
-        flash('User updated successfully', 'success')
+        flash(_('User updated successfully'), 'success')
         return redirect(url_for('.user', nickname=nickname))
     else:
         # Create a list of field keys, remove password fields from it because the
-        # password has to be processed separately. 
+        # password has to be processed separately.
         fields = form.data.keys()
         fields.remove('current_password')
-        fields.remove('new_password') 
+        fields.remove('new_password')
         fields.remove('verify_password')
-        
-        # Removing csrf_token key prevents the app from breaking when trying to 
+
+        # Removing csrf_token key prevents the app from breaking when trying to
         # pre-pupulate csrf_token hidden input (usually when trying to edit
         # your profile. csrf_token field does not exist in the user object,
         # so it crashes the app. This does not compromise the functionality of
@@ -383,7 +383,7 @@ def edit(nickname):
         except ValueError:
             pass
 
-        # Set default form field values based on current values in the 
+        # Set default form field values based on current values in the
         # database for user being edited.
         for field in fields:
             setattr(getattr(form, field), 'default', getattr(user, field))
@@ -405,14 +405,14 @@ def delete(nickname):
 
     if current_user.id is not user.id and not current_user.is_admin:
         abort(403)
-    
+
     if current_user.id is user.id:
         logout_user()
 
     user.delete()
-    flash('User deleted successfully', 'success')
+    flash(_('User deleted successfully'), 'success')
 
-    return redirect(url_for('index')) 
+    return redirect(url_for('index'))
 
 
 @mod.route('/translate', methods=['POST'])
@@ -422,7 +422,7 @@ def translate():
     '''
     if request.method == 'POST' \
     and request.form['lang_code'] in tuple(app.config['SUPPORTED_LANGUAGES'].keys()):
-        session['lang_code'] = request.form['lang_code'] 
+        session['lang_code'] = request.form['lang_code']
         if current_user.is_authenticated:
             current_user.locale = session['lang_code']
             current_user.update()
@@ -445,9 +445,10 @@ def reset_password():
                        [user.email,],
                        {'user': user, 'link': link},
                        'email/reset_password.txt')
-            flash('Email with password reset instructions sent to {0}. \
-                  You can close this window now.'.format(user.email), 
-                  'success')
+            flash(_(
+                'Email with password reset instructions sent to %(user_email). You can close this window now.',
+                user_email=user.email
+            ), 'success')
     return render_template('users/reset_password.html', form=form)
 
 

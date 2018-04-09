@@ -1,18 +1,26 @@
-from app import db
-
-from flask_wtf import Form 
-from wtforms.ext.sqlalchemy.orm import model_form
+from flask_babel import lazy_gettext as _
+from flask_wtf import Form
+from wtforms_alchemy import model_form_factory
 
 from .models import Page, PageTranslation
 
+ModelForm = model_form_factory(Form)
 
-PageForm = model_form(Page, base_class=Form, db_session=db.session, only=(
-        'url',
-))
 
-PageTranslationForm = model_form(
-        PageTranslation, base_class=Form, db_session=db.session, only=(
-                'name',
-                'content',
-        )
-)
+class PageForm(ModelForm):
+    class Meta:
+        model = Page
+        only = ('url',)
+        field_args = {
+            'url': {'label': _('URL') },
+        }
+
+
+class PageTranslationForm(ModelForm):
+    class Meta:
+        model = PageTranslation
+        only = ('name', 'content')
+        field_args = {
+            'name': {'label': _('Name')},
+            'content': {'label': _('Content')},
+        }

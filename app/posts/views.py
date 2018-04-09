@@ -56,7 +56,7 @@ def post_add(slug):
     cause = Cause.query.filter_by(slug=slug).first()
 
     if current_user not in cause.supporters.all() and not current_user.is_admin:
-        flash('You must be supporting this cause to post.', 'error')
+        flash(_('You must be supporting this cause to post.'), 'error')
         return redirect(url_for('causes.cause_detail', slug=slug))
 
     form = PostForm(CombinedMultiDict((request.files, request.form)))
@@ -77,13 +77,16 @@ def post_add(slug):
             post_image.post = post
             post_image.save()
 
-        send_email('"{0.title}" - "{1.title}"'.format(post, cause),
-                set([s.email for s in cause.creators.all() 
-                     + User.query.filter_by(is_admin=True).all()]),
-                   {'cause': cause, 'post': post},
-                   'email/post_creators.txt')
+        send_email(
+            _('"%(post_title)s" - "%(cause_title)s"',
+              post_title=post.title, cause_title=cause.title),
+            set([s.email for s in cause.creators.all()
+                 + User.query.filter_by(is_admin=True).all()]),
+            {'cause': cause, 'post': post},
+            'email/post_creators.txt'
+        )
 
-        flash('Post added!', 'success')
+        flash(_('Post added!'), 'success')
         LogEvent._log('post_add', post, user=current_user)
         return redirect(url_for('.post_list', slug=cause.slug))
 
@@ -122,7 +125,7 @@ def post_edit(slug, pk):
             post_image.post = post
             post_image.save()
 
-        flash('Post updated!', 'success')
+        flash(_('Post updated!'), 'success')
         return redirect(url_for('.post_detail', slug=cause.slug, pk=post.id))
 
     context = {
@@ -144,7 +147,7 @@ def post_delete(slug, pk):
     if current_user.id is post.author.id or current_user.is_admin:
         post.deleted = True
         post.save()
-        flash('Post deleted!', 'success')
+        flash(_('Post deleted!'), 'success')
         return redirect(url_for('causes.cause_detail', slug=cause.slug))
     else:
         abort(404)
@@ -174,12 +177,12 @@ def comment_add(slug, pk):
         if post.author is not None:
             recipients.add(post.author.email)
 
-        send_email('New comment on "{0.title}"'.format(post),
+        send_email(_('New comment on "%(title)s"', title=post.title),
                    list(recipients),
                    {'post': post, 'comment': comment},
                    'email/post_comment.txt')
 
-        flash('Comment added!', 'success')
+        flash(_('Comment added!'), 'success')
         LogEvent._log('post_reply', comment, user=current_user)
         return redirect(url_for('.post_detail', slug=cause.slug, pk=post.id))
 

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Users - {{ super() }}{% endblock title %}
+{% block title %}{{ _('Users') }} - {{ super() }}{% endblock title %}
 
 {% block content %}
 <div class="full-width-container">
@@ -11,25 +11,25 @@
     <div class="four columns">
         <a href="{{ url_for('admin.admin') }}" 
            class="button button-primary u-add-margin-top u-pull-right">
-            <span class="oi" data-glyph="caret-left" title="Back" aria-hidden="true"></span> to Admin
+           <span class="oi" data-glyph="caret-left" title="Back" aria-hidden="true"></span> 
+           {{ _('to Admin') }}
         </a>
     </div>
   </div>
-  <hr>
+  <hr class="u-remove-margin-top">
   <div class="row">
       <div class="twelve columns">
         <table class="u-full-width">
             <thead>
                 <tr>
-                    <th>id</th>
-                    <th>nickname</th>
-                    <th>full name</th>
-                    <th>e-mail</th>
-                    <th>last login</th>
-                    <th>causes created</th>
-                    <th>causes supported</th>
-                    <th>actions taken</th>
-                    <th class="u-text-right">edit</th>
+                  <th>{{ _('id') }}</th>
+                  <th>{{ _('nickname') }}</th>
+                  <th>{{ _('e-mail') }}</th>
+                  <th>{{ _('last login') }}</th>
+                  <th>{{ _('causes created') }}</th>
+                  <th>{{ _('causes supported') }}</th>
+                  <th>{{ _('actions taken') }}</th>
+                  <th class="u-text-right">{{ _('edit') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,17 +38,17 @@
                     <td>{{ user.id }}</td>
                     <td>
                       {{ render_avatar(user) }}
-                      <a href="{{ url_for('users.user', nickname=user.nickname) }}">
+                      <a href="{{ url_for('users.user', nickname=user.nickname) }}"
+                          title="{{ user.full_name|default(_('n/a')) }}">
                         {{ user.nickname }}
                       </a>
                     </td>
-                    <td>{{ user.full_name|default('n/a') }}</td>
                     <td>{{ user.email|default('n/a') }}</td>
                     <td>
                         {% if user.last_login %}
                             {{ user.last_login.strftime('%Y-%m-%d %H:%M:%S') }}
                         {% else %}
-                            {{ user.last_login }}
+                            {{ _('n/a') }}
                         {% endif %}
                     </td>
                     <td>{{ user.causes_created.count() }}</td>

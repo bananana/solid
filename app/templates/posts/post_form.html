@@ -13,7 +13,7 @@
 
                 <label for="images" class="button-icon u-pull-right">
                     <img src="{{ url_for('static', filename='open-iconic/png/image-3x.png') }}">
-                    <small>Add Image</small>
+                    <small>{{ _('Add Image') }}</small>
                 </label>
                 {{ render_field_no_label(post_form.images) }}
             </fieldset>

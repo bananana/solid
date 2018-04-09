@@ -17,7 +17,7 @@
             <span>
                 {{ render_avatar(user) }} 
                 <strong>{{ user.nickname }}</strong> 
-                {% if user.is_admin %}<sup><small>Admin</small></sup>{% endif %}
+                {% if user.is_admin %}<sup><small>{{ _('Admin') }}</small></sup>{% endif %}
             </span>
             {% if user.full_name %}
                 <h5 class="u-remove-margin-bottom">{{ user.full_name }}</h5>
@@ -25,14 +25,16 @@
             {% if current_user == user or current_user.is_admin %}
                 <br>
                 <small class="separator u-add-margin-top">
-                    <span>Other users won't see the details below</span>
+                    <span>{{ _("Other users won't see the details below") }}</span>
                 </small>
                 {% if user.email %}<div>{{ user.email }}</div>{% endif %}
                 {% if user.phone %}<div>{{ user.phone }}</div>{% endif %}
                 {% if user.zip %}<div>{{ user.zip }}</div>{% endif %}
             {% endif %}
             {% if current_user == user or current_user.is_admin %}
-                <a href="{{ url_for('users.edit', nickname=user.nickname) }}" class="button u-full-width u-add-margin-top">Edit</a>
+                <a href="{{ url_for('users.edit', nickname=user.nickname) }}" class="button u-full-width u-add-margin-top">
+                    {{ _('Edit') }}
+                </a>
             {% endif %}
         </div>
         <div class="six columns">
@@ -43,18 +45,22 @@
                 <small>
                     <strong>There's nothing to show here yet.</strong><br>
                     {% if current_user == user %}
-                        Start a discussion on one of the causes you're
-                        supporting so that others can see it here.
+                        {{ _("Start a discussion on one of the causes you're supporting so that others can see it here.") }}
                     {% else %}
-                        When this user participates in a discussion, you'll
-                        see it here!
+                        {{ _("When this user participates in a discussion, you'll see it here!") }}
                     {% endif %}
                 </small>
             {% endif %}
             </ul>
         </div>
         <div class="three columns">
-            <h5>Created {{ user.causes_created.count() }} cause{% if user.causes_created.count() != 1 %}s{% endif %}</h5>
+            <h5>
+                {% trans causes_created=user.causes_created.count() %}
+                Created {{ causes_created}} cause
+                {% pluralize %}
+                Created {{ causes_created}} causes
+                {% endtrans %}
+            </h5>
             {% if user.causes_created.count() > 0 %}
                 <ul class="no-bullets">
                 {% for cause in user.causes_created %}
@@ -63,7 +69,13 @@
                 </ul>
                 <hr>
             {% endif %}
-            <h5>Supporting {{ user.causes_supports.distinct().count() }} cause{% if user.causes_supports.distinct().count() != 1 %}s{% endif %}</h5>
+            <h5>
+                {% trans causes_supports=user.causes_supports.count() %}
+                Supporting {{ causes_supports }} cause
+                {% pluralize %}
+                Supporting {{ causes_supports }} causes
+                {% endtrans %}
+            </h5>
             {% if user.causes_supports.distinct().count() > 0 %}
                 <ul class="no-bullets">
                 {% for cause in user.causes_supports %}
@@ -72,7 +84,13 @@
                 </ul>
                 <hr>
             {% endif %}
-            <h5>Took {{ user.actions.count() }} action{% if user.actions.count() != 1 %}s{% endif %}</h5>
+            <h5>
+                {% trans actions=user.actions.count() %}
+                Took {{ actions }} action
+                {% pluralize %}
+                Took {{ actions }} actions
+                {% endtrans %}
+            </h5>
             {% if user.actions.count() > 0 %}
                 <ul class="no-bullets">
                 {% for action in user.actions %}
@@ -81,7 +99,7 @@
                             {{ action.title }}
                         </a>
                         <small>
-                            from
+                            {{ _('from') }}
                             <a href="{{ url_for('causes.cause_detail', slug=action.cause.slug) }}">{{ action.cause.title }}</a>
                         </small>
                     </li>

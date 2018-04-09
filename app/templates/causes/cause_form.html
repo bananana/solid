@@ -3,7 +3,7 @@
 
 {% block title %}
     {% if cause.id %}
-    {{ _("Edit Cause") }} 
+        {{ _("Edit Cause") }} "{{ cause.title }}"
     {% else %}
     {{ _("Add Cause") }} 
     {% endif %}
@@ -41,7 +41,7 @@
         <div class="row">
             <fieldset>
                 <div class="three columns offset-by-three">
-                    <input id="save" type="submit" value="Save"
+                    <input id="save" type="submit" value="{{ _('Save') }}"
                         class="button button-primary u-mobile-fixed-bottom">
                 </div>
                 <div class="three columns">

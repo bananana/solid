@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% set active_page = "user_edit" %}
 
+{% block title %}
+    {% if current_user.is_admin %}
+        {{ _('Edit User') }} "{{ user.nickname }}"
+    {% else %}
+        {{ _('Edit Profile') }}
+    {% endif %} - {{ super() }}
+{% endblock %}
+
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='jQuery-Form-Validator/form-validator/jquery.form-validator.min.js') }}"></script>
 <script>
@@ -59,7 +67,7 @@ $(document).ready(function() {
     <div class="row">
         <div class="six columns">
             <fieldset>
-                <legend><h3>Profile</h3></legend>
+                <legend><h3>{{ _('Profile') }}</h3></legend>
                 {{ form.hidden_tag() }}
                 {{ render_field(form.nickname, class='u-full-width') }}
                 {{ render_field(form.full_name, class='u-full-width') }}
@@ -83,7 +91,7 @@ $(document).ready(function() {
         </div>
         <div class="six columns">
             <fieldset>
-                <legend><h3>Password</h3></legend>
+                <legend><h3>{{ _('Password') }}</h3></legend>
                 {{ render_field(form.current_password, class='u-full-width') }}
                 <div>
                 {{ render_field(form.new_password,
@@ -106,7 +114,9 @@ $(document).ready(function() {
     <hr>
     <div class="row">
         <div class="twelve columns u-text-center">
-            <a href="{{ url_for('users.delete', nickname=user.nickname) }}" class="button danger">Delete Account</a>
+            <a href="{{ url_for('users.delete', nickname=user.nickname) }}" class="button danger">
+                {{ _('Delete Account') }}
+            </a>
         </div>
     </div>
 </form>
