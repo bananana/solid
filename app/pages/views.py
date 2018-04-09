@@ -11,6 +11,9 @@ mod = Blueprint('pages', __name__)
 
 @mod.route('/<url>')
 def page_detail(url):
-    page = Page.query.filter_by(url='/{0}'.format(url)).one()
+    try:
+        page = Page.query.filter_by(url='/{0}'.format(url)).one()
+    except NoResultFound:
+        abort(404)
 
     return render_template('pages/page.html', page=page)
