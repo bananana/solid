@@ -271,7 +271,9 @@
         </div>
 
         <div class="three columns">
+            {% if cause.story_heading %}
             <h3>{{ cause.story_heading }}</h3>
+            {% endif %}
             <article class="read_more">
                 {{ cause.story_content|markdown }}
             </article>
