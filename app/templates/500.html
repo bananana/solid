@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
-{% block scripts %}
+{% block title %}
+    {{ _('Internal Server Error') }} - {{ super() }}
 {% endblock %}
 
 {% block content %}
