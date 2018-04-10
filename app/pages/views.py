@@ -1,5 +1,4 @@
-from flask import (Blueprint, render_template, url_for, redirect, request, g,
-                   flash, abort)
+from flask import Blueprint, render_template, abort
 
 from sqlalchemy.orm.exc import NoResultFound
 
