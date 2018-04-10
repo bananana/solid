@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 from os import environ
 
@@ -120,6 +121,11 @@ def config_vars():
     if 'SENTRY_JS_KEY' in app.config:
         c['sentry_js_key'] = app.config['SENTRY_JS_KEY']
     return c
+
+
+@app.context_processor
+def now():
+    return {'now': datetime.utcnow()}
 
 
 # App-wide decorators
