@@ -6,6 +6,12 @@
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 <script src="{{ url_for('static', filename='js/post_image_preview.js') }}"></script>
+<script src="{{ url_for('static', filename='autosize/dist/autosize.min.js') }}"></script>
+<script>
+$(document).ready(function() {
+    autosize(document.getElementById('body'));
+});
+</script>
 {% endblock %}
 
 {% block content %}
@@ -15,12 +21,12 @@
         {{ post_form.hidden_tag() }}
         <div class="row u-add-margin-bottom">
             <div class="six columns offset-by-three">
-                <span class="u-pull-left">{{ render_avatar(post.author) }}</span>
-                <span class="u-pull-right">{{ post.created_on.strftime('%b. %d, %Y') }}</span>
+                <span>{{ render_avatar(post.author) }}</span>
+                <small>{{ post.created_on.strftime('%b. %d, %Y') }}</small>
             </div>
         </div>
         <div class="row">
-            <div class="twelve columns u-remove-margin-left post-box">
+            <div class="six columns offset-by-three u-remove-margin-left post-box">
                 {{ render_field_no_label(post_form.body, class="", placeholder="Start a conversation") }}
                 <fieldset class="post-box-controls">
                     <label for="images" class="button-icon u-pull-right">
@@ -31,17 +37,23 @@
                 </fieldset>
             </div>
         </div>
-        <div class="nine columns u-remove-margin-left" id="preview"></div>
+        <div class="six columns offset-by-three u-add-margin-bottom" id="preview"></div>
         <div class="row u-add-margin-top">
-            <div class="four columns offset-by-three">
-                <input id="save" type="submit" value="{{ _('Save') }}"
-                    class="button button-primary u-mobile-fixed-bottom">
+            <div class="three columns offset-by-three">
+                <input id="cancel" class="button u-full-width" value="{{ _('Cancel') }}">
             </div>
-            <div class="two columns">
+            <div class="three columns">
+                <input id="save" type="submit" value="{{ _('Save') }}"
+                    class="button button-primary u-full-width u-mobile-fixed-bottom">
+            </div>
+        </div>
+        <div class="row">
+            <hr>
+            <div class="six columns offset-by-three u-text-center">
                 {% if post %}
-                <a class="button danger u-mobile-fixed-bottom"
+                <a class="button danger"
                    data-target="modal-delete">
-                    {{ _('Delete') }}
+                    {{ _('Delete Post') }}
                 </a>
                 <div id="modal-delete" class="modal">
                     <div style="width:300px;">

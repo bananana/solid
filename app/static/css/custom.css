@@ -637,9 +637,6 @@ a.support-action {
     padding: 0 10px;
     font-size: small;
 }
-#post #save {
-    width: 100px;
-}
 .posting-unauthorized {
     display: block;
     background-color: #fbfaf9;
