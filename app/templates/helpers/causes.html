@@ -28,7 +28,7 @@ section (app/templates/styleguide/templating#cause-helpers)
 %}
 {% set log_loop = namespace(previous=None) %}
 {% for event in log %}
-    {% if log_loop.previous != event.logged_at.strftime('%b. %d, %Y') %} 
+    {% if log_loop.previous != event.logged_at.strftime('%b. %d, %Y') and not event.item.deleted %} 
         <small class="separator">
             <span>
                 {{ event.logged_at.strftime('%b. %d, %Y') }}
