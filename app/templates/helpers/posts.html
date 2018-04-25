@@ -67,7 +67,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
     </article>
     <small class="u-pull-left u-add-margin-top">
         <a class="post-comment-count" 
-           href="{# url_for('posts.post_detail', slug=cause.slug, pk=comment.post.id) #}">
+           href="{{ url_for('posts.post_detail', slug=cause.slug, pk=comment.post_id) }}">
             <span class="oi" data-glyph="comment-square"></span>
             {{ _('View conversation') }}
         </a>
