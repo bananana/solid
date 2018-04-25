@@ -90,7 +90,7 @@
                         {{ comment.body|markdown }}
                         <p class="u-pull-left u-full-width u-remove-margin-bottom">
                             {{ render_avatar(comment.author) }}&nbsp;
-                            {% if comment.created_on %}{{ comment.created_on.strftime('%b. %d, %Y') }}{% endif %}
+                            {% if comment.created_on %}<small>{{ comment.created_on.strftime('%b. %d, %Y') }}</small>{% endif %}
                             {% if comment.author == current_user or current_user.is_admin %}
                                 <a class="button u-pull-right u-remove-margin-bottom"
                                     href="{{ url_for('posts.post_edit', slug=cause.slug, pk=comment.id) }}">
