@@ -88,6 +88,8 @@ class Comment(CRUDMixin, db.Model):
     author_id     = db.Column(db.Integer, db.ForeignKey('users_user.id'))
     author        = db.relationship('User', backref=db.backref('comments', lazy='dynamic'))
 
+    deleted = db.Column(db.Boolean)
+
     def save(self, *args, **kwargs):
         if not self.created_on:
             self.created_on = datetime.datetime.utcnow()
