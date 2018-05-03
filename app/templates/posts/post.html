@@ -49,42 +49,44 @@
                     {{ render_avatar(post.author) }}&nbsp;
                     <small>{{ post.created_on.strftime('%b. %d, %Y') }}</small>
                     {% if not post.deleted and (post.author == current_user or current_user.is_admin) %}
-                        <a class="button u-pull-right u-remove-margin-bottom"
-                            href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
-                            edit
-                        </a>
-                        <a class="button u-pull-right u-remove-margin-bottom u-add-margin-right"
-                            href="{{ url_for('posts.post_delete', slug=cause.slug, pk=post.id) }}">
-                            delete
-                        </a>
+                        <small class="u-pull-right u-add-margin-top">
+                            <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
+                                <span class="oi" data-glyph="pencil"></span>
+                                {{ _('Edit') }}
+                            </a>
+                        </small>
                     {% endif %}
                 </p>
             </div>
-            <h5 class="u-remove-margin-bottom">{{ _('%(count)s comments for this post. Leave yours:', count=post.comments.count()) }}</h5>
-            {% if current_user.is_authenticated and current_user.is_supporting(cause) %}
-            {% from "helpers/forms.html" import render_field, render_boolean %}
-            <form id="cause" class="u-add-margin-top" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
-                {{ comment_form.hidden_tag() }}
-                <fieldset class="no-label">
-                    {{ render_field(comment_form.body, class="u-full-width") }}
-                </fieldset>
-                <input id="save" type="submit" value="Leave a Comment"
-                    class="button button-primary">
-            </form>
-            {% elif not current_user.is_authenticated %}
-            <p><strong>
-                <a href="{{ url_for('causes.cause_detail', slug=cause.slug)}}">
-                    {{ _('Log in') }} 
-                </a>
-                {{ _('to post.') }}
-            </strong></p>
+            {% if not post.deleted %}
+                <h5 class="u-remove-margin-bottom">{{ _('%(count)s comments for this post. Leave yours:', count=post.comments.count()) }}</h5>
+                {% if current_user.is_authenticated and current_user.is_supporting(cause) %}
+                    {% from "helpers/forms.html" import render_field, render_boolean %}
+                    <form id="cause" class="u-add-margin-top" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
+                        {{ comment_form.hidden_tag() }}
+                        <fieldset class="no-label">
+                            {{ render_field(comment_form.body, class="u-full-width") }}
+                        </fieldset>
+                        <input id="save" type="submit" value="Leave a Comment"
+                            class="button button-primary">
+                    </form>
+                    {% elif not current_user.is_authenticated %}
+                    <p><strong>
+                        <a href="{{ url_for('causes.cause_detail', slug=cause.slug)}}">
+                            {{ _('Log in') }} 
+                        </a>
+                        {{ _('to post.') }}
+                    </strong></p>
+                    {% else %}
+                    <p><strong>
+                        <a href="{{ url_for('causes.cause_support', slug=cause.slug)}}">
+                            {{ _('Support this cause') }}
+                        </a>
+                        {{ _('to post.') }}
+                    </strong></p>
+                {% endif %}
             {% else %}
-            <p><strong>
-                <a href="{{ url_for('causes.cause_support', slug=cause.slug)}}">
-                    {{ _('Support this cause') }}
-                </a>
-                {{ _('to post.') }}
-            </strong></p>
+                <h5 class="u-remove-margin-bottom">Original post deleted. Comments locked.</h5>
             {% endif %}
         </div>
         <div class="one-half column">
@@ -96,10 +98,12 @@
                             {{ render_avatar(comment.author) }}&nbsp;
                             {% if comment.created_on %}<small>{{ comment.created_on.strftime('%b. %d, %Y') }}</small>{% endif %}
                             {% if comment.author == current_user or current_user.is_admin %}
-                                <a class="button u-pull-right u-remove-margin-bottom"
-                                    href="{{ url_for('posts.post_edit', slug=cause.slug, pk=comment.id) }}">
-                                    edit
-                                </a>
+                                <small class="u-pull-right u-add-margin-top">
+                                    <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
+                                        <span class="oi" data-glyph="pencil"></span>
+                                        {{ _('Edit') }}
+                                    </a>
+                                </small>
                             {% endif %}
                         </p>
                     </div>
