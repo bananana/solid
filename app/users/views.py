@@ -261,7 +261,7 @@ def authorize_facebook():
     if not facebook.authorized:
         return redirect(url_for('facebook.login'))
 
-    r = facebook.get('/v2.5/me?fields=name,email,link,picture,id').json()
+    r = facebook.get('/v3.0/me?fields=name,email,link,picture,id').json()
 
     #: Query the database to see if user already exists
     user_query = User.query.filter_by(social_id=r['id']).first()
