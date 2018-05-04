@@ -36,7 +36,8 @@ def post_detail(slug, pk):
     cause = Cause.query.filter_by(slug=slug).first()
     post = cause.posts.filter_by(id=pk).one()
 
-    if post.deleted and not current_user.is_admin:
+    if (post.deleted and not current_user.is_authenticated) or \
+       (post.deleted and not current_user.is_admin):
         abort(404)
 
     comment_form = CommentForm(request.form)
