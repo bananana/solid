@@ -1,4 +1,4 @@
-"""empty message
+"""copy Page data to PageTranslation
 
 Revision ID: 4a490dacaa06
 Revises: f992c0df5662

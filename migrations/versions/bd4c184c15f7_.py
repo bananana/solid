@@ -1,4 +1,4 @@
-"""empty message
+"""add Post.deleted
 
 Revision ID: bd4c184c15f7
 Revises: f8c51b97cb4a

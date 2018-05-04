@@ -1,4 +1,4 @@
-"""empty message
+"""clean-up (non-nullables, indices)
 
 Revision ID: d568eda603db
 Revises: 3de620b399d7

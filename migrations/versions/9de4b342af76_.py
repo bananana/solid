@@ -1,4 +1,4 @@
-"""empty message
+"""make Post.title optional
 
 Revision ID: 9de4b342af76
 Revises: 1944900d3b2c
