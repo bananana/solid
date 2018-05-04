@@ -9,7 +9,7 @@ section (app/templates/styleguide/templating#)
    style="background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url({{ action.image_url }}) no-repeat; background-size: cover"
    {% endif %}
    >
-    <div class="support-action-modal-description">
+    <div class="support-action-description">
         <h5 class="u-remove-margin-bottom">
             {% if current_user in action.supporters.all() %}
             <span class="oi" data-glyph="check" style="color:#ff9900;"></span>

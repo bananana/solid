@@ -567,7 +567,7 @@ a.support-action {
 .support-action-share a:focus {
     text-decoration: none;
 }
-.support-action-modal-description {
+.support-action-description {
     min-height: 180px;
 }
 
