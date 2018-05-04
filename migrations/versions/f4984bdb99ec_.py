@@ -1,4 +1,4 @@
-"""empty message
+"""add Action translations
 
 Revision ID: f4984bdb99ec
 Revises: d568eda603db

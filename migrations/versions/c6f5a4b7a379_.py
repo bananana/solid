@@ -1,4 +1,4 @@
-"""empty message
+"""add Comment.deleted
 
 Revision ID: c6f5a4b7a379
 Revises: bd4c184c15f7

@@ -1,4 +1,4 @@
-"""empty message
+"""make Cause translation title optional
 
 Revision ID: 01e9c4fc3ac4
 Revises: cad31b133f5e

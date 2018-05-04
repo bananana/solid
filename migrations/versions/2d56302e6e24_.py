@@ -1,4 +1,4 @@
-"""empty message
+"""add Cause translations
 
 Revision ID: 2d56302e6e24
 Revises: 8321545d47fa

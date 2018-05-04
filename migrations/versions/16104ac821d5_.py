@@ -1,4 +1,4 @@
-"""empty message
+"""drop non-translated Action fields
 
 Revision ID: 16104ac821d5
 Revises: 8b57e757256c

@@ -1,4 +1,4 @@
-"""empty message
+"""copy Action content to ActionTranslation
 
 Revision ID: 8b57e757256c
 Revises: f4984bdb99ec

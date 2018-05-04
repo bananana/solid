@@ -1,4 +1,4 @@
-"""empty message
+"""add PostImage
 
 Revision ID: f8c51b97cb4a
 Revises: 9de4b342af76

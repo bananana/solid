@@ -1,4 +1,4 @@
-"""empty message
+"""add Page translations
 
 Revision ID: f992c0df5662
 Revises: 16104ac821d5
