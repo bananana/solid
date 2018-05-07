@@ -17,11 +17,11 @@ section (app/templates/styleguide/templating#discussion-helpers)
                     <img class="post-image-thumbnail" src="{{ image.image_path|resize('128x128', fill='True') }}" />
                 </a>
                 <div id="modal-post-image-{{ post.id }}" class="modal">
-                    <div style="width:initial; display:inline-block">
+                    <div style="width:initial; max-width:800px; display:inline-block">
                         <a class="button-modal-close u-pull-right">
                             <img src="{{ url_for('static', filename='open-iconic/png/x-2x.png') }}" alt="X" style="margin-bottom:0.5em" />
                         </a>
-                        <img class="u-cf" src="{{ image.image_url }}" />
+                        <img class="u-cf" style="width:100%" src="{{ image.image_url }}" />
                     </div>
                 </div>
             {% endfor %}
