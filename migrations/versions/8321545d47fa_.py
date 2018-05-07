@@ -1,4 +1,4 @@
-"""empty message
+"""add User nickname & zip indices
 
 Revision ID: 8321545d47fa
 Revises: e21949ae489f

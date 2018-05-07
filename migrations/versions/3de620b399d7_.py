@@ -1,4 +1,4 @@
-"""empty message
+"""add User.locale
 
 Revision ID: 3de620b399d7
 Revises: 520c881c2954

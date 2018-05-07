@@ -1,4 +1,4 @@
-"""empty message
+"""add Action.image, update Cause & Action translation FKs
 
 Revision ID: 1944900d3b2c
 Revises: b4a2fcb7edf8

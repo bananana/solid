@@ -1,4 +1,4 @@
-"""empty message
+"""drop un-translated Page content
 
 Revision ID: b4a2fcb7edf8
 Revises: 4a490dacaa06

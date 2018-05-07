@@ -1,4 +1,4 @@
-"""empty message
+"""remove un-translated Cause fields
 
 Revision ID: 520c881c2954
 Revises: 01e9c4fc3ac4

@@ -1,4 +1,4 @@
-"""empty message
+"""copy Cause content to CauseTranslation
 
 Revision ID: cad31b133f5e
 Revises: 2d56302e6e24
