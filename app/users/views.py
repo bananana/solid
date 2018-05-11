@@ -364,8 +364,6 @@ def edit(nickname):
         elif form.new_password.data and not user.is_valid_password(form.current_password.data):
             flash(_('Current password field does not match your password'), 'error')
             return redirect(url_for('.edit', nickname=nickname))
-        else:
-            print('else')
 
         user.update(**form_data)
         user.generate_initials()
