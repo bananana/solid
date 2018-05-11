@@ -5,7 +5,7 @@ $(document).ready(function () {
     input.addEventListener('change', updateImageDisplay);
     function updateImageDisplay() {
         while(preview.firstChild) {
-            preview.removChild(preview.firstChild);
+            preview.removeChild(preview.firstChild);
         }
 
         var curFiles = input.files;
