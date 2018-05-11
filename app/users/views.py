@@ -357,9 +357,15 @@ def edit(nickname):
 
         # Remove empty fields from list
         form_data = {k:v for k,v in complete_form_data.iteritems() if not v == ''}
+
         # Set the password if it was submitted
-        if form.new_password.data:
+        if form.new_password.data and user.is_valid_password(form.current_password.data):
             user.set_password(form.new_password.data)
+        elif form.new_password.data and not user.is_valid_password(form.current_password.data):
+            flash(_('Current password field does not match your password'), 'error')
+            return redirect(url_for('.edit', nickname=nickname))
+        else:
+            print('else')
 
         user.update(**form_data)
         user.generate_initials()
