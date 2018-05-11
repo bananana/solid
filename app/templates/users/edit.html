@@ -83,7 +83,8 @@ $(document).ready(function() {
                     data_validation='custom',
                     data_validation_regexp='^[0-9]{5}$',
                     data_validation_error_msg_container='#form-zip-error',
-                    data_validation_error_msg='Not a valid zip code'
+                    data_validation_error_msg='Not a valid zip code',
+                    data_validation_optional="true"
                 ) }}
                 {{ render_field(form.employer, class='u-full-width') }}
                 {{ render_field(form.description, class='u-full-width') }}
@@ -97,8 +98,9 @@ $(document).ready(function() {
                 {{ render_field(form.new_password,
                                 class='u-full-width',
                                 data_validation='strength',
-                                data_validation_strength='3',
-                                data_validation_error_msg_container='#form-new_password-error'
+                                data_validation_strength='2',
+                                data_validation_error_msg_container='#form-new_password-error',
+                                data_validation_optional="true"
                 ) }}
                 </div>
                 {{ render_field(form.verify_password,

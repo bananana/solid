@@ -57,7 +57,7 @@ def set_email():
     if form.validate_on_submit():
         form.populate_obj(user)
         user.update()
-        flash(_('Email updated successfully'), 'success')
+        flash(_('Profile updated successfully'), 'success')
         return redirect(
             session.pop('next', False)
             or url_for('.user', nickname=nickname)
