@@ -21,7 +21,7 @@
 
     <div class="row u-add-margin-top">
         <div class="one-half column">
-            <div class="post u-remove-margin-top u-add-margin-bottom">
+            <div class="post u-remove-margin-top u-add-margin-bottom" {% if post.deleted %}style="border:1px solid #a72b17;"{% endif %}>
                 {% if post.title %}<h2 class="u-pull-left">
                     {{ post.title }}
                 </h2>{% endif %}
@@ -41,7 +41,6 @@
                             </div>
                         </div>
                     {% endfor %}
-                    {% if post.deleted %}<strong>[deleted]</strong>{% endif %}
                     {{ post.body|markdown }}
                 </article>
                 <p class="u-remove-margin-bottom">
@@ -54,14 +53,22 @@
                                 {{ _('Edit') }}
                             </a>
                         </small>
+                    {% elif post.deleted %}
+                        <strong class="u-pull-right" style="color:#a72b17;"><span class="oi" data-glyph="warning"></span> Deleted</strong>
                     {% endif %}
                 </p>
             </div>
             {% if not post.deleted %}
-                <h5 class="u-remove-margin-bottom">{{ _('%(count)s comments for this post. Leave yours:', count=post.comments.count()) }}</h5>
+                <h5 class="u-remove-margin-bottom">
+                    {{ _('%(count)s comments for this post. Leave yours:', count=post.comments.count()) }}
+                </h5>
                 {% if current_user.is_authenticated and current_user.is_supporting(cause) %}
                     {% from "helpers/forms.html" import render_field, render_boolean %}
-                    <form id="cause" class="u-add-margin-top" name="cause" action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" method="post">
+                    <form id="cause" 
+                          class="u-add-margin-top" 
+                          name="cause" 
+                          action="{{ url_for('posts.comment_add', slug=cause.slug, pk=post.id) }}" 
+                          method="post">
                         {{ comment_form.hidden_tag() }}
                         <fieldset class="no-label">
                             {{ render_field(comment_form.body, class="u-full-width") }}
