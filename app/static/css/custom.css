@@ -822,6 +822,18 @@ a.support-action {
         width: 50%;
     }
 }
+.modal-img div {
+    width: initial;
+    max-width: 800px;
+    display: inline-block;
+}
+.modal-img div a {
+    margin-bottom: 1em;
+}
+.modal-img div img {
+    width: 100%;
+}
+
 
 
 /* Input 
