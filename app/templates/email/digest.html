@@ -23,12 +23,14 @@
 </p>
 {% endif %}
 
+{% if posts_new|length > 0 %}
 <p style="font-weight: bold; padding: 0.5em 5%; border: 1px solid #ff9900; background-color: #fbfaf9; width: 90%;">
 	New posts from the community
 	<span style="float: right">
 		{{ posts_new|length }}
 	</span>
 </p>
+{% endif %}
 
 {% if action_supporters|legth > 0 %}
 <p style="font-weight: bold; padding: 0.5em 5%; border: 1px solid #ff9900; background-color: #fbfaf9; width: 90%;">
