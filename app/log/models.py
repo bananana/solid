@@ -6,6 +6,10 @@ from sqlalchemy_utils import generic_relationship
 
 from app import db
 
+likes = db.Table('likes',
+    db.Column('user_id', db.Integer, db.ForeignKey('users_user.id')),
+    db.Column('log_item_id', db.Integer, db.ForeignKey('log_events.id'))
+)
 
 class LogEventType(db.Model):
     __tablename__ = 'log_event_types'

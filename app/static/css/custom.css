@@ -1076,6 +1076,12 @@ input[type="submit"]:disabled:focus {
 .button-icon img {
     vertical-align: -80%;
 }
+.button-icon-sm:hover {
+    text-decoration: none;
+}
+.button-icon-sm .oi {
+    vertical-align: -1px;
+}
 
 
 /* Dropdown 

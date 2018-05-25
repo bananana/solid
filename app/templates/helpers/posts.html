@@ -42,14 +42,22 @@ section (app/templates/styleguide/templating#discussion-helpers)
         <br class="u-cf">
     </article>
     <small class="u-pull-left u-add-margin-top">
-        <a class="post-comment-count" href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
+        <a class="post-comment-count button-icon-sm" 
+           href="{{ url_for('posts.post_detail', slug=cause.slug, pk=post.id) }}">
             <span class="oi" data-glyph="comment-square"></span>
             {{ _('%(count)s comments', count=post.comments.count()) }}
         </a>
     </small>
+    <small class="u-pull-right u-add-margin-top u-add-margin-left">
+        <a class="button-icon-sm" href="">
+            <span class="oi" data-glyph="heart"></span>
+            0
+        </a>
+    </small>
     {% if post.author == current_user or current_user.is_admin %}
     <small class="u-pull-right u-add-margin-top">
-        <a href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
+        <a class="button-icon-sm" 
+           href="{{ url_for('posts.post_edit', slug=cause.slug, pk=post.id) }}">
             <span class="oi" data-glyph="pencil"></span>
             {{ _('Edit') }}
         </a>
@@ -72,10 +80,16 @@ section (app/templates/styleguide/templating#discussion-helpers)
         {{ comment.body | markdown | striptags | truncate(280, True) }} 
     </article>
     <small class="u-pull-left u-add-margin-top">
-        <a class="post-comment-count" 
+        <a class="post-comment-count button-icon-sm" 
            href="{{ url_for('posts.post_detail', slug=cause.slug, pk=comment.post_id) }}">
             <span class="oi" data-glyph="comment-square"></span>
             {{ _('View conversation') }}
+        </a>
+    </small>
+    <small class="u-pull-right u-add-margin-top u-add-margin-left">
+        <a class="button-icon-sm" href="">
+            <span class="oi" data-glyph="heart"></span>
+            0
         </a>
     </small>
     <br class="u-cf">
