@@ -54,6 +54,11 @@ class LogEvent(db.Model):
     item_id = db.Column(db.Integer)
     item = generic_relationship(item_type, item_id)
 
+    likers = db.relationship('User', secondary=likes,
+                             backref=db.backref(
+                                 'log_item_likes', lazy='dynamic'
+                             ), lazy='dynamic')
+
     logged_at = db.Column(db.DateTime(), default=datetime.utcnow)
 
     @staticmethod
