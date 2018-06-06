@@ -1,8 +1,9 @@
 from flask import (Blueprint, render_template, url_for, redirect, request,
                    flash, abort)
 from flask_login import current_user, login_required
+from app import app, db
 from .models import *
-from app import db
+from app.users.models import User
 
 mod = Blueprint('log', __name__)
 
@@ -15,8 +16,8 @@ def like(log_item_id, user_id):
 
     # Prevent users from liking on behalf of others
     if user.id is current_user.id:
-        
+        log_item.likers.append(current_user)
+        db.session.commit()
+        return('', 204)
     else:
         abort(404)
-
-
