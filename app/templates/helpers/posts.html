@@ -5,7 +5,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
 
 {% from "helpers/users.html" import render_avatar %}
 
-{% macro render_post(cause, post) %}
+{% macro render_post(cause, post, likes) %}
 <div class="post">
     <p class="u-remove-margin-top u-remove-margin-bottom">
         {{ render_avatar(post.author) }}&nbsp;said:
@@ -51,7 +51,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
     <small class="u-pull-right u-add-margin-top u-add-margin-left">
         <a class="button-icon-sm" href="">
             <span class="oi" data-glyph="heart"></span>
-            0
+            {{ likes }}
         </a>
     </small>
     {% if post.author == current_user or current_user.is_admin %}
@@ -67,7 +67,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
 </div>
 {% endmacro %}
 
-{% macro render_post_comment(cause, comment) %}
+{% macro render_post_comment(cause, comment, likes) %}
 <div class="post">
     <p class="u-remove-margin-top u-remove-margin-bottom">
         {% if comment.author == comment.post.author %}
@@ -89,7 +89,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
     <small class="u-pull-right u-add-margin-top u-add-margin-left">
         <a class="button-icon-sm" href="">
             <span class="oi" data-glyph="heart"></span>
-            0
+            {{ likes }}
         </a>
     </small>
     <br class="u-cf">

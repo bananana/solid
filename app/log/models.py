@@ -67,5 +67,11 @@ class LogEvent(db.Model):
         db.session.add(event)
         db.session.commit()
 
+    @property
+    def count_likes(self):
+        query = likes.count(whereclause=likes.c.log_item_id.in_([self.id]))
+        result = db.engine.execute(query)
+        return result.fetchone()[0]
+        
     def __repr__(self):
         return '<LogEvent %r on %r>' % (self.item_type, self.logged_at)
