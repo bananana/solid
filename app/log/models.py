@@ -68,6 +68,12 @@ class LogEvent(db.Model):
         db.session.commit()
 
     @property
+    def list_likers(self):
+        query = likes.filter(whereclause=likes.c.log_item_id.in_([self.id]))
+        result = db.engine.execute(query)
+        return reslut.fetchone()[0]
+
+    @property
     def count_likes(self):
         query = likes.count(whereclause=likes.c.log_item_id.in_([self.id]))
         result = db.engine.execute(query)
