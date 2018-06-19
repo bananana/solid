@@ -15,7 +15,7 @@ def like(log_item_id, user_id):
     user = User.query.filter_by(id=user_id).first()
 
     # Prevent users from liking on behalf of others
-    print(log_item.list_likers)
+    #print(log_item.list_likers)
     if user.id is current_user.id:
         log_item.likers.append(current_user)
         db.session.commit()

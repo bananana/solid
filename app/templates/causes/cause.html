@@ -74,9 +74,14 @@
             history.pushState("", document.title, window.location.pathname);
         });
 
-        $('.button-like').click(function(e) {
-            var like_id = $(e.target).attr('id');
-            console.log(like_id);
+        $('.button-like').click(function() {
+            var like_id = $(this).attr('id');
+            like_id = like_id.split('-', 3)[2];
+            $.post('/log/' + like_id + '/user/' + {{ current_user.id }} + '/like').done(function() {
+                    console.log('success');
+                  }).fail(function() {
+                    console.log('fail');
+                  });
         });
 
         var breakpoint = {};
