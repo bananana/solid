@@ -7,7 +7,7 @@ from flask_login import current_user, login_required
 from flask_babel import gettext as _
 
 from app import app, db, uploaded_images
-from app.log.models import LogEvent, LogEventType
+from app.log.models import LogEvent, LogEventType, mark_viewed
 from app.posts.forms import PostForm
 
 from .models import Cause, CauseTranslation, Action, ActionTranslation
@@ -94,6 +94,9 @@ def cause_detail(slug):
         context["supporter"] = False
 
     context["cause_support"] = session.pop("cause_support", None)
+
+    if current_user.is_authenticated:
+        mark_viewed(cause, current_user)
 
     return render_template('causes/cause.html', **context)
 
@@ -251,6 +254,9 @@ def action_detail(slug, pk=None):
     if action is None:
         abort(404)
 
+    if current_user.is_authenticated:
+        mark_viewed(action, current_user)
+
     context = {
         "cause": cause,
         "action": action
@@ -369,6 +375,8 @@ def action_support(slug, pk):
     if action is None:
         abort(404)
 
+    mark_viewed(action, current_user)
+
     if current_user not in action.supporters.all():
         cause.supporters.append(current_user)
         action.supporters.append(current_user)
@@ -395,6 +403,9 @@ def action_thanks(slug, pk):
 
     if action is None:
         abort(404)
+
+    if current_user.is_authenticated:
+        mark_viewed(action, current_user)
 
     context = {
         "user": current_user,

@@ -7,7 +7,7 @@ from werkzeug.datastructures import CombinedMultiDict
 from app import uploaded_images
 from app.causes.models import Cause
 from app.causes.views import cause_required
-from app.log.models import LogEvent
+from app.log.models import LogEvent, mark_viewed
 from app.users.models import User
 
 from .forms import PostForm, CommentForm
@@ -39,6 +39,12 @@ def post_detail(slug, pk):
     if (post.deleted and not current_user.is_authenticated) or \
        (post.deleted and not current_user.is_admin):
         abort(404)
+
+    if current_user.is_authenticated:
+        mark_viewed(post, current_user)
+        
+        for comment in post.comments.all():
+            mark_viewed(comment, current_user)
 
     comment_form = CommentForm(request.form)
 

@@ -36,6 +36,15 @@ class LogEventType(db.Model):
         return '<LogEventType %r>' % self.name
 
 
+def mark_viewed(obj, user):
+    for event in LogEvent.query.filter(
+        LogEvent.item.is_type(obj.__class__), LogEvent.item_id==obj.id
+    ):
+        viewed = LogEventViewed(event=event, user=user)
+        db.session.merge(viewed)
+        db.session.commit()
+
+
 class LogEvent(db.Model):
     __tablename__ = 'log_events'
     id = db.Column(db.Integer, primary_key=True)
