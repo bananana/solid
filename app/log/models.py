@@ -6,10 +6,12 @@ from sqlalchemy_utils import generic_relationship
 
 from app import db
 
+
 likes = db.Table('likes',
     db.Column('user_id', db.Integer, db.ForeignKey('users_user.id')),
     db.Column('log_item_id', db.Integer, db.ForeignKey('log_events.id'))
 )
+
 
 class LogEventType(db.Model):
     __tablename__ = 'log_event_types'
@@ -67,17 +69,5 @@ class LogEvent(db.Model):
         db.session.add(event)
         db.session.commit()
 
-    @property
-    def list_likers(self):
-        query = likes.filter(whereclause=likes.c.log_item_id.in_([self.id]))
-        result = db.engine.execute(query)
-        return reslut.fetchone()[0]
-
-    @property
-    def count_likes(self):
-        query = likes.count(whereclause=likes.c.log_item_id.in_([self.id]))
-        result = db.engine.execute(query)
-        return result.fetchone()[0]
-        
     def __repr__(self):
         return '<LogEvent %r on %r>' % (self.item_type, self.logged_at)

@@ -56,9 +56,9 @@ section (app/templates/styleguide/templating#cause-helpers)
             </a>
         </p>
         {% elif event.event_type_id == 8 and event.item and not event.item.deleted %}
-            {{ render_post(event.item.id, event.item.cause, event.item, event.count_likes) }}
+            {{ render_post(event.id, event.item.cause, event.item, event.likers.count()) }}
         {% elif event.event_type_id == 9 and event.item and not event.item.deleted %}
-            {{ render_post_comment(event.item.id, event.item.post.cause, event.item, event.count_likes) }}
+            {{ render_post_comment(event.id, event.item.post.cause, event.item, event.likers.count()) }}
         {% endif %}
     </div>
 {% endfor %}
