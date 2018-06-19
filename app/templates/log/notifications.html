@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Notifications') }} - {{ super() }}{% endblock %}
+
+{% block content %}
+{% from "helpers/logs.html" import render_log_notifications with context %}
+{% from "helpers/users.html" import render_avatar %}
+<div class="full-width-container">
+    <div class="row u-add-margin-top">
+        <div class="twelve columns">
+            <h1>{{ _('Notifications') }}</h1>
+        </div>
+    </div>
+    <div class="row u-add-margin-top">
+        <div class="twelve columns">
+            <ul class="no-bullets">
+            {% if log %}
+                {{ render_log_notifications(log.items) }} 
+            {% else %}
+                <small>
+                    <strong>There's nothing to show here yet.</strong><br>
+                </small>
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -3,13 +3,8 @@
 
 {% block title %}{{ user.nickname }} - {{ super() }}{% endblock %}
 
-{% block scripts %}
-<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
-{% endblock %}
-
 {% block content %}
-{% from "helpers/causes.html" import render_log with context %}
-{% from "helpers/modals.html" import render_modal %}
+{% from "helpers/logs.html" import render_log with context %}
 {% from "helpers/users.html" import render_avatar %}
 <div class="full-width-container">
     <div class="row u-add-margin-top">

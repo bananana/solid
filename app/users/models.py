@@ -93,6 +93,54 @@ class User(UserMixin, CRUDMixin, db.Model):
     def actions_per_cause(self, cause):
         return self.actions.filter_by(cause_id=cause.id)
 
+    def notifications(self):
+        from app.log.models import LogEvent, LogEventType, LogEventViewed
+        from app.causes.models import Cause, Action
+        from app.posts.models import Post, Comment
+
+        user_causes = self.causes_supports
+        
+        user_cause_actions = Action.query.filter(Action.cause_id.in_(
+            [c.id for c in user_causes.all()]
+        ))
+
+        user_cause_posts = Post.query.filter(Post.cause_id.in_(
+            [c.id for c in user_causes.all()]
+        ))
+
+        user_cause_post_comments = Comment.query.filter(Comment.post_id.in_(
+            [p.id for p in user_cause_posts.all()]
+        ))
+
+        return LogEvent.query.filter(
+            (
+                (LogEvent.event_type_id.in_([LogEventType.EVENT_TYPES[e] for e in [
+                    'cause_add',
+                    'cause_support'
+                ]]))
+                & (LogEvent.item_id.in_([c.id for c in user_causes.all()]))
+            )
+            | (
+                (LogEvent.event_type_id.in_([LogEventType.EVENT_TYPES[e] for e in [
+                    'action_add',
+                    'action_support'
+                ]]))
+                & (LogEvent.item_id.in_([a.id for a in user_cause_actions.all()]))
+            )
+            | (
+                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['post_add'])
+                & (LogEvent.item_id.in_([p.id for p in user_cause_posts.all()]))
+            )
+            | (
+                (LogEvent.event_type_id == LogEventType.EVENT_TYPES['post_reply'])
+                & (LogEvent.item_id.in_([c.id for c in user_cause_post_comments.all()]))
+            )
+        )\
+            .order_by(LogEvent.logged_at.desc())\
+            .outerjoin(LogEventViewed)\
+            .add_column(db.func.count(LogEventViewed.id))\
+            .group_by(LogEvent.id)
+
     def get_token(self, expiration=1800):
         s = Serializer(app.config['SECRET_KEY']) 
         return s.dumps({'user': self.id}).decode('utf-8')
