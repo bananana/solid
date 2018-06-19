@@ -60,3 +60,19 @@ class LogEvent(db.Model):
 
     def __repr__(self):
         return '<LogEvent %r on %r>' % (self.item_type, self.logged_at)
+
+
+class LogEventViewed(db.Model):
+    __tablename__ = 'log_events_viewed'
+    id = db.Column(db.Integer, primary_key=True)
+
+    event_id = db.Column(db.Integer, db.ForeignKey('log_events.id'))
+    event = db.relationship('LogEvent', backref=db.backref('viewed', lazy='dynamic'))
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users_user.id'))
+    user = db.relationship('User', backref=db.backref('events_viewed', lazy='dynamic'))
+
+    viewed_at = db.Column(db.DateTime(), default=datetime.utcnow)
+    
+    def __repr__(self):
+        return '<LogEventViewed %r on %r>' % (self.event.item_type, self.viewed_at)
