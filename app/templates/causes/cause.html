@@ -75,10 +75,23 @@
         });
 
         $('.button-like').click(function() {
-            var like_id = $(this).attr('id');
-            like_id = like_id.split('-', 3)[2];
+            var like_id = $(this).attr('id').split('-', 3)[2];
             $.post('/log/' + like_id + '/user/' + {{ current_user.id }} + '/like').done(function() {
-                    console.log('success');
+                    if(!$('#button-like-' + like_id).hasClass('button-already-liked')) {
+                        $('.likes-' + like_id).html(parseInt($('.likes-' + like_id).html(), 10) + 1);
+                        $('#button-like-' + like_id).addClass('button-already-liked'); 
+                    }
+                  }).fail(function() {
+                    console.log('fail');
+                  });
+        });
+        $('.button-already-liked').click(function() {
+            var like_id = $(this).attr('id').split('-', 3)[2];
+            $.post('/log/' + like_id + '/user/' + {{ current_user.id }} + '/unlike').done(function() {
+                    if($('#button-like-' + like_id).hasClass('button-already-liked')) {
+                        $('.likes-' + like_id).html(parseInt($('.likes-' + like_id).html(), 10) - 1);
+                        $('#button-like-' + like_id).removeClass('button-already-liked'); 
+                    }
                   }).fail(function() {
                     console.log('fail');
                   });

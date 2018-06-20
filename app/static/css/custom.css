@@ -838,6 +838,9 @@ a.support-action {
 
 /* Input 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button-already-liked {
+    color:#ff9900;
+}
 input[type="file"] {
     display: none;
 }

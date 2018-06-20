@@ -5,7 +5,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
 
 {% from "helpers/users.html" import render_avatar %}
 
-{% macro render_post(event_id, cause, post, likes) %}
+{% macro render_post(event_id, cause, post, likes, already_liked) %}
 <div class="post">
     <p class="u-remove-margin-top u-remove-margin-bottom">
         {{ render_avatar(post.author) }}&nbsp;said:
@@ -49,7 +49,8 @@ section (app/templates/styleguide/templating#discussion-helpers)
         </a>
     </small>
     <small class="u-pull-right u-add-margin-top u-add-margin-left">
-        <a id="button-like-{{ event_id }}" class="button-icon-sm button-like">
+        <a id="button-like-{{ event_id }}" 
+           class="button-icon-sm button-like {% if already_liked %}button-already-liked{% endif %}">
             <span class="oi" data-glyph="heart"></span>
             <span class="likes-{{ event_id }}">{{ likes }}</span>
         </a>
@@ -67,7 +68,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
 </div>
 {% endmacro %}
 
-{% macro render_post_comment(event_id, cause, comment, likes) %}
+{% macro render_post_comment(event_id, cause, comment, likes, already_liked) %}
 <div class="post">
     <p class="u-remove-margin-top u-remove-margin-bottom">
         {% if comment.author == comment.post.author %}
@@ -87,7 +88,8 @@ section (app/templates/styleguide/templating#discussion-helpers)
         </a>
     </small>
     <small class="u-pull-right u-add-margin-top u-add-margin-left">
-        <a id="button-like-{{ event_id }}" class="button-icon-sm button-like">
+        <a id="button-like-{{ event_id }}" 
+           class="button-icon-sm button-like {% if already_liked %}button-already-liked{% endif %}">
             <span class="oi" data-glyph="heart"></span>
             <span class="likes-{{ event_id }}">{{ likes }}</span>
         </a>
