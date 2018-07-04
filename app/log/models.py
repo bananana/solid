@@ -7,6 +7,12 @@ from sqlalchemy_utils import generic_relationship
 from app import db
 
 
+likes = db.Table('likes',
+    db.Column('user_id', db.Integer, db.ForeignKey('users_user.id')),
+    db.Column('log_item_id', db.Integer, db.ForeignKey('log_events.id'))
+)
+
+
 class LogEventType(db.Model):
     __tablename__ = 'log_event_types'
 
@@ -49,6 +55,11 @@ class LogEvent(db.Model):
     item_type = db.Column(db.Unicode(255))
     item_id = db.Column(db.Integer)
     item = generic_relationship(item_type, item_id)
+
+    likers = db.relationship('User', secondary=likes,
+                             backref=db.backref(
+                                 'log_item_likes', lazy='dynamic'
+                             ), lazy='dynamic')
 
     logged_at = db.Column(db.DateTime(), default=datetime.utcnow)
 

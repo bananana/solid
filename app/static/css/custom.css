@@ -822,10 +822,25 @@ a.support-action {
         width: 50%;
     }
 }
+.modal-img div {
+    width: initial;
+    max-width: 800px;
+    display: inline-block;
+}
+.modal-img div a {
+    margin-bottom: 1em;
+}
+.modal-img div img {
+    width: 100%;
+}
+
 
 
 /* Input 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button-already-liked {
+    color:#ff9900;
+}
 input[type="file"] {
     display: none;
 }
@@ -1063,6 +1078,12 @@ input[type="submit"]:disabled:focus {
 }
 .button-icon img {
     vertical-align: -80%;
+}
+.button-icon-sm:hover {
+    text-decoration: none;
+}
+.button-icon-sm .oi {
+    vertical-align: -1px;
 }
 
 

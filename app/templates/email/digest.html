@@ -14,33 +14,41 @@
 	}} summary  of <a href="https://bsolid.org">Solid</a> causes that you are helping win:
 </p>
 
+{% if actions_new|length > 0 %}
 <p style="font-weight: bold; padding: 0.5em 5%; border: 1px solid #ff9900; background-color: #fbfaf9; width: 90%;">
 	New actions available to take
 	<span style="float: right">
 		{{ actions_new|length }}
 	</span>
 </p>
+{% endif %}
 
+{% if posts_new|length > 0 %}
 <p style="font-weight: bold; padding: 0.5em 5%; border: 1px solid #ff9900; background-color: #fbfaf9; width: 90%;">
 	New posts from the community
 	<span style="float: right">
 		{{ posts_new|length }}
 	</span>
 </p>
+{% endif %}
 
+{% if action_supporters|legth > 0 %}
 <p style="font-weight: bold; padding: 0.5em 5%; border: 1px solid #ff9900; background-color: #fbfaf9; width: 90%;">
 	Actions completed
 	<span style="float: right">
 		{{ actions_supporters|length }}
 	</span>
 </p>
+{% endif %}
 
+{% if causes_supporters|length > 0 %}
 <p style="font-weight: bold; padding: 0.5em 5%; border: 1px solid #ff9900; background-color: #fbfaf9; width: 90%;">
 	New supporters
 	<span style="float: right">
 		{{ causes_supporters|length }}
 	</span>
 </p>
+{% endif %}
 
 {% if highlights %}
 <h2>Highlights</h2>
