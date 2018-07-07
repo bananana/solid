@@ -37,23 +37,38 @@ section (app/templates/styleguide/templating#cause-helpers)
     {% endif %}
     {% set log_loop.previous = event.logged_at.strftime('%b. %d, %Y') %} 
     <div class="feed-item">
-        {% if event.event_type_id in [1,2,3,4] %}
+        {% if event.event_type_id < 8 %}
         <p>
+            {% if event.event_type_id in [1,2,3,4] %}
             {{ render_avatar(event.user) }}&nbsp;
             {{ captions[event.event_type_id] }}:
             <a class="feed-link"
                href="{{ url_for('causes.cause_detail', slug=event.item.slug) }}">
                 {{ event.item.title }}
             </a>
-        </p>
-        {% elif event.event_type_id in [5,6,7] %}
-        <p>
+            {% elif event.event_type_id in [5,6,7] %}
             {{ render_avatar(event.user) }}&nbsp;
             {{ captions[event.event_type_id] }}:
             <a class="feed-link"  
                href="{{ url_for('causes.action_detail', slug=event.item.cause.slug, pk=event.item.id) }}">
                 {{ event.item.title }}
             </a>
+            {% endif %}
+            {% if event.event_type_id in [3,6] %}
+            {% if current_user in event.likers %}
+                {% set already_liked = True %}
+            {% else %}
+                {% set already_liked = False %}
+            {% endif %}
+            <small class="u-pull-right u-add-margin-top u-add-margin-left">
+                <a id="button-like-{{ event.id }}" 
+                   class="button-icon-sm button-like {% if already_liked %}button-already-liked{% endif %}">
+                    <span class="oi" data-glyph="heart"></span>
+                    <span class="likes-{{ event.id }}">{{ event.likers.count() }}</span>
+                </a>
+            </small>
+        </p>
+        {% endif %}
         </p>
         {% elif event.event_type_id == 8 and event.item and not event.item.deleted %}
             {% if current_user in event.likers %}
