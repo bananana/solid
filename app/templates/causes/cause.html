@@ -281,13 +281,17 @@
                 {% if log.has_next %}
                     <a class="u-pull-left" 
                        href="{{ url_for('.cause_detail', slug=cause.slug, page=log.next_num) }}#actions">
-                        <span class="oi" data-glyph="caret-left"></span><span style="vertical-align:2px;">Older</span>
+                       <span class="oi" data-glyph="caret-left"></span><span style="vertical-align:2px;">
+                           {{ _('Older') }}
+                       </span>
                     </a>
                 {% endif %}
                 {% if log.has_prev %}
                     <a class="u-pull-right" i
                        href="{{ url_for('.cause_detail', slug=cause.slug, page=log.prev_num) }}#actions">
-                        <span style="vertical-align:2px;">Newer</span><span class="oi" data-glyph="caret-right"></span>
+                       <span style="vertical-align:2px;">
+                           {{ _('Newer') }}
+                       </span><span class="oi" data-glyph="caret-right"></span>
                     </a>
                 {% endif %}
             </div>

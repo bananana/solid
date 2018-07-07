@@ -15,15 +15,15 @@ section (app/templates/styleguide/templating#cause-helpers)
 {% from "helpers/posts.html" import render_post with context %}
 {% from "helpers/posts.html" import render_post_comment with context %}
 {% set captions={
-    1: 'added a cause',
-    2: 'edited a cause',
-    3: 'supported a cause',
-    4: 'reached cause milestone',
-    5: 'added an action',
-    6: 'supported an action',
-    7: 'commented on action',
-    8: 'said',
-    9: 'posted a reply',
+    1: _('added a cause'),
+    2: _('edited a cause'),
+    3: _('supported a cause'),
+    4: _('reached cause milestone'),
+    5: _('added an action'),
+    6: _('supported an action'),
+    7: _('commented on action'),
+    8: _('said'),
+    9: _('posted a reply'),
     }
 %}
 {% set log_loop = namespace(previous=None) %}

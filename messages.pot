@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-09 16:21-0400\n"
+"POT-Creation-Date: 2018-07-07 14:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.3\n"
 
-#: app/__init__.py:31
+#: app/__init__.py:32
 msgid "Please log in to access this page."
 msgstr ""
 
-#: app/__init__.py:180
+#: app/__init__.py:186
 msgid "Your message has been sent!"
 msgstr ""
 
@@ -120,33 +120,33 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: app/posts/views.py:59
+#: app/posts/views.py:61
 msgid "You must be supporting this cause to post."
 msgstr ""
 
-#: app/posts/views.py:81
+#: app/posts/views.py:83
 #, python-format
 msgid "\"%(post_title)s\" - \"%(cause_title)s\""
 msgstr ""
 
-#: app/posts/views.py:89
+#: app/posts/views.py:91
 msgid "Post added!"
 msgstr ""
 
-#: app/posts/views.py:128
+#: app/posts/views.py:130
 msgid "Post updated!"
 msgstr ""
 
-#: app/posts/views.py:150
+#: app/posts/views.py:152
 msgid "Post deleted!"
 msgstr ""
 
-#: app/posts/views.py:180
+#: app/posts/views.py:182
 #, python-format
 msgid "New comment on \"%(title)s\""
 msgstr ""
 
-#: app/posts/views.py:185
+#: app/posts/views.py:187
 msgid "Comment added!"
 msgstr ""
 
@@ -160,7 +160,7 @@ msgid "Sign up"
 msgstr ""
 
 #: app/templates/base.html:75 app/templates/base.html:124
-#: app/templates/posts/post.html:73 app/templates/users/login.html:83
+#: app/templates/posts/post.html:82 app/templates/users/login.html:83
 msgid "Log in"
 msgstr ""
 
@@ -270,7 +270,8 @@ msgstr ""
 #: app/templates/admin/cause_list.html:58 app/templates/admin/index.html:50
 #: app/templates/admin/index.html:126 app/templates/admin/index.html:212
 #: app/templates/admin/page_list.html:50 app/templates/helpers/actions.html:126
-#: app/templates/helpers/posts.html:48 app/templates/users/index.html:36
+#: app/templates/helpers/posts.html:63 app/templates/posts/post.html:53
+#: app/templates/posts/post.html:110 app/templates/users/index.html:36
 msgid "Edit"
 msgstr ""
 
@@ -377,7 +378,7 @@ msgstr ""
 
 #: app/templates/admin/page_edit.html:31
 #: app/templates/causes/action_form.html:54
-#: app/templates/causes/cause_form.html:44 app/templates/posts/edit.html:37
+#: app/templates/causes/cause_form.html:44 app/templates/posts/edit.html:46
 msgid "Save"
 msgstr ""
 
@@ -453,60 +454,68 @@ msgstr ""
 msgid "Add Action"
 msgstr ""
 
-#: app/templates/causes/actions.html:20 app/templates/causes/cause.html:134
+#: app/templates/causes/actions.html:20 app/templates/causes/cause.html:157
 msgid "Take action to win"
 msgstr ""
 
-#: app/templates/causes/actions.html:22 app/templates/causes/cause.html:136
+#: app/templates/causes/actions.html:22 app/templates/causes/cause.html:159
 #, python-format
 msgid "%(count)s available"
 msgstr ""
 
-#: app/templates/causes/actions.html:30 app/templates/causes/cause.html:149
+#: app/templates/causes/actions.html:30 app/templates/causes/cause.html:172
 msgid "new action"
 msgstr ""
 
-#: app/templates/causes/cause.html:139
+#: app/templates/causes/cause.html:162
 #, python-format
 msgid "%(count)s taken"
 msgstr ""
 
-#: app/templates/causes/cause.html:148
+#: app/templates/causes/cause.html:171
 msgid "Add new action"
 msgstr ""
 
-#: app/templates/causes/cause.html:162
+#: app/templates/causes/cause.html:185
 msgid "You are supporting this cause"
 msgstr ""
 
-#: app/templates/causes/cause.html:165 app/templates/causes/cause.html:176
+#: app/templates/causes/cause.html:188 app/templates/causes/cause.html:199
 msgid "Share"
 msgstr ""
 
-#: app/templates/causes/cause.html:171
+#: app/templates/causes/cause.html:194
 msgid "Stay updated on actions"
 msgstr ""
 
-#: app/templates/causes/cause.html:172
+#: app/templates/causes/cause.html:195
 msgid "Follow"
 msgstr ""
 
-#: app/templates/causes/cause.html:180
+#: app/templates/causes/cause.html:203
 msgid "Cause creators"
 msgstr ""
 
-#: app/templates/causes/cause.html:193 app/templates/helpers/actions.html:23
+#: app/templates/causes/cause.html:216 app/templates/helpers/actions.html:23
 #: app/templates/helpers/actions.html:51
 #, python-format
 msgid "%(count)s supporters"
 msgstr ""
 
-#: app/templates/causes/cause.html:206
+#: app/templates/causes/cause.html:229
 msgid "Actions taken"
 msgstr ""
 
-#: app/templates/causes/cause.html:214
+#: app/templates/causes/cause.html:237
 msgid "Share this cause"
+msgstr ""
+
+#: app/templates/causes/cause.html:285
+msgid "Older"
+msgstr ""
+
+#: app/templates/causes/cause.html:293
+msgid "Newer"
 msgstr ""
 
 #: app/templates/causes/cause_form.html:6
@@ -517,20 +526,68 @@ msgstr ""
 msgid "Add Cause"
 msgstr ""
 
-#: app/templates/helpers/posts.html:41
+#: app/templates/helpers/causes.html:18
+msgid "added a cause"
+msgstr ""
+
+#: app/templates/helpers/causes.html:19
+msgid "edited a cause"
+msgstr ""
+
+#: app/templates/helpers/causes.html:20
+msgid "supported a cause"
+msgstr ""
+
+#: app/templates/helpers/causes.html:21
+msgid "reached cause milestone"
+msgstr ""
+
+#: app/templates/helpers/causes.html:22
+msgid "added an action"
+msgstr ""
+
+#: app/templates/helpers/causes.html:23
+msgid "supported an action"
+msgstr ""
+
+#: app/templates/helpers/causes.html:24
+msgid "commented on action"
+msgstr ""
+
+#: app/templates/helpers/causes.html:25
+msgid "said"
+msgstr ""
+
+#: app/templates/helpers/causes.html:26
+msgid "posted a reply"
+msgstr ""
+
+#: app/templates/helpers/posts.html:39
+msgid "(read more)"
+msgstr ""
+
+#: app/templates/helpers/posts.html:48
 #, python-format
 msgid "%(count)s comments"
 msgstr ""
 
-#: app/templates/helpers/posts.html:72
+#: app/templates/helpers/posts.html:75
+msgid "commented on their own post:"
+msgstr ""
+
+#: app/templates/helpers/posts.html:77
+msgid "replied to"
+msgstr ""
+
+#: app/templates/helpers/posts.html:87
 msgid "View conversation"
 msgstr ""
 
-#: app/templates/helpers/posts.html:91
+#: app/templates/helpers/posts.html:113
 msgid "No posts!"
 msgstr ""
 
-#: app/templates/helpers/posts.html:95
+#: app/templates/helpers/posts.html:117
 msgid "Start the conversation"
 msgstr ""
 
@@ -539,20 +596,24 @@ msgstr ""
 msgid "Post"
 msgstr ""
 
-#: app/templates/posts/edit.html:44
-msgid "Delete"
+#: app/templates/posts/edit.html:43
+msgid "Cancel"
 msgstr ""
 
-#: app/templates/posts/post.html:59
+#: app/templates/posts/edit.html:56
+msgid "Delete Post"
+msgstr ""
+
+#: app/templates/posts/post.html:63
 #, python-format
 msgid "%(count)s comments for this post. Leave yours:"
 msgstr ""
 
-#: app/templates/posts/post.html:75 app/templates/posts/post.html:82
+#: app/templates/posts/post.html:84 app/templates/posts/post.html:91
 msgid "to post."
 msgstr ""
 
-#: app/templates/posts/post.html:80
+#: app/templates/posts/post.html:89
 msgid "Support this cause"
 msgstr ""
 
@@ -576,11 +637,11 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: app/templates/users/edit.html:94 app/users/forms.py:16 app/users/forms.py:28
+#: app/templates/users/edit.html:95 app/users/forms.py:16 app/users/forms.py:28
 msgid "Password"
 msgstr ""
 
-#: app/templates/users/edit.html:118
+#: app/templates/users/edit.html:120
 msgid "Delete Account"
 msgstr ""
 
@@ -726,7 +787,7 @@ msgid "Confirm password"
 msgstr ""
 
 #: app/users/views.py:60
-msgid "Email updated successfully"
+msgid "Profile updated successfully"
 msgstr ""
 
 #: app/users/views.py:132
@@ -741,15 +802,19 @@ msgstr ""
 msgid "You have been logged out successfully"
 msgstr ""
 
-#: app/users/views.py:366
+#: app/users/views.py:365
+msgid "Current password field does not match your password"
+msgstr ""
+
+#: app/users/views.py:370
 msgid "User updated successfully"
 msgstr ""
 
-#: app/users/views.py:413
+#: app/users/views.py:417
 msgid "User deleted successfully"
 msgstr ""
 
-#: app/users/views.py:448
+#: app/users/views.py:452
 msgid ""
 "Email with password reset instructions sent to %(user_email). You can "
 "close this window now."
