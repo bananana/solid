@@ -1,793 +1,529 @@
-# Spanish translations for .
-# Copyright (C) 2016 ORGANIZATION
-# This file is distributed under the same license as the  project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
+# This file was generated from ../messages_es_2018-05-03_translated.xlsx
 msgid ""
 msgstr ""
-"Project-Id-Version:  Solid\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-09 16:21-0400\n"
-"PO-Revision-Date: 2017-08-22 16:28-0400\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2018-07-07 14:32-0400\n"
 "Language: es\n"
-"Language-Team: es <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.3\n"
+"Generated-By: xls-to-po 1.0\n"
 
-#: app/__init__.py:31
 msgid "Please log in to access this page."
-msgstr ""
+msgstr "Inicia sesión para entrar en esta página"
 
-#: app/__init__.py:180
 msgid "Your message has been sent!"
-msgstr ""
+msgstr "Tu mensaje fue enviado"
 
-#: app/admin/views.py:67
 msgid "Page updated!"
-msgstr ""
+msgstr "¡Página actualizada!"
 
-#: app/admin/views.py:94
 msgid "Page added!"
-msgstr ""
+msgstr "¡Página añadida!"
 
-#: app/causes/forms.py:19
 msgid "Location"
-msgstr ""
+msgstr "Lugar"
 
-#: app/causes/forms.py:20
 msgid "Boss"
-msgstr ""
+msgstr "Jefe"
 
-#: app/causes/forms.py:21 app/causes/forms.py:45
 msgid "Image"
-msgstr ""
+msgstr "Imágen"
 
-#: app/causes/forms.py:30 app/causes/forms.py:54
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
-#: app/causes/forms.py:31
 msgid "Intro"
-msgstr ""
+msgstr "Introducción"
 
-#: app/causes/forms.py:32 app/posts/forms.py:27 app/posts/forms.py:38
 msgid "Body"
-msgstr ""
+msgstr "Cuerpo del texto"
 
-#: app/causes/forms.py:43
 msgid "Expiration"
-msgstr ""
+msgstr "Vencimiento"
 
-#: app/causes/forms.py:44
 msgid "Link"
-msgstr ""
+msgstr "Resumen"
 
-#: app/causes/forms.py:55
 msgid "Summary"
-msgstr ""
+msgstr "Link"
 
-#: app/causes/forms.py:56 app/users/forms.py:43
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
-#: app/causes/views.py:29
 msgid "No causes found"
-msgstr ""
+msgstr "Causas no halladas"
 
-#: app/causes/views.py:140
 msgid "Cause created!"
-msgstr ""
+msgstr "Causa creada!"
 
-#: app/causes/views.py:184
 msgid "You are already supporting this cause."
-msgstr ""
+msgstr "Ya respaldas esta causa."
 
-#: app/causes/views.py:261
-#, python-format
 msgid ""
-"You are supporting this action! <a href=\"%(cause_url)s\">See other ways "
-"you can help %(cause_title)s\"</a>."
+"You are supporting this action! <a href=\"%(cause_url)s\">See other ways you"
+" can help %(cause_title)s\"</a>."
 msgstr ""
+"Respaldas esta causa! <a href=\"%(cause_url)s\"> Ve otras formas de ayudar "
+"%(cause_title)s\"</a>."
 
-#: app/causes/views.py:317
 msgid "Action added!"
-msgstr ""
+msgstr "¡Acción añadida!"
 
-#: app/causes/views.py:323
 msgid "Action updated!"
-msgstr ""
+msgstr "¡Acción actualizada!"
 
-#: app/causes/views.py:353
 msgid "Action deleted successfully"
-msgstr ""
+msgstr "Acción borrada"
 
-#: app/pages/forms.py:15
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
-#: app/pages/forms.py:24
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
-#: app/pages/forms.py:25
 msgid "Content"
-msgstr ""
+msgstr "Contenido"
 
-#: app/posts/forms.py:43
 msgid "Are you sure?"
-msgstr ""
+msgstr "¿Estás seguro/a?"
 
-#: app/posts/views.py:59
 msgid "You must be supporting this cause to post."
-msgstr ""
+msgstr "Tienes que apoyar esta causa para publicar"
 
-#: app/posts/views.py:81
-#, python-format
 msgid "\"%(post_title)s\" - \"%(cause_title)s\""
 msgstr ""
 
-#: app/posts/views.py:89
 msgid "Post added!"
-msgstr ""
+msgstr "¡Mensaje añadido!"
 
-#: app/posts/views.py:128
 msgid "Post updated!"
-msgstr ""
+msgstr "¡Mensaje actualizado!"
 
-#: app/posts/views.py:150
 msgid "Post deleted!"
-msgstr ""
+msgstr "¡Mensaje borrado!"
 
-#: app/posts/views.py:180
-#, python-format
 msgid "New comment on \"%(title)s\""
-msgstr ""
+msgstr "Comentario nuevo sobre \"%(títle)s\""
 
-#: app/posts/views.py:185
 msgid "Comment added!"
-msgstr ""
+msgstr "¡Comentario añadido!"
 
-#: app/templates/500.html:4
 msgid "Internal Server Error"
-msgstr ""
+msgstr "Error del servidor principal"
 
-#: app/templates/base.html:66 app/templates/base.html:131
-#: app/templates/users/login.html:49
 msgid "Sign up"
-msgstr ""
+msgstr "Regístrate"
 
-#: app/templates/base.html:75 app/templates/base.html:124
-#: app/templates/posts/post.html:73 app/templates/users/login.html:83
 msgid "Log in"
-msgstr "Ingresa"
+msgstr "Inicia sesión "
 
-#: app/templates/base.html:92
 msgid "Logged&nbsp;in&nbsp;as"
 msgstr ""
 
-#: app/templates/base.html:97
 msgid "Your profile"
-msgstr ""
+msgstr "Tu perfil"
 
-#: app/templates/base.html:102
 msgid "Settings"
-msgstr ""
+msgstr "Configuración"
 
-#: app/templates/admin/index.html:3 app/templates/admin/index.html:12
-#: app/templates/base.html:109 app/templates/users/index.html:20
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
-#: app/templates/base.html:115
 msgid "Logout"
-msgstr ""
+msgstr "Cierre de sesión"
 
-#: app/templates/base.html:198
 msgid "Information"
-msgstr ""
+msgstr "Información"
 
-#: app/templates/base.html:200
 msgid "Contact"
-msgstr ""
+msgstr "Contactar"
 
-#: app/templates/base.html:201
 msgid "About Us"
-msgstr ""
+msgstr "Sobre nosotros"
 
-#: app/templates/base.html:202
 msgid "How it works"
-msgstr ""
+msgstr "Cómo funciona"
 
-#: app/templates/base.html:203 app/templates/base.html:227
 msgid "Terms of service"
-msgstr ""
+msgstr "Condiciones de servicio"
 
-#: app/templates/base.html:208
 msgid "Developers"
-msgstr ""
+msgstr "Desarrollador"
 
-#: app/templates/base.html:210
-msgid "Styleguide"
-msgstr ""
+msgid "Style guide"
+msgstr "Manual de estilo"
 
-#: app/templates/admin/cause_list.html:3 app/templates/admin/cause_list.html:9
-#: app/templates/admin/index.html:92
 msgid "Causes"
-msgstr ""
+msgstr "Causas"
 
-#: app/templates/admin/cause_list.html:15 app/templates/admin/page_list.html:15
-#: app/templates/admin/user_list.html:15
 msgid "to Admin"
-msgstr ""
+msgstr "a Admin"
 
-#: app/templates/admin/cause_list.html:18 app/templates/admin/index.html:103
 msgid "Add new cause"
-msgstr ""
+msgstr "Añade causa nueva"
 
-#: app/templates/admin/cause_list.html:21 app/templates/admin/index.html:106
 msgid "cause"
-msgstr ""
+msgstr "Causa"
 
-#: app/templates/admin/cause_list.html:31 app/templates/admin/index.html:33
-#: app/templates/admin/index.html:111 app/templates/admin/index.html:194
-#: app/templates/admin/page_list.html:31 app/templates/admin/user_list.html:25
 msgid "id"
-msgstr ""
+msgstr "ID"
 
-#: app/templates/admin/cause_list.html:32
 msgid "title"
-msgstr ""
+msgstr "título"
 
-#: app/templates/admin/cause_list.html:33
 msgid "slug"
-msgstr ""
+msgstr "slug"
 
-#: app/templates/admin/cause_list.html:34
 msgid "boss"
-msgstr ""
+msgstr "jefe"
 
-#: app/templates/admin/cause_list.html:35
 msgid "location"
-msgstr ""
+msgstr "lugar"
 
-#: app/templates/admin/cause_list.html:36
 msgid "supporters"
-msgstr ""
+msgstr "partidario"
 
-#: app/templates/admin/cause_list.html:37
 msgid "image"
-msgstr ""
+msgstr "Imágen"
 
-#: app/templates/admin/cause_list.html:38 app/templates/admin/index.html:35
-#: app/templates/admin/index.html:113 app/templates/admin/index.html:196
-#: app/templates/admin/page_list.html:34 app/templates/admin/user_list.html:32
 msgid "edit"
-msgstr ""
+msgstr "editar"
 
-#: app/templates/admin/cause_list.html:58 app/templates/admin/index.html:50
-#: app/templates/admin/index.html:126 app/templates/admin/index.html:212
-#: app/templates/admin/page_list.html:50 app/templates/helpers/actions.html:126
-#: app/templates/helpers/posts.html:48 app/templates/users/index.html:36
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
-#: app/templates/admin/index.html:20 app/templates/admin/user_list.html:3
-#: app/templates/admin/user_list.html:9
 msgid "Users"
-msgstr ""
+msgstr "Usuario(a)"
 
-#: app/templates/admin/index.html:25
 msgid "View all users"
-msgstr ""
+msgstr "Ve a todos los usuarios"
 
-#: app/templates/admin/index.html:34 app/templates/admin/user_list.html:26
 msgid "nickname"
-msgstr ""
+msgstr "apodo"
 
-#: app/templates/admin/index.html:63 app/templates/admin/index.html:139
-#: app/templates/admin/index.html:226
 msgid "More"
-msgstr ""
+msgstr "Más"
 
-#: app/templates/admin/index.html:68
-#, python-format
 msgid "%(user_count)s additional entry not displayed."
-msgid_plural "%(user_count)s additional entries not displayed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr "%(user_count)s entrada adicional no mostrada."
 
-#: app/templates/admin/index.html:73 app/templates/admin/index.html:150
-#: app/templates/admin/index.html:236
 msgid "View all"
 msgstr ""
 
-#: app/templates/admin/index.html:82 app/templates/admin/page_list.html:61
 msgid "Nothing here yet."
 msgstr ""
 
-#: app/templates/admin/index.html:97
 msgid "View all causes"
-msgstr ""
+msgstr "Ve todas las causas"
 
-#: app/templates/admin/index.html:99
 msgid "View"
-msgstr ""
+msgstr "Ve"
 
-#: app/templates/admin/index.html:105 app/templates/admin/page_list.html:20
 msgid "Add"
-msgstr ""
+msgstr "Añade"
 
-#: app/templates/admin/index.html:112
 msgid "title (slug)"
-msgstr ""
+msgstr "Título (slug)"
 
-#: app/templates/admin/index.html:144
-#, python-format
 msgid "%(cause_count)s additional entry not displayed."
-msgid_plural "%(cause_count)s additional entries not displayed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr "%(cause_count)s entrada adicional no mostrada."
 
-#: app/templates/admin/index.html:161 app/templates/admin/index.html:246
 msgid "Nothing here yet"
 msgstr ""
 
-#: app/templates/admin/index.html:163
 msgid "Add a new cause"
-msgstr ""
+msgstr "Añade causa nueva"
 
-#: app/templates/admin/index.html:175 app/templates/admin/page_list.html:3
-#: app/templates/admin/page_list.html:9
 msgid "Pages"
-msgstr ""
+msgstr "Páginas"
 
-#: app/templates/admin/index.html:180
 msgid "View all pages"
-msgstr ""
+msgstr "Ve todas las páginas"
 
-#: app/templates/admin/index.html:183
 msgid "all"
 msgstr ""
 
-#: app/templates/admin/index.html:189 app/templates/admin/page_list.html:21
 msgid "page"
-msgstr ""
+msgstr "página"
 
-#: app/templates/admin/index.html:195
 msgid "name (url)"
-msgstr ""
+msgstr "nombre (url)"
 
-#: app/templates/admin/index.html:231
-#, python-format
 msgid "%(page_count)s additional entry not displayed."
-msgid_plural "%(page_count)s additional entries not displayed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
-#: app/templates/admin/index.html:248 app/templates/admin/page_list.html:63
 msgid "Add a new page"
-msgstr ""
+msgstr "Añade página nueva"
 
-#: app/templates/admin/page_edit.html:3 app/templates/admin/page_edit.html:9
 msgid "Edit page"
-msgstr ""
+msgstr "Edita página"
 
-#: app/templates/admin/page_edit.html:31
-#: app/templates/causes/action_form.html:54
-#: app/templates/causes/cause_form.html:44 app/templates/posts/edit.html:37
 msgid "Save"
 msgstr "Guardar"
 
-#: app/templates/admin/page_list.html:14
 msgid "Back"
-msgstr ""
+msgstr "Atrás"
 
-#: app/templates/admin/page_list.html:18
 msgid "Add new page"
-msgstr ""
+msgstr "Añade página"
 
-#: app/templates/admin/page_list.html:32
 msgid "name"
-msgstr ""
+msgstr "nombre"
 
-#: app/templates/admin/page_list.html:33
 msgid "url"
-msgstr ""
+msgstr "url"
 
-#: app/templates/admin/user_list.html:27
 msgid "e-mail"
-msgstr ""
+msgstr "e-mail"
 
-#: app/templates/admin/user_list.html:28
 msgid "last login"
-msgstr ""
+msgstr "Último inicio de sesión "
 
-#: app/templates/admin/user_list.html:29
 msgid "causes created"
-msgstr ""
+msgstr "Causas creadas"
 
-#: app/templates/admin/user_list.html:30
 msgid "causes supported"
-msgstr ""
+msgstr "Causas apoyadas"
 
-#: app/templates/admin/user_list.html:31
 msgid "actions taken"
-msgstr ""
+msgstr "Acciones tomadas"
 
-#: app/templates/admin/user_list.html:42 app/templates/admin/user_list.html:51
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
-#: app/templates/causes/action.html:72 app/templates/causes/action.html:78
-#: app/templates/causes/action.html:84 app/templates/helpers/actions.html:105
-#: app/templates/helpers/actions.html:107
-#: app/templates/helpers/actions.html:111
 msgid "Support!"
-msgstr ""
+msgstr "¡Apoyar!"
 
-#: app/templates/causes/action.html:96 app/templates/helpers/actions.html:118
 msgid "Go to 3rd party site"
-msgstr ""
+msgstr "Ir a página web externa"
 
-#: app/templates/causes/action.html:152
 msgid "Be the first to take this action!"
-msgstr ""
+msgstr "¡Sé el primero en tomar esta acción!"
 
-#: app/templates/causes/action.html:154
 msgid "1 person took this action"
-msgstr ""
+msgstr "1 persona tomó esta acción"
 
-#: app/templates/causes/action.html:156
-#, python-format
 msgid "%(count)s people took this action"
-msgstr ""
+msgstr "%(count)s personas tomaron esta acción"
 
-#: app/templates/causes/action_form.html:6
 msgid "Edit Action"
-msgstr ""
+msgstr "Edita acción"
 
-#: app/templates/causes/action_form.html:8
 msgid "Add Action"
-msgstr ""
+msgstr "Añadir acción"
 
-#: app/templates/causes/actions.html:20 app/templates/causes/cause.html:134
 msgid "Take action to win"
-msgstr ""
+msgstr "Toma acción para ganar"
 
-#: app/templates/causes/actions.html:22 app/templates/causes/cause.html:136
-#, python-format
 msgid "%(count)s available"
-msgstr ""
+msgstr "%(count)s disponibles"
 
-#: app/templates/causes/actions.html:30 app/templates/causes/cause.html:149
 msgid "new action"
-msgstr ""
+msgstr "Acción nueva"
 
-#: app/templates/causes/cause.html:139
-#, python-format
 msgid "%(count)s taken"
-msgstr ""
+msgstr "%(count)s tomadas"
 
-#: app/templates/causes/cause.html:148
 msgid "Add new action"
-msgstr ""
+msgstr "Añade acción nueva"
 
-#: app/templates/causes/cause.html:162
 msgid "You are supporting this cause"
-msgstr ""
+msgstr "Apoyas esta causa"
 
-#: app/templates/causes/cause.html:165 app/templates/causes/cause.html:176
 msgid "Share"
 msgstr "Comparte"
 
-#: app/templates/causes/cause.html:171
 msgid "Stay updated on actions"
-msgstr ""
+msgstr "Mantente al día sobre las acciones"
 
-#: app/templates/causes/cause.html:172
 msgid "Follow"
-msgstr ""
+msgstr "Sigue"
 
-#: app/templates/causes/cause.html:180
 msgid "Cause creators"
-msgstr ""
+msgstr "Creadores de causas"
 
-#: app/templates/causes/cause.html:193 app/templates/helpers/actions.html:23
-#: app/templates/helpers/actions.html:51
-#, python-format
 msgid "%(count)s supporters"
 msgstr "%(count)s partidarios"
 
-#: app/templates/causes/cause.html:206
 msgid "Actions taken"
-msgstr ""
+msgstr "Acciones tomadas"
 
-#: app/templates/causes/cause.html:214
 msgid "Share this cause"
-msgstr ""
+msgstr "Comparte esta causa"
 
-#: app/templates/causes/cause_form.html:6
 msgid "Edit Cause"
-msgstr ""
+msgstr "Edita causa"
 
-#: app/templates/causes/cause_form.html:8
 msgid "Add Cause"
-msgstr ""
+msgstr "Añade causa"
 
-#: app/templates/helpers/posts.html:41
-#, python-format
 msgid "%(count)s comments"
-msgstr ""
+msgstr "%(count)s comentarios"
 
-#: app/templates/helpers/posts.html:72
 msgid "View conversation"
-msgstr ""
+msgstr "Ver conversación"
 
-#: app/templates/helpers/posts.html:91
 msgid "No posts!"
-msgstr ""
+msgstr "¡Mensajes no permitidos!"
 
-#: app/templates/helpers/posts.html:95
 msgid "Start the conversation"
-msgstr ""
+msgstr "Inicia conversación"
 
-#: app/templates/posts/comment_form.html:18
-#: app/templates/posts/post_form.html:11
 msgid "Post"
-msgstr ""
+msgstr "Publica"
 
-#: app/templates/posts/edit.html:44
 msgid "Delete"
-msgstr ""
+msgstr "Borrar"
 
-#: app/templates/posts/post.html:59
-#, python-format
 msgid "%(count)s comments for this post. Leave yours:"
-msgstr ""
+msgstr "%(count)s comentarios sobre este mensaje. Añade el tuyo:"
 
-#: app/templates/posts/post.html:75 app/templates/posts/post.html:82
 msgid "to post."
-msgstr ""
+msgstr "para publicar."
 
-#: app/templates/posts/post.html:80
 msgid "Support this cause"
-msgstr ""
+msgstr "Apoya esta causa"
 
-#: app/templates/posts/post_form.html:16
 msgid "Add Image"
-msgstr ""
+msgstr "Añade imágen"
 
-#: app/templates/posts/post_list.html:17
 msgid "Add new post"
-msgstr ""
+msgstr "Publica mensaje nuevo"
 
-#: app/templates/users/edit.html:6
 msgid "Edit User"
-msgstr ""
+msgstr "Edita Usuario/a"
 
-#: app/templates/users/edit.html:8
 msgid "Edit Profile"
-msgstr ""
+msgstr "Edita perfil"
 
-#: app/templates/users/edit.html:70
 msgid "Profile"
-msgstr ""
+msgstr "Perfil"
 
-#: app/templates/users/edit.html:94 app/users/forms.py:16 app/users/forms.py:28
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
-#: app/templates/users/edit.html:118
 msgid "Delete Account"
-msgstr ""
+msgstr "Borra la cuenta"
 
-#: app/templates/users/index.html:28
 msgid "Other users won't see the details below"
-msgstr ""
+msgstr "Otros no verán los detalles de abajo. "
 
-#: app/templates/users/index.html:48
 msgid ""
-"Start a discussion on one of the causes you're supporting so that others "
-"can see it here."
+"Start a discussion on one of the causes you're supporting so that others can"
+" see it here."
 msgstr ""
+"Inicia discusión sobre una de las causas que apoyas para que otros la puedan"
+" ver aquí."
 
-#: app/templates/users/index.html:50
 msgid "When this user participates in a discussion, you'll see it here!"
-msgstr ""
+msgstr "Cuando este usuario participa en una discusión, ¡lo verás aquí!"
 
-#: app/templates/users/index.html:58
-#, python-format
 msgid ""
 "\n"
 "                Created %(causes_created)s cause\n"
 "                "
-msgid_plural ""
-"\n"
-"                Created %(causes_created)s causes\n"
-"                "
-msgstr[0] ""
-msgstr[1] ""
+msgstr "Causas %(causes_created)s creadas"
 
-#: app/templates/users/index.html:73
-#, python-format
 msgid ""
 "\n"
 "                Supporting %(causes_supports)s cause\n"
 "                "
-msgid_plural ""
-"\n"
-"                Supporting %(causes_supports)s causes\n"
-"                "
-msgstr[0] ""
-msgstr[1] ""
+msgstr "Apoya %(causes_supports)s causas"
 
-#: app/templates/users/index.html:88
-#, python-format
 msgid ""
 "\n"
 "                Took %(actions)s action\n"
 "                "
-msgid_plural ""
-"\n"
-"                Took %(actions)s actions\n"
-"                "
-msgstr[0] ""
-msgstr[1] ""
+msgstr "Tomó %(actions)s acciones"
 
-#: app/templates/users/index.html:102
 msgid "from"
-msgstr ""
+msgstr "de"
 
-#: app/templates/users/login.html:34
 msgid "Log in with Twitter"
-msgstr "Ingresa con Twitter"
+msgstr "Inicia sesión con Twitter"
 
-#: app/templates/users/login.html:39
 msgid "Log in with Google"
-msgstr "Ingresa con Google"
+msgstr "Inicia sesión con Google"
 
-#: app/templates/users/login.html:44
 msgid "Log in with Facebook"
-msgstr "Ingresa con Facebook"
+msgstr "Inicia sesión con Facebook"
 
-#: app/templates/users/login.html:88
 msgid "Forgot password?"
-msgstr ""
+msgstr "Olvidaste tu contraseña?"
 
-#: app/templates/users/login.html:93
-msgid "By accessing and using this service, you agree to the"
-msgstr ""
+msgid "By accessing and using this service, you agree to the terms of service"
+msgstr "Al entrar y usar este servicio, aceptas el acuerdo de servicio"
 
-#: app/templates/users/login.html:94
-msgid "terms of service"
-msgstr ""
-
-#: app/templates/users/reset_password.html:39
 msgid "Send password reset link"
-msgstr ""
+msgstr "Enviar enlace para cambiar contraseña"
 
-#: app/templates/users/reset_password_submit.html:80
 msgid "Reset Password"
-msgstr ""
+msgstr "Cambiar contraseña"
 
-#: app/users/forms.py:15
 msgid "Email or Username"
-msgstr ""
+msgstr "Email o Nombre de Usuario"
 
-#: app/users/forms.py:18
 msgid "Remember me"
-msgstr ""
+msgstr "Recuérdame"
 
-#: app/users/forms.py:23 app/users/forms.py:39 app/users/forms.py:54
-msgid "Email"
-msgstr ""
+msgid "Email "
+msgstr "Email"
 
-#: app/users/forms.py:24 app/users/forms.py:36
 msgid "Nickname"
-msgstr ""
+msgstr "Apodo"
 
-#: app/users/forms.py:27 app/users/forms.py:38
 msgid "Full Name"
-msgstr ""
+msgstr "Nombre completo"
 
-#: app/users/forms.py:31 app/users/forms.py:49
 msgid "Verify password"
-msgstr ""
+msgstr "Verifica  contraseña"
 
-#: app/users/forms.py:40
 msgid "Phone"
-msgstr ""
+msgstr "Teléfono"
 
-#: app/users/forms.py:41
 msgid "Zip"
-msgstr ""
+msgstr "Zip"
 
-#: app/users/forms.py:42
 msgid "Employer"
-msgstr ""
+msgstr "Patrón"
 
-#: app/users/forms.py:44
 msgid "Current password"
-msgstr ""
+msgstr "Contraseña actual"
 
-#: app/users/forms.py:46
 msgid "New password"
-msgstr ""
+msgstr "Contraseña nueva"
 
-#: app/users/forms.py:58
-msgid "New Password"
-msgstr ""
-
-#: app/users/forms.py:61
 msgid "Confirm password"
-msgstr ""
+msgstr "Confirma contraseña"
 
-#: app/users/views.py:60
-msgid "Email updated successfully"
-msgstr ""
+msgid "Email updated successfully "
+msgstr "Email actualizado"
 
-#: app/users/views.py:132
 msgid "Nickname already exists, please pick a different one."
-msgstr ""
+msgstr "Este apodo ya existe; elije otro."
 
-#: app/users/views.py:170
 msgid "Email or Password is invalid"
-msgstr ""
+msgstr "Email o contraseña inválido"
 
-#: app/users/views.py:297
 msgid "You have been logged out successfully"
-msgstr ""
+msgstr "Tu sesión ha sido cerrada"
 
-#: app/users/views.py:366
 msgid "User updated successfully"
-msgstr ""
+msgstr "Usuario actualizado"
 
-#: app/users/views.py:413
+msgid "User deleted successfully"
+msgstr "Usuario borrado"
+
+msgid ""
+"Email with password reset instructions sent to %(user_email). You can close "
+"this window now."
+msgstr ""
+"Email con instrucciones para cambiar contraseña enviado a %(user_email). "
+"Puedes cerrar esta ventana."
+
 msgid "User deleted successfully"
 msgstr ""
 
-#: app/users/views.py:448
 msgid ""
-"Email with password reset instructions sent to %(user_email). You can "
-"close this window now."
+"Email with password reset instructions sent to %(user_email). You can close "
+"this window now."
 msgstr ""
-
-#~ msgid "(%(count)s current)"
-#~ msgstr "(%(count)s ƈŭřřḗƞŧ)"
-
-#~ msgid "Supporters: %(count)s"
-#~ msgstr "Şŭƥƥǿřŧḗřş: %(count)s"
-
-#~ msgid "%(count)s comments."
-#~ msgstr "%(count)s ƈǿḿḿḗƞŧş."
-
-#~ msgid "Reply"
-#~ msgstr "Řḗƥŀẏ"
-
-#~ msgid "Log In"
-#~ msgstr "Ingresa"
-
-#~ msgid "Login"
-#~ msgstr "Ingresa"
-
-#~ msgid "Conversation"
-#~ msgstr "Conversación"
-
-#~ msgid "Sign Up"
-#~ msgstr "Apúntate"
-
-#~ msgid "Stand with us!"
-#~ msgstr "¡Ponte de pie junto a nosotros!"
-
-#~ msgid "Join this cause's community, and stay updated on actions"
-#~ msgstr "Únete a la comunidad de esta causa, y mantente al tanto de las acciones"
-
-#~ msgid "Creators"
-#~ msgstr "Creadores"
- 
-#~ msgid "(edit)"
-#~ msgstr "(editar)"
