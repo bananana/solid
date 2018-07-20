@@ -5,7 +5,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
 
 {% from "helpers/users.html" import render_avatar %}
 
-{% macro render_post(event_id, cause, post, likes, already_liked) %}
+{% macro render_post(cause, post, event_id, likes, already_liked) %}
 <div class="post">
     <p class="u-remove-margin-top u-remove-margin-bottom">
         {{ render_avatar(post.author) }}&nbsp;said:
@@ -48,6 +48,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
             {{ _('%(count)s comments', count=post.comments.count()) }}
         </a>
     </small>
+    {% if event_id %}
     <small class="u-pull-right u-add-margin-top u-add-margin-left">
         <a id="button-like-{{ event_id }}" 
            class="button-icon-sm button-like {% if already_liked %}button-already-liked{% endif %}">
@@ -55,6 +56,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
             <span class="likes-{{ event_id }}">{{ likes }}</span>
         </a>
     </small>
+    {% endif %}
     {% if post.author == current_user or current_user.is_admin %}
     <small class="u-pull-right u-add-margin-top">
         <a class="button-icon-sm" 
