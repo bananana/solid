@@ -70,7 +70,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
 </div>
 {% endmacro %}
 
-{% macro render_post_comment(event_id, cause, comment, likes, already_liked) %}
+{% macro render_post_comment(cause, comment, event_id, likes, already_liked) %}
 <div class="post">
     <p class="u-remove-margin-top u-remove-margin-bottom">
         {% if comment.author == comment.post.author %}
@@ -89,6 +89,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
             {{ _('View conversation') }}
         </a>
     </small>
+    {% if event_id %}
     <small class="u-pull-right u-add-margin-top u-add-margin-left">
         <a id="button-like-{{ event_id }}" 
            class="button-icon-sm button-like {% if already_liked %}button-already-liked{% endif %}">
@@ -96,6 +97,7 @@ section (app/templates/styleguide/templating#discussion-helpers)
             <span class="likes-{{ event_id }}">{{ likes }}</span>
         </a>
     </small>
+    {% endif %}
     <br class="u-cf">
 </div>
 {% endmacro %}
