@@ -45,11 +45,15 @@ link:
 	@ tput setaf 5; tput bold; echo "Updating release symlink"; tput sgr0
 	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo -u bsolid sh -c 'rm -f $(ROOT)/previous && mv $(ROOT)/current $(ROOT)/previous || true && ln -s $(RELEASE) $(ROOT)/current'"
 
+selinux:
+	@ tput setaf 5; tput bold; echo "Setting SELinux context"; tput sgr0
+	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo sh -c 'semanage fcontext -a -t httpd_var_run_t $(ROOT)/bsolid.sock' && restorecon -R $(ROOT)"
+
 restart:
 	@ tput setaf 5; tput bold; echo "Restarting gunicorn server"; tput sgr0
 	ssh -t $(SSH_OPTS) $(SSH_USER)@$(SSH_HOST) "sudo systemctl restart $(SERVICE).service"
 
-.PHONY : deploy archive upload clean extract pip migrate link restart i18n_test i18n_extract i18n_update i18n_munge i18n_compile i18n
+.PHONY : deploy archive upload clean extract pip migrate link restart selinux i18n_test i18n_extract i18n_update i18n_munge i18n_compile i18n
 
 i18n_test: i18n_extract i18n_update i18n_munge i18n_compile
 
