@@ -137,6 +137,17 @@
                         {% endif %}
                     {% endif %}
 
+                    {% if current_user.is_authenticated %} 
+                        <!-- Notifications -->
+                        <div id="notify-dropdown" class="dropdown u-pull-right">
+                            <div class="dropdown-button u-pull-right">
+                                <a href="{{ url_for('log.notifications_list_unread') }}">
+                                    <img src="{{ url_for('static', filename='open-iconic/png/bell-3x.png') }}">&nbsp;
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+
                     <!-- Language picker -->
                     <div id="lang-dropdown" class="dropdown u-pull-right">
                         <div class="dropdown-button u-pull-right">
@@ -168,16 +179,6 @@
                         </div>
                     </div>
 
-                    {% if current_user.is_authenticated %} 
-                        <!-- Notifications -->
-                        <div id="notify-dropdown" class="dropdown u-pull-right">
-                            <div class="dropdown-button u-pull-right">
-                                <a href="{{ url_for('log.notifications_list_unread') }}">
-                                    <img src="{{ url_for('static', filename='open-iconic/png/bell-3x.png') }}">&nbsp;
-                                </a>
-                            </div>
-                        </div>
-                    {% endif %}
                 </div>
             </div>
         </div>

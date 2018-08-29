@@ -461,6 +461,14 @@ p {
     display: block;
 }
 
+
+/* Feed 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.notification.new img {
+    margin-top: 10px;
+}
+
+
 /* Support Actions 
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .bx-wrapper {
@@ -1070,11 +1078,14 @@ input[type="submit"]:disabled:focus {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 #lang-dropdown {
     margin-right: 2em;
-    padding-top: 0.3em;
+    padding-top: 0.5em;
 }
 #notify-dropdown {
-    margin-right: 4em;
-    padding-top: 0.3em;
+    margin-right: 2em;
+    padding-top: 0.5em;
+}
+#notify-dropdown a:hover {
+    text-decoration: none;
 }
 .dropdown {
     position: relative;

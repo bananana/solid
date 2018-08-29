@@ -51,7 +51,8 @@ section (app/templates/styleguide/templating#log-helpers)
         {% elif event.event_type_id == 8 and event.item and not event.item.deleted %}
             {{ render_post(event.item.cause, event.item) }}
         {% elif event.event_type_id == 9 and event.item and not event.item.deleted %}
-            {{ render_post_comment(event.item.post.cause, event.item) }}
+            <!-- Breaks the app for some reason -->
+            {# render_post_comment(event.item.post.cause, event.item) #}
         {% endif %}
     </div>
 {% endfor %}
